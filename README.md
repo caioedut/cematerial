@@ -17,3 +17,6 @@
 <script type="text/javascript" src="js/cematerial.min.js"></script>
 <link type="text/css" rel="stylesheet" href="css/cematerial.min.css"/>
 ```
+
+## Example
+http://codepen.io/CaioEduT/pen/XKykZW

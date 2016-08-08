@@ -14,6 +14,6 @@
 <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 
 <!-- CEMATERIAL -->
-<script type="text/javascript" src="js/cematerial.js"></script>
-<link type="text/css" rel="stylesheet" href="css/cematerial.css"/>
+<script type="text/javascript" src="js/cematerial.min.js"></script>
+<link type="text/css" rel="stylesheet" href="css/cematerial.min.css"/>
 ```

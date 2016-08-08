@@ -1,7 +1,7 @@
 # CEMaterial
 ## Dependences
 - jQuery (https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js)
-- Roboto Font (https://fonts.googleapis.com/css?family=Roboto:400,500,700)
+- Roboto Font (https://fonts.googleapis.com/css?family=Roboto)
 - Material Icons Font (https://fonts.googleapis.com/icon?family=Material+Icons)
 
 ## How to use

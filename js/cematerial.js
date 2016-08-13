@@ -22,39 +22,44 @@ jQuery(function ($) {
         })
     ;
 
-    // app
-    //     .on('mousedown', '.waves', function (e) {
-    //         var elem = $(this);
-    //         var wave = elem.find('.waves-box');
-    //
-    //         if ($(e.target).is('.waves-box span')) {
-    //             return true;
-    //         }
-    //
-    //         if (!wave.length) {
-    //             wave = $('<div class="waves-box"><span></span></div>').appendTo(elem);
-    //         }
-    //
-    //         // Diagonal = √ w² + h²
-    //         var size = Math.sqrt(Math.pow(elem.outerWidth(), 2) + Math.pow(elem.outerHeight(), 2)) * 2;
-    //         var offset = elem.offset();
-    //
-    //         wave.find('span').css({
-    //             left: e.pageX - offset.left,
-    //             top: e.pageY - offset.top,
-    //             height: size,
-    //             width: size,
-    //             opacity: .4
-    //         }).on('transitionend', function () {
-    //             if ($(this).css('opacity') == 0.4) {
-    //                 wave.remove();
-    //             }
-    //         });
-    //
-    //         return true;
-    //     })
-    // ;
-    
+    app
+        .on('click', '.waves', function (e) {
+            e.preventDefault();
+
+            var elem = $(this);
+            var box = elem.find('.waves-box');
+
+            if (!box.length) {
+                box = $('<div class="waves-box"><span></span></div>').appendTo(elem);
+            }
+
+            var wave = $('<span></span>');
+            box.find('span').replaceWith(wave);
+
+            // Get size
+            // Diagonal = √ w² + h²
+            var size = Math.sqrt(Math.pow(elem.outerWidth(), 2) + Math.pow(elem.outerHeight(), 2)) * 2;
+            var offset = elem.offset();
+
+            wave
+                .css({
+                    left: e.pageX - offset.left,
+                    top: e.pageY - offset.top,
+                    height: size,
+                    width: size,
+                    opacity: .4
+                })
+                .on('transitionend', function () {
+                    if ($(this).css('opacity') == 0.4) {
+                        wave.css('opacity', 0);
+                    }
+                })
+            ;
+
+            return true;
+        });
+    ;
+
     // DRAG AND DROP UPLOAD
     app
         .on('drag dragstart dragend dragover dragenter dragleave drop', '.filedrop', function (e) {

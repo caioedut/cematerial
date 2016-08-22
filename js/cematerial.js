@@ -9,6 +9,22 @@ jQuery(function ($) {
     var body = $('body');
     var app = body;
 
+    // CLASS BINDING
+    app
+        .on('focus', '[data-class-focus]', function () {
+            CEMaterial.bindClassEvent($(this), 'focus');
+        })
+        .on('blur', '[data-class-focus]', function () {
+            CEMaterial.unbindClassEvent($(this), 'focus');
+        })
+        .on('mouseenter', '[data-class-hover]', function () {
+            CEMaterial.bindClassEvent($(this), 'hover');
+        })
+        .on('mouseleave', '[data-class-focus]', function () {
+            CEMaterial.unbindClassEvent($(this), 'hover');
+        })
+    ;
+
     /**
      * LABEL TOGGLE
      */
@@ -229,5 +245,16 @@ var CEMaterial = {
                 label.toggleClass('label-active', has_value ? true : false);
             });
         }
+    },
+    bindClassEvent: function (el, event) {
+        var clazz = el.data('class-' + event);
+
+        if (!el.hasClass(clazz)) {
+            el.data(event + '-remove', clazz);
+            el.addClass(clazz);
+        }
+    },
+    unbindClassEvent: function (el, event) {
+        el.removeClass(el.data(event + '-remove'));
     }
 };

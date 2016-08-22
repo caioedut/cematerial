@@ -55,17 +55,15 @@ p {
     margin: 1em 0;
 }
 
-h1:first-child,
-h2:first-child,
-h3:first-child,
-h4:first-child,
-h5:first-child,
-h6:first-child,
-p:first-child {
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child, p:first-child {
     margin-top: 0;
 }
 
-a, .link, .link-block {
+h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:last-child, p:last-child {
+    margin-bottom: 0;
+}
+
+a, a:link, .link, .link-block {
     cursor: pointer;
     color: inherit;
     display: inline-block;
@@ -74,6 +72,10 @@ a, .link, .link-block {
 
 .link-block {
     display: block;
+}
+
+a:hover, a:link:hover, .link:hover, .link-block:hover {
+    text-decoration: none;
 }
 
 .link-underline:hover {
@@ -346,10 +348,10 @@ a, .link, .link-block {
 .card .card-title,
 .dialog .dialog-title {
     margin: 0;
-    padding: 0;
 }
 
 .card .card-img img {
+    display: block;
     width: 100%;
 }
 
@@ -947,6 +949,7 @@ ul.menu,
 .grid {
     display: flex;
     flex-flow: row wrap;
+    min-width: 100%;
     width: 100%;
 }
 
@@ -1069,11 +1072,11 @@ ul.menu,
 }
 
 /*.xs-col-1, .xs-col-2, .xs-col-3, .xs-col-4, .xs-col-5, .xs-col-6, .xs-col-7, .xs-col-8, .xs-col-9, .xs-col-10, .xs-col-11, .xs-col-12, .sm-col-1, .sm-col-2, .sm-col-3, .sm-col-4, .sm-col-5, .sm-col-6, .sm-col-7, .sm-col-8, .sm-col-9, .sm-col-10, .sm-col-11, .sm-col-12, .md-col-1, .md-col-2, .md-col-3, .md-col-4, .md-col-5, .md-col-6, .md-col-7, .md-col-8, .md-col-9, .md-col-10, .md-col-11, .md-col-12, .lg-col-1, .lg-col-2, .lg-col-3, .lg-col-4, .lg-col-5, .lg-col-6, .lg-col-7, .lg-col-8, .lg-col-9, .lg-col-10, .lg-col-11, .lg-col-12, .xl-col-1, .xl-col-2, .xl-col-3, .xl-col-4, .xl-col-5, .xl-col-6, .xl-col-7, .xl-col-8, .xl-col-9, .xl-col-10, .xl-col-11, .xl-col-12 {*/
-[class*="xs-col"], [class*="sm-col"], [class*="md-col"], [class*="lg-col"], [class*="xl-col"] {
+.grid-coll,
+[class*="xs-col-"], [class*="sm-col-"], [class*="md-col-"], [class*="lg-col-"], [class*="xl-col-"] {
     position: relative;
+    display: block;
     min-height: 1px;
-    /*padding: 8px;*/
-
     transition: all ease .3s;
 }
 

@@ -24,8 +24,6 @@ jQuery(function ($) {
 
     app
         .on('click', '.waves', function (e) {
-            e.preventDefault();
-
             var elem = $(this);
             var box = elem.find('.waves-box');
 

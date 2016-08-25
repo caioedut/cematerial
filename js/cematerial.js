@@ -52,8 +52,7 @@ jQuery(function ($) {
     box.find('span').replaceWith(wave);
 
     // Get size
-    // Diagonal = √ w² + h²
-    var size = Math.sqrt(Math.pow(el.outerWidth(), 2) + Math.pow(el.outerHeight(), 2)) * 2;
+    var size = Math.max(el.outerWidth(), el.outerHeight()) * 2;
     var offset = el.offset();
 
     wave

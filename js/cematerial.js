@@ -1,3 +1,4 @@
+// INIT CEMATERIAL
 jQuery(function($) {
   var doc = $(document);
   CEMaterial.init(doc);
@@ -27,9 +28,7 @@ jQuery(function ($) {
   })
   ;
 
-  /**
-  * LABEL TOGGLE
-  */
+  // LABEL TOGGLE
   var texts = 'input:not([type="radio"]):not([type="checkbox"]):not([type="button"]), select, textarea';
   app
   .on('focus', texts, function () {
@@ -42,11 +41,11 @@ jQuery(function ($) {
 
   app
   .on('click', '.waves', function (e) {
-    var elem = $(this);
-    var box = elem.find('.waves-box');
+    var el = $(this);
+    var box = el.find('.waves-box');
 
     if (!box.length) {
-      box = $('<div class="waves-box"><span></span></div>').appendTo(elem);
+      box = $('<div class="waves-box"><span></span></div>').appendTo(el);
     }
 
     var wave = $('<span></span>');
@@ -54,8 +53,8 @@ jQuery(function ($) {
 
     // Get size
     // Diagonal = √ w² + h²
-    var size = Math.sqrt(Math.pow(elem.outerWidth(), 2) + Math.pow(elem.outerHeight(), 2)) * 2;
-    var offset = elem.offset();
+    var size = Math.sqrt(Math.pow(el.outerWidth(), 2) + Math.pow(el.outerHeight(), 2)) * 2;
+    var offset = el.offset();
 
     wave
     .css({
@@ -97,8 +96,8 @@ jQuery(function ($) {
   .on('drop', '.filedrop', function (e) {
     e.preventDefault();
 
-    var elem = $(this);
-    var input = elem.find('input[type="file"]');
+    var el = $(this);
+    var input = el.find('input[type="file"]');
     var files = e.originalEvent.dataTransfer.files || [];
     var accept = (input.attr('accept') || "").split(',');
 
@@ -106,13 +105,13 @@ jQuery(function ($) {
   })
   .on('change', '.filedrop input[type="file"]', function (e) {
     var input = $(this);
-    var elem = input.closest('.filedrop');
+    var el = input.closest('.filedrop');
     var files = e.target.files;
 
-    elem.find('img, .filedrop-list').remove();
+    el.find('img, .filedrop-list').remove();
 
     if (files && files.length) {
-      var list = $('<div class="filedrop-list"></div>').prependTo(elem);
+      var list = $('<div class="filedrop-list"></div>').prependTo(el);
 
       for (var i in files) {
         if (isNaN(i)) {
@@ -131,17 +130,17 @@ jQuery(function ($) {
 
   // SUBMENU CLICK REPLACING HOVER
   app.on('click', '.menu li a', function (e) {
-    var elem = $(this);
-    var target = elem.closest('li').find('> ul');
+    var el = $(this);
+    var target = el.closest('li').find('> ul');
 
     if (target.length) {
-      if (!elem.data('toggle')) {
-        elem
+      if (!el.data('toggle')) {
+        el
         .attr('data-toggle', 'menu')
         .data('target', target)
         ;
 
-        $('.menu-visible').not(elem.parents('.menu-visible')).not(target).removeClass('menu-visible');
+        $('.menu-visible').not(el.parents('.menu-visible')).not(target).removeClass('menu-visible');
         target.toggleClass('menu-visible');
         e.stopPropagation();
       }
@@ -160,9 +159,9 @@ jQuery(function ($) {
 
   // DATA TOGGLE
   app.on('click', '[data-toggle]', function (e) {
-    var elem = $(this);
-    var action = elem.data('toggle').trim();
-    var target = CEMaterial.getTarget(elem);
+    var el = $(this);
+    var action = el.data('toggle').trim();
+    var target = CEMaterial.getTarget(el);
 
     switch (action) {
       case 'sidebar':
@@ -170,25 +169,25 @@ jQuery(function ($) {
       e.stopPropagation();
       break;
       case 'menu':
-      $('.menu-visible').not(elem.parents('.menu-visible')).not(target).removeClass('menu-visible');
+      $('.menu-visible').not(el.parents('.menu-visible')).not(target).removeClass('menu-visible');
       target.toggleClass('menu-visible');
       e.stopPropagation();
       break;
       case 'dialog':
-      target = target.length ? target : elem.closest('.dialog');
+      target = target.length ? target : el.closest('.dialog');
       target.toggleClass('dialog-visible');
 
-      if (elem.data('focus')) {
+      if (el.data('focus')) {
         target.one('transitionend', function () {
-          target.find(elem.data('focus')).focus();
+          target.find(el.data('focus')).focus();
         });
       }
 
       e.stopPropagation();
       break;
       case 'table':
-      var checked = elem.prop('checked');
-      target = target.length ? target : elem.closest('table');
+      var checked = el.prop('checked');
+      target = target.length ? target : el.closest('table');
       target.find('input[type="checkbox"]').prop('checked', checked);
       e.stopPropagation();
       break;
@@ -214,18 +213,18 @@ var CEMaterial = {
     }));
     CEMaterial.inputAutoGrow(target.find('.input-autogrow'));
   },
-  getTarget: function (elem) {
-    if (elem.data('target')) {
-      return $(elem.data('target'));
-    } else if (elem.attr('href')) {
-      return $(elem.attr('href'));
+  getTarget: function (el) {
+    if (el.data('target')) {
+      return $(el.data('target'));
+    } else if (el.attr('href')) {
+      return $(el.attr('href'));
     }
 
     return new jQuery();
   },
-  getLabels: function (elem) {
-    var label = elem.closest('label,.label');
-    var id = elem.attr('id');
+  getLabels: function (el) {
+    var label = el.closest('label,.label');
+    var id = el.attr('id');
 
     if (id) {
       label = label.add($('label[for="' + id + '"]'));
@@ -233,23 +232,23 @@ var CEMaterial = {
 
     return label;
   },
-  onFocus: function (elems) {
-    if (elems.length) {
-      elems.each(function () {
-        var elem = $(this);
-        var label = CEMaterial.getLabels(elem);
+  onFocus: function (els) {
+    if (els.length) {
+      els.each(function () {
+        var el = $(this);
+        var label = CEMaterial.getLabels(el);
         label.addClass('label-active label-focus');
       });
     }
   },
-  onBlur: function (elems) {
-    if (elems.length) {
-      elems.each(function () {
-        var elem = $(this);
-        var label = CEMaterial.getLabels(elem).removeClass('label-focus');
+  onBlur: function (els) {
+    if (els.length) {
+      els.each(function () {
+        var el = $(this);
+        var label = CEMaterial.getLabels(el).removeClass('label-focus');
 
         // Check LABEL FLOATING
-        var value = elem.val() || '';
+        var value = el.val() || '';
         var has_value = value instanceof Array ? value.length : value.trim();
 
         label.toggleClass('label-active', has_value ? true : false);

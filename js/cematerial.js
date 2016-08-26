@@ -190,6 +190,12 @@ jQuery(function ($) {
       target.find('input[type="checkbox"]').prop('checked', checked);
       e.stopPropagation();
       break;
+      case 'panel':
+      target = target.length ? target : el.closest('.panel');
+      el.closest('.panel-group').find('.panel').not(target).removeClass('panel-visible');
+      target.toggleClass('panel-visible');
+      e.stopPropagation();
+      break;
       default:
       break;
     }

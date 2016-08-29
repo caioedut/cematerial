@@ -10,7 +10,7 @@ html, body {
 }
 
 body {
-    color: rgba(0, 0, 0, .8);
+    color: #333;
     font-family: Roboto, sans-serif;
     margin: 0;
     overflow: auto;
@@ -1044,6 +1044,8 @@ ul.menu,
 }
 
 /*GRID*/
+
+/*GRID HORIZONTAL*/
 .grid {
     display: flex;
     flex-flow: row wrap;
@@ -1101,6 +1103,10 @@ ul.menu,
     padding-right: 64px;
 }
 
+.grid-horizontal {
+    flex-direction: row;
+}
+
 .grid-reverse {
     flex-direction: row-reverse;
 }
@@ -1144,13 +1150,13 @@ ul.menu,
     align-items: flex-end;
 }
 
-/*GRID ROW*/
-.grid-row {
-    flex-direction: row;
+/*GRID VERTICAL*/
+.grid-vertical {
+    flex-direction: column;
 }
 
-.grid-row > * {
-    width: 100%;
+.grid-vertical.grid-reverse {
+    flex-direction: column-reverse;
 }
 
 /*Grid align particular column*/
@@ -1163,11 +1169,21 @@ ul.menu,
 }
 
 .col-top {
-    align-self: flex-start;
+    margin-bottom: auto;
 }
 
 .col-bottom {
-    align-self: flex-end;
+    margin-top: auto;
+}
+
+.col-middle {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.col-center {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .col-fill {

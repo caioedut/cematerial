@@ -23,7 +23,7 @@ jQuery(function ($) {
   .on('mouseenter', '[data-class-hover]', function () {
     CEMaterial.bindClassEvent($(this), 'hover');
   })
-  .on('mouseleave', '[data-class-focus]', function () {
+  .on('mouseleave', '[data-class-hover]', function () {
     CEMaterial.unbindClassEvent($(this), 'hover');
   })
   ;

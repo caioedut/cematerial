@@ -57,6 +57,7 @@ jQuery(function ($) {
 
             if (!box.length) {
                 box = $('<div class="waves-box"><span></span></div>').appendTo(el);
+                el.trigger('click');
             }
 
             var wave = box.find('span').attr('style', 'transition: none;');
@@ -160,6 +161,28 @@ jQuery(function ($) {
         if (dialog.is(target)) {
             dialog.removeClass('dialog-visible');
         }
+    });
+
+    // TABS EVENTS
+    app.on('click', '.tabs .tab-list > *', function (e) {
+        e.preventDefault();
+        var el = $(this);
+        var parent = el.closest('.tabs');
+        var index = el.data('index');
+
+        if (!index) {
+            index = el.index();
+        }
+
+        if (el.is('li')) {
+            el = el.find('a');
+        }
+
+        parent.find('.tab-active').removeClass('tab-active');
+        el.addClass('tab-active');
+
+        parent.find('.tab-visible').removeClass('tab-visible');
+        parent.find('.tab-content').eq(index).addClass('tab-visible');
     });
 
     // DATA TOGGLE

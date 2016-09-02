@@ -2091,23 +2091,6 @@ textarea.input:not([rows]) {
     .xs-sidebar.sidebar-right {
         transform: translateX(100%);
     }
-
-    .xs-menu-up {
-        top: auto;
-        bottom: 100%;
-    }
-
-    .xs-menu-up.menu-arrow:before {
-        top: 100%;
-        bottom: auto;
-        border-top: 10px solid #fff;
-        border-bottom: 0;
-    }
-
-    .xs-menu-up .menu {
-        top: auto;
-        bottom: 0;
-    }
 }
 
 @media (min-width: 600px) and (max-width: 1023px) {
@@ -2150,23 +2133,6 @@ textarea.input:not([rows]) {
 
     .sm-sidebar.sidebar-right {
         transform: translateX(100%);
-    }
-
-    .sm-menu-up {
-        top: auto;
-        bottom: 100%;
-    }
-
-    .sm-menu-up.menu-arrow:before {
-        top: 100%;
-        bottom: auto;
-        border-top: 10px solid #fff;
-        border-bottom: 0;
-    }
-
-    .sm-menu-up .menu {
-        top: auto;
-        bottom: 0;
     }
 }
 
@@ -2211,23 +2177,6 @@ textarea.input:not([rows]) {
     .md-sidebar.sidebar-right {
         transform: translateX(100%);
     }
-
-    .md-menu-up {
-        top: auto;
-        bottom: 100%;
-    }
-
-    .md-menu-up.menu-arrow:before {
-        top: 100%;
-        bottom: auto;
-        border-top: 10px solid #fff;
-        border-bottom: 0;
-    }
-
-    .md-menu-up .menu {
-        top: auto;
-        bottom: 0;
-    }
 }
 
 @media (min-width: 1440px) and (max-width: 1919px) {
@@ -2271,23 +2220,6 @@ textarea.input:not([rows]) {
     .lg-sidebar.sidebar-right {
         transform: translateX(100%);
     }
-
-    .lg-menu-up {
-        top: auto;
-        bottom: 100%;
-    }
-
-    .lg-menu-up.menu-arrow:before {
-        top: 100%;
-        bottom: auto;
-        border-top: 10px solid #fff;
-        border-bottom: 0;
-    }
-
-    .lg-menu-up .menu {
-        top: auto;
-        bottom: 0;
-    }
 }
 
 @media (min-width: 1920px) {
@@ -2330,23 +2262,6 @@ textarea.input:not([rows]) {
 
     .xl-sidebar.sidebar-right {
         transform: translateX(100%);
-    }
-
-    .xl-menu-up {
-        top: auto;
-        bottom: 100%;
-    }
-
-    .xl-menu-up.menu-arrow:before {
-        top: 100%;
-        bottom: auto;
-        border-top: 10px solid #fff;
-        border-bottom: 0;
-    }
-
-    .xl-menu-up .menu {
-        top: auto;
-        bottom: 0;
     }
 }
 

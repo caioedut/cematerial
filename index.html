@@ -25,6 +25,18 @@
             max-width: 1200px;
         }
     </style>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.dialog')
+                    .on('cem.dialog.show', function (e) {
+                        console.log(e.relatedTarget);
+                    })
+                    .on('cem.dialog.hide', function (e) {
+                        console.log(e.relatedTarget);
+                    });
+        });
+    </script>
 </head>
 
 <body>
@@ -315,7 +327,7 @@
     <section class="container">
         <h1>Expansion Panels</h1>
 
-        <div class="container bg-grey-2">
+        <div class="container bg-grey-3">
             <div class="panel-group">
                 <div class="panel">
                     <div class="panel-header">
@@ -484,375 +496,222 @@
     <div class="divider-horizontal"></div>
 
     <section class="container">
+        <h1>Dropdown</h1>
+
+        <div class="container bg-grey-3">
+            <div class="grid grid-adjust-xs">
+                <div class="grid-col">
+                    <div class="dropdown">
+                        <a class="btn bg-purple-5" data-toggle="dropdown">
+                            Dropdown 1
+                            <i class="md-icon">expand_more</i>
+                        </a>
+                        <div class="dropdown-body dropdown-sm">
+                            <div class="container">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col">
+                    <div class="dropdown">
+                        <a class="btn bg-purple-5" data-toggle="dropdown">
+                            Dropdown 2
+                            <i class="md-icon">chevron_right</i>
+                        </a>
+                        <div class="dropdown-body dropdown-sm top left-inverse">
+                            <div class="container">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col">
+                    <div class="dropdown">
+                        <a class="btn bg-purple-5" data-toggle="dropdown">
+                            <i class="md-icon">chevron_left</i>
+                            Dropdown 3
+                        </a>
+                        <div class="dropdown-body dropdown-sm top right-inverse">
+                            <div class="container">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-col">
+                    <div class="dropdown">
+                        <a class="btn bg-purple-5" data-toggle="dropdown">
+                            Dropup 1
+                            <i class="md-icon">expand_less</i>
+                        </a>
+                        <div class="dropdown-body dropdown-sm bottom-inverse">
+                            <div class="container">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col">
+                    <div class="dropdown">
+                        <a class="btn bg-purple-5" data-toggle="dropdown">
+                            Dropup 2
+                            <i class="md-icon">chevron_right</i>
+                        </a>
+                        <div class="dropdown-body dropdown-sm bottom left-inverse">
+                            <div class="container">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col">
+                    <div class="dropdown">
+                        <a class="btn bg-purple-5" data-toggle="dropdown">
+                            <i class="md-icon">chevron_left</i>
+                            Dropup 3
+                        </a>
+                        <div class="dropdown-body dropdown-sm bottom right-inverse">
+                            <div class="container">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-horizontal"></div>
+
+    <section class="container">
         <h1>Menus</h1>
 
-        <div class="xs-text-center">
+        <div class="container bg-grey-3">
 
-            <div class="menu-block">
-                <div class="btn bg-pink-5" data-toggle="menu" data-target=".menu00">
-                    Menu
+            <div class="grid grid-adjust-md">
+                <div class="grid-col">
+                    <h3>Menu Styles</h3>
+                    <ul class="menu">
+                        <li>
+                            <a>
+                                <i class="md-icon">account_circle</i>
+                                Menu Padrao
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="md-icon">account_circle</i>
+                                Menu para Esquerda
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="md-icon">account_circle</i>
+                                Menu para Direita
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="menu00 menu menu-arrow xs-menu-down sm-menu-down md-menu-down lg-menu-down xl-menu-down ">
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu Padrao
+                <div class="grid-col">
+                    <h3>Menu inside Dropdown</h3>
+                    <div class="dropdown">
+                        <a class="btn bg-purple-5" data-toggle="dropdown">
+                            <i class="md-icon">menu</i>
                         </a>
-                        <ul class="menu">
+                        <ul class="dropdown-body top left menu">
                             <li>
                                 <a>
-                                    Teste Filho
+                                    <i class="md-icon">visibility</i>
+                                    Preview
+                                    <!--<i class="md-icon">chevron_right</i>-->
                                 </a>
                             </li>
                             <li>
                                 <a>
-                                    Teste Filho
+                                    <i class="md-icon">person_add</i>
+                                    Share
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <i class="md-icon">link</i>
+                                    Get Link
+                                </a>
+                            </li>
+                            <li class="divider-horizontal"></li>
+                            <li>
+                                <a>
+                                    <i class="md-icon">content_copy</i>
+                                    Make a copy
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <i class="md-icon">get_app</i>
+                                    Download
+                                </a>
+                            </li>
+                            <li class="divider-horizontal"></li>
+                            <li>
+                                <a>
+                                    <i class="md-icon">delete</i>
+                                    Remove
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Esquerda
-                        </a>
-                        <ul class="menu menu-left">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Direita
-                        </a>
-                        <ul class="menu menu-right">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="menu-block">
-                <div class="btn bg-pink-5" data-toggle="menu" data-target=".menu01">
-                    Menu menu-left
+                    </div>
                 </div>
-                <ul class="menu01 menu menu-arrow xs-menu-down sm-menu-down md-menu-down lg-menu-down xl-menu-down menu-left">
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu Padrao
+                <div class="grid-col">
+                    <h3>Menu Dropdown Cascading</h3>
+                    <div class="dropdown">
+                        <a class="btn bg-purple-5" data-toggle="dropdown">
+                            File
                         </a>
-                        <ul class="menu">
+                        <ul class="dropdown-body top-inverse left menu">
                             <li>
                                 <a>
-                                    Teste Filho
+                                    New
+                                    <!--<i class="md-icon">chevron_right</i>-->
                                 </a>
                             </li>
                             <li>
                                 <a>
-                                    Teste Filho
+                                    Open...
+                                </a>
+                            </li>
+                            <li class="dropdown" data-class-hover="bg-purple-5">
+                                <a data-toggle="dropdown">
+                                    Open recent
+                                </a>
+                                <ul class="dropdown-body top left-inverse menu">
+                                    <li>
+                                        <a>
+                                            Buttons
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            Text Fields
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            Grid
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="divider-horizontal"></li>
+                            <li>
+                                <a>
+                                    Exit
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Esquerda
-                        </a>
-                        <ul class="menu menu-left">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Direita
-                        </a>
-                        <ul class="menu menu-right">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="menu-block">
-                <div class="btn bg-pink-5" data-toggle="menu" data-target=".menu02">
-                    Menu menu-right
+                    </div>
                 </div>
-                <ul class="menu02 menu menu-arrow xs-menu-down sm-menu-down md-menu-down lg-menu-down xl-menu-down menu-right">
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu Padrao
-                        </a>
-                        <ul class="menu">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Esquerda
-                        </a>
-                        <ul class="menu menu-left">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Direita
-                        </a>
-                        <ul class="menu menu-right">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="menu-block">
-                <div class="btn bg-pink-5" data-toggle="menu" data-target=".menu10">
-                    Menu
-                </div>
-                <ul class="menu10 menu menu-arrow xs-menu-up sm-menu-up md-menu-up lg-menu-up xl-menu-up ">
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu Padrao
-                        </a>
-                        <ul class="menu">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Esquerda
-                        </a>
-                        <ul class="menu menu-left">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Direita
-                        </a>
-                        <ul class="menu menu-right">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="menu-block">
-                <div class="btn bg-pink-5" data-toggle="menu" data-target=".menu11">
-                    Menu menu-left
-                </div>
-                <ul class="menu11 menu menu-arrow xs-menu-up sm-menu-up md-menu-up lg-menu-up xl-menu-up menu-left">
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu Padrao
-                        </a>
-                        <ul class="menu">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Esquerda
-                        </a>
-                        <ul class="menu menu-left">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Direita
-                        </a>
-                        <ul class="menu menu-right">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="menu-block">
-                <div class="btn bg-pink-5" data-toggle="menu" data-target=".menu12">
-                    Menu menu-right
-                </div>
-                <ul class="menu12 menu menu-arrow xs-menu-up sm-menu-up md-menu-up lg-menu-up xl-menu-up menu-right">
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu Padrao
-                        </a>
-                        <ul class="menu">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Esquerda
-                        </a>
-                        <ul class="menu menu-left">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="md-icon">account_circle</i>
-                            Menu para Direita
-                        </a>
-                        <ul class="menu menu-right">
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Teste Filho
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
 
         </div>

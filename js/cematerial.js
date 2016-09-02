@@ -40,8 +40,8 @@ jQuery(function ($) {
     ;
 
     /** // Temporarily disabled
-    app
-        .on('mouseup mouseleave', '.waves', function () {
+     app
+     .on('mouseup mouseleave', '.waves', function () {
             var wave = $(this).find('.waves-box span');
 
             if (wave.css('opacity') == 0.4) {
@@ -52,7 +52,7 @@ jQuery(function ($) {
                 });
             }
         })
-        .on('mousedown', '.waves', function (e) {
+     .on('mousedown', '.waves', function (e) {
             var el = $(this);
             var box = el.find('.waves-box');
 
@@ -80,7 +80,7 @@ jQuery(function ($) {
 
             return true;
         })
-    ;
+     ;
      */
 
     // TEXTAREA AUTO GROW
@@ -136,35 +136,6 @@ jQuery(function ($) {
         })
     ;
 
-    // SUBMENU CLICK REPLACING HOVER
-    app.on('click', '.menu li a', function (e) {
-        var el = $(this);
-        var target = el.closest('li').find('> ul');
-
-        if (target.length) {
-            if (!el.data('toggle')) {
-                el
-                    .attr('data-toggle', 'menu')
-                    .data('target', target)
-                ;
-
-                $('.menu-visible').not(el.parents('.menu-visible')).not(target).removeClass('menu-visible');
-                target.toggleClass('menu-visible');
-                e.stopPropagation();
-            }
-        }
-    });
-
-    // MODAL EVENTS
-    app.on('click', '.dialog-visible', function (e) {
-        var dialog = $(this);
-        var target = $(e.target);
-
-        if (dialog.is(target)) {
-            dialog.removeClass('dialog-visible');
-        }
-    });
-
     // TABS EVENTS
     app.on('click', '.tabs .tab-list > *', function (e) {
         e.preventDefault();
@@ -191,52 +162,92 @@ jQuery(function ($) {
     app.on('click', '[data-toggle]', function (e) {
         var el = $(this);
         var action = el.data('toggle').trim();
-        var target = CEMaterial.getTarget(el);
+        var target = CEMaterial.getTarget(el, '.' + action);
+
+        var event_params = {relatedTarget: el};
 
         switch (action) {
-            case 'sidebar':
-                target.toggleClass('sidebar-visible');
-                e.stopPropagation();
-                break;
-            case 'menu':
-                $('.menu-visible').not(el.parents('.menu-visible')).not(target).removeClass('menu-visible');
-                target.toggleClass('menu-visible');
-                e.stopPropagation();
-                break;
-            case 'dialog':
-                target = target.length ? target : el.closest('.dialog');
-                target.toggleClass('dialog-visible');
+            case 'dialog': {
+                target.trigger(jQuery.Event(target.hasClass('dialog-visible') ? 'cem.dialog.hide' : 'cem.dialog.show', event_params));
 
                 if (el.data('focus')) {
                     target.one('transitionend', function () {
                         target.find(el.data('focus')).focus();
                     });
                 }
-
+                break;
+            }
+            case 'dropdown': {
+                $('.dropdown-visible').not(el.parents('.dropdown-visible')).not(target).trigger(jQuery.Event('cem.dropdown.hide', event_params));
+                target.trigger(jQuery.Event(target.hasClass('dropdown-visible') ? 'cem.dropdown.hide' : 'cem.dropdown.show', event_params));
+                break;
+            }
+            case 'panel': {
+                el.closest('.panel-group').find('.panel-visible').not(target).trigger(jQuery.Event('cem.panel.hide', event_params));
+                target.trigger(jQuery.Event(target.hasClass('panel-visible') ? 'cem.panel.hide' : 'cem.panel.show', event_params));
+                break;
+            }
+            case 'sidebar': {
+                target.toggleClass('sidebar-visible');
                 e.stopPropagation();
                 break;
-            case 'table':
+            }
+            case 'table': {
                 var checked = el.prop('checked');
                 target = target.length ? target : el.closest('table');
                 target.find('input[type="checkbox"]').prop('checked', checked);
                 e.stopPropagation();
                 break;
-            case 'panel':
-                target = target.length ? target : el.closest('.panel');
-                el.closest('.panel-group').find('.panel').not(target).removeClass('panel-visible');
-                target.toggleClass('panel-visible');
-                e.stopPropagation();
-                break;
+            }
             default:
                 break;
         }
     });
 
-    // CLOSE SIDEBARS/MENUS/DIALOGS ON BODY CLICK (MUST BE THE LAST EVENT)
+    /**
+     * CEM TOGGLE EVENTS
+     */
+    // Dialogs
+    app
+        .on('cem.dialog.show', '.dialog', function (e) {
+            $(this).addClass('dialog-visible');
+            e.stopPropagation();
+        })
+        .on('cem.dialog.hide', '.dialog', function (e) {
+            $(this).removeClass('dialog-visible');
+            e.stopPropagation();
+        })
+    ;
+    // Dropdown
+    app
+        .on('cem.dropdown.show', '.dropdown', function (e) {
+            $(this).addClass('dropdown-visible');
+            e.stopPropagation();
+        })
+        .on('cem.dropdown.hide', '.dropdown', function (e) {
+            $(this).removeClass('dropdown-visible');
+            e.stopPropagation();
+        })
+    ;
+    // Expansion panels
+    app
+        .on('cem.panel.show', '.panel', function (e) {
+            $(this).addClass('panel-visible');
+            e.stopPropagation();
+        })
+        .on('cem.panel.hide', '.panel', function (e) {
+            $(this).removeClass('panel-visible');
+            e.stopPropagation();
+        })
+    ;
+
+    // CLOSE SIDEBARS/DROPDOWNS/DIALOGS ON BODY CLICK (MUST BE THE LAST EVENT)
     doc.on('click', function (e) {
         var target = $(e.target);
+
+        target.filter('.dialog-visible').trigger(jQuery.Event('cem.dialog.hide', {relatedTarget: target}));
+        $('.dropdown-visible').not(target.parents('.dropdown-visible')).trigger(jQuery.Event('cem.dropdown.hide', {relatedTarget: target}));
         $('.sidebar-visible').not(target.closest('.sidebar-visible')).removeClass('sidebar-visible');
-        $('.menu-visible').not(target.closest('.menu-visible')).removeClass('menu-visible');
     });
 
 });
@@ -249,11 +260,13 @@ var CEMaterial = {
         }));
         CEMaterial.inputAutoGrow(target.find('.input-autogrow'));
     },
-    getTarget: function (el) {
+    getTarget: function (el, parent) {
         if (el.data('target')) {
             return $(el.data('target'));
         } else if (el.attr('href')) {
             return $(el.attr('href'));
+        } else if (parent) {
+            return el.closest(parent);
         }
 
         return new jQuery();

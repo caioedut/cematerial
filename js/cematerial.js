@@ -39,6 +39,7 @@ jQuery(function ($) {
         })
     ;
 
+    /** // Temporarily disabled
     app
         .on('mouseup mouseleave', '.waves', function () {
             var wave = $(this).find('.waves-box span');
@@ -80,6 +81,7 @@ jQuery(function ($) {
             return true;
         })
     ;
+     */
 
     // TEXTAREA AUTO GROW
     app.on('input', '.input-autogrow', function () {

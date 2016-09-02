@@ -383,7 +383,7 @@ a:hover, a:link:hover, .link:hover, .link-block:hover {
     z-index: 101;
 
     overflow: hidden;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 
     transition: ease all .4s;
     opacity: 0;
@@ -402,7 +402,7 @@ a:hover, a:link:hover, .link:hover, .link-block:hover {
 .dialog-content {
     background-color: #fff;
     box-shadow: 0 16px 50px -16px rgba(0, 0, 0, 0.6);
-    max-height: calc(100vh - 66px);
+    max-height: 100%;
 
     transition: ease all .4s;
     transform: scale(.2);
@@ -427,26 +427,19 @@ a:hover, a:link:hover, .link:hover, .link-block:hover {
 
 /*DIALOG FLEX*/
 .dialog-content {
-    display: flex;
-    flex-flow: column;
+    display: flex!important;
+    flex-direction: column;
 }
 
-.dialog-header {
-    align-self: flex-start;
+.dialog-header,
+.dialog-footer {
     min-height: 45px;
     width: 100%;
 }
 
 .dialog-body {
-    /*flex: 1;*/
-    overflow: hidden;
+    min-height: 0px;
     overflow-y: auto;
-    width: 100%;
-}
-
-.dialog-footer {
-    align-self: flex-end;
-    min-height: 45px;
     width: 100%;
 }
 

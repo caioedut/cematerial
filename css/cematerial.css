@@ -989,6 +989,115 @@ textarea.input:not([rows]) {
     display: none;
 }
 
+/*SLIDER / RANGE*/
+.slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    display: block;
+    width: 100%;
+}
+
+.slider:focus {
+    outline: none;
+}
+
+/*SLIDER TRACK BEGIN*/
+.slider::-webkit-slider-runnable-track {
+    background-color: #aaa;
+    display: block;
+    height: 2px;
+    width: 100%;
+}
+
+.slider::-moz-range-track {
+    background-color: #aaa;
+    display: block;
+    height: 2px;
+    width: 100%;
+}
+
+.slider::-ms-track {
+    background-color: #aaa;
+    display: block;
+    height: 2px;
+    margin: 4px 0;
+    width: 100%;
+}
+
+/*SLIDER TRACK END*/
+
+/*SLIDER THUMB BEGIN*/
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-color: #aaa;
+    border-radius: 50%;
+    cursor: pointer;
+
+    margin-top: -6px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    height: 12px;
+    width: 12px;
+
+    transition: all ease .3s;
+}
+
+.slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-color: #aaa;
+    border-radius: 50%;
+    cursor: pointer;
+
+    height: 12px;
+    width: 12px;
+
+    transition: all ease .3s;
+}
+
+.slider::-ms-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-color: #aaa;
+    border-radius: 50%;
+    cursor: pointer;
+
+    margin: auto !important;
+    height: 12px;
+    width: 12px;
+
+    transition: all ease .3s;
+}
+
+/*SLIDER THUMB HOVER*/
+.slider::-webkit-slider-thumb:hover,
+.slider::-webkit-slider-thumb:active {
+    margin-top: -7px;
+    height: 16px;
+    width: 16px;
+}
+
+.slider::-moz-range-thumb:hover,
+.slider::-moz-range-thumb:active {
+    height: 16px;
+    width: 16px;
+}
+
+.slider::-ms-thumb:hover,
+.slider::-ms-thumb:active {
+    height: 16px;
+    width: 16px;
+}
+
+/*SLIDER THUMB END*/
+
 /*****************
 * MEDIA QUERIES
 *****************/

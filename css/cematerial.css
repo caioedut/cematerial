@@ -855,6 +855,11 @@ textarea.input:not([rows]) {
     width: max-content;
 }
 
+.menu-block {
+    display: block;
+    width: 100%;
+}
+
 .menu li {
     position: relative;
     margin: 0;
@@ -866,6 +871,7 @@ textarea.input:not([rows]) {
     border-top: 1px solid #f0f0f0;
 }
 
+.menu a,
 .menu li a,
 .menu li.divider-horizontal {
     display: block;
@@ -950,6 +956,7 @@ textarea.input:not([rows]) {
 
 /*TABS*/
 .tabs .tab-list {
+    position: relative;
     display: block;
     margin: 0;
     overflow-x: auto;
@@ -967,7 +974,7 @@ textarea.input:not([rows]) {
 }
 
 .tabs .tab-list a {
-    border-bottom: 3px solid transparent;
+    border-bottom: 4px solid transparent;
     font-size: 1rem;
     max-width: 160px;
     min-width: 96px;
@@ -983,6 +990,18 @@ textarea.input:not([rows]) {
 
 .tabs .tab-list .tab-active {
     border-color: inherit;
+}
+
+.tabs .tab-bar {
+    position: absolute;
+    bottom: 0;
+    border: 2px solid blue;
+    border-color: inherit;
+    transition: transform ease-out .4s, width ease-out .4s;
+}
+
+.tabs .tab-bar ~ * {
+    border-color: transparent !important;
 }
 
 .tabs .tab-content:not(.tab-visible) {
@@ -2158,6 +2177,10 @@ textarea.input:not([rows]) {
         margin: 0 !important;
     }
 
+    .xs-no-padding {
+        padding: 0 !important;
+    }
+
     .xs-nav-bottom {
         position: fixed;
         left: 0;
@@ -2200,6 +2223,10 @@ textarea.input:not([rows]) {
         margin: 0 !important;
     }
 
+    .sm-no-padding {
+        padding: 0 !important;
+    }
+
     .sm-nav-bottom {
         position: fixed;
         left: 0;
@@ -2237,6 +2264,10 @@ textarea.input:not([rows]) {
 
     .md-no-margin {
         margin: 0 !important;
+    }
+
+    .md-no-padding {
+        padding: 0 !important;
     }
 
     .md-nav-bottom {
@@ -2278,6 +2309,10 @@ textarea.input:not([rows]) {
         margin: 0 !important;
     }
 
+    .lg-no-padding {
+        padding: 0 !important;
+    }
+
     .lg-nav-bottom {
         position: fixed;
         left: 0;
@@ -2315,6 +2350,10 @@ textarea.input:not([rows]) {
 
     .xl-no-margin {
         margin: 0 !important;
+    }
+
+    .xl-no-padding {
+        padding: 0 !important;
     }
 
     .xl-nav-bottom {
@@ -2382,6 +2421,14 @@ textarea.input:not([rows]) {
 
 .right-inverse {
     right: 100%;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
 }
 
 /*ADD CLASSES*/

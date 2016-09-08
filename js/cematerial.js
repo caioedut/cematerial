@@ -136,28 +136,6 @@ jQuery(function ($) {
         })
     ;
 
-    // TABS EVENTS
-    app.on('click', '.tabs .tab-list > *', function (e) {
-        e.preventDefault();
-        var el = $(this);
-        var parent = el.closest('.tabs');
-        var index = el.data('index');
-
-        if (!index) {
-            index = el.index();
-        }
-
-        if (el.is('li')) {
-            el = el.find('a');
-        }
-
-        parent.find('.tab-active').removeClass('tab-active');
-        el.addClass('tab-active');
-
-        parent.find('.tab-visible').removeClass('tab-visible');
-        parent.find('.tab-content').eq(index).addClass('tab-visible');
-    });
-
     // DATA TOGGLE
     app.on('click', '[data-toggle]', function (e) {
         var el = $(this);
@@ -186,6 +164,10 @@ jQuery(function ($) {
                 el.closest('.panel-group').find('.panel-visible').not(target).trigger(jQuery.Event('cem.panel.hide', event_params));
                 target.trigger(jQuery.Event(target.hasClass('panel-visible') ? 'cem.panel.hide' : 'cem.panel.show', event_params));
                 break;
+            }
+            case 'tab': {
+                el.closest('.tab-list').find('.tab-active').not(el).trigger(jQuery.Event('cem.tab.hide', event_params));
+                el.trigger(jQuery.Event(el.hasClass('tab-active') ? 'cem.tab.hide' : 'cem.tab.show', event_params));
             }
             case 'sidebar': {
                 target.toggleClass('sidebar-visible');
@@ -240,6 +222,44 @@ jQuery(function ($) {
             e.stopPropagation();
         })
     ;
+    // Tabs
+    app
+        .on('cem.tab.show', '.tab-list [data-toggle="tab"]', function (e) {
+            var el = $(this);
+            var parent = el.closest('.tabs');
+            var list = parent.find('.tab-list');
+
+            var bar = list.find('.tab-bar');
+            if (!bar.length) {
+                bar = $('<div class="tab-bar"></div>').prependTo(list);
+            }
+
+            var index = el.data('index');
+            if (!index) {
+                index = el.index() - 1;
+            }
+
+            if (el.is('li')) {
+                el = el.find('a');
+            }
+
+            el.addClass('tab-active');
+            parent.find('.tab-content').eq(index).addClass('tab-visible');
+
+            bar.css({
+                transform: 'translateX(' + el.position().left + 'px)',
+                width: el.outerWidth()
+            });
+
+            e.stopPropagation();
+        })
+        .on('cem.tab.hide', '.tab-list [data-toggle="tab"]', function (e) {
+            $(this).removeClass('tab-active')
+                .closest('.tabs')
+                .find('.tab-content.tab-visible').removeClass('tab-visible');
+            e.stopPropagation();
+        })
+    ;
 
     // CLOSE SIDEBARS/DROPDOWNS/DIALOGS ON BODY CLICK (MUST BE THE LAST EVENT)
     doc.on('click', function (e) {
@@ -263,7 +283,7 @@ var CEMaterial = {
     getTarget: function (el, parent) {
         if (el.data('target')) {
             return $(el.data('target'));
-        } else if (el.attr('href')) {
+        } else if (el.attr('href') && el.attr('href') != '#') {
             return $(el.attr('href'));
         } else if (parent) {
             return el.closest(parent);

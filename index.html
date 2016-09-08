@@ -19,10 +19,30 @@
             background-color: #eee;
         }
 
+        #sidebar {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #fff;
+            border-right: 1px solid #aaa;
+            overflow: hidden;
+            overflow-y: auto;
+            width: 240px;
+            z-index: 2;
+        }
+
         #main {
             background-color: #fff;
-            margin: 0 auto;
-            max-width: 1200px;
+            margin-left: 240px;
+            /*margin: 0 auto;*/
+            /*max-width: 1200px;*/
+        }
+
+        @media (max-width: 1023px) {
+            #main {
+                margin-left: 0;
+            }
         }
     </style>
 
@@ -41,7 +61,102 @@
 
 <body>
 
+<div id="sidebar" class="xs-sidebar sm-sidebar">
+    <div class="panel-group">
+        <div class="panel panel-visible">
+            <div class="panel-header link" data-toggle="panel">
+                <h4>Components</h4>
+            </div>
+            <div class="panel-body xs-no-padding no-padding">
+                <ul class="menu menu-block">
+                    <li>
+                        <a href="#buttons">
+                            Buttons
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cards">
+                            Cards
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#chips">
+                            Chips
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#datatables">
+                            Data tables
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#dialogs">
+                            Dialogs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#dividers">
+                            Dividers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#expansionpanels">
+                            Expansion panels
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#gridlists">
+                            Grid lists
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#lists">
+                            Lists
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#menus">
+                            Menus
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#selectioncontrols">
+                            Selection controls
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#sliders">
+                            Sliders
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#tabs">
+                            Tabs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#textfields">
+                            Text fields
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#toolbars">
+                            Toolbars
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="main">
+
+    <div class="container xs-visible sm-visible">
+        <div class="btn btn-circle bg-grey-3" data-toggle="sidebar" data-target="#sidebar">
+            <i class="md-icon">menu</i>
+        </div>
+    </div>
 
     <section class="container">
         <h1>Buttons</h1>
@@ -465,51 +580,51 @@
         <h1>Tabs</h1>
         <div class="tabs">
             <nav class="tab-list bg-green-6 border-red-5">
-                <a class="tab-active" href="#">
+                <a class="tab-active" data-toggle="tab" data-target=".tab1">
                     Web
                 </a>
-                <a href="#">
+                <a data-toggle="tab" data-target="#tab1">
                     Shopping
                 </a>
-                <a href="#">
+                <a data-toggle="tab" data-target="#tab2">
                     Videos
                 </a>
-                <a href="#">
+                <a data-toggle="tab" data-target="#tab3">
                     Images
                 </a>
-                <a href="#">
+                <a data-toggle="tab" data-target="#tab4">
                     News
                 </a>
-                <a href="#">
+                <a data-toggle="tab" data-target="#tab5">
                     More
                 </a>
             </nav>
-            <div class="tab-content tab-visible">
+            <div id="tab1" class="tab-content tab-visible">
                 <div class="container add-border">
                     Content tab 1
                 </div>
             </div>
-            <div class="tab-content">
+            <div id="tab2" class="tab-content">
                 <div class="container add-border">
                     Content tab 2
                 </div>
             </div>
-            <div class="tab-content">
+            <div id="tab3" class="tab-content">
                 <div class="container add-border">
                     Content tab 3
                 </div>
             </div>
-            <div class="tab-content">
+            <div id="tab4" class="tab-content">
                 <div class="container add-border">
                     Content tab 4
                 </div>
             </div>
-            <div class="tab-content">
+            <div id="tab5" class="tab-content">
                 <div class="container add-border">
                     Content tab 5
                 </div>
             </div>
-            <div class="tab-content">
+            <div id="tab6" class="tab-content">
                 <div class="container add-border">
                     Content tab 6
                 </div>

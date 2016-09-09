@@ -49,11 +49,17 @@
     <script type="text/javascript">
         $(function () {
             $('.dialog')
+                    .on('cem.dialog.beforeShow', function (e) {
+                        console.log('Before Show');
+                    })
                     .on('cem.dialog.show', function (e) {
-                        console.log(e.relatedTarget);
+                        console.log('Show');
+                    })
+                    .on('cem.dialog.beforeHide', function (e) {
+                        console.log('Before Hide');
                     })
                     .on('cem.dialog.hide', function (e) {
-                        console.log(e.relatedTarget);
+                        console.log('Hide');
                     });
         });
     </script>

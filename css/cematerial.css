@@ -620,11 +620,11 @@ table td:last-child {
     content: 'keyboard_arrow_up';
 }
 
-.panel-visible:not(:first-child) {
+.panel-visible:not(:first-child):not(.panel-nomargin) {
     margin-top: 16px;
 }
 
-.panel-visible:not(:last-child) {
+.panel-visible:not(:last-child):not(.panel-nomargin) {
     margin-bottom: 16px;
 }
 

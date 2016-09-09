@@ -1,3 +1,331 @@
+if (typeof jQuery === 'undefined') {
+    throw new Error('CEMaterial requires jQuery');
+}
+
+/** ========================================================================
+ *
+ * CEMaterial Dialogs
+ *
+ * ======================================================================== */
+
++function ($) {
+    'use strict';
+
+    // CLASS
+
+    var Dialog = function (el, options) {
+        var that = this;
+
+        this.options = options || {};
+        this.$el = $(el);
+
+        if (this.options.remote) {
+            this.$el
+                .find('.dialog-content')
+                .load(this.options.remote, $.proxy(function () {
+                    this.$element.trigger('cem.dialog.loaded');
+                }, this))
+        }
+
+        if (this.options.autoclose) {
+            this.$el.on('click', function (e) {
+                var target = $(e.target);
+                if (target.is(that.$el)) {
+                    that.hide(target);
+                }
+            });
+        }
+
+        if (this.options.keyboard) {
+            $(document).on('keydown', function (e) {
+                var target = $(e.target);
+                if (e.which == 27) {
+                    that.hide(target);
+                }
+            });
+        }
+    };
+
+    Dialog.VERSION = '0.1.0';
+
+    Dialog.DEFAULTS = {
+        autoclose: true,
+        focus: false,
+        keyboard: false
+    };
+
+    Dialog.prototype.toggle = function (_relatedTarget) {
+        return this.$el.hasClass('dialog-visible') ? this.hide() : this.show(_relatedTarget);
+    };
+
+    Dialog.prototype.show = function (_relatedTarget) {
+        var e; // Event handler
+
+        e = $.Event('cem.dialog.beforeShow', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+
+        // Show dialog
+        this.$el.addClass('dialog-visible');
+
+        // Focus
+        if (this.options.focus) {
+            this.$el.find(this.options.focus).focus();
+        }
+
+        e = $.Event('cem.dialog.show', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+    };
+
+    Dialog.prototype.hide = function (_relatedTarget) {
+        var e; // Event handler
+
+        e = $.Event('cem.dialog.beforeHide', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+
+        // Hide dialog
+        this.$el.removeClass('dialog-visible');
+
+        e = $.Event('cem.dialog.hide', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+    };
+
+    // DIALOG - JQUERY PLUGIN
+
+    function Plugin(action, _relatedTarget) {
+        return this.each(function () {
+            var $this = $(this);
+            var options = $.extend({}, Dialog.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
+
+            var dialog = $this.data('cem.dialog');
+
+            if (!dialog) {
+                dialog = new Dialog(this, options);
+                $this.data('cem.dialog', dialog);
+            }
+
+            if (typeof action == 'string') {
+                dialog[action](_relatedTarget);
+            } else if (options.show) {
+                dialog.show(_relatedTarget);
+            }
+        });
+    }
+
+    $.fn.dialog = Plugin;
+    $.fn.dialog.Constructor = Dialog;
+
+    // DIALOG - DATA API
+    $(document).on('click', '[data-toggle="dialog"]', function (e) {
+        var $this = $(this);
+        var $target = CEMaterial.getTarget($this, '.dialog');
+
+        $this.is('a') ? e.preventDefault() : '';
+
+        Plugin.call($target, 'toggle', this);
+    });
+
+}(jQuery);
+
+
+/** ========================================================================
+ *
+ * CEMaterial Panels
+ *
+ * ======================================================================== */
+
++function ($) {
+    'use strict';
+
+    // CLASS
+
+    var Panel = function (el, options) {
+        this.options = options || {};
+        this.$el = $(el);
+
+        if (this.options.margin) {
+            this.$el.removeClass('panel-nomargin');
+        } else {
+            this.$el.addClass('panel-nomargin');
+        }
+    };
+
+    Panel.VERSION = '0.1.0';
+
+    Panel.DEFAULTS = {
+        margin: true
+    };
+
+    Panel.prototype.toggle = function (_relatedTarget) {
+        return this.$el.hasClass('panel-visible') ? this.hide() : this.show(_relatedTarget);
+    };
+
+    Panel.prototype.show = function (_relatedTarget) {
+        var e; // Event handler
+
+        // If has panel group, close PREVIOUS OPENNED PANEL
+        this.$el.closest('.panel-group').find('.panel.panel-visible').panel('hide');
+
+        e = $.Event('cem.panel.beforeShow', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+
+        // Show panel
+        this.$el.addClass('panel-visible');
+
+        e = $.Event('cem.panel.show', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+    };
+
+    Panel.prototype.hide = function (_relatedTarget) {
+        var e; // Event handler
+
+        e = $.Event('cem.panel.beforeHide', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+
+        // Hide panel
+        this.$el.removeClass('panel-visible');
+
+        e = $.Event('cem.panel.hide', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+    };
+
+    // PANEL - JQUERY PLUGIN
+
+    function Plugin(action, _relatedTarget) {
+        return this.each(function () {
+            var $this = $(this);
+            var options = $.extend({}, Panel.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
+
+            var panel = $this.data('cem.panel');
+
+            if (!panel) {
+                panel = new Panel(this, options);
+                $this.data('cem.panel', panel);
+            }
+
+            if (typeof action == 'string') {
+                panel[action](_relatedTarget);
+            } else if (options.show) {
+                panel.show(_relatedTarget);
+            }
+        });
+    }
+
+    $.fn.panel = Plugin;
+    $.fn.panel.Constructor = Panel;
+
+    // PANEL - DATA API
+    $(document).on('click', '[data-toggle="panel"]', function (e) {
+        var $this = $(this);
+        var $target = CEMaterial.getTarget($this, '.panel');
+
+        $this.is('a') ? e.preventDefault() : '';
+
+        Plugin.call($target, 'toggle', this);
+    });
+
+}(jQuery);
+
+
+/** ========================================================================
+ *
+ * CEMaterial Dropdowns
+ *
+ * ======================================================================== */
+
++function ($) {
+    'use strict';
+
+    // CLASS
+
+    var Dropdown = function (el, options) {
+        this.options = options || {};
+        this.$el = $(el);
+
+        if (this.options.autoclose) {
+            $(document).on('click', function (e) {
+                var target = $(e.target);
+                $('.dropdown-visible').not(target.parents('.dropdown-visible')).dropdown('hide');
+            });
+        }
+    };
+
+    Dropdown.VERSION = '0.1.0';
+
+    Dropdown.DEFAULTS = {
+        autoclose: true
+    };
+
+    Dropdown.prototype.toggle = function (_relatedTarget) {
+        return this.$el.hasClass('dropdown-visible') ? this.hide() : this.show(_relatedTarget);
+    };
+
+    Dropdown.prototype.show = function (_relatedTarget) {
+        var e; // Event handler
+
+        // If has OTHER OPENNED dropdown, close
+        $(document).find('.dropdown.dropdown-visible').not(this.$el.parents('.dropdown-visible')).dropdown('hide');
+
+        e = $.Event('cem.dropdown.beforeShow', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+
+        // Show dropdown
+        this.$el.addClass('dropdown-visible');
+
+        e = $.Event('cem.dropdown.show', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+    };
+
+    Dropdown.prototype.hide = function (_relatedTarget) {
+        var e; // Event handler
+
+        e = $.Event('cem.dropdown.beforeHide', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+
+        // Hide dropdown
+        this.$el.removeClass('dropdown-visible');
+
+        e = $.Event('cem.dropdown.hide', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+    };
+
+    // DROPDOWN - JQUERY PLUGIN
+
+    function Plugin(action, _relatedTarget) {
+        return this.each(function () {
+            var $this = $(this);
+            var options = $.extend({}, Dropdown.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
+
+            var dropdown = $this.data('cem.dropdown');
+
+            if (!dropdown) {
+                dropdown = new Dropdown(this, options);
+                $this.data('cem.dropdown', dropdown);
+            }
+
+            if (typeof action == 'string') {
+                dropdown[action](_relatedTarget);
+            } else if (options.show) {
+                dropdown.show(_relatedTarget);
+            }
+        });
+    }
+
+    $.fn.dropdown = Plugin;
+    $.fn.dropdown.Constructor = Dropdown;
+
+    // DROPDOWN - DATA API
+    $(document).on('click', '[data-toggle="dropdown"]', function (e) {
+        var $this = $(this);
+        var $target = CEMaterial.getTarget($this, '.dropdown');
+
+        $this.is('a') ? e.preventDefault() : '';
+
+        Plugin.call($target, 'toggle', this);
+    });
+
+}(jQuery);
+
+
 // INIT CEMATERIAL
 jQuery(function ($) {
     var doc = $(document);
@@ -145,26 +473,6 @@ jQuery(function ($) {
         var event_params = {relatedTarget: el};
 
         switch (action) {
-            case 'dialog': {
-                target.trigger(jQuery.Event(target.hasClass('dialog-visible') ? 'cem.dialog.hide' : 'cem.dialog.show', event_params));
-
-                if (el.data('focus')) {
-                    target.one('transitionend', function () {
-                        target.find(el.data('focus')).focus();
-                    });
-                }
-                break;
-            }
-            case 'dropdown': {
-                $('.dropdown-visible').not(el.parents('.dropdown-visible')).not(target).trigger(jQuery.Event('cem.dropdown.hide', event_params));
-                target.trigger(jQuery.Event(target.hasClass('dropdown-visible') ? 'cem.dropdown.hide' : 'cem.dropdown.show', event_params));
-                break;
-            }
-            case 'panel': {
-                el.closest('.panel-group').find('.panel-visible').not(target).trigger(jQuery.Event('cem.panel.hide', event_params));
-                target.trigger(jQuery.Event(target.hasClass('panel-visible') ? 'cem.panel.hide' : 'cem.panel.show', event_params));
-                break;
-            }
             case 'tab': {
                 el.closest('.tab-list').find('.tab-active').not(el).trigger(jQuery.Event('cem.tab.hide', event_params));
                 el.trigger(jQuery.Event(el.hasClass('tab-active') ? 'cem.tab.hide' : 'cem.tab.show', event_params));
@@ -189,39 +497,6 @@ jQuery(function ($) {
     /**
      * CEM TOGGLE EVENTS
      */
-    // Dialogs
-    app
-        .on('cem.dialog.show', '.dialog', function (e) {
-            $(this).addClass('dialog-visible');
-            e.stopPropagation();
-        })
-        .on('cem.dialog.hide', '.dialog', function (e) {
-            $(this).removeClass('dialog-visible');
-            e.stopPropagation();
-        })
-    ;
-    // Dropdown
-    app
-        .on('cem.dropdown.show', '.dropdown', function (e) {
-            $(this).addClass('dropdown-visible');
-            e.stopPropagation();
-        })
-        .on('cem.dropdown.hide', '.dropdown', function (e) {
-            $(this).removeClass('dropdown-visible');
-            e.stopPropagation();
-        })
-    ;
-    // Expansion panels
-    app
-        .on('cem.panel.show', '.panel', function (e) {
-            $(this).addClass('panel-visible');
-            e.stopPropagation();
-        })
-        .on('cem.panel.hide', '.panel', function (e) {
-            $(this).removeClass('panel-visible');
-            e.stopPropagation();
-        })
-    ;
     // Tabs
     app
         .on('cem.tab.show', '.tab-list [data-toggle="tab"]', function (e) {
@@ -264,9 +539,6 @@ jQuery(function ($) {
     // CLOSE SIDEBARS/DROPDOWNS/DIALOGS ON BODY CLICK (MUST BE THE LAST EVENT)
     doc.on('click', function (e) {
         var target = $(e.target);
-
-        target.filter('.dialog-visible').trigger(jQuery.Event('cem.dialog.hide', {relatedTarget: target}));
-        $('.dropdown-visible').not(target.parents('.dropdown-visible')).trigger(jQuery.Event('cem.dropdown.hide', {relatedTarget: target}));
         $('.sidebar-visible').not(target.closest('.sidebar-visible')).removeClass('sidebar-visible');
     });
 
@@ -348,3 +620,5 @@ var CEMaterial = {
         });
     }
 };
+
+

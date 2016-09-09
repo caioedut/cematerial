@@ -35,7 +35,7 @@
         if (this.options.keyboard) {
             $(document).on('keydown', function (e) {
                 var target = $(e.target);
-                if (e.which == 27) {
+                if (e.which == 27 && that == Dialog.OPENED[Dialog.OPENED.length - 1]) {
                     that.hide(target);
                 }
             });
@@ -47,8 +47,10 @@
     Dialog.DEFAULTS = {
         autoclose: true,
         focus: false,
-        keyboard: false
+        keyboard: true
     };
+
+    Dialog.OPENED = [];
 
     Dialog.prototype.toggle = function (_relatedTarget) {
         return this.$el.hasClass('dialog-visible') ? this.hide() : this.show(_relatedTarget);
@@ -68,6 +70,12 @@
             this.$el.find(this.options.focus).focus();
         }
 
+        // Add to Dialog.OPENED
+        var last = Dialog.OPENED[Dialog.OPENED.length - 1];
+        if (this != last) {
+            Dialog.OPENED.push(this);
+        }
+
         e = $.Event('cem.dialog.show', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
     };
@@ -80,6 +88,12 @@
 
         // Hide dialog
         this.$el.removeClass('dialog-visible');
+
+        // Remove from Dialog.OPENED
+        var last = Dialog.OPENED[Dialog.OPENED.length - 1];
+        if (this == last) {
+            Dialog.OPENED.pop();
+        }
 
         e = $.Event('cem.dialog.hide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);

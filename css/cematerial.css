@@ -855,6 +855,14 @@ textarea.input:not([rows]) {
     width: max-content;
 }
 
+.xs-sidebar .menu,
+.sm-sidebar .menu,
+.md-sidebar .menu,
+.lg-sidebar .menu,
+.xl-sidebar .menu {
+    padding: 0;
+}
+
 .menu-block {
     display: block;
     width: 100%;
@@ -2429,6 +2437,18 @@ textarea.input:not([rows]) {
 
 .no-padding {
     padding: 0 !important;
+}
+
+.no-shadow {
+    box-shadow: none !important;
+}
+
+.indent {
+    padding-left: 2em !important;
+}
+
+.outdent {
+    padding-left: .5em !important;
 }
 
 /*ADD CLASSES*/

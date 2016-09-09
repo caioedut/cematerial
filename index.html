@@ -25,7 +25,7 @@
             bottom: 0;
             left: 0;
             background-color: #fff;
-            border-right: 1px solid #aaa;
+            border-right: 1px solid #ddd;
             overflow: hidden;
             overflow-y: auto;
             width: 240px;
@@ -63,89 +63,89 @@
 
 <div id="sidebar" class="xs-sidebar sm-sidebar">
     <div class="panel-group">
-        <div class="panel panel-visible">
+        <div class="panel panel-visible no-shadow">
             <div class="panel-header link" data-toggle="panel">
                 <h4>Components</h4>
             </div>
-            <div class="panel-body xs-no-padding no-padding">
+            <div class="panel-body no-padding">
                 <ul class="menu menu-block">
                     <li>
-                        <a href="#buttons">
+                        <a class="indent" href="#buttons">
                             Buttons
                         </a>
                     </li>
                     <li>
-                        <a href="#cards">
+                        <a class="indent" href="#cards">
                             Cards
                         </a>
                     </li>
                     <li>
-                        <a href="#chips">
+                        <a class="indent" href="#chips">
                             Chips
                         </a>
                     </li>
                     <li>
-                        <a href="#datatables">
+                        <a class="indent" href="#datatables">
                             Data tables
                         </a>
                     </li>
                     <li>
-                        <a href="#dialogs">
+                        <a class="indent" href="#dialogs">
                             Dialogs
                         </a>
                     </li>
                     <li>
-                        <a href="#dropdowns">
+                        <a class="indent" href="#dropdowns">
                             Dropdowns
                         </a>
                     </li>
                     <li>
-                        <a href="#dividers">
+                        <a class="indent" href="#dividers">
                             Dividers
                         </a>
                     </li>
                     <li>
-                        <a href="#expansionpanels">
+                        <a class="indent" href="#expansionpanels">
                             Expansion panels
                         </a>
                     </li>
                     <li>
-                        <a href="#gridlists">
+                        <a class="indent" href="#gridlists">
                             Grid lists
                         </a>
                     </li>
                     <li>
-                        <a href="#lists">
+                        <a class="indent" href="#lists">
                             Lists
                         </a>
                     </li>
                     <li>
-                        <a href="#menus">
+                        <a class="indent" href="#menus">
                             Menus
                         </a>
                     </li>
                     <li>
-                        <a href="#selectioncontrols">
+                        <a class="indent" href="#selectioncontrols">
                             Selection controls
                         </a>
                     </li>
                     <li>
-                        <a href="#sliders">
+                        <a class="indent" href="#sliders">
                             Sliders
                         </a>
                     </li>
                     <li>
-                        <a href="#tabs">
+                        <a class="indent" href="#tabs">
                             Tabs
                         </a>
                     </li>
                     <li>
-                        <a href="#textfields">
+                        <a class="indent" href="#textfields">
                             Text fields
                         </a>
                     </li>
                     <li>
-                        <a href="#toolbars">
+                        <a class="indent" href="#toolbars">
                             Toolbars
                         </a>
                     </li>
@@ -157,14 +157,17 @@
 
 <div id="main">
 
-    <div class="container xs-visible sm-visible">
-        <div class="btn btn-circle bg-grey-3" data-toggle="sidebar" data-target="#sidebar">
-            <i class="md-icon">menu</i>
+    <div class="grid grid-middle bg-indigo-5 affix-top">
+        <div class="grid-col md-hidden lg-hidden xl-hidden">
+            <div class="container-sm">
+                <div class="btn btn-circle waves" data-toggle="sidebar" data-target="#sidebar">
+                    <i class="md-icon">menu</i>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="container bg-indigo-5">
-        <h3>Components</h3>
+        <div class="grid-col container-xs">
+            <h3 class="container">Components</h3>
+        </div>
     </div>
 
     <section id="buttons" class="container">

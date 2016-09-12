@@ -577,6 +577,10 @@ table td:last-child {
 
 .panel .panel-body,
 .panel .panel-footer {
+}
+
+.panel:not(.panel-processed):not(.panel-visible) .panel-body,
+.panel:not(.panel-processed):not(.panel-visible) .panel-footer {
     display: none;
 }
 

@@ -191,10 +191,11 @@ if (typeof jQuery === 'undefined') {
         this.$el.trigger(e);
 
         // Show panel
-        this.$el.addClass('panel-visible').find('.panel-body, .panel-footer').finish().slideDown(200, function () {
+        this.$el.find('.panel-body, .panel-footer').finish().slideDown(200, function () {
             e = $.Event('cem.panel.show', {relatedTarget: _relatedTarget});
             that.$el.trigger(e);
         });
+        this.$el.addClass('panel-processed panel-visible');
     };
 
     Panel.prototype.hide = function (_relatedTarget) {
@@ -205,10 +206,11 @@ if (typeof jQuery === 'undefined') {
         this.$el.trigger(e);
 
         // Hide panel
-        this.$el.removeClass('panel-visible').find('.panel-body, .panel-footer').finish().slideUp(200, function () {
+        this.$el.find('.panel-body, .panel-footer').finish().slideUp(200, function () {
             e = $.Event('cem.panel.hide', {relatedTarget: _relatedTarget});
             that.$el.trigger(e);
         });
+        this.$el.addClass('panel-processed').removeClass('panel-visible');
     };
 
     // PANEL - JQUERY PLUGIN
@@ -858,5 +860,3 @@ var CEMaterial = {
         });
     }
 };
-
-

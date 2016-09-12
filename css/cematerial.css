@@ -842,6 +842,33 @@ textarea.input:not([rows]) {
     width: 32px;
 }
 
+/*TOOLTIPS*/
+.tooltip {
+    position: absolute;
+    background-color: #616161;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 0.74rem;
+    margin-top: 2px;
+    max-width: 100%;
+    padding: 6px 8px;
+    width: max-content;
+    z-index: 999;
+
+    opacity: 0;
+    transition: ease opacity .15s;
+}
+
+.tooltip-nowrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tooltip-visible {
+    opacity: 1;
+}
+
 /*MENUS */
 .menu {
     background-color: #fff;
@@ -1005,7 +1032,7 @@ textarea.input:not([rows]) {
     bottom: 0;
     border: 2px solid blue;
     border-color: inherit;
-    transition: transform ease-out .4s, width ease-out .4s;
+    transition: all ease .4s;
 }
 
 .tabs .tab-bar ~ * {

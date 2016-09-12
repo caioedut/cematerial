@@ -99,6 +99,13 @@ a:hover, a:link:hover, .link:hover, .link-block:hover {
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .md-icon-xs {
@@ -597,27 +604,9 @@ table td:last-child {
     padding-bottom: 0;
 }
 
-.panel-toggler {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    background-color: inherit;
-    cursor: pointer;
-    font-size: 1.8rem;
-    line-height: 1.4rem;
-    padding: inherit;
-    transform: translateY(-50%);
-    z-index: 1;
-}
-
-.panel-toggler:after {
-    content: 'keyboard_arrow_down';
-    display: block;
-    font-family: 'Material Icons';
-}
-
-.panel-visible .panel-toggler:after {
-    content: 'keyboard_arrow_up';
+.panel-visible:not(.panel-noscale) {
+    margin-left: -8px;
+    margin-right: -8px;
 }
 
 .panel-visible:not(:first-child):not(.panel-nomargin) {
@@ -626,6 +615,15 @@ table td:last-child {
 
 .panel-visible:not(:last-child):not(.panel-nomargin) {
     margin-bottom: 16px;
+}
+
+/*PANEL TOGGLER*/
+.panel:not(.panel-visible) .panel-toggler .md-icon:not(:first-child) {
+    display: none;
+}
+
+.panel-visible .panel-toggler .md-icon:first-child:not(:last-child) {
+    display: none;
 }
 
 /*LABELS*/
@@ -2517,6 +2515,48 @@ textarea.input:not([rows]) {
 
 .container-xl {
     padding: 64px !important;
+}
+
+/*TEXT SIZES*/
+.text-xs {
+    font-size: .6em;
+}
+
+.text-sm {
+    font-size: .8em;
+}
+
+.text-md {
+    font-size: 1em;
+}
+
+.text-lg {
+    font-size: 1.2em;
+}
+
+.text-xl {
+    font-size: 1.4em;
+}
+
+/*BTN FIT*/
+.btn-fit-xs {
+    margin: -4px;
+}
+
+.btn-fit-sm {
+    margin: -8px;
+}
+
+.btn-fit-md {
+    margin: -16px;
+}
+
+.btn-fit-lg {
+    margin: -32px;
+}
+
+.btn-fit-xl {
+    margin: -64px;
 }
 
 /*IMAGE CLASSES*/

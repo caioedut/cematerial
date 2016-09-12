@@ -18,12 +18,19 @@
         } else {
             this.$el.addClass('panel-nomargin');
         }
+
+        if (this.options.scale) {
+            this.$el.removeClass('panel-noscale');
+        } else {
+            this.$el.addClass('panel-noscale');
+        }
     };
 
     Panel.VERSION = '0.1.0';
 
     Panel.DEFAULTS = {
-        margin: true
+        margin: true,
+        scale: true
     };
 
     Panel.prototype.toggle = function (_relatedTarget) {

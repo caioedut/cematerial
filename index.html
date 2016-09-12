@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <!-- FONTS -->
-    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"/>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 
     <!-- CEMATERIAL -->
@@ -69,7 +69,7 @@
 
 <div id="sidebar" class="xs-sidebar sm-sidebar">
     <div class="panel-group">
-        <div class="panel panel-visible no-shadow">
+        <div class="panel panel-visible panel-noscale no-shadow" data-scale="0">
             <div class="panel-header link" data-toggle="panel">
                 <h4>Components</h4>
             </div>
@@ -649,15 +649,26 @@
             <div class="panel-group">
                 <div class="panel">
                     <div class="panel-header">
-                        <div class="grid grid-adjust-xs grid-nowrap grid-middle">
-                            <div class="grid-col xs-col-4">
-                                <b>Trip Name</b>
+
+                        <div class="grid grid-justify grid-middle">
+                            <div class="grid-col col-fill">
+                                <div class="grid grid-adjust-xs grid-nowrap grid-middle">
+                                    <div class="grid-col xs-col-4">
+                                        <b>Trip Name</b>
+                                    </div>
+                                    <div class="grid-col xs-col-8">
+                                        Caribean cruise
+                                    </div>
+                                </div>
                             </div>
-                            <div class="grid-col xs-col-8">
-                                Caribean cruise
+                            <div class="grid-col col-right">
+                                <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                    <i class="md-icon">keyboard_arrow_down</i>
+                                    <i class="md-icon">keyboard_arrow_up</i>
+                                </button>
                             </div>
                         </div>
-                        <div class="panel-toggler" data-toggle="panel"></div>
+
                     </div>
                     <div class="panel-body">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!
@@ -665,15 +676,26 @@
                 </div>
                 <div class="panel">
                     <div class="panel-header">
-                        <div class="grid grid-adjust-xs">
-                            <div class="grid-col xs-col-4">
-                                <b>Location</b>
+
+                        <div class="grid grid-justify grid-middle">
+                            <div class="grid-col col-fill">
+                                <div class="grid grid-adjust-xs">
+                                    <div class="grid-col xs-col-4">
+                                        <b>Location</b>
+                                    </div>
+                                    <div class="grid-col xs-col-8">
+                                        Barbados
+                                    </div>
+                                </div>
                             </div>
-                            <div class="grid-col xs-col-8">
-                                Barbados
+                            <div class="grid-col col-right">
+                                <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                    <i class="md-icon">keyboard_arrow_down</i>
+                                    <i class="md-icon">keyboard_arrow_up</i>
+                                </button>
                             </div>
                         </div>
-                        <div class="panel-toggler" data-toggle="panel"></div>
+
                     </div>
                     <div class="panel-body">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!
@@ -689,18 +711,29 @@
                 </div>
                 <div class="panel">
                     <div class="panel-header">
-                        <div class="grid grid-adjust-xs">
-                            <div class="grid-col xs-col-4">
-                                <b>Start and end dates</b>
+
+                        <div class="grid grid-justify grid-middle">
+                            <div class="grid-col col-fill">
+                                <div class="grid grid-adjust-xs">
+                                    <div class="grid-col xs-col-4">
+                                        <b>Start and end dates</b>
+                                    </div>
+                                    <div class="grid-col xs-col-3">
+                                        <span class="text-grey-6">Start date:</span> Feb 29, 2016
+                                    </div>
+                                    <div class="grid-col xs-col-3">
+                                        <span class="text-grey-6">End date:</span> Not set
+                                    </div>
+                                </div>
                             </div>
-                            <div class="grid-col xs-col-3">
-                                <span class="text-grey-6">Start date:</span> Feb 29, 2016
-                            </div>
-                            <div class="grid-col xs-col-3">
-                                <span class="text-grey-6">End date:</span> Not set
+                            <div class="grid-col col-right">
+                                <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                    <i class="md-icon">keyboard_arrow_down</i>
+                                    <i class="md-icon">keyboard_arrow_up</i>
+                                </button>
                             </div>
                         </div>
-                        <div class="panel-toggler" data-toggle="panel"></div>
+
                     </div>
                     <div class="panel-body">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
@@ -709,15 +742,26 @@
                 </div>
                 <div class="panel">
                     <div class="panel-header">
-                        <div class="grid grid-adjust-xs grid-nowrap grid-middle">
-                            <div class="grid-col xs-col-4">
-                                <b>Carrier</b>
+
+                        <div class="grid grid-justify grid-middle">
+                            <div class="grid-col col-fill">
+                                <div class="grid grid-adjust-xs grid-nowrap grid-middle">
+                                    <div class="grid-col xs-col-4">
+                                        <b>Carrier</b>
+                                    </div>
+                                    <div class="grid-col xs-col-8">
+                                        The best cruise line
+                                    </div>
+                                </div>
                             </div>
-                            <div class="grid-col xs-col-8">
-                                The best cruise line
+                            <div class="grid-col col-right">
+                                <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                    <i class="md-icon">keyboard_arrow_down</i>
+                                    <i class="md-icon">keyboard_arrow_up</i>
+                                </button>
                             </div>
                         </div>
-                        <div class="panel-toggler" data-toggle="panel"></div>
+
                     </div>
                     <div class="panel-body">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
@@ -728,17 +772,28 @@
                 </div>
                 <div class="panel">
                     <div class="panel-header">
-                        <div class="grid grid-adjust-xs grid-nowrap grid-middle">
-                            <div class="grid-col xs-col-4">
-                                <b>Meal preferences</b>
-                                <br/>
-                                <small>Optional</small>
+
+                        <div class="grid grid-justify grid-middle">
+                            <div class="grid-col col-fill">
+                                <div class="grid grid-adjust-xs grid-nowrap grid-middle">
+                                    <div class="grid-col xs-col-4">
+                                        <b>Meal preferences</b>
+                                        <br/>
+                                        <small>Optional</small>
+                                    </div>
+                                    <div class="grid-col xs-col-8">
+                                        Vegetarian
+                                    </div>
+                                </div>
                             </div>
-                            <div class="grid-col xs-col-8">
-                                Vegetarian
+                            <div class="grid-col col-right">
+                                <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                    <i class="md-icon">keyboard_arrow_down</i>
+                                    <i class="md-icon">keyboard_arrow_up</i>
+                                </button>
                             </div>
                         </div>
-                        <div class="panel-toggler" data-toggle="panel"></div>
+
                     </div>
                     <div class="panel-body">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>

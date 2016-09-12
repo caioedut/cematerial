@@ -38,6 +38,7 @@
     };
 
     Panel.prototype.show = function (_relatedTarget) {
+        var that = this;
         var e; // Event handler
 
         // If has panel group, close PREVIOUS OPENNED PANEL
@@ -47,23 +48,24 @@
         this.$el.trigger(e);
 
         // Show panel
-        this.$el.addClass('panel-visible');
-
-        e = $.Event('cem.panel.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        this.$el.addClass('panel-visible').find('.panel-body, .panel-footer').finish().slideDown(200, function () {
+            e = $.Event('cem.panel.show', {relatedTarget: _relatedTarget});
+            that.$el.trigger(e);
+        });
     };
 
     Panel.prototype.hide = function (_relatedTarget) {
+        var that = this;
         var e; // Event handler
 
         e = $.Event('cem.panel.beforeHide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
 
         // Hide panel
-        this.$el.removeClass('panel-visible');
-
-        e = $.Event('cem.panel.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        this.$el.removeClass('panel-visible').find('.panel-body, .panel-footer').finish().slideUp(200, function () {
+            e = $.Event('cem.panel.hide', {relatedTarget: _relatedTarget});
+            that.$el.trigger(e);
+        });
     };
 
     // PANEL - JQUERY PLUGIN

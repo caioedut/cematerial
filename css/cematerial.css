@@ -575,25 +575,14 @@ table td:last-child {
     position: relative;
 }
 
-.panel-body,
-.panel-footer {
-    height: auto;
-    opacity: 1;
-    overflow: hidden;
-    transition: ease all .3s;
+.panel .panel-body,
+.panel .panel-footer {
+    display: none;
 }
 
 .panel-footer {
     border-top: 1px solid #ddd;
     padding: 16px;
-}
-
-.panel:not(.panel-visible) .panel-body,
-.panel:not(.panel-visible) .panel-footer {
-    height: 0;
-    opacity: 0;
-    padding-top: 0;
-    padding-bottom: 0;
 }
 
 .panel-visible:not(.panel-noscale) {
@@ -847,6 +836,7 @@ textarea.input:not([rows]) {
 
     opacity: 0;
     transition: ease opacity .15s;
+    will-change: top, left;
 }
 
 .tooltip-nowrap {
@@ -1023,6 +1013,7 @@ textarea.input:not([rows]) {
     border-bottom: 3px solid blue;
     border-color: inherit;
     transition: all ease .4s;
+    will-change: transform, width;
 }
 
 .tabs .tab-bar ~ * {

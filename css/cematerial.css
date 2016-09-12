@@ -999,7 +999,7 @@ textarea.input:not([rows]) {
 }
 
 .tabs .tab-list a {
-    border-bottom: 4px solid transparent;
+    border-bottom: 3px solid transparent;
     font-size: 1rem;
     max-width: 160px;
     min-width: 96px;
@@ -1020,7 +1020,7 @@ textarea.input:not([rows]) {
 .tabs .tab-bar {
     position: absolute;
     bottom: 0;
-    border: 2px solid blue;
+    border-bottom: 3px solid blue;
     border-color: inherit;
     transition: all ease .4s;
 }

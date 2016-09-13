@@ -67,7 +67,7 @@
 
 <body>
 
-<div id="sidebar" class="xs-sidebar sm-sidebar">
+<div id="sidebar" class="xs-sidebar sm-sidebar raised-xs">
     <div class="panel-group">
         <div class="panel panel-visible panel-noscale no-shadow" data-scale="0">
             <div class="panel-header link" data-toggle="panel">
@@ -101,13 +101,13 @@
                         </a>
                     </li>
                     <li>
-                        <a class="indent" href="#dropdowns">
-                            Dropdowns
+                        <a class="indent" href="#dividers">
+                            Dividers
                         </a>
                     </li>
                     <li>
-                        <a class="indent" href="#dividers">
-                            Dividers
+                        <a class="indent" href="#dropdowns">
+                            Dropdowns
                         </a>
                     </li>
                     <li>
@@ -128,6 +128,11 @@
                     <li>
                         <a class="indent" href="#menus">
                             Menus
+                        </a>
+                    </li>
+                    <li>
+                        <a class="indent" href="#raise">
+                            Raise
                         </a>
                     </li>
                     <li>
@@ -168,7 +173,7 @@
 
 <div id="main">
 
-    <div class="grid grid-middle bg-indigo-5 affix-top">
+    <div class="grid grid-middle bg-indigo-5 affix-top raised">
         <div class="grid-col md-hidden lg-hidden xl-hidden">
             <div class="container-sm">
                 <div class="btn btn-circle waves" data-toggle="sidebar" data-target="#sidebar">
@@ -470,6 +475,26 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider-horizontal"></div>
+    <section id="dividers" class="container">
+        <h1>Dividers</h1>
+        <h2>Divider Horizontal</h2>
+        <div class="grid grid-adjust">
+            <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                <div class="divider-horizontal container-sm"></div>
+            </div>
+            <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                <div class="divider-horizontal container-sm border-red-5"></div>
+            </div>
+            <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                <div class="divider-horizontal container-sm border-green-5"></div>
+            </div>
+            <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                <div class="divider-horizontal container-sm border-blue-5"></div>
             </div>
         </div>
     </section>
@@ -956,6 +981,22 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <div class="divider-horizontal"></div>
+    <section id="raise" class="container">
+        <h1>
+            Raise
+            <small>(shadow)</small>
+        </h1>
+
+        <div class="">
+            <button class="btn btn-icon raised-xs bg-orange-5"></button>
+            <button class="btn btn-icon raised-sm bg-orange-5"></button>
+            <button class="btn btn-icon raised-md bg-orange-5"></button>
+            <button class="btn btn-icon raised-lg bg-orange-5"></button>
+            <button class="btn btn-icon raised-xl bg-orange-5"></button>
         </div>
     </section>
 

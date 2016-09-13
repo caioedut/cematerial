@@ -91,13 +91,6 @@ a:hover, a:link:hover, .link:hover, .link-block:hover {
     text-transform: lowercase;
     transform: scale(1.3);
     vertical-align: middle;
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .md-icon-xs {
@@ -336,13 +329,17 @@ a:hover, a:link:hover, .link:hover, .link-block:hover {
 }
 
 .card .card-header,
-.card .card-body,
 .dialog .dialog-header,
-.dialog .dialog-body,
-.panel .panel-header,
-.panel .panel-body {
+.panel .panel-header {
     display: block;
     padding: 16px;
+}
+
+.card .card-body,
+.dialog .dialog-body,
+.panel .panel-body {
+    display: block;
+    padding: 8px 16px;
 }
 
 .card .card-footer,
@@ -371,7 +368,7 @@ a:hover, a:link:hover, .link:hover, .link-block:hover {
     border-radius: 0 0 2px 2px;
 }
 
-/*DIALOGS (TO USE WITH CARDS)*/
+/*DIALOGS / MODALS*/
 .dialog {
     position: fixed;
     top: 0;
@@ -441,7 +438,7 @@ a:hover, a:link:hover, .link:hover, .link-block:hover {
 }
 
 .dialog-body {
-    min-height: 0px;
+    min-height: 0;
     overflow-y: auto;
     width: 100%;
 }
@@ -2584,7 +2581,7 @@ textarea.input:not([rows]) {
     visibility: hidden;
 }
 
-/*COLORS*/
+/*BG COLORS*/
 .bg-black {
     background-color: #000
 }
@@ -2633,10 +2630,6 @@ textarea.input:not([rows]) {
     background-color: #B71C1C
 }
 
-.bg-primary-red .bg-primary-4, .bg-secondary-red .bg-secondary-4, .bg-primary-red .bg-primary-5, .bg-secondary-red .bg-secondary-5, .bg-primary-red .bg-primary-6, .bg-secondary-red .bg-secondary-6, .bg-primary-red .bg-primary-7, .bg-secondary-red .bg-secondary-7, .bg-primary-red .bg-primary-8, .bg-secondary-red .bg-secondary-8, .bg-primary-red .bg-primary-9, .bg-secondary-red .bg-secondary-9, .bg-red-4, .bg-red-5, .bg-red-6, .bg-red-7, .bg-red-8, .bg-red-9 {
-    color: #fff;
-}
-
 .bg-pink-0 {
     background-color: #FCE4EC
 }
@@ -2675,10 +2668,6 @@ textarea.input:not([rows]) {
 
 .bg-pink-9 {
     background-color: #880E4F
-}
-
-.bg-primary-pink .bg-primary-3, .bg-secondary-pink .bg-secondary-3, .bg-primary-pink .bg-primary-4, .bg-secondary-pink .bg-secondary-4, .bg-primary-pink .bg-primary-5, .bg-secondary-pink .bg-secondary-5, .bg-primary-pink .bg-primary-6, .bg-secondary-pink .bg-secondary-6, .bg-primary-pink .bg-primary-7, .bg-secondary-pink .bg-secondary-7, .bg-primary-pink .bg-primary-8, .bg-secondary-pink .bg-secondary-8, .bg-primary-pink .bg-primary-9, .bg-secondary-pink .bg-secondary-9, .bg-pink-3, .bg-pink-4, .bg-pink-5, .bg-pink-6, .bg-pink-7, .bg-pink-8, .bg-pink-9 {
-    color: #fff;
 }
 
 .bg-purple-0 {
@@ -2721,10 +2710,6 @@ textarea.input:not([rows]) {
     background-color: #4A148C
 }
 
-.bg-primary-purple .bg-primary-3, .bg-secondary-purple .bg-secondary-3, .bg-primary-purple .bg-primary-4, .bg-secondary-purple .bg-secondary-4, .bg-primary-purple .bg-primary-5, .bg-secondary-purple .bg-secondary-5, .bg-primary-purple .bg-primary-6, .bg-secondary-purple .bg-secondary-6, .bg-primary-purple .bg-primary-7, .bg-secondary-purple .bg-secondary-7, .bg-primary-purple .bg-primary-8, .bg-secondary-purple .bg-secondary-8, .bg-primary-purple .bg-primary-9, .bg-secondary-purple .bg-secondary-9, .bg-purple-3, .bg-purple-4, .bg-purple-5, .bg-purple-6, .bg-purple-7, .bg-purple-8, .bg-purple-9 {
-    color: #fff;
-}
-
 .bg-deeppurple-0 {
     background-color: #EDE7F6
 }
@@ -2763,10 +2748,6 @@ textarea.input:not([rows]) {
 
 .bg-deeppurple-9 {
     background-color: #311B92
-}
-
-.bg-primary-deeppurple .bg-primary-3, .bg-secondary-deeppurple .bg-secondary-3, .bg-primary-deeppurple .bg-primary-4, .bg-secondary-deeppurple .bg-secondary-4, .bg-primary-deeppurple .bg-primary-5, .bg-secondary-deeppurple .bg-secondary-5, .bg-primary-deeppurple .bg-primary-6, .bg-secondary-deeppurple .bg-secondary-6, .bg-primary-deeppurple .bg-primary-7, .bg-secondary-deeppurple .bg-secondary-7, .bg-primary-deeppurple .bg-primary-8, .bg-secondary-deeppurple .bg-secondary-8, .bg-primary-deeppurple .bg-primary-9, .bg-secondary-deeppurple .bg-secondary-9, .bg-deeppurple-3, .bg-deeppurple-4, .bg-deeppurple-5, .bg-deeppurple-6, .bg-deeppurple-7, .bg-deeppurple-8, .bg-deeppurple-9 {
-    color: #fff;
 }
 
 .bg-indigo-0 {
@@ -2809,10 +2790,6 @@ textarea.input:not([rows]) {
     background-color: #1A237E
 }
 
-.bg-primary-indigo .bg-primary-3, .bg-secondary-indigo .bg-secondary-3, .bg-primary-indigo .bg-primary-4, .bg-secondary-indigo .bg-secondary-4, .bg-primary-indigo .bg-primary-5, .bg-secondary-indigo .bg-secondary-5, .bg-primary-indigo .bg-primary-6, .bg-secondary-indigo .bg-secondary-6, .bg-primary-indigo .bg-primary-7, .bg-secondary-indigo .bg-secondary-7, .bg-primary-indigo .bg-primary-8, .bg-secondary-indigo .bg-secondary-8, .bg-primary-indigo .bg-primary-9, .bg-secondary-indigo .bg-secondary-9, .bg-indigo-3, .bg-indigo-4, .bg-indigo-5, .bg-indigo-6, .bg-indigo-7, .bg-indigo-8, .bg-indigo-9 {
-    color: #fff;
-}
-
 .bg-blue-0 {
     background-color: #E3F2FD
 }
@@ -2851,10 +2828,6 @@ textarea.input:not([rows]) {
 
 .bg-blue-9 {
     background-color: #0D47A1
-}
-
-.bg-primary-blue .bg-primary-5, .bg-secondary-blue .bg-secondary-5, .bg-primary-blue .bg-primary-6, .bg-secondary-blue .bg-secondary-6, .bg-primary-blue .bg-primary-7, .bg-secondary-blue .bg-secondary-7, .bg-primary-blue .bg-primary-8, .bg-secondary-blue .bg-secondary-8, .bg-primary-blue .bg-primary-9, .bg-secondary-blue .bg-secondary-9, .bg-blue-5, .bg-blue-6, .bg-blue-7, .bg-blue-8, .bg-blue-9 {
-    color: #fff;
 }
 
 .bg-lightblue-0 {
@@ -2897,10 +2870,6 @@ textarea.input:not([rows]) {
     background-color: #01579B
 }
 
-.bg-primary-lightblue .bg-primary-6, .bg-secondary-lightblue .bg-secondary-6, .bg-primary-lightblue .bg-primary-7, .bg-secondary-lightblue .bg-secondary-7, .bg-primary-lightblue .bg-primary-8, .bg-secondary-lightblue .bg-secondary-8, .bg-primary-lightblue .bg-primary-9, .bg-secondary-lightblue .bg-secondary-9, .bg-lightblue-6, .bg-lightblue-7, .bg-lightblue-8, .bg-lightblue-9 {
-    color: #fff;
-}
-
 .bg-cyan-0 {
     background-color: #E0F7FA
 }
@@ -2939,10 +2908,6 @@ textarea.input:not([rows]) {
 
 .bg-cyan-9 {
     background-color: #006064
-}
-
-.bg-primary-cyan .bg-primary-7, .bg-secondary-cyan .bg-secondary-7, .bg-primary-cyan .bg-primary-8, .bg-secondary-cyan .bg-secondary-8, .bg-primary-cyan .bg-primary-9, .bg-secondary-cyan .bg-secondary-9, .bg-cyan-7, .bg-cyan-8, .bg-cyan-9 {
-    color: #fff;
 }
 
 .bg-teal-0 {
@@ -2985,10 +2950,6 @@ textarea.input:not([rows]) {
     background-color: #004D40
 }
 
-.bg-primary-teal .bg-primary-5, .bg-secondary-teal .bg-secondary-5, .bg-primary-teal .bg-primary-6, .bg-secondary-teal .bg-secondary-6, .bg-primary-teal .bg-primary-7, .bg-secondary-teal .bg-secondary-7, .bg-primary-teal .bg-primary-8, .bg-secondary-teal .bg-secondary-8, .bg-primary-teal .bg-primary-9, .bg-secondary-teal .bg-secondary-9, .bg-teal-5, .bg-teal-6, .bg-teal-7, .bg-teal-8, .bg-teal-9 {
-    color: #fff;
-}
-
 .bg-green-0 {
     background-color: #E8F5E9
 }
@@ -3027,10 +2988,6 @@ textarea.input:not([rows]) {
 
 .bg-green-9 {
     background-color: #1B5E20
-}
-
-.bg-primary-green .bg-primary-6, .bg-secondary-green .bg-secondary-6, .bg-primary-green .bg-primary-7, .bg-secondary-green .bg-secondary-7, .bg-primary-green .bg-primary-8, .bg-secondary-green .bg-secondary-8, .bg-primary-green .bg-primary-9, .bg-secondary-green .bg-secondary-9, .bg-green-6, .bg-green-7, .bg-green-8, .bg-green-9 {
-    color: #fff;
 }
 
 .bg-lightgreen-0 {
@@ -3073,10 +3030,6 @@ textarea.input:not([rows]) {
     background-color: #33691E
 }
 
-.bg-primary-lightgreen .bg-primary-7, .bg-secondary-lightgreen .bg-secondary-7, .bg-primary-lightgreen .bg-primary-8, .bg-secondary-lightgreen .bg-secondary-8, .bg-primary-lightgreen .bg-primary-9, .bg-secondary-lightgreen .bg-secondary-9, .bg-lightgreen-7, .bg-grass-8, .bg-grass-9 {
-    color: #fff;
-}
-
 .bg-lime-0 {
     background-color: #F9FBE7
 }
@@ -3115,10 +3068,6 @@ textarea.input:not([rows]) {
 
 .bg-lime-9 {
     background-color: #827717
-}
-
-.bg-primary-lime .bg-primary-9, .bg-secondary-lime .bg-secondary-9, .bg-lime-9 {
-    color: #fff;
 }
 
 .bg-yellow-0 {
@@ -3241,10 +3190,6 @@ textarea.input:not([rows]) {
     background-color: #E65100
 }
 
-.bg-primary-orange .bg-primary-8, .bg-secondary-orange .bg-secondary-8, .bg-primary-orange .bg-primary-9, .bg-secondary-orange .bg-secondary-9, .bg-orange-8, .bg-orange-9 {
-    color: #fff;
-}
-
 .bg-deeporange-0 {
     background-color: #FBE9E7
 }
@@ -3283,10 +3228,6 @@ textarea.input:not([rows]) {
 
 .bg-deeporange-9 {
     background-color: #BF360C
-}
-
-.bg-primary-deeporange .bg-primary-5, .bg-secondary-deeporange .bg-secondary-5, .bg-primary-deeporange .bg-primary-6, .bg-secondary-deeporange .bg-secondary-6, .bg-primary-deeporange .bg-primary-7, .bg-secondary-deeporange .bg-secondary-7, .bg-primary-deeporange .bg-primary-8, .bg-secondary-deeporange .bg-secondary-8, .bg-primary-deeporange .bg-primary-9, .bg-secondary-deeporange .bg-secondary-9, .bg-deeporange-5, .bg-deeporange-6, .bg-deeporange-7, .bg-deeporange-8, .bg-deeporange-9 {
-    color: #fff;
 }
 
 .bg-brown-0 {
@@ -3329,10 +3270,6 @@ textarea.input:not([rows]) {
     background-color: #3E2723
 }
 
-.bg-primary-brown .bg-primary-3, .bg-secondary-brown .bg-secondary-3, .bg-primary-brown .bg-primary-4, .bg-secondary-brown .bg-secondary-4, .bg-primary-brown .bg-primary-5, .bg-secondary-brown .bg-secondary-5, .bg-primary-brown .bg-primary-6, .bg-secondary-brown .bg-secondary-6, .bg-primary-brown .bg-primary-7, .bg-secondary-brown .bg-secondary-7, .bg-primary-brown .bg-primary-8, .bg-secondary-brown .bg-secondary-8, .bg-primary-brown .bg-primary-9, .bg-secondary-brown .bg-secondary-9, .bg-brown-3, .bg-brown-4, .bg-brown-5, .bg-brown-6, .bg-brown-7, .bg-brown-8, .bg-brown-9 {
-    color: #fff;
-}
-
 .bg-grey-0 {
     background-color: #FAFAFA
 }
@@ -3371,10 +3308,6 @@ textarea.input:not([rows]) {
 
 .bg-grey-9 {
     background-color: #212121
-}
-
-.bg-primary-grey .bg-primary-6, .bg-secondary-grey .bg-secondary-6, .bg-primary-grey .bg-primary-7, .bg-secondary-grey .bg-secondary-7, .bg-primary-grey .bg-primary-8, .bg-secondary-grey .bg-secondary-8, .bg-primary-grey .bg-primary-9, .bg-secondary-grey .bg-secondary-9, .bg-grey-6, .bg-grey-7, .bg-grey-8, .bg-grey-9 {
-    color: #fff;
 }
 
 .bg-bluegrey-0 {
@@ -3417,10 +3350,28 @@ textarea.input:not([rows]) {
     background-color: #263238
 }
 
-.bg-primary-bluegrey .bg-primary-4, .bg-secondary-bluegrey .bg-secondary-4, .bg-primary-bluegrey .bg-primary-5, .bg-secondary-bluegrey .bg-secondary-5, .bg-primary-bluegrey .bg-primary-6, .bg-secondary-bluegrey .bg-secondary-6, .bg-primary-bluegrey .bg-primary-7, .bg-secondary-bluegrey .bg-secondary-7, .bg-primary-bluegrey .bg-primary-8, .bg-secondary-bluegrey .bg-secondary-8, .bg-primary-bluegrey .bg-primary-9, .bg-secondary-bluegrey .bg-secondary-9, .bg-bluegrey-4, .bg-bluegrey-5, .bg-bluegrey-6, .bg-bluegrey-7, .bg-bluegrey-8, .bg-bluegrey-9 {
-    color: #fff;
+.bg-black,
+.bg-red-4, .bg-red-5, .bg-red-6, .bg-red-7, .bg-red-8, .bg-red-9,
+.bg-pink-3, .bg-pink-4, .bg-pink-5, .bg-pink-6, .bg-pink-7, .bg-pink-8, .bg-pink-9,
+.bg-purple-3, .bg-purple-4, .bg-purple-5, .bg-purple-6, .bg-purple-7, .bg-purple-8, .bg-purple-9,
+.bg-deeppurple-3, .bg-deeppurple-4, .bg-deeppurple-5, .bg-deeppurple-6, .bg-deeppurple-7, .bg-deeppurple-8, .bg-deeppurple-9,
+.bg-indigo-3, .bg-indigo-4, .bg-indigo-5, .bg-indigo-6, .bg-indigo-7, .bg-indigo-8, .bg-indigo-9,
+.bg-blue-5, .bg-blue-6, .bg-blue-7, .bg-blue-8, .bg-blue-9,
+.bg-lightblue-6, .bg-lightblue-7, .bg-lightblue-8, .bg-lightblue-9,
+.bg-cyan-7, .bg-cyan-8, .bg-cyan-9,
+.bg-teal-5, .bg-teal-6, .bg-teal-7, .bg-teal-8, .bg-teal-9,
+.bg-green-6, .bg-green-7, .bg-green-8, .bg-green-9,
+.bg-grass-8, .bg-grass-9,
+.bg-lime-9,
+.bg-orange-8, .bg-orange-9,
+.bg-deeporange-5, .bg-deeporange-6, .bg-deeporange-7, .bg-deeporange-8, .bg-deeporange-9,
+.bg-brown-3, .bg-brown-4, .bg-brown-5, .bg-brown-6, .bg-brown-7, .bg-brown-8, .bg-brown-9,
+.bg-grey-6, .bg-grey-7, .bg-grey-8, .bg-grey-9,
+.bg-bluegrey-4, .bg-bluegrey-5, .bg-bluegrey-6, .bg-bluegrey-7, .bg-bluegrey-8, .bg-bluegrey-9 {
+    color: #fff
 }
 
+/*BORDER COLORS*/
 .border-black {
     border-color: #000
 }

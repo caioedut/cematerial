@@ -491,7 +491,7 @@ if (typeof jQuery === 'undefined') {
 
     var Tabs = function (el, options) {
         this.options = options || {};
-        this.$el = $(el);
+        this.$el = $(el).closest('.tabs');
 
         // Create element
         this.$list = this.$el.find('.tab-list');

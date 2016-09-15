@@ -1491,18 +1491,6 @@ textarea.input:not([rows]) {
     padding-bottom: 25%
 }
 
-.xs-bg-cover, .xs-bg-contain {
-    background: center center no-repeat;
-}
-
-.xs-bg-cover {
-    background-size: cover;
-}
-
-.xs-bg-contain {
-    background-size: contain;
-}
-
 /*@media (min-width: 544px) {*/
 @media (min-width: 600px) {
     /*.sm-col-1, .sm-col-2, .sm-col-3, .sm-col-4, .sm-col-5, .sm-col-6, .sm-col-7, .sm-col-8, .sm-col-9, .sm-col-10, .sm-col-11, .sm-col-12 {float: left;}*/
@@ -1660,18 +1648,6 @@ textarea.input:not([rows]) {
 
     .sm-box-25 {
         padding-bottom: 25%
-    }
-
-    .sm-bg-cover, .sm-bg-contain {
-        background: center center no-repeat;
-    }
-
-    .sm-bg-cover {
-        background-size: cover;
-    }
-
-    .sm-bg-contain {
-        background-size: contain;
     }
 }
 
@@ -1833,18 +1809,6 @@ textarea.input:not([rows]) {
     .md-box-25 {
         padding-bottom: 25%
     }
-
-    .md-bg-cover, .md-bg-contain {
-        background: center center no-repeat;
-    }
-
-    .md-bg-cover {
-        background-size: cover;
-    }
-
-    .md-bg-contain {
-        background-size: contain;
-    }
 }
 
 /*@media (min-width: 992px) {*/
@@ -2005,18 +1969,6 @@ textarea.input:not([rows]) {
     .lg-box-25 {
         padding-bottom: 25%
     }
-
-    .lg-bg-cover, .lg-bg-contain {
-        background: center center no-repeat;
-    }
-
-    .lg-bg-cover {
-        background-size: cover;
-    }
-
-    .lg-bg-contain {
-        background-size: contain;
-    }
 }
 
 /*@media (min-width: 1200px) {*/
@@ -2176,18 +2128,6 @@ textarea.input:not([rows]) {
 
     .xl-box-25 {
         padding-bottom: 25%
-    }
-
-    .xl-bg-cover, .xl-bg-contain {
-        background: center center no-repeat;
-    }
-
-    .xl-bg-cover {
-        background-size: cover;
-    }
-
-    .xl-bg-contain {
-        background-size: contain;
     }
 }
 
@@ -2410,7 +2350,7 @@ textarea.input:not([rows]) {
     }
 }
 
-/*GLOBAL USAGE*/
+/*GLOBAL USAGE / UTIL*/
 .static {
     position: static !important;
 }
@@ -2583,6 +2523,35 @@ textarea.input:not([rows]) {
     margin: -64px;
 }
 
+/*MEDIA CLASSES*/
+.media-fluid {
+    position: relative;
+    display: block;
+    padding-bottom: 50%;
+}
+
+.media-fluid > *, .media-fluid-xs > *, .media-fluid-sm > *, .media-fluid-lg > *, .media-fluid-xl > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.media-fluid-xs {
+    padding-bottom: 25%;
+}
+
+.media-fluid-sm {
+    padding-bottom: 75%;
+}
+
+.media-fluid-lg {
+    padding-bottom: 75%;
+}
+
+.media-fluid-xl {
+    padding-bottom: 100%;
+}
+
 /*IMAGE CLASSES*/
 .img-fluid {
     display: inline-block;
@@ -2596,6 +2565,19 @@ textarea.input:not([rows]) {
 
 .img-circle {
     border-radius: 50%;
+}
+
+.media-cover, .media-contain {
+    height: 100%;
+    width: 100%;
+}
+
+.media-cover {
+    object-fit: cover;
+}
+
+.media-contain {
+    object-fit: contain;
 }
 
 .invisible {

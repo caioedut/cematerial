@@ -143,6 +143,118 @@ a:hover, a:link:hover, .link:hover, .link-block:hover {
     background-color: rgba(0, 0, 0, .2);
 }
 
+/*BASE LAYOUT BEGIN*/
+.layout {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: hidden;
+
+    height: 100%;
+    width: 100%;
+}
+
+body > .layout {
+    height: 100vh;
+    width: 100vw;
+}
+
+.layout .layout-sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: #fff;
+    border-right: 1px solid rgba(0, 0, 0, 0.14);
+
+    overflow: hidden;
+    overflow-y: auto;
+    z-index: 1;
+
+    height: 100%;
+    width: calc(100% - 56px);
+    max-width: 340px;
+
+    transform: translateX(-100%);
+    transition: transform ease .3s;
+}
+
+.layout .layout-header {
+    margin: 0 !important;
+}
+
+.layout .layout-content {
+    margin: 0 !important;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.layout .layout-sidebar ~ * {
+    position: relative;
+    margin-left: auto !important;
+    transition: width ease .3s;
+    width: 100%;
+    /*z-index: 1;*/
+}
+
+.layout .layout-sidebar .menu {
+    padding: 0;
+}
+
+.layout .layout-sidebar-visible {
+    transform: translateX(0);
+}
+
+.layout .layout-sidebar ~ *:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .6);
+    content: '';
+    opacity: 0;
+    transition: ease opacity .3s, ease visibility .3s;
+    visibility: hidden;
+    /*z-index: 2;*/
+}
+
+.layout .layout-sidebar-visible ~ *:after {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (min-width: 1024px) {
+    .layout [data-toggle="sidebar"] {
+        display: none !important;
+    }
+
+    .layout .layout-sidebar {
+        max-width: 260px;
+        transform: translateX(0);
+    }
+
+    .layout .layout-sidebar ~ * {
+        width: calc(100% - 260px);
+    }
+
+    .layout .layout-sidebar-visible ~ *:after {
+        display: none;
+    }
+}
+
+/*@media (max-width: 1023px) {*/
+/*.layout .layout-sidebar:not(.layout-sidebar-visible) {*/
+/*transform: translateX(-100%);*/
+/*}*/
+
+/*.layout .layout-sidebar:not(.layout-sidebar-visible) ~ * {*/
+/*width: 100%;*/
+/*}*/
+/*}*/
+
+/*BASE LAYOUT END*/
+
 /*BUTTONS*/
 .btn {
     position: relative;
@@ -882,14 +994,6 @@ textarea.input:not([rows]) {
     width: max-content;
 }
 
-.xs-sidebar .menu,
-.sm-sidebar .menu,
-.md-sidebar .menu,
-.lg-sidebar .menu,
-.xl-sidebar .menu {
-    padding: 0;
-}
-
 .menu-block {
     display: block;
     width: 100%;
@@ -947,6 +1051,7 @@ textarea.input:not([rows]) {
 /*DROPDOWN / DROPUP*/
 .dropdown {
     position: relative;
+    display: inline-block;
 }
 
 .dropdown-body {
@@ -1163,10 +1268,6 @@ textarea.input:not([rows]) {
 /* 1024 - medium (md) */
 /* 1440 - large (lg) */
 /* 1920 - xlarge (xl) */
-
-.sidebar-visible {
-    transform: translateX(0) !important;
-}
 
 .xs-visible, .sm-visible, .md-visible, .lg-visible, .xl-visible,
 .xs-visible-block, .sm-visible-block, .md-visible-block, .lg-visible-block, .xl-visible-block,
@@ -2167,15 +2268,6 @@ textarea.input:not([rows]) {
         height: 56px;
         width: 100%;
     }
-
-    .xs-sidebar {
-        transition: ease transform .3s;
-        transform: translateX(-100%);
-    }
-
-    .xs-sidebar.sidebar-right {
-        transform: translateX(100%);
-    }
 }
 
 @media (min-width: 600px) and (max-width: 1023px) {
@@ -2209,15 +2301,6 @@ textarea.input:not([rows]) {
         bottom: 0;
         width: 100%;
         z-index: 99;
-    }
-
-    .sm-sidebar {
-        transition: ease transform .3s;
-        transform: translateX(-100%);
-    }
-
-    .sm-sidebar.sidebar-right {
-        transform: translateX(100%);
     }
 }
 
@@ -2253,15 +2336,6 @@ textarea.input:not([rows]) {
         width: 100%;
         z-index: 99;
     }
-
-    .md-sidebar {
-        transition: ease transform .3s;
-        transform: translateX(-100%);
-    }
-
-    .md-sidebar.sidebar-right {
-        transform: translateX(100%);
-    }
 }
 
 @media (min-width: 1440px) and (max-width: 1919px) {
@@ -2296,15 +2370,6 @@ textarea.input:not([rows]) {
         width: 100%;
         z-index: 99;
     }
-
-    .lg-sidebar {
-        transition: ease transform .3s;
-        transform: translateX(-100%);
-    }
-
-    .lg-sidebar.sidebar-right {
-        transform: translateX(100%);
-    }
 }
 
 @media (min-width: 1920px) {
@@ -2338,15 +2403,6 @@ textarea.input:not([rows]) {
         bottom: 0;
         width: 100%;
         z-index: 99;
-    }
-
-    .xl-sidebar {
-        transition: ease transform .3s;
-        transform: translateX(-100%);
-    }
-
-    .xl-sidebar.sidebar-right {
-        transform: translateX(100%);
     }
 }
 

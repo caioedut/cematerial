@@ -754,17 +754,18 @@ jQuery(function ($) {
     app.on('click', '[data-toggle]', function (e) {
         var el = $(this);
         var action = el.data('toggle').trim();
-        var target = CEMaterial.getTarget(el, '.' + action);
-
-        var event_params = {relatedTarget: el};
+        var target;
 
         switch (action) {
             case 'sidebar': {
-                target.toggleClass('sidebar-visible');
+                target = CEMaterial.getTarget(el);
+                target = target.length ? target : el.closest('.layout').find('.layout-sidebar');
+                target.toggleClass('layout-sidebar-visible');
                 e.stopPropagation();
                 break;
             }
             case 'table': {
+                target = CEMaterial.getTarget(el, '.table');
                 var checked = el.prop('checked');
                 target = target.length ? target : el.closest('table');
                 target.find('input[type="checkbox"]').prop('checked', checked);
@@ -776,12 +777,11 @@ jQuery(function ($) {
         }
     });
 
-    // CLOSE SIDEBARS/DROPDOWNS/DIALOGS ON BODY CLICK (MUST BE THE LAST EVENT)
+    // CLOSE SIDEBARS
     doc.on('click', function (e) {
         var target = $(e.target);
-        $('.sidebar-visible').not(target.closest('.sidebar-visible')).removeClass('sidebar-visible');
+        $('.layout-sidebar-visible').not(target.closest('.layout-sidebar-visible')).removeClass('layout-sidebar-visible');
     });
-
 });
 
 

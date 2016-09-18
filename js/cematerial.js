@@ -295,6 +295,7 @@ if (typeof jQuery === 'undefined') {
 
         // Show dropdown
         this.$el.addClass('dropdown-visible');
+        this.updatePosition();
 
         e = $.Event('cem.dropdown.show', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
@@ -311,6 +312,20 @@ if (typeof jQuery === 'undefined') {
 
         e = $.Event('cem.dropdown.hide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
+    };
+
+    Dropdown.prototype.updatePosition = function () {
+        var $dropbody = this.$el.find('.dropdown-body').css('transform', 'none');
+        var offset = $dropbody.offset();
+
+        if (offset.left < 0) {
+            $dropbody.css('transform', 'translateX(' + Math.abs(offset.left) + 'px)');
+        } else {
+            var translate = (offset.left + $dropbody.outerWidth()) - $('body').outerWidth();
+            if (translate > 0) {
+                $dropbody.css('transform', 'translateX(-' + translate + 'px)');
+            }
+        }
     };
 
     // DROPDOWN - JQUERY PLUGIN

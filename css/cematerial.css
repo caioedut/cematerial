@@ -359,7 +359,7 @@ body > .layout {
 }
 
 /*BTN HOVER BEGIN*/
-.btn:not(.btn-no-hover):before {
+.btn:before {
     position: absolute;
     top: 0;
     left: 0;
@@ -370,11 +370,13 @@ body > .layout {
     width: 100%;
 }
 
-.btn:not(.btn-no-hover):hover:before {
+.btn:hover:before,
+.btn:focus:before {
     background-color: rgba(0, 0, 0, .1);
 }
 
-.btn[class*="bg-"]:not(.btn-no-hover):hover:before {
+.btn[class*="bg-"]:hover:before,
+.btn[class*="bg-"]:focus:before {
     background-color: rgba(255, 255, 255, .2);
 }
 
@@ -2570,7 +2572,7 @@ textarea.input:not([rows]) {
 .media-fluid {
     position: relative;
     display: block;
-    padding-bottom: 50%;
+    padding-bottom: 75%;
 }
 
 .media-fluid > *, .media-fluid-xs > *, .media-fluid-sm > *, .media-fluid-lg > *, .media-fluid-xl > * {
@@ -2584,15 +2586,15 @@ textarea.input:not([rows]) {
 }
 
 .media-fluid-sm {
-    padding-bottom: 75%;
+    padding-bottom: 50%;
 }
 
 .media-fluid-lg {
-    padding-bottom: 75%;
+    padding-bottom: 100%;
 }
 
 .media-fluid-xl {
-    padding-bottom: 100%;
+    padding-bottom: 125%;
 }
 
 /*IMAGE CLASSES*/

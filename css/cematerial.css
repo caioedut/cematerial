@@ -221,7 +221,7 @@ body > .layout {
 }
 
 .layout .layout-sidebar-visible {
-    transform: translateX(100%);
+    transform: translateX(100%)!important;
 }
 
 .layout .layout-sidebar-visible + .layout-sidebar-backdrop {

@@ -94,4 +94,45 @@
         Plugin.call($target, 'toggle', this);
     });
 
+    $(document)
+        .on('swipestart', '.layout', function (e) {
+            var $el = $(e.target).closest('.layout');
+            var $sidebar = $el.find('.layout-sidebar').first();
+
+            // GET TRANSLATE X VALUE
+            var translate_x = parseInt($sidebar.css('transform').split(',')[4]);
+
+            $sidebar.addClass('sidebar-notransition').data('translateX', translate_x);
+        })
+        .on('swipemove', '.layout', function (e) {
+            var $el = $(e.target).closest('.layout');
+            var $sidebar = $el.find('.layout-sidebar').first();
+
+            if (e.swipeFromX - $el.offset().left < 32 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
+                e.preventDefault();
+
+                var translate_x = $sidebar.data('translateX');
+
+                // Offset (translateX) | MIN = 0 | MAX = SIDEBAR WIDTH
+                var offset = Math.max(0, Math.min($sidebar.outerWidth(), translate_x + e.swipeOffsetX));
+
+                $sidebar.css('transform', 'translateX(' + offset + 'px)');
+            }
+        })
+        .on('swipeend', '.layout', function (e) {
+            var $el = $(e.target).closest('.layout');
+            var $sidebar = $el.find('.layout-sidebar').first();
+
+            $sidebar.removeClass('sidebar-notransition').removeAttr('style');
+
+            if (e.swipeFromX - $el.offset().left < 32 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
+                if (e.swipeDirectionX == 'left') {
+                    $sidebar.sidebar('hide');
+                } else {
+                    $sidebar.sidebar('show');
+                }
+            }
+        })
+    ;
+
 }(jQuery);

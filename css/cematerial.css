@@ -159,10 +159,10 @@ body > .layout {
     width: 100vw;
 }
 
-.layout .layout-sidebar {
+.layout-sidebar {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 100%;
 
     background-color: #fff;
     border-right: 1px solid rgba(0, 0, 0, 0.14);
@@ -175,8 +175,12 @@ body > .layout {
     width: calc(100% - 56px);
     max-width: 340px;
 
-    transform: translateX(-100%);
+    transform: translateX(0);
     transition: transform ease .3s;
+}
+
+.sidebar-notransition {
+    transition: none !important;
 }
 
 .layout .layout-header {
@@ -217,7 +221,7 @@ body > .layout {
 }
 
 .layout .layout-sidebar-visible {
-    transform: translateX(0);
+    transform: translateX(100%);
 }
 
 .layout .layout-sidebar-visible + .layout-sidebar-backdrop {
@@ -233,7 +237,7 @@ body > .layout {
     .layout .layout-sidebar {
         box-shadow: none;
         max-width: 260px;
-        transform: translateX(0);
+        transform: translateX(100%) !important;
     }
 
     .layout .layout-sidebar ~ * {
@@ -2458,6 +2462,19 @@ textarea.input:not([rows]) {
 
 .no-shadow {
     box-shadow: none !important;
+}
+
+.no-transition {
+    transition: none !important;
+}
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .indent {

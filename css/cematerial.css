@@ -65,20 +65,20 @@ h1:last-child, h2:last-child, h3:last-child, h4:last-child, h5:last-child, h6:la
 
 a, a:link, .link, .link-block {
     cursor: pointer;
-    color: inherit;
     display: inline-block;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .link-block {
     display: block !important;
 }
 
-a:hover, a:link:hover, .link:hover, .link-block:hover {
-    text-decoration: none;
+a, .link, .link-block {
+    color: inherit;
 }
 
-.link-underline:hover {
+.link-underline:hover,
+.link-underline:focus {
     text-decoration: underline !important;
 }
 
@@ -1057,6 +1057,10 @@ textarea.input:not([rows]) {
     transition: margin ease .3s, opacity ease .3s, visibility ease .3s;
 }
 
+.dropdown-fit > .dropdown-body {
+    width: 100%;
+}
+
 .dropdown-visible > .dropdown-body {
     margin: 0 auto;
     opacity: 1;
@@ -1269,7 +1273,7 @@ textarea.input:not([rows]) {
 
 /*GRID HORIZONTAL*/
 .grid {
-    display: flex;
+    display: flex !important;
     flex-flow: row wrap;
     min-width: 100%;
     width: 100%;

@@ -221,7 +221,7 @@ body > .layout {
 }
 
 .layout .layout-sidebar-visible {
-    transform: translateX(100%)!important;
+    transform: translateX(100%);
 }
 
 .layout .layout-sidebar-visible + .layout-sidebar-backdrop {
@@ -237,7 +237,7 @@ body > .layout {
     .layout .layout-sidebar {
         box-shadow: none;
         max-width: 260px;
-        transform: translateX(100%);
+        transform: translateX(100%) !important;
     }
 
     .layout .layout-sidebar ~ * {

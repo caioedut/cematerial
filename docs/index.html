@@ -1,0 +1,1389 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0"/>
+
+    <title>CEMaterial by CaioEduT</title>
+
+    <!-- JQUERY -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <!-- FONTS -->
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+
+    <!-- CEMATERIAL -->
+    <script type="text/javascript" src="js/cematerial.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/cematerial.min.css"/>
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('.dialog')
+                    .on('cem.dialog.beforeShow', function () {
+                        console.log('Before Show');
+                    })
+                    .on('cem.dialog.show', function () {
+                        console.log('Show');
+                    })
+                    .on('cem.dialog.beforeHide', function () {
+                        console.log('Before Hide');
+                    })
+                    .on('cem.dialog.hide', function () {
+                        console.log('Hide');
+                    });
+        });
+    </script>
+</head>
+
+<body>
+
+<div class="layout">
+    <div id="side-main" class="layout-sidebar">
+
+        <div class="container-md">
+            <h1>CEMaterial</h1>
+        </div>
+
+        <div class="divider-horizontal"></div>
+
+        <div class="panel-group">
+            <div class="panel panel-visible panel-noscale no-shadow" data-scale="0">
+                <div class="panel-header link" data-toggle="panel">
+                    <b>Components</b>
+                </div>
+                <div class="panel-body no-padding">
+                    <ul class="menu menu-block">
+                        <li>
+                            <a class="indent" href="#buttons">
+                                Buttons
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#cards">
+                                Cards
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#chips">
+                                Chips
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#datatables">
+                                Data tables
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#dialogs">
+                                Dialogs
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#dividers">
+                                Dividers
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#dropdowns">
+                                Dropdowns
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#expansionpanels">
+                                Expansion panels
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#gridlists">
+                                Grid lists
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#layout">
+                                Layout
+                            </a>
+                        </li>
+                        <!--<li>-->
+                        <!--<a class="indent" href="#lists">-->
+                        <!--Lists-->
+                        <!--</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a class="indent" href="#menus">
+                                Menus
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#raise">
+                                Raise
+                            </a>
+                        </li>
+                        <!--<li>-->
+                        <!--<a class="indent" href="#selectioncontrols">-->
+                        <!--Selection controls-->
+                        <!--</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a class="indent" href="#sliders">
+                                Sliders
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#tabs">
+                                Tabs
+                            </a>
+                        </li>
+                        <li>
+                            <a class="indent" href="#textfields">
+                                Text fields
+                            </a>
+                        </li>
+                        <!--<li>-->
+                        <!--<a class="indent" href="#toolbars">-->
+                        <!--Toolbars-->
+                        <!--</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a class="indent" href="#tooltips">
+                                Tooltips
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="layout-header bg-indigo-6">
+        <div class="grid grid-nowrap grid-middle">
+            <div class="grid-col">
+                <button class="btn btn-icon btn-xl text-white" type="button" data-toggle="sidebar" data-target="#side-main">
+                    <i class="md-icon">menu</i>
+                </button>
+            </div>
+            <div class="grid-col container-md">
+                <h3>Components</h3>
+            </div>
+            <div class="grid-col col-right">
+                <button class="btn btn-icon btn-xl text-white" type="button">
+                    <i class="md-icon">search</i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="layout-content">
+
+        <section id="buttons" class="container-xl">
+            <h1>Buttons</h1>
+            <div class="grid grid-adjust">
+                <div class="grid-col container-md">
+                    <h2>Normal</h2>
+
+                    <div class="grid grid-adjust-xs grid-middle">
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised bg-teal-5 waves btn-xs" type="button">
+                                X-Small
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised bg-teal-5 waves btn-sm" type="button">
+                                Small
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised bg-teal-5 waves" type="button">
+                                Normal
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised bg-teal-5 waves btn-lg" type="button">
+                                Large
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised bg-teal-5 waves btn-xl" type="button">
+                                X-Large
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised btn-icon bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                                Icon Text
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised bg-teal-5 waves btn-disabled" type="button">
+                                Disabled
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised waves btn-flat text-teal-5" type="button">
+                                Flat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-md">
+                    <h2>Circle</h2>
+
+                    <div class="grid grid-adjust-xs grid-middle">
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised btn-xs btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised btn-sm btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised btn-md btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised btn-lg btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn btn-raised btn-xl btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="cards" class="container-xl">
+            <h1>Cards / Colors</h1>
+
+            <div class="grid grid-adjust-md">
+                <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 container-md">
+                    <div class="card">
+                        <div class="card-img media-fluid media-fluid-sm">
+                            <img class="media-cover" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                        </div>
+                        <div class="card-header bg-grey-6 relative">
+                            <h3 class="card-title">
+                                Header
+                            </h3>
+                            <button class="btn btn-float btn-xl waves right top bg-grey-8" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="card-body bg-grey-7">
+                            Lorem ipsum dolor sit amet
+                        </div>
+                        <div class="card-body container-md">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dignissimos doloremque earum eius est fugiat id inventore itaque.
+                        </div>
+                        <div class="divider-horizontal"></div>
+                        <div class="card-footer">
+                            <button class="btn waves waves-dark" type="button">
+                                Button
+                            </button>
+                            <button class="btn waves bg-grey-8" type="button">
+                                Button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 container-md">
+                    <div class="card">
+                        <div class="card-img media-fluid media-fluid-sm">
+                            <img class="media-cover" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                        </div>
+                        <div class="card-header bg-red-6 relative">
+                            <h3 class="card-title">
+                                Header
+                            </h3>
+                            <button class="btn btn-float btn-xl waves right top bg-red-8" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="card-body bg-red-7">
+                            Lorem ipsum dolor sit amet
+                        </div>
+                        <div class="card-body container-md">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dignissimos doloremque earum eius est fugiat id inventore itaque.
+                        </div>
+                        <div class="divider-horizontal"></div>
+                        <div class="card-footer">
+                            <button class="btn waves waves-dark" type="button">
+                                Button
+                            </button>
+                            <button class="btn waves bg-red-8" type="button">
+                                Button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 container-md">
+                    <div class="card">
+                        <div class="card-img media-fluid media-fluid-sm">
+                            <img class="media-cover" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                        </div>
+                        <div class="card-header bg-green-6 relative">
+                            <h3 class="card-title">
+                                Header
+                            </h3>
+                            <button class="btn btn-float btn-xl waves right top bg-green-8" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="card-body bg-green-7">
+                            Lorem ipsum dolor sit amet
+                        </div>
+                        <div class="card-body container-md">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dignissimos doloremque earum eius est fugiat id inventore itaque.
+                        </div>
+                        <div class="divider-horizontal"></div>
+                        <div class="card-footer">
+                            <button class="btn waves waves-dark" type="button">
+                                Button
+                            </button>
+                            <button class="btn waves bg-green-8" type="button">
+                                Button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 container-md">
+                    <div class="card">
+                        <div class="card-img media-fluid media-fluid-sm">
+                            <img class="media-cover" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                        </div>
+                        <div class="card-header bg-blue-6 relative">
+                            <h3 class="card-title">
+                                Header
+                            </h3>
+                            <button class="btn btn-float btn-xl waves right top bg-blue-8" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="card-body bg-blue-7">
+                            Lorem ipsum dolor sit amet
+                        </div>
+                        <div class="card-body container-md">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dignissimos doloremque earum eius est fugiat id inventore itaque.
+                        </div>
+                        <div class="divider-horizontal"></div>
+                        <div class="card-footer">
+                            <button class="btn waves waves-dark" type="button">
+                                Button
+                            </button>
+                            <button class="btn waves bg-blue-8" type="button">
+                                Button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="chips" class="container-xl">
+            <h1>Chips</h1>
+
+            <div>
+                <div class="chips">
+                    Basic chips
+                </div>
+                <div class="chips">
+                    <div class="chips-img" style="background-image: url('http://www.slidesjs.com/img/example-slide-350-1.jpg')"></div>
+                    Image chips
+                </div>
+                <div class="chips">
+                    <div class="chips-img" style="background-image: url('http://www.slidesjs.com/img/example-slide-350-1.jpg')"></div>
+                    Icon chips
+                    <i class="md-icon">close</i>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="datatables" class="container-xl">
+            <h1>Data tables</h1>
+
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="grid grid-middle grid-nowrap">
+                            <h3 class="card-title">
+                                Nutrition
+                            </h3>
+                            <a class="btn btn-icon btn-circle waves waves-dark col-right">
+                                <i class="md-icon">filter_list</i>
+                            </a>
+                            <a class="btn btn-circle waves waves-dark">
+                                <i class="md-icon">more_vert</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table-card table-hover">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <input class="input" type="checkbox" data-toggle="table"/>
+                                </th>
+                                <th class="table-content">Dessert (100g serving)</th>
+                                <th>Calories</th>
+                                <th>Fat (g)</th>
+                                <th>Carbs (g)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <input class="input" type="checkbox"/>
+                                </td>
+                                <td>Frozen yogurt</td>
+                                <td class="xs-text-right">159</td>
+                                <td class="xs-text-right">6.0</td>
+                                <td class="xs-text-right">24</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="input" type="checkbox"/>
+                                </td>
+                                <td>Ice cream sandwich</td>
+                                <td class="xs-text-right">237</td>
+                                <td class="xs-text-right">9.0</td>
+                                <td class="xs-text-right">37</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="input" type="checkbox"/>
+                                </td>
+                                <td>Eclair</td>
+                                <td class="xs-text-right">262</td>
+                                <td class="xs-text-right">16.0</td>
+                                <td class="xs-text-right">24</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="grid grid-adjust-sm grid-middle">
+                            <div class="col-right">
+                                Rows per page:
+                            </div>
+                            <div class="grid-col">
+                                3
+                            </div>
+                            <div class="grid-col">
+                                1-3 of 30
+                            </div>
+                            <div class="grid-col">
+                                <a class="btn btn-icon waves waves-dark">
+                                    <i class="md-icon">chevron_left</i>
+                                </a>
+                                <a class="btn btn-icon waves waves-dark">
+                                    <i class="md-icon">chevron_right</i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="dividers" class="container-xl">
+            <h1>Dividers</h1>
+            <h2>Divider Horizontal</h2>
+            <div class="grid grid-adjust">
+                <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                    <div class="divider-horizontal container-sm"></div>
+                </div>
+                <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                    <div class="divider-horizontal container-sm border-red-5"></div>
+                </div>
+                <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                    <div class="divider-horizontal container-sm border-green-5"></div>
+                </div>
+                <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                    <div class="divider-horizontal container-sm border-blue-5"></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="dialogs" class="container-xl">
+            <h1>Modal Dialog</h1>
+
+            <div class="grid grid-adjust-xs">
+                <div class="grid-col container-xs">
+                    <a class="btn waves bg-blue-5" data-toggle="dialog" data-target="#myDialog">
+                        Open Dialog
+                    </a>
+                </div>
+                <div class="grid-col container-xs">
+                    <a class="btn waves bg-blue-5" data-toggle="dialog" data-target="#myDialog2">
+                        Open Second Dialog
+                    </a>
+                </div>
+            </div>
+
+            <div class="dialog dialog-dark dialog-middle" id="myDialog">
+                <div class="dialog-content xs-col-12 sm-col-9 md-col-7 lg-col-5 xl-col-4">
+                    <div class="dialog-header">
+                        <div class="grid grid-justify grid-nowrap">
+                            <h1 class="dialog-title">
+                                My first dialog
+                            </h1>
+                            <a class="btn btn-icon btn-fit-md waves waves-dark btn-sm" data-toggle="dialog">
+                                <i class="md-icon">close</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="dialog-body">
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Duis condimentum augue id magna semper rutrum. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Fusce consectetuer risus a nunc. Aliquam ornare wisi eu metus. Integer pellentesque quam vel velit. Duis pulvinar.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Aenean vel massa quis mauris vehicula lacinia. Quisque tincidunt scelerisque libero. Maecenas libero. Etiam dictum tincidunt diam. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Suspendisse nisl. Sed convallis magna eu sem. Cras pede libero, dapibus nec, pretium sit amet, tempor quis, urna.</p>
+                        <p>
+                            <a class="btn waves bg-blue-5" data-toggle="dialog" data-target="#myDialog2">
+                                Open Second Dialog
+                            </a>
+                        </p>
+                        <p>Nam quis nulla. Integer malesuada. In in enim a arcu imperdiet malesuada. Sed vel lectus. Donec odio urna, tempus molestie, porttitor ut, iaculis quis, sem. Phasellus rhoncus. Aenean id metus id velit ullamcorper pulvinar. Vestibulum fermentum tortor id mi. Pellentesque ipsum. Nulla non arcu lacinia neque faucibus fringilla. Nulla non lectus sed nisl molestie malesuada. Proin in tellus sit amet nibh dignissim sagittis. Vivamus luctus egestas leo. Maecenas sollicitudin. Nullam rhoncus aliquam metus. Etiam egestas wisi a erat.</p>
+                        <p>Morbi leo mi, nonummy eget, tristique non, rhoncus non, leo. Nullam faucibus mi quis velit. Integer in sapien. Fusce tellus odio, dapibus id, fermentum quis, suscipit id, erat. Fusce aliquam vestibulum ipsum. Aliquam erat volutpat. Pellentesque sapien. Cras elementum. Nulla pulvinar eleifend sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque porta. Vivamus porttitor turpis ac leo.</p>
+                    </div>
+                    <div class="dialog-footer">
+                        <a class="btn waves waves-dark" data-toggle="dialog">Cancel</a>
+                        <a class="btn waves bg-green-6" data-toggle="dialog">Confirm</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dialog dialog-dark dialog-middle" id="myDialog2">
+                <div class="dialog-content xs-col-11 sm-col-8 md-col-6 lg-col-4 xl-col-3">
+                    <div class="dialog-header">
+                        <div class="grid grid-justify grid-nowrap">
+                            <h1 class="dialog-title">
+                                My second dialog
+                            </h1>
+                            <a class="btn btn-icon btn-fit-md waves waves-dark btn-sm" data-toggle="dialog">
+                                <i class="md-icon">close</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="dialog-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque molestias nisi obcaecati officia voluptatum! Blanditiis dolores facere ipsam magni saepe sit! Corporis debitis dicta earum expedita labore placeat quisquam vel!</p>
+                    </div>
+                    <div class="dialog-footer">
+                        <a class="btn waves waves-dark" data-toggle="dialog">Cancel</a>
+                        <a class="btn waves bg-green-6" data-toggle="dialog">Confirm</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="dropdowns" class="container-xl">
+            <h1>Dropdown / Dropup</h1>
+
+            <div class="grid grid-vertical grid-adjust-xs">
+                <div class="grid-col container-xs">
+                    <div class="grid grid-adjust-xs">
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn bg-purple-5" data-toggle="dropdown">
+                                    Dropdown 1
+                                    <i class="md-icon">expand_more</i>
+                                </a>
+                                <div class="dropdown-body dropdown-sm">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn bg-purple-5" data-toggle="dropdown">
+                                    Dropup 1
+                                    <i class="md-icon">expand_less</i>
+                                </a>
+                                <div class="dropdown-body dropdown-sm bottom-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-xs">
+                    <div class="grid grid-adjust-xs">
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn bg-purple-5" data-toggle="dropdown">
+                                    Dropdown 2
+                                    <i class="md-icon">chevron_right</i>
+                                </a>
+                                <div class="dropdown-body dropdown-sm top left-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn bg-purple-5" data-toggle="dropdown">
+                                    <i class="md-icon">chevron_left</i>
+                                    Dropdown 3
+                                </a>
+                                <div class="dropdown-body dropdown-sm top right-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-xs">
+                    <div class="grid grid-adjust-xs">
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn bg-purple-5" data-toggle="dropdown">
+                                    Dropup 2
+                                    <i class="md-icon">chevron_right</i>
+                                </a>
+                                <div class="dropdown-body dropdown-sm bottom left-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn bg-purple-5" data-toggle="dropdown">
+                                    <i class="md-icon">chevron_left</i>
+                                    Dropup 3
+                                </a>
+                                <div class="dropdown-body dropdown-sm bottom right-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="expansionpanels" class="container-xl">
+            <h1>
+                Expansion Panels
+                <small>(Collapse / Accordion)</small>
+            </h1>
+
+            <div class="container-lg bg-grey-3">
+                <div class="panel-group">
+                    <div class="panel">
+                        <div class="panel-header">
+
+                            <div class="grid grid-justify grid-middle">
+                                <div class="grid-col col-fill">
+                                    <div class="grid grid-adjust-xs grid-nowrap grid-middle">
+                                        <div class="grid-col xs-col-4">
+                                            <b>Trip Name</b>
+                                        </div>
+                                        <div class="grid-col xs-col-8">
+                                            Caribean cruise
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-col col-right">
+                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                        <i class="md-icon">keyboard_arrow_down</i>
+                                        <i class="md-icon">keyboard_arrow_up</i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+
+                            <div class="grid grid-justify grid-middle">
+                                <div class="grid-col col-fill">
+                                    <div class="grid grid-adjust-xs">
+                                        <div class="grid-col xs-col-4">
+                                            <b>Location</b>
+                                        </div>
+                                        <div class="grid-col xs-col-8">
+                                            Barbados
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-col col-right">
+                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                        <i class="md-icon">keyboard_arrow_down</i>
+                                        <i class="md-icon">keyboard_arrow_up</i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn" type="button">
+                                Cancel
+                            </button>
+                            <button class="btn text-blue-5" type="button">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+
+                            <div class="grid grid-justify grid-middle">
+                                <div class="grid-col col-fill">
+                                    <div class="grid grid-adjust-xs">
+                                        <div class="grid-col xs-col-4">
+                                            <b>Start and end dates</b>
+                                        </div>
+                                        <div class="grid-col xs-col-3">
+                                            <span class="text-grey-6">Start date:</span> Feb 29, 2016
+                                        </div>
+                                        <div class="grid-col xs-col-3">
+                                            <span class="text-grey-6">End date:</span> Not set
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-col col-right">
+                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                        <i class="md-icon">keyboard_arrow_down</i>
+                                        <i class="md-icon">keyboard_arrow_up</i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+
+                            <div class="grid grid-justify grid-middle">
+                                <div class="grid-col col-fill">
+                                    <div class="grid grid-adjust-xs grid-nowrap grid-middle">
+                                        <div class="grid-col xs-col-4">
+                                            <b>Carrier</b>
+                                        </div>
+                                        <div class="grid-col xs-col-8">
+                                            The best cruise line
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-col col-right">
+                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                        <i class="md-icon">keyboard_arrow_down</i>
+                                        <i class="md-icon">keyboard_arrow_up</i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">
+
+                            <div class="grid grid-justify grid-middle">
+                                <div class="grid-col col-fill">
+                                    <div class="grid grid-adjust-xs grid-nowrap grid-middle">
+                                        <div class="grid-col xs-col-4">
+                                            <b>Meal preferences</b>
+                                            <br/>
+                                            <small>Optional</small>
+                                        </div>
+                                        <div class="grid-col xs-col-8">
+                                            Vegetarian
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-col col-right">
+                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
+                                        <i class="md-icon">keyboard_arrow_down</i>
+                                        <i class="md-icon">keyboard_arrow_up</i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="gridlists" class="container-xl">
+            <h1>Grid lists</h1>
+
+            <h2>Breakpoints</h2>
+            <div class="table-responsive">
+                <table class="add-border add-round">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Extra small</th>
+                        <th>Small</th>
+                        <th>Medium</th>
+                        <th>Large</th>
+                        <th>Extra large</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Class</th>
+                        <td>xs-col-</td>
+                        <td>sm-col-</td>
+                        <td>md-col-</td>
+                        <td>lg-col-</td>
+                        <td>xl-col-</td>
+                    </tr>
+                    <tr>
+                        <th>Point break</th>
+                        <td>All</td>
+                        <td> >= 600px</td>
+                        <td> >= 1024px</td>
+                        <td> >= 1440px</td>
+                        <td> >= 1920px</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Usage</h2>
+            <div class="grid xs-text-center">
+                <div class="md-col-1 bg-grey-1 add-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-1</b><br/>(lg-col-1)<br/>(xl-col-1)
+                </div>
+                <div class="md-col-2 bg-grey-2 add-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-2</b><br/>(lg-col-2)<br/>(xl-col-2)
+                </div>
+                <div class="md-col-3 bg-grey-1 add-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-3</b><br/>(lg-col-3)<br/>(xl-col-3)
+                </div>
+                <div class="md-col-6 bg-grey-2 add-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-6</b><br/>(lg-col-6)<br/>(xl-col-6)
+                </div>
+                <div class="md-col-3 bg-grey-1 add-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-3</b><br/>(lg-col-3)<br/>(xl-col-3)
+                </div>
+                <div class="md-col-4 bg-grey-2 add-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-4</b><br/>(lg-col-4)<br/>(xl-col-4)
+                </div>
+                <div class="md-col-5 bg-grey-1 add-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-5</b><br/>(lg-col-5)<br/>(xl-col-5)
+                </div>
+            </div>
+
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="layout" class="container-xl">
+            <h1>Layout</h1>
+            <div class="grid grid-center">
+                <div class="grid-col xs-col-12 md-col-10 lg-col-8 xl-col-6 container bg-grey-3">
+                    <div class="layout add-border add-round bg-white raised-md" style="height: 300px;">
+                        <div id="side-example" class="layout-sidebar">
+                            <div class="relative">
+                                <img class="media-cover absolute top left" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                                <div class="relative container-sm">
+                                    <div class="xs-col-4">
+                                        <div class="media-fluid media-fluid-lg">
+                                            <img class="img-fluid img-circle media-cover raised" src="http://www.gbchealth.org/wp-content/uploads/2016/03/user-profile-placeholder.png" alt=""/>
+                                        </div>
+                                    </div>
+                                    <div class="divider-horizontal container-sm invisible"></div>
+                                    <div class="dropdown dropdown-fit">
+                                        <div class="grid grid-middle text-white link" data-toggle="dropdown">
+                                            <div class="grid-col">
+                                                <b>My Name</b>
+                                                <br/>
+                                                myemail@mycompany.com
+                                            </div>
+                                            <div class="grid-col col-right">
+                                                <i class="md-icon">arrow_drop_down</i>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-body">
+                                            <div class="container">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis error magnam repudiandae sequi. Eos, ipsum magnam natus non praesentium quo reiciendis sit vel. Consequuntur cupiditate, earum maxime nesciunt suscipit voluptatibus?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-md">
+                                <p>This is my sidebar</p>
+                                <p>This is my sidebar</p>
+                                <p>This is my sidebar</p>
+                                <p>This is my sidebar</p>
+                                <p>This is my sidebar</p>
+                                <p>This is my sidebar</p>
+                                <p>This is my sidebar</p>
+                                <p>This is my sidebar</p>
+                                <p>This is my sidebar</p>
+                            </div>
+                        </div>
+                        <div class="layout-header bg-purple-5">
+                            <div class="grid grid-nowrap grid-middle">
+                                <div class="grid-col">
+                                    <button class="btn btn-icon btn-xl text-white" type="button" data-toggle="sidebar" data-target="#side-example">
+                                        <i class="md-icon">menu</i>
+                                    </button>
+                                </div>
+                                <div class="grid-col container-md">
+                                    <h3>Layout Header</h3>
+                                </div>
+                                <div class="grid-col col-right">
+                                    <button class="btn btn-icon btn-xl text-white" type="button">
+                                        <i class="md-icon">search</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layout-content container-md">
+                            <h3>Layout Content</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque delectus dignissimos dolores eaque error et exercitationem fuga harum magni molestias, omnis perspiciatis possimus saepe sapiente similique soluta suscipit tempore voluptatibus?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque delectus dignissimos dolores eaque error et exercitationem fuga harum magni molestias, omnis perspiciatis possimus saepe sapiente similique soluta suscipit tempore voluptatibus?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque delectus dignissimos dolores eaque error et exercitationem fuga harum magni molestias, omnis perspiciatis possimus saepe sapiente similique soluta suscipit tempore voluptatibus?
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque delectus dignissimos dolores eaque error et exercitationem fuga harum magni molestias, omnis perspiciatis possimus saepe sapiente similique soluta suscipit tempore voluptatibus?
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque delectus dignissimos dolores eaque error et exercitationem fuga harum magni molestias, omnis perspiciatis possimus saepe sapiente similique soluta suscipit tempore voluptatibus?
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque delectus dignissimos dolores eaque error et exercitationem fuga harum magni molestias, omnis perspiciatis possimus saepe sapiente similique soluta suscipit tempore voluptatibus?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="menus" class="container-xl">
+            <h1>Menus</h1>
+
+            <div class="container bg-grey-3">
+
+                <div class="grid">
+                    <div class="grid-col container-md">
+                        <h3>Menu Styles</h3>
+                        <ul class="menu">
+                            <li>
+                                <a>
+                                    <i class="md-icon">account_circle</i>
+                                    Menu Item
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <i class="md-icon">account_circle</i>
+                                    Menu Item
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <i class="md-icon">account_circle</i>
+                                    Menu Item
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid-col container-md">
+                        <h3>Menu inside Dropdown</h3>
+                        <div class="dropdown">
+                            <button class="btn btn-circle bg-purple-5" type="button" data-toggle="dropdown">
+                                <i class="md-icon">menu</i>
+                            </button>
+                            <ul class="dropdown-body top left menu">
+                                <li>
+                                    <a>
+                                        <i class="md-icon">visibility</i>
+                                        Preview
+                                        <!--<i class="md-icon">chevron_right</i>-->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">person_add</i>
+                                        Share
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">link</i>
+                                        Get Link
+                                    </a>
+                                </li>
+                                <li class="divider-horizontal"></li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">content_copy</i>
+                                        Make a copy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">get_app</i>
+                                        Download
+                                    </a>
+                                </li>
+                                <li class="divider-horizontal"></li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">delete</i>
+                                        Remove
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="grid-col container-md">
+                        <h3>Menu Dropdown Cascading</h3>
+                        <div class="dropdown">
+                            <a class="btn bg-purple-5" data-toggle="dropdown">
+                                File
+                            </a>
+                            <ul class="dropdown-body top-inverse left menu">
+                                <li>
+                                    <a>
+                                        New
+                                        <!--<i class="md-icon">chevron_right</i>-->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        Open...
+                                    </a>
+                                </li>
+                                <li class="dropdown" data-class-hover="bg-purple-5">
+                                    <a data-toggle="dropdown">
+                                        Open recent
+                                    </a>
+                                    <ul class="dropdown-body top left-inverse menu">
+                                        <li>
+                                            <a>
+                                                Buttons
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                Text Fields
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                Grid
+                                            </a>
+                                        </li>
+                                        <li class="dropdown" data-class-hover="bg-purple-5">
+                                            <a data-toggle="dropdown">
+                                                Submenu 2
+                                            </a>
+                                            <ul class="dropdown-body top right-inverse menu">
+                                                <li>
+                                                    <a>
+                                                        Option 1
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        Option 2
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="divider-horizontal"></li>
+                                <li>
+                                    <a>
+                                        Exit
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="raise" class="container-xl">
+            <h1>
+                Raise
+                <small>(shadow)</small>
+            </h1>
+
+            <div class="">
+                <button class="btn btn-icon raised-xs bg-orange-5"></button>
+                <button class="btn btn-icon raised-sm bg-orange-5"></button>
+                <button class="btn btn-icon raised-md bg-orange-5"></button>
+                <button class="btn btn-icon raised-lg bg-orange-5"></button>
+                <button class="btn btn-icon raised-xl bg-orange-5"></button>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="sliders" class="container-xl">
+            <h1>Slider</h1>
+
+            <div class="">
+                <input class="slider" type="range" step="1"/>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="tabs" class="container-xl">
+            <h1>Tabs</h1>
+            <div class="tabs">
+                <nav class="tab-list bg-blue-5 border-yellow-5">
+                    <a data-toggle="tab" data-target="#tab1">
+                        Web
+                    </a>
+                    <a class="tab-active" data-toggle="tab" data-target="#tab2">
+                        Shopping
+                    </a>
+                    <a data-toggle="tab" data-target="#tab3">
+                        Videos
+                    </a>
+                    <a data-toggle="tab" data-target="#tab4">
+                        Images
+                    </a>
+                    <a data-toggle="tab" data-target="#tab5">
+                        News
+                    </a>
+                    <a data-toggle="tab" data-target="#tab6">
+                        More
+                    </a>
+                </nav>
+                <div id="tab1" class="tab-content">
+                    <div class="container add-border">
+                        Content tab 1
+                    </div>
+                </div>
+                <div id="tab2" class="tab-content tab-visible">
+                    <div class="container add-border">
+                        Content tab 2
+                    </div>
+                </div>
+                <div id="tab3" class="tab-content">
+                    <div class="container add-border">
+                        Content tab 3
+                    </div>
+                </div>
+                <div id="tab4" class="tab-content">
+                    <div class="container add-border">
+                        Content tab 4
+                    </div>
+                </div>
+                <div id="tab5" class="tab-content">
+                    <div class="container add-border">
+                        Content tab 5
+                    </div>
+                </div>
+                <div id="tab6" class="tab-content">
+                    <div class="container add-border">
+                        Content tab 6
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="textfields" class="container-xl">
+            <h1>Text Fields</h1>
+
+            <h2>Input inside Label</h2>
+            <div class="grid grid-adjust-sm">
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label focus-blue-5">
+                        Input color on focus
+                        <input class="input focus-blue-5" type="text"/>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label text-blue-5">
+                        Input colored
+                        <input class="input input-blue-5" type="text"/>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label label-float focus-blue-5">
+                        <span class="label-text">Input floating label</span>
+                        <input class="input focus-blue-5" type="text"/>
+                    </label>
+                </div>
+            </div>
+
+            <h2>Input outside Label</h2>
+            <div class="grid grid-adjust-sm">
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label focus-blue-5" for="input1">
+                        Input color on focus (placeholder)
+                    </label>
+                    <input id="input1" class="input focus-blue-5" type="text" placeholder="Input placeholder"/>
+                </div>
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label text-blue-5" for="input2">
+                        Input colored
+                    </label>
+                    <input id="input2" class="input input-blue-5" type="text"/>
+                </div>
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label label-float focus-blue-5" for="input3">
+                        <span class="label-text">Input floating label (placeholder)</span>
+                    </label>
+                    <input id="input3" class="input input-placeholder focus-blue-5" type="text" placeholder="Input placeholder"/>
+                </div>
+            </div>
+
+            <h2>Others text fields</h2>
+            <div class="grid grid-adjust-sm">
+                <div class="xs-col-12 md-col-3 label-group">
+                    <label class="label focus-blue-5">
+                        Combobox color on focus
+                        <select class="input focus-blue-5">
+                            <option value="">[Select]</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-3 label-group">
+                    <label class="label label-float focus-blue-5">
+                        <span class="label-text">Combobox floating label</span>
+                        <select class="input focus-blue-5">
+                            <option value=""></option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-3 label-group">
+                    <label class="label text-blue-5">
+                        Input (autogrow)
+                        <input class="input input-blue-5 input-autogrow" type="text"/>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-3 label-group">
+                    <label class="label focus-blue-5">
+                        Textarea (autogrow)
+                        <textarea class="input focus-blue-5 input-autogrow" rows="1"></textarea>
+                    </label>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="tooltips" class="container-xl">
+            <h1>Tooltips</h1>
+
+            <div class="grid grid-justify grid-adjust-sm">
+                <div class="grid-col container-sm">
+                    <button class="btn bg-purple-5" data-tooltip="Lorem ipsum dolor sit amet, consectetur adipisicing elit">
+                        Fit Left
+                    </button>
+                </div>
+                <div class="grid-col container-sm">
+                    <button class="btn bg-purple-5" data-tooltip="Lorem ipsum dolor sit amet, consectetur adipisicing elit">
+                        Normal Tooltip
+                    </button>
+                </div>
+                <div class="grid-col container-sm">
+                    <div class="grid grid-nowrap">
+                        <div class="grid-col">
+                            <button class="btn btn-icon" data-tooltip="Bold CTRL + B">
+                                <i class="md-icon">format_bold</i>
+                            </button>
+                        </div>
+                        <div class="grid-col">
+                            <button class="btn btn-icon" data-tooltip="Italic CTRL + I">
+                                <i class="md-icon">format_italic</i>
+                            </button>
+                        </div>
+                        <div class="grid-col">
+                            <button class="btn btn-icon" data-tooltip="Underline CTRL + U">
+                                <i class="md-icon">format_underline</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-sm">
+                    <button class="btn bg-purple-5" data-tooltip="Lorem ipsum dolor sit amet, consectetur adipisicing elit">
+                        Fit Right
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal container-xl"></div>
+
+        <div class="grid grid-middle bg-indigo-5 affix-bottom">
+            <div class="grid-col container-md">
+                <a class="link-underline" href="https://github.com/caioedut/CEMaterial" target="_blank">
+                    https://github.com/caioedut/CEMaterial
+                </a>
+            </div>
+            <div class="grid-col container-md col-right">
+                By
+                <a class="link-underline" href="http://caioedut.com/" target="_blank">
+                    CaioEduT
+                </a>
+                - 2016
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>

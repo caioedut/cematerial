@@ -767,12 +767,15 @@ if (typeof jQuery === 'undefined') {
 }(jQuery);
 
 
-// Swipe event
-
-var swipe_touch = 'ontouchstart' in document.documentElement;
+/** ========================================================================
+ *
+ * CEMaterial Swipe
+ *
+ * ======================================================================== */
 
 +(function () {
 
+    var swipe_touch = 'ontouchstart' in document.documentElement;
     var $doc = $(document);
 
     $doc
@@ -824,7 +827,7 @@ var swipe_touch = 'ontouchstart' in document.documentElement;
                         top: data.pos_y > target_y
                     },
                     swipeDirectionX: data.event_params.pageX > target_x ? 'left' : 'right',
-                    swipeDirectionY: data.event_params.pageY > target_y ? 'left' : 'right',
+                    swipeDirectionY: data.event_params.pageY > target_y ? 'top' : 'bottom',
                     swipeFromX: data.pos_x,
                     swipeFromY: data.pos_y,
                     swipeToX: target_x,

@@ -7,6 +7,8 @@
 +function ($) {
     'use strict';
 
+    var $doc = $(document);
+
     // CLASS
 
     var Sidebar = function (el, options) {
@@ -16,13 +18,14 @@
         this.$backdrop = $('<div class="layout-sidebar-backdrop"></div>').insertAfter(this.$el);
 
         if (this.options.autoclose) {
-            $(document).on('click', function (e) {
-                $('.layout-sidebar-visible').not($(e.target).closest('.layout-sidebar-visible')).sidebar('hide');
+            var that = this;
+            $doc.on('click', function (e) {
+                that.$el.not($(e.target).closest('.layout-sidebar-visible')).sidebar('hide');
             });
         }
     };
 
-    Sidebar.VERSION = '0.1.0';
+    Sidebar.VERSION = '0.1.1';
 
     Sidebar.DEFAULTS = {
         autoclose: true
@@ -85,7 +88,7 @@
     $.fn.sidebar.Constructor = Sidebar;
 
     // SIDEBAR - DATA API
-    $(document).on('click', '[data-toggle="sidebar"]', function (e) {
+    $doc.on('click', '[data-toggle="sidebar"]', function (e) {
         var $this = $(this);
         var $target = CEMaterial.getTarget($this, '.layout-sidebar');
 
@@ -94,7 +97,7 @@
         Plugin.call($target, 'toggle', this);
     });
 
-    $(document)
+    $doc
         .on('swipestart', '.layout', function (e) {
             var $el = $(e.target).closest('.layout');
             var $sidebar = $el.find('.layout-sidebar').first();

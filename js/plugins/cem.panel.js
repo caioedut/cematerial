@@ -26,7 +26,7 @@
         }
     };
 
-    Panel.VERSION = '0.1.0';
+    Panel.VERSION = '0.1.1';
 
     Panel.DEFAULTS = {
         margin: true,
@@ -86,8 +86,6 @@
 
             if (typeof action == 'string') {
                 panel[action](_relatedTarget);
-            } else if (options.show) {
-                panel.show(_relatedTarget);
             }
         });
     }

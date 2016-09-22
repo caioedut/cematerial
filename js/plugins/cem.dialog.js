@@ -7,6 +7,8 @@
 +function ($) {
     'use strict';
 
+    var $doc = $(document);
+
     // CLASS
 
     var Dialog = function (el, options) {
@@ -33,7 +35,7 @@
         }
 
         if (this.options.keyboard) {
-            $(document).on('keydown', function (e) {
+            $doc.on('keydown', function (e) {
                 var target = $(e.target);
                 if (e.which == 27 && that == Dialog.OPENED[Dialog.OPENED.length - 1]) {
                     that.hide(target);
@@ -42,7 +44,7 @@
         }
     };
 
-    Dialog.VERSION = '0.1.0';
+    Dialog.VERSION = '0.1.1';
 
     Dialog.DEFAULTS = {
         autoclose: true,
@@ -115,8 +117,6 @@
 
             if (typeof action == 'string') {
                 dialog[action](_relatedTarget);
-            } else if (options.show) {
-                dialog.show(_relatedTarget);
             }
         });
     }
@@ -125,7 +125,7 @@
     $.fn.dialog.Constructor = Dialog;
 
     // DIALOG - DATA API
-    $(document).on('click', '[data-toggle="dialog"]', function (e) {
+    $doc.on('click', '[data-toggle="dialog"]', function (e) {
         var $this = $(this);
         var $target = CEMaterial.getTarget($this, '.dialog');
 

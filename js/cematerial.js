@@ -1,7 +1,3 @@
-if (typeof jQuery === 'undefined') {
-    throw new Error('CEMaterial requires jQuery');
-}
-
 /** ========================================================================
  *
  * CEMaterial Dialogs
@@ -10,6 +6,8 @@ if (typeof jQuery === 'undefined') {
 
 +function ($) {
     'use strict';
+
+    var $doc = $(document);
 
     // CLASS
 
@@ -37,7 +35,7 @@ if (typeof jQuery === 'undefined') {
         }
 
         if (this.options.keyboard) {
-            $(document).on('keydown', function (e) {
+            $doc.on('keydown', function (e) {
                 var target = $(e.target);
                 if (e.which == 27 && that == Dialog.OPENED[Dialog.OPENED.length - 1]) {
                     that.hide(target);
@@ -46,7 +44,7 @@ if (typeof jQuery === 'undefined') {
         }
     };
 
-    Dialog.VERSION = '0.1.0';
+    Dialog.VERSION = '0.1.1';
 
     Dialog.DEFAULTS = {
         autoclose: true,
@@ -119,8 +117,6 @@ if (typeof jQuery === 'undefined') {
 
             if (typeof action == 'string') {
                 dialog[action](_relatedTarget);
-            } else if (options.show) {
-                dialog.show(_relatedTarget);
             }
         });
     }
@@ -129,9 +125,124 @@ if (typeof jQuery === 'undefined') {
     $.fn.dialog.Constructor = Dialog;
 
     // DIALOG - DATA API
-    $(document).on('click', '[data-toggle="dialog"]', function (e) {
+    $doc.on('click', '[data-toggle="dialog"]', function (e) {
         var $this = $(this);
         var $target = CEMaterial.getTarget($this, '.dialog');
+
+        $this.is('a') ? e.preventDefault() : '';
+
+        Plugin.call($target, 'toggle', this);
+    });
+
+}(jQuery);
+
+
+/** ========================================================================
+ *
+ * CEMaterial Dropdowns
+ *
+ * ======================================================================== */
+
++function ($) {
+    'use strict';
+
+    var $doc = $(document);
+
+    // CLASS
+
+    var Dropdown = function (el, options) {
+        this.options = options || {};
+        this.$el = $(el);
+
+        if (this.options.autoclose) {
+            var that = this;
+            $doc.on('click', function (e) {
+                that.$el.not($(e.target).closest('.dropdown-visible')).dropdown('hide');
+            });
+        }
+    };
+
+    Dropdown.VERSION = '0.1.1';
+
+    Dropdown.DEFAULTS = {
+        autoclose: true
+    };
+
+    Dropdown.prototype.toggle = function (_relatedTarget) {
+        return this.$el.hasClass('dropdown-visible') ? this.hide() : this.show(_relatedTarget);
+    };
+
+    Dropdown.prototype.show = function (_relatedTarget) {
+        var e; // Event handler
+
+        // If has OTHER OPENNED dropdown, close
+        $doc.find('.dropdown.dropdown-visible').not(this.$el.parents('.dropdown-visible')).dropdown('hide');
+
+        e = $.Event('cem.dropdown.beforeShow', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+
+        // Show dropdown
+        this.$el.addClass('dropdown-visible');
+        this.updatePosition();
+
+        e = $.Event('cem.dropdown.show', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+    };
+
+    Dropdown.prototype.hide = function (_relatedTarget) {
+        var e; // Event handler
+
+        e = $.Event('cem.dropdown.beforeHide', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+
+        // Hide dropdown
+        this.$el.removeClass('dropdown-visible');
+
+        e = $.Event('cem.dropdown.hide', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+    };
+
+    Dropdown.prototype.updatePosition = function () {
+        var $dropbody = this.$el.find('.dropdown-body').css('transform', 'none');
+        var offset = $dropbody.offset();
+
+        if (offset.left < 0) {
+            $dropbody.css('transform', 'translateX(' + Math.abs(offset.left) + 'px)');
+        } else {
+            var translate = (offset.left + $dropbody.outerWidth()) - $('body').outerWidth();
+            if (translate > 0) {
+                $dropbody.css('transform', 'translateX(-' + translate + 'px)');
+            }
+        }
+    };
+
+    // DROPDOWN - JQUERY PLUGIN
+
+    function Plugin(action, _relatedTarget) {
+        return this.each(function () {
+            var $this = $(this);
+            var options = $.extend({}, Dropdown.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
+
+            var dropdown = $this.data('cem.dropdown');
+
+            if (!dropdown) {
+                dropdown = new Dropdown(this, options);
+                $this.data('cem.dropdown', dropdown);
+            }
+
+            if (typeof action == 'string') {
+                dropdown[action](_relatedTarget);
+            }
+        });
+    }
+
+    $.fn.dropdown = Plugin;
+    $.fn.dropdown.Constructor = Dropdown;
+
+    // DROPDOWN - DATA API
+    $doc.on('click', '[data-toggle="dropdown"]', function (e) {
+        var $this = $(this);
+        var $target = CEMaterial.getTarget($this, '.dropdown');
 
         $this.is('a') ? e.preventDefault() : '';
 
@@ -169,7 +280,7 @@ if (typeof jQuery === 'undefined') {
         }
     };
 
-    Panel.VERSION = '0.1.0';
+    Panel.VERSION = '0.1.1';
 
     Panel.DEFAULTS = {
         margin: true,
@@ -229,8 +340,6 @@ if (typeof jQuery === 'undefined') {
 
             if (typeof action == 'string') {
                 panel[action](_relatedTarget);
-            } else if (options.show) {
-                panel.show(_relatedTarget);
             }
         });
     }
@@ -253,244 +362,260 @@ if (typeof jQuery === 'undefined') {
 
 /** ========================================================================
  *
- * CEMaterial Dropdowns
+ * CEMaterial Sidebars
  *
  * ======================================================================== */
 
 +function ($) {
     'use strict';
 
+    var $doc = $(document);
+
     // CLASS
 
-    var Dropdown = function (el, options) {
+    var Sidebar = function (el, options) {
         this.options = options || {};
         this.$el = $(el);
 
+        this.$backdrop = $('<div class="layout-sidebar-backdrop"></div>').insertAfter(this.$el);
+
         if (this.options.autoclose) {
-            $(document).on('click', function (e) {
-                var target = $(e.target);
-                $('.dropdown-visible').not(target.parents('.dropdown-visible')).dropdown('hide');
+            var that = this;
+            $doc.on('click', function (e) {
+                that.$el.not($(e.target).closest('.layout-sidebar-visible')).sidebar('hide');
             });
         }
     };
 
-    Dropdown.VERSION = '0.1.0';
+    Sidebar.VERSION = '0.1.1';
 
-    Dropdown.DEFAULTS = {
+    Sidebar.DEFAULTS = {
         autoclose: true
     };
 
-    Dropdown.prototype.toggle = function (_relatedTarget) {
-        return this.$el.hasClass('dropdown-visible') ? this.hide() : this.show(_relatedTarget);
+    Sidebar.prototype.toggle = function (_relatedTarget) {
+        return this.$el.hasClass('layout-sidebar-visible') ? this.hide() : this.show(_relatedTarget);
     };
 
-    Dropdown.prototype.show = function (_relatedTarget) {
+    Sidebar.prototype.show = function (_relatedTarget) {
+        var that = this;
         var e; // Event handler
 
-        // If has OTHER OPENNED dropdown, close
-        $(document).find('.dropdown.dropdown-visible').not(this.$el.parents('.dropdown-visible')).dropdown('hide');
-
-        e = $.Event('cem.dropdown.beforeShow', {relatedTarget: _relatedTarget});
+        e = $.Event('cem.sidebar.beforeShow', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
 
-        // Show dropdown
-        this.$el.addClass('dropdown-visible');
-        this.updatePosition();
+        // Show sidebar
+        setTimeout(function () {
+            that.$el.addClass('layout-sidebar-visible');
+        }, 1);
 
-        e = $.Event('cem.dropdown.show', {relatedTarget: _relatedTarget});
+        e = $.Event('cem.sidebar.show', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
     };
 
-    Dropdown.prototype.hide = function (_relatedTarget) {
+    Sidebar.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.dropdown.beforeHide', {relatedTarget: _relatedTarget});
+        e = $.Event('cem.sidebar.beforeHide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
 
-        // Hide dropdown
-        this.$el.removeClass('dropdown-visible');
+        // Hide sidebar
+        this.$el.removeClass('layout-sidebar-visible');
 
-        e = $.Event('cem.dropdown.hide', {relatedTarget: _relatedTarget});
+        e = $.Event('cem.sidebar.hide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
     };
 
-    Dropdown.prototype.updatePosition = function () {
-        var $dropbody = this.$el.find('.dropdown-body').css('transform', 'none');
-        var offset = $dropbody.offset();
-
-        if (offset.left < 0) {
-            $dropbody.css('transform', 'translateX(' + Math.abs(offset.left) + 'px)');
-        } else {
-            var translate = (offset.left + $dropbody.outerWidth()) - $('body').outerWidth();
-            if (translate > 0) {
-                $dropbody.css('transform', 'translateX(-' + translate + 'px)');
-            }
-        }
-    };
-
-    // DROPDOWN - JQUERY PLUGIN
+    // SIDEBAR - JQUERY PLUGIN
 
     function Plugin(action, _relatedTarget) {
         return this.each(function () {
             var $this = $(this);
-            var options = $.extend({}, Dropdown.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
+            var options = $.extend({}, Sidebar.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
 
-            var dropdown = $this.data('cem.dropdown');
+            var sidebar = $this.data('cem.sidebar');
 
-            if (!dropdown) {
-                dropdown = new Dropdown(this, options);
-                $this.data('cem.dropdown', dropdown);
+            if (!sidebar) {
+                sidebar = new Sidebar(this, options);
+                $this.data('cem.sidebar', sidebar);
             }
 
             if (typeof action == 'string') {
-                dropdown[action](_relatedTarget);
-            } else if (options.show) {
-                dropdown.show(_relatedTarget);
+                sidebar[action](_relatedTarget);
             }
         });
     }
 
-    $.fn.dropdown = Plugin;
-    $.fn.dropdown.Constructor = Dropdown;
+    $.fn.sidebar = Plugin;
+    $.fn.sidebar.Constructor = Sidebar;
 
-    // DROPDOWN - DATA API
-    $(document).on('click', '[data-toggle="dropdown"]', function (e) {
+    // SIDEBAR - DATA API
+    $doc.on('click', '[data-toggle="sidebar"]', function (e) {
         var $this = $(this);
-        var $target = CEMaterial.getTarget($this, '.dropdown');
+        var $target = CEMaterial.getTarget($this, '.layout-sidebar');
 
         $this.is('a') ? e.preventDefault() : '';
 
         Plugin.call($target, 'toggle', this);
     });
 
+    $doc
+        .on('swipestart', '.layout', function (e) {
+            var $el = $(e.target).closest('.layout');
+            var $sidebar = $el.find('.layout-sidebar').first();
+
+            // GET TRANSLATE X VALUE
+            var translate_x = parseInt($sidebar.css('transform').split(',')[4]);
+
+            $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
+
+            // Create a backdrop if not exists
+            if (!$sidebar.data('cem.sidebar')) {
+                $sidebar.sidebar();
+            }
+        })
+        .on('swipemove', '.layout', function (e) {
+            var $el = $(e.target).closest('.layout');
+            var $sidebar = $el.find('.layout-sidebar').first();
+
+            if (e.swipeFromX - $el.offset().left < 32 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
+                e.preventDefault();
+
+                var translate_x = $sidebar.data('translateX');
+
+                // Offset (translateX) | MIN = 0 | MAX = SIDEBAR WIDTH
+                var width = $sidebar.outerWidth();
+                var offset = Math.max(0, Math.min(width, translate_x + e.swipeOffsetX));
+
+                // Backdrop opacity percent
+                var opacity = offset / width;
+
+                $sidebar.css('transform', 'translateX(' + offset + 'px)');
+                $sidebar.data('cem.sidebar').$backdrop.css('opacity', opacity);
+            }
+        })
+        .on('swipeend', '.layout', function (e) {
+            var $el = $(e.target).closest('.layout');
+            var $sidebar = $el.find('.layout-sidebar').first();
+
+            $sidebar.removeClass('layout-sidebar-swiping').removeAttr('style');
+            $sidebar.data('cem.sidebar').$backdrop.removeAttr('style');
+
+            if (e.swipeFromX - $el.offset().left < 32 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
+                if (e.swipeDirectionX == 'left') {
+                    $sidebar.sidebar('hide');
+                } else {
+                    $sidebar.sidebar('show');
+                }
+            }
+        })
+    ;
+
 }(jQuery);
 
 
 /** ========================================================================
  *
- * CEMaterial Tooltips
+ * CEMaterial Swipe
  *
  * ======================================================================== */
 
-+function ($) {
-    'use strict';
++(function () {
 
-    // CLASS
+    var $doc = $(document);
+    var swipe_touch = 'ontouchstart' in document.documentElement;
 
-    var Tooltip = function (el, options) {
-        this.options = options || {};
-        this.$el = $(el);
+    // Event creation
 
-        // Create element
-        this.$tooltip = $('<span class="tooltip"></span>');
+    $doc
+        .on(swipe_touch ? 'touchstart' : 'mousedown', function (e) {
+            var data = {
+                $target: $(e.target),
+                pos_x: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
+                pos_y: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0),
+                event_params: {
+                    pageX: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
+                    pageY: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0)
+                },
+                /**
+                 * 0 = No swipe
+                 * 1 = Swipe start
+                 * 2 = Swipe move
+                 */
+                status: 1
+            };
 
-        if (!this.options.wrap) {
-            this.$tooltip.addClass('tooltip-nowrap');
-        }
-    };
-
-    Tooltip.VERSION = '0.1.0';
-
-    Tooltip.DEFAULTS = {
-        html: false,
-        wrap: false
-    };
-
-    Tooltip.prototype.show = function (_relatedTarget) {
-        var e; // Event handler
-
-        e = $.Event('cem.tooltip.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
-
-        this.updateTitle();
-        this.updatePosition();
-
-        e = $.Event('cem.tooltip.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
-    };
-
-    Tooltip.prototype.hide = function (_relatedTarget) {
-        var e; // Event handler
-
-        e = $.Event('cem.tooltip.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
-
-        // Hide tooltip
-        this.$tooltip.removeClass('tooltip-visible').remove();
-
-        e = $.Event('cem.tooltip.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
-    };
-
-    Tooltip.prototype.updateTitle = function () {
-        if (!this.$el.data('tooltip')) {
-            this.$el.data('tooltip', this.$el.attr('title'));
-        }
-
-        var title = this.$el.data('tooltip');
-
-        // Strip tags
-        if (!this.options.html) {
-            title = $("<div/>").html(title).text();
-        }
-
-        this.$tooltip.html(title);
-    };
-
-    Tooltip.prototype.updatePosition = function () {
-        this.$tooltip.appendTo('body');
-
-        var offset = this.$el.offset();
-        var width = this.$tooltip.outerWidth();
-
-        // Offset left (MIN = 0px)
-        var left = Math.max(offset.left + (this.$el.outerWidth() / 2) - (width / 2), 0);
-
-        // Offset left (MAX = BODY WIDTH - TOOLTIP WIDTH)
-        left = Math.min(left, $('body').outerWidth() - width);
-
-        // Update css position
-        this.$tooltip.css({
-            top: offset.top + this.$el.outerHeight(),
-            left: left
-        }).addClass('tooltip-visible');
-    };
-
-    // TOOLTIP - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Tooltip.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var tooltip = $this.data('cem.tooltip');
-
-            if (!tooltip) {
-                tooltip = new Tooltip(this, options);
-                $this.data('cem.tooltip', tooltip);
-            }
-
-            if (typeof action == 'string') {
-                tooltip[action](_relatedTarget);
-            } else if (options.show) {
-                tooltip.show(_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.tooltip = Plugin;
-    $.fn.tooltip.Constructor = Tooltip;
-
-    // TOOLTIP - DATA API
-    $(document)
-        .on('mouseover focus', '[data-tooltip]', function () {
-            Plugin.call($(this), 'show', this);
+            $doc.data('swipe', data);
         })
-        .on('mouseleave blur', '[data-tooltip]', function () {
-            Plugin.call($(this), 'hide', this);
-        });
+        .on(swipe_touch ? 'touchmove' : 'mousemove', function (e) {
+            if (!$doc.data('swipe')) {
+                return true;
+            }
 
-}(jQuery);
+            var data = $doc.data('swipe');
+
+            if (data.status == 1) {
+                data.$target.trigger($.Event('swipestart', data.event_params));
+                data = $.extend(data, {status: 2});
+                $doc.data('swipe', data);
+            }
+
+            if (data.status != 2) {
+                return true;
+            }
+
+            var target_x = e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0);
+            var target_y = e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0);
+
+            data = $.extend(data, {
+                event_params: {
+                    direction: {
+                        bottom: data.pos_y < target_y,
+                        left: data.pos_x > target_x,
+                        right: data.pos_x < target_x,
+                        top: data.pos_y > target_y
+                    },
+                    swipeDirectionX: data.event_params.pageX > target_x ? 'left' : 'right',
+                    swipeDirectionY: data.event_params.pageY > target_y ? 'top' : 'bottom',
+                    swipeFromX: data.pos_x,
+                    swipeFromY: data.pos_y,
+                    swipeToX: target_x,
+                    swipeToY: target_y,
+                    swipeOffsetX: target_x - data.pos_x,
+                    swipeOffsetY: target_y - data.pos_y,
+
+                    // Default
+                    pageX: target_x,
+                    pageY: target_y,
+                    preventDefault: function () {
+                        e.preventDefault();
+                    }
+                }
+            });
+
+            $doc.data('swipe', data);
+
+            data.$target.trigger($.Event('swipemove', data.event_params));
+        })
+        .on(swipe_touch ? 'touchend' : 'mouseup dragend', function () {
+            if (!$doc.data('swipe')) {
+                return true;
+            }
+
+            var data = $doc.data('swipe');
+
+            if (data.status) {
+                if (data.status == 2) {
+                    data.$target.trigger($.Event('swipeend', data.event_params));
+                }
+
+                data = $.extend(data, {status: 0});
+                $doc.data('swipe', data);
+            }
+        })
+    ;
+
+})();
 
 
 /** ========================================================================
@@ -517,7 +642,7 @@ if (typeof jQuery === 'undefined') {
         this.$list.prepend(this.$bar);
     };
 
-    Tabs.VERSION = '0.1.0';
+    Tabs.VERSION = '0.1.1';
 
     Tabs.DEFAULTS = {};
 
@@ -605,8 +730,6 @@ if (typeof jQuery === 'undefined') {
 
             if (typeof action == 'string') {
                 tabs[action](_relatedTarget);
-            } else if (options.show) {
-                tabs.show(_relatedTarget);
             }
         });
     }
@@ -629,7 +752,7 @@ if (typeof jQuery === 'undefined') {
 
 /** ========================================================================
  *
- * CEMaterial Sidebars
+ * CEMaterial Tooltips
  *
  * ======================================================================== */
 
@@ -638,252 +761,120 @@ if (typeof jQuery === 'undefined') {
 
     // CLASS
 
-    var Sidebar = function (el, options) {
+    var Tooltip = function (el, options) {
         this.options = options || {};
         this.$el = $(el);
 
-        this.$backdrop = $('<div class="layout-sidebar-backdrop"></div>').insertAfter(this.$el);
+        // Create element
+        this.$tooltip = $('<span class="tooltip"></span>');
 
-        if (this.options.autoclose) {
-            $(document).on('click', function (e) {
-                $('.layout-sidebar-visible').not($(e.target).closest('.layout-sidebar-visible')).sidebar('hide');
-            });
+        if (this.options.wrap) {
+            this.$tooltip.removeClass('tooltip-nowrap');
+        } else {
+            this.$tooltip.addClass('tooltip-nowrap');
         }
     };
 
-    Sidebar.VERSION = '0.1.0';
+    Tooltip.VERSION = '0.1.1';
 
-    Sidebar.DEFAULTS = {
-        autoclose: true
+    Tooltip.DEFAULTS = {
+        html: false,
+        wrap: false
     };
 
-    Sidebar.prototype.toggle = function (_relatedTarget) {
-        return this.$el.hasClass('layout-sidebar-visible') ? this.hide() : this.show(_relatedTarget);
-    };
-
-    Sidebar.prototype.show = function (_relatedTarget) {
-        var that = this;
+    Tooltip.prototype.show = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.sidebar.beforeShow', {relatedTarget: _relatedTarget});
+        e = $.Event('cem.tooltip.beforeShow', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
 
-        // Show sidebar
-        setTimeout(function () {
-            that.$el.addClass('layout-sidebar-visible');
-        }, 1);
+        this.updateTitle();
+        this.updatePosition();
 
-        e = $.Event('cem.sidebar.show', {relatedTarget: _relatedTarget});
+        e = $.Event('cem.tooltip.show', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
     };
 
-    Sidebar.prototype.hide = function (_relatedTarget) {
+    Tooltip.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.sidebar.beforeHide', {relatedTarget: _relatedTarget});
+        e = $.Event('cem.tooltip.beforeHide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
 
-        // Hide sidebar
-        this.$el.removeClass('layout-sidebar-visible');
+        // Hide tooltip
+        this.$tooltip.removeClass('tooltip-visible').remove();
 
-        e = $.Event('cem.sidebar.hide', {relatedTarget: _relatedTarget});
+        e = $.Event('cem.tooltip.hide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
     };
 
-    // SIDEBAR - JQUERY PLUGIN
+    Tooltip.prototype.updateTitle = function () {
+        if (!this.$el.data('tooltip')) {
+            this.$el.data('tooltip', this.$el.attr('title'));
+        }
+
+        var title = this.$el.data('tooltip');
+
+        // Strip tags
+        if (!this.options.html) {
+            title = $("<div/>").html(title).text();
+        }
+
+        this.$tooltip.html(title);
+    };
+
+    Tooltip.prototype.updatePosition = function () {
+        this.$tooltip.appendTo('body');
+
+        var offset = this.$el.offset();
+        var width = this.$tooltip.outerWidth();
+
+        // Offset left (MIN = 0px)
+        var left = Math.max(offset.left + (this.$el.outerWidth() / 2) - (width / 2), 0);
+
+        // Offset left (MAX = BODY WIDTH - TOOLTIP WIDTH)
+        left = Math.min(left, $('body').outerWidth() - width);
+
+        // Update css position
+        this.$tooltip.css({
+            top: offset.top + this.$el.outerHeight(),
+            left: left
+        }).addClass('tooltip-visible');
+    };
+
+    // TOOLTIP - JQUERY PLUGIN
 
     function Plugin(action, _relatedTarget) {
         return this.each(function () {
             var $this = $(this);
-            var options = $.extend({}, Sidebar.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
+            var options = $.extend({}, Tooltip.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
 
-            var sidebar = $this.data('cem.sidebar');
+            var tooltip = $this.data('cem.tooltip');
 
-            if (!sidebar) {
-                sidebar = new Sidebar(this, options);
-                $this.data('cem.sidebar', sidebar);
+            if (!tooltip) {
+                tooltip = new Tooltip(this, options);
+                $this.data('cem.tooltip', tooltip);
             }
 
             if (typeof action == 'string') {
-                sidebar[action](_relatedTarget);
+                tooltip[action](_relatedTarget);
             }
         });
     }
 
-    $.fn.sidebar = Plugin;
-    $.fn.sidebar.Constructor = Sidebar;
+    $.fn.tooltip = Plugin;
+    $.fn.tooltip.Constructor = Tooltip;
 
-    // SIDEBAR - DATA API
-    $(document).on('click', '[data-toggle="sidebar"]', function (e) {
-        var $this = $(this);
-        var $target = CEMaterial.getTarget($this, '.layout-sidebar');
-
-        $this.is('a') ? e.preventDefault() : '';
-
-        Plugin.call($target, 'toggle', this);
-    });
-
+    // TOOLTIP - DATA API
     $(document)
-        .on('swipestart', '.layout', function (e) {
-            var $el = $(e.target).closest('.layout');
-            var $sidebar = $el.find('.layout-sidebar').first();
-
-            // GET TRANSLATE X VALUE
-            var translate_x = parseInt($sidebar.css('transform').split(',')[4]);
-
-            $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
-
-            // Create a backdrop if not exists
-            if (!$sidebar.data('cem.sidebar')) {
-                $sidebar.sidebar();
-            }
+        .on('mouseover focus', '[data-tooltip]', function () {
+            Plugin.call($(this), 'show', this);
         })
-        .on('swipemove', '.layout', function (e) {
-            var $el = $(e.target).closest('.layout');
-            var $sidebar = $el.find('.layout-sidebar').first();
-
-            if (e.swipeFromX - $el.offset().left < 32 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
-                e.preventDefault();
-
-                var translate_x = $sidebar.data('translateX');
-
-                // Offset (translateX) | MIN = 0 | MAX = SIDEBAR WIDTH
-                var width = $sidebar.outerWidth();
-                var offset = Math.max(0, Math.min(width, translate_x + e.swipeOffsetX));
-
-                // Backdrop opacity percent
-                var opacity = offset / width;
-
-                $sidebar.css('transform', 'translateX(' + offset + 'px)');
-                $sidebar.data('cem.sidebar').$backdrop.css('opacity', opacity);
-            }
-        })
-        .on('swipeend', '.layout', function (e) {
-            var $el = $(e.target).closest('.layout');
-            var $sidebar = $el.find('.layout-sidebar').first();
-
-            $sidebar.removeClass('layout-sidebar-swiping').removeAttr('style');
-            $sidebar.data('cem.sidebar').$backdrop.removeAttr('style');
-
-            if (e.swipeFromX - $el.offset().left < 32 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
-                if (e.swipeDirectionX == 'left') {
-                    $sidebar.sidebar('hide');
-                } else {
-                    $sidebar.sidebar('show');
-                }
-            }
-        })
-    ;
+        .on('mouseleave blur', '[data-tooltip]', function () {
+            Plugin.call($(this), 'hide', this);
+        });
 
 }(jQuery);
-
-
-/** ========================================================================
- *
- * CEMaterial Swipe
- *
- * ======================================================================== */
-
-+(function () {
-
-    var swipe_touch = 'ontouchstart' in document.documentElement;
-    var $doc = $(document);
-
-    $doc
-        .on(swipe_touch ? 'touchstart' : 'mousedown', function (e) {
-            var data = {
-                $target: $(e.target),
-                pos_x: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
-                pos_y: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0),
-                event_params: {
-                    pageX: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
-                    pageY: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0)
-                },
-                /**
-                 * 0 = No swipe
-                 * 1 = Swipe start
-                 * 2 = Swipe move
-                 */
-                status: 1
-            };
-
-            $doc.data('swipe', data);
-        })
-        .on(swipe_touch ? 'touchmove' : 'mousemove', function (e) {
-            if (!$doc.data('swipe')) {
-                return true;
-            }
-
-            var data = $doc.data('swipe');
-
-            if (data.status == 1) {
-                data.$target.trigger($.Event('swipestart', data.event_params));
-                data = $.extend(data, {status: 2});
-                $doc.data('swipe', data);
-            }
-
-            if (data.status != 2) {
-                return true;
-            }
-
-            var target_x = e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0);
-            var target_y = e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0);
-
-            data = $.extend(data, {
-                event_params: {
-                    direction: {
-                        bottom: data.pos_y < target_y,
-                        left: data.pos_x > target_x,
-                        right: data.pos_x < target_x,
-                        top: data.pos_y > target_y
-                    },
-                    swipeDirectionX: data.event_params.pageX > target_x ? 'left' : 'right',
-                    swipeDirectionY: data.event_params.pageY > target_y ? 'top' : 'bottom',
-                    swipeFromX: data.pos_x,
-                    swipeFromY: data.pos_y,
-                    swipeToX: target_x,
-                    swipeToY: target_y,
-                    swipeOffsetX: target_x - data.pos_x,
-                    swipeOffsetY: target_y - data.pos_y,
-
-                    // Default
-                    pageX: target_x,
-                    pageY: target_y,
-                    preventDefault: function () {
-                        e.preventDefault();
-                    }
-                }
-            });
-
-            $doc.data('swipe', data);
-
-            for (var i in data.event_params.direction) {
-                if (data.event_params.direction[i]) {
-                    data.$target.trigger($.Event('swipe' + i, data.event_params));
-                }
-            }
-
-            data.$target.trigger($.Event('swipemove', data.event_params));
-        })
-        .on(swipe_touch ? 'touchend' : 'mouseup dragend', function () {
-            if (!$doc.data('swipe')) {
-                return true;
-            }
-
-            var data = $doc.data('swipe');
-
-            if (data.status) {
-                if (data.status == 2) {
-                    data.$target.trigger($.Event('swipeend', data.event_params));
-                }
-
-                data = $.extend(data, {status: 0});
-                $doc.data('swipe', data);
-            }
-        })
-    ;
-
-})();
 
 
 // INIT CEMATERIAL

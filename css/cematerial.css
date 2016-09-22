@@ -179,8 +179,10 @@ body > .layout {
     transition: transform ease .3s;
 }
 
-.sidebar-notransition {
+.layout-sidebar-swiping,
+.layout-sidebar-swiping + .layout-sidebar-backdrop {
     transition: none !important;
+    visibility: visible !important;
 }
 
 .layout .layout-header {
@@ -205,7 +207,7 @@ body > .layout {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: rgba(0, 0, 0, .6);
     z-index: 98;
 
     transition: opacity ease .3s, visibility ease .3s;

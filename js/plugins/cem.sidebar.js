@@ -102,7 +102,12 @@
             // GET TRANSLATE X VALUE
             var translate_x = parseInt($sidebar.css('transform').split(',')[4]);
 
-            $sidebar.addClass('sidebar-notransition').data('translateX', translate_x);
+            $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
+
+            // Create a backdrop if not exists
+            if (!$sidebar.data('cem.sidebar')) {
+                $sidebar.sidebar();
+            }
         })
         .on('swipemove', '.layout', function (e) {
             var $el = $(e.target).closest('.layout');
@@ -114,16 +119,22 @@
                 var translate_x = $sidebar.data('translateX');
 
                 // Offset (translateX) | MIN = 0 | MAX = SIDEBAR WIDTH
-                var offset = Math.max(0, Math.min($sidebar.outerWidth(), translate_x + e.swipeOffsetX));
+                var width = $sidebar.outerWidth();
+                var offset = Math.max(0, Math.min(width, translate_x + e.swipeOffsetX));
+
+                // Backdrop opacity percent
+                var opacity = offset / width;
 
                 $sidebar.css('transform', 'translateX(' + offset + 'px)');
+                $sidebar.data('cem.sidebar').$backdrop.css('opacity', opacity);
             }
         })
         .on('swipeend', '.layout', function (e) {
             var $el = $(e.target).closest('.layout');
             var $sidebar = $el.find('.layout-sidebar').first();
 
-            $sidebar.removeClass('sidebar-notransition').removeAttr('style');
+            $sidebar.removeClass('layout-sidebar-swiping').removeAttr('style');
+            $sidebar.data('cem.sidebar').$backdrop.removeAttr('style');
 
             if (e.swipeFromX - $el.offset().left < 32 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
                 if (e.swipeDirectionX == 'left') {

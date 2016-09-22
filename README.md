@@ -1,5 +1,5 @@
 # CEMaterial
-https://caioedut.github.io/cematerial/
+https://caioedut.github.io/CEMaterial/
 
 ## Dependences
 - jQuery (https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js)
@@ -21,4 +21,4 @@ https://caioedut.github.io/cematerial/
 ```
 
 ## Example
-https://caioedut.github.io/cematerial/
+https://caioedut.github.io/CEMaterial/

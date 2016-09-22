@@ -16,12 +16,14 @@
         // Create element
         this.$tooltip = $('<span class="tooltip"></span>');
 
-        if (!this.options.wrap) {
+        if (this.options.wrap) {
+            this.$tooltip.removeClass('tooltip-nowrap');
+        } else {
             this.$tooltip.addClass('tooltip-nowrap');
         }
     };
 
-    Tooltip.VERSION = '0.1.0';
+    Tooltip.VERSION = '0.1.1';
 
     Tooltip.DEFAULTS = {
         html: false,
@@ -104,8 +106,6 @@
 
             if (typeof action == 'string') {
                 tooltip[action](_relatedTarget);
-            } else if (options.show) {
-                tooltip.show(_relatedTarget);
             }
         });
     }

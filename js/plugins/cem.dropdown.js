@@ -7,6 +7,8 @@
 +function ($) {
     'use strict';
 
+    var $doc = $(document);
+
     // CLASS
 
     var Dropdown = function (el, options) {
@@ -14,14 +16,14 @@
         this.$el = $(el);
 
         if (this.options.autoclose) {
-            $(document).on('click', function (e) {
-                var target = $(e.target);
-                $('.dropdown-visible').not(target.parents('.dropdown-visible')).dropdown('hide');
+            var that = this;
+            $doc.on('click', function (e) {
+                that.$el.not($(e.target).closest('.dropdown-visible')).dropdown('hide');
             });
         }
     };
 
-    Dropdown.VERSION = '0.1.0';
+    Dropdown.VERSION = '0.1.1';
 
     Dropdown.DEFAULTS = {
         autoclose: true
@@ -35,7 +37,7 @@
         var e; // Event handler
 
         // If has OTHER OPENNED dropdown, close
-        $(document).find('.dropdown.dropdown-visible').not(this.$el.parents('.dropdown-visible')).dropdown('hide');
+        $doc.find('.dropdown.dropdown-visible').not(this.$el.parents('.dropdown-visible')).dropdown('hide');
 
         e = $.Event('cem.dropdown.beforeShow', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
@@ -91,8 +93,6 @@
 
             if (typeof action == 'string') {
                 dropdown[action](_relatedTarget);
-            } else if (options.show) {
-                dropdown.show(_relatedTarget);
             }
         });
     }
@@ -101,7 +101,7 @@
     $.fn.dropdown.Constructor = Dropdown;
 
     // DROPDOWN - DATA API
-    $(document).on('click', '[data-toggle="dropdown"]', function (e) {
+    $doc.on('click', '[data-toggle="dropdown"]', function (e) {
         var $this = $(this);
         var $target = CEMaterial.getTarget($this, '.dropdown');
 

@@ -22,7 +22,7 @@
         this.$list.prepend(this.$bar);
     };
 
-    Tabs.VERSION = '0.1.0';
+    Tabs.VERSION = '0.1.1';
 
     Tabs.DEFAULTS = {};
 
@@ -110,8 +110,6 @@
 
             if (typeof action == 'string') {
                 tabs[action](_relatedTarget);
-            } else if (options.show) {
-                tabs.show(_relatedTarget);
             }
         });
     }

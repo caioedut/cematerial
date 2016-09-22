@@ -6,8 +6,10 @@
 
 +(function () {
 
-    var swipe_touch = 'ontouchstart' in document.documentElement;
     var $doc = $(document);
+    var swipe_touch = 'ontouchstart' in document.documentElement;
+
+    // Event creation
 
     $doc
         .on(swipe_touch ? 'touchstart' : 'mousedown', function (e) {

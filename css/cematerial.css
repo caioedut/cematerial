@@ -2564,23 +2564,23 @@ textarea.input:not([rows]) {
 }
 
 .container-xs {
-    padding: 4px !important;
+    padding: 4px;
 }
 
 .container-sm {
-    padding: 8px !important;
+    padding: 8px;
 }
 
 .container, .container-md {
-    padding: 16px !important;
+    padding: 16px;
 }
 
 .container-lg {
-    padding: 32px !important;
+    padding: 32px;
 }
 
 .container-xl {
-    padding: 64px !important;
+    padding: 64px;
 }
 
 /*TEXT SIZES*/

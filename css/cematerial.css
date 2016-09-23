@@ -1287,24 +1287,6 @@ textarea.input:not([rows]) {
 
 /*SLIDER THUMB END*/
 
-/*****************
-* MEDIA QUERIES
-*****************/
-
-/*BREAKPOINTS*/
-/* 0 - xsmall (xs) */
-/* 600 - small (sm) */
-/* 1024 - medium (md) */
-/* 1440 - large (lg) */
-/* 1920 - xlarge (xl) */
-
-.xs-visible, .sm-visible, .md-visible, .lg-visible, .xl-visible,
-.xs-visible-block, .sm-visible-block, .md-visible-block, .lg-visible-block, .xl-visible-block,
-.xs-visible-inline, .sm-visible-inline, .md-visible-inline, .lg-visible-inline, .xl-visible-inline,
-.xs-visible-inline-block, .sm-visible-inline-block, .md-visible-inline-block, .lg-visible-inline-block, .xl-visible-inline-block {
-    display: none !important;
-}
-
 /*GRID*/
 
 /*GRID HORIZONTAL*/
@@ -1463,6 +1445,24 @@ textarea.input:not([rows]) {
 
 [class*="xs-col-"], [class*="sm-col-"], [class*="md-col-"], [class*="lg-col-"], [class*="xl-col-"] {
     width: 100%;
+}
+
+/*****************
+* MEDIA QUERIES
+*****************/
+
+/*BREAKPOINTS*/
+/* 0 - xsmall (xs) */
+/* 600 - small (sm) */
+/* 1024 - medium (md) */
+/* 1440 - large (lg) */
+/* 1920 - xlarge (xl) */
+
+.xs-visible, .sm-visible, .md-visible, .lg-visible, .xl-visible,
+.xs-visible-block, .sm-visible-block, .md-visible-block, .lg-visible-block, .xl-visible-block,
+.xs-visible-inline, .sm-visible-inline, .md-visible-inline, .lg-visible-inline, .xl-visible-inline,
+.xs-visible-inline-block, .sm-visible-inline-block, .md-visible-inline-block, .lg-visible-inline-block, .xl-visible-inline-block {
+    display: none !important;
 }
 
 .xs-col-1 {
@@ -2286,17 +2286,6 @@ textarea.input:not([rows]) {
     .xs-no-padding {
         padding: 0 !important;
     }
-
-    .xs-nav-bottom {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, .5);
-        z-index: 99;
-
-        height: 56px;
-        width: 100%;
-    }
 }
 
 @media (min-width: 600px) and (max-width: 1023px) {
@@ -2322,14 +2311,6 @@ textarea.input:not([rows]) {
 
     .sm-no-padding {
         padding: 0 !important;
-    }
-
-    .sm-nav-bottom {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        z-index: 99;
     }
 }
 
@@ -2357,14 +2338,6 @@ textarea.input:not([rows]) {
     .md-no-padding {
         padding: 0 !important;
     }
-
-    .md-nav-bottom {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        z-index: 99;
-    }
 }
 
 @media (min-width: 1440px) and (max-width: 1919px) {
@@ -2391,14 +2364,6 @@ textarea.input:not([rows]) {
     .lg-no-padding {
         padding: 0 !important;
     }
-
-    .lg-nav-bottom {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        z-index: 99;
-    }
 }
 
 @media (min-width: 1920px) {
@@ -2424,14 +2389,6 @@ textarea.input:not([rows]) {
 
     .xl-no-padding {
         padding: 0 !important;
-    }
-
-    .xl-nav-bottom {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        z-index: 99;
     }
 }
 

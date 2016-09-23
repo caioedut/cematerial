@@ -467,11 +467,13 @@
             // GET TRANSLATE X VALUE
             var translate_x = parseInt($sidebar.css('transform').split(',')[4]);
 
-            $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
-
-            // Create a backdrop if not exists
+            // Create a backdrop if not exists (INIT SIDEBAR PLUGIN)
             if (!$sidebar.data('cem.sidebar')) {
                 $sidebar.sidebar();
+            }
+
+            if (e.swipeFromX - $el.offset().left < 32 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
+                $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
             }
         })
         .on('swipemove', '.layout', function (e) {
@@ -554,16 +556,6 @@
 
             var data = $doc.data('swipe');
 
-            if (data.status == 1) {
-                data.$target.trigger($.Event('swipestart', data.event_params));
-                data = $.extend(data, {status: 2});
-                $doc.data('swipe', data);
-            }
-
-            if (data.status != 2) {
-                return true;
-            }
-
             var target_x = e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0);
             var target_y = e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0);
 
@@ -594,6 +586,16 @@
             });
 
             $doc.data('swipe', data);
+
+            if (data.status == 1) {
+                data.$target.trigger($.Event('swipestart', data.event_params));
+                data = $.extend(data, {status: 2});
+                $doc.data('swipe', data);
+            }
+
+            if (data.status != 2) {
+                return true;
+            }
 
             data.$target.trigger($.Event('swipemove', data.event_params));
         })

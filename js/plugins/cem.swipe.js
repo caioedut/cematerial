@@ -38,16 +38,6 @@
 
             var data = $doc.data('swipe');
 
-            if (data.status == 1) {
-                data.$target.trigger($.Event('swipestart', data.event_params));
-                data = $.extend(data, {status: 2});
-                $doc.data('swipe', data);
-            }
-
-            if (data.status != 2) {
-                return true;
-            }
-
             var target_x = e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0);
             var target_y = e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0);
 
@@ -78,6 +68,16 @@
             });
 
             $doc.data('swipe', data);
+
+            if (data.status == 1) {
+                data.$target.trigger($.Event('swipestart', data.event_params));
+                data = $.extend(data, {status: 2});
+                $doc.data('swipe', data);
+            }
+
+            if (data.status != 2) {
+                return true;
+            }
 
             data.$target.trigger($.Event('swipemove', data.event_params));
         })

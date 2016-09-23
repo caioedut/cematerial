@@ -105,11 +105,13 @@
             // GET TRANSLATE X VALUE
             var translate_x = parseInt($sidebar.css('transform').split(',')[4]);
 
-            $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
-
-            // Create a backdrop if not exists
+            // Create a backdrop if not exists (INIT SIDEBAR PLUGIN)
             if (!$sidebar.data('cem.sidebar')) {
                 $sidebar.sidebar();
+            }
+
+            if (e.swipeFromX - $el.offset().left < 32 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
+                $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
             }
         })
         .on('swipemove', '.layout', function (e) {

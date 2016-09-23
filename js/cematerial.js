@@ -157,7 +157,7 @@
         if (this.options.autoclose) {
             var that = this;
             $doc.on('click', function (e) {
-                that.$el.not($(e.target).closest('.dropdown-visible')).dropdown('hide');
+                that.$el.not($(e.target).parents('.dropdown-visible')).dropdown('hide');
             });
         }
     };
@@ -887,12 +887,10 @@ jQuery(function ($) {
 });
 
 jQuery(function ($) {
-    var doc = $(document);
-    var body = $('body');
-    var app = body;
+    var $doc = $(document);
 
     // CLASS BINDING
-    app
+    $doc
         .on('focus', '[data-class-focus]', function () {
             CEMaterial.bindClassEvent($(this), 'focus');
         })
@@ -909,7 +907,7 @@ jQuery(function ($) {
 
     // LABEL TOGGLE
     var texts = 'input:not([type="radio"]):not([type="checkbox"]):not([type="button"]), select, textarea';
-    app
+    $doc
         .on('focus', texts, function () {
             CEMaterial.onFocus($(this));
         })
@@ -919,7 +917,7 @@ jQuery(function ($) {
     ;
 
     /** // Temporarily disabled
-     app
+     $doc
      .on('mouseup mouseleave', '.waves', function () {
             var wave = $(this).find('.waves-box span');
 
@@ -963,13 +961,13 @@ jQuery(function ($) {
      */
 
     // TEXTAREA AUTO GROW
-    app.on('input', '.input-autogrow', function () {
+    $doc.on('input', '.input-autogrow', function () {
         var el = $(this);
         CEMaterial.inputAutoGrow(el);
     });
 
     // DRAG AND DROP UPLOAD
-    app
+    $doc
         .on('drag dragstart dragend dragover dragenter dragleave drop', '.filedrop', function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -1016,7 +1014,7 @@ jQuery(function ($) {
     ;
 
     // DATA TOGGLE
-    app.on('click', '[data-toggle]', function (e) {
+    $doc.on('click', '[data-toggle]', function (e) {
         var el = $(this);
         var action = el.data('toggle').trim();
         var target;

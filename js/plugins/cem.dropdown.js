@@ -18,7 +18,7 @@
         if (this.options.autoclose) {
             var that = this;
             $doc.on('click', function (e) {
-                that.$el.not($(e.target).closest('.dropdown-visible')).dropdown('hide');
+                that.$el.not($(e.target).parents('.dropdown-visible')).dropdown('hide');
             });
         }
     };

@@ -185,7 +185,8 @@ body > .layout {
     visibility: visible !important;
 }
 
-.layout .layout-header {
+.layout .layout-header,
+.layout .layout-footer{
     margin: 0 !important;
 }
 

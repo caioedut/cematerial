@@ -166,7 +166,6 @@ body > .layout {
 
     background-color: #fff;
     border-right: 1px solid rgba(0, 0, 0, 0.15);
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
 
     overflow: hidden;
     overflow-y: auto;
@@ -235,7 +234,6 @@ body > .layout {
     }
 
     .layout .layout-sidebar {
-        box-shadow: none;
         max-width: 280px;
         transform: translateX(100%) !important;
     }

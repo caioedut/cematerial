@@ -17,8 +17,9 @@
 
         this.$backdrop = $('<div class="layout-sidebar-backdrop"></div>').insertAfter(this.$el);
 
+        var that = this;
+
         if (this.options.autoclose) {
-            var that = this;
             $doc.on('click', function (e) {
                 that.$el.not($(e.target).closest('.layout-sidebar-visible')).sidebar('hide');
             });
@@ -88,14 +89,35 @@
     $.fn.sidebar.Constructor = Sidebar;
 
     // SIDEBAR - DATA API
-    $doc.on('click', '[data-toggle="sidebar"]', function (e) {
-        var $this = $(this);
-        var $target = CEMaterial.getTarget($this, '.layout-sidebar');
+    $doc
+        .on('click', '[data-toggle="sidebar"]', function (e) {
+            var $this = $(this);
+            var $target = CEMaterial.getTarget($this, '.layout-sidebar');
 
-        $this.is('a') ? e.preventDefault() : '';
+            $this.is('a') ? e.preventDefault() : '';
 
-        Plugin.call($target, 'toggle', this);
-    });
+            Plugin.call($target, 'toggle', this);
+        })
+        .on('click', '[data-toggle="nav"]', function (e) {
+            var $this = $(this);
+            var $sidebar = $this.closest('.layout-sidebar');
+
+            $this.is('a') ? e.preventDefault() : '';
+
+            Plugin.call($sidebar, 'show', this);
+
+            // Sidenav click
+            var $target = $sidebar.find(CEMaterial.getTarget($this));
+
+            if ($target.hasClass('nav-hidden')) {
+                $sidebar.find('.layout-nav').addClass('nav-hidden');
+                $target.removeClass('nav-hidden');
+            } else {
+                $sidebar.find('.layout-nav').removeClass('nav-hidden');
+                $target.addClass('nav-hidden');
+            }
+        })
+    ;
 
     $doc
         .on('swipestart', '.layout', function (e) {

@@ -11,7 +11,7 @@ html, body {
 
 body {
     color: #333;
-    font-family: Roboto, sans-serif;
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
     margin: 0;
     overflow: auto;
     overflow-x: hidden;
@@ -252,6 +252,10 @@ body > .layout {
     display: block;
 }
 
+.layout-nav.nav-hidden {
+    display: none;
+}
+
 .layout-nav a {
     display: block;
     font-size: 1rem;
@@ -291,7 +295,8 @@ body > .layout {
     cursor: pointer;
     display: inline-block;
     font-size: 1rem;
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
     line-height: 36px;
     outline: none;
     overflow: hidden;

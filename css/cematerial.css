@@ -84,7 +84,7 @@ a, .link, .link-block {
 
 .md-icon {
     display: inline-block;
-    font-family: 'Material Icons';
+    font-family: "Material Icons", sans-serif;
     font-feature-settings: "liga" 1;
     font-style: normal;
     padding: 0 1px 2px;
@@ -175,8 +175,11 @@ body > .layout {
     width: calc(100% - 56px);
     max-width: 340px;
 
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
     transition: transform ease .3s;
+
+    /*Fix browser slow swipe*/
+    backface-visibility: hidden;
 }
 
 .layout-sidebar-swiping,
@@ -220,7 +223,7 @@ body > .layout {
 }
 
 .layout .layout-sidebar-visible {
-    transform: translateX(100%);
+    transform: translate3d(100%, 0, 0);
 }
 
 .layout .layout-sidebar-visible + .layout-sidebar-backdrop {
@@ -235,7 +238,7 @@ body > .layout {
 
     .layout .layout-sidebar {
         max-width: 280px;
-        transform: translateX(100%) !important;
+        transform: translate3d(100%, 0, 0) !important;
     }
 
     .layout .layout-sidebar ~ * {
@@ -304,7 +307,7 @@ body > .layout {
     text-decoration: none !important;
     text-transform: uppercase;
     text-overflow: clip;
-    transition: ease all .3s;;
+    transition: ease all .3s;
     vertical-align: middle;
     white-space: nowrap;
 
@@ -313,13 +316,6 @@ body > .layout {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 /*FIREFOX FIX*/
@@ -529,7 +525,7 @@ body > .layout {
 
     overflow: hidden;
 
-    transition: ease all .4s;
+    transition: opacity ease .4s, visibility ease .4s;
     opacity: 0;
     visibility: hidden;
 }
@@ -549,7 +545,7 @@ body > .layout {
     box-shadow: 0 16px 50px -16px rgba(0, 0, 0, 0.6);
     max-height: 100%;
 
-    transition: ease all .4s;
+    transition: transform ease .4s;
     transform: scale(.2);
 }
 
@@ -602,7 +598,7 @@ body > .layout {
     position: absolute;
     top: 50%;
     left: 0;
-    border-top: 1px solid transparent;
+    border-top: 1px solid;
     border-color: inherit;
     content: '';
     width: 100%;
@@ -622,7 +618,7 @@ body > .layout {
 }
 
 .list-border .list-item + .list-item {
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid;
     border-color: inherit;
 }
 
@@ -725,7 +721,7 @@ table td:last-child {
 .panel {
     background-color: #fff;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
-    transition: all ease .3s;
+    transition: margin ease .3s;
 }
 
 .panel:not(:first-child) {
@@ -734,10 +730,6 @@ table td:last-child {
 
 .panel-header {
     position: relative;
-}
-
-.panel .panel-body,
-.panel .panel-footer {
 }
 
 .panel:not(.panel-processed):not(.panel-visible) .panel-body,
@@ -791,7 +783,7 @@ table td:last-child {
 
     transform: scale(.9);
     transform-origin: top left;
-    transition: transform .3s, color .3s;
+    transition: transform ease .3s, color ease .3s;
 }
 
 .label-float:not(.label-active) .label-text {
@@ -836,12 +828,12 @@ table td:last-child {
 
     border: 0;
     display: block;
-    font-family: Roboto;
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
     font-size: 15px;
     outline: none;
     padding: 8px 0;
 
-    transition: background .3s ease-out;
+    transition: background ease-out .3s;
 }
 
 .input:not([type="checkbox"]):not([type="radio"]):not(.input-autogrow),
@@ -851,7 +843,7 @@ textarea.input {
 
 .input.input-autogrow:not(textarea) {
     max-width: 100%;
-    min-width: auto;
+    min-width: 0;
     width: auto;
 }
 
@@ -891,7 +883,7 @@ textarea.input:not([rows]) {
 .input[type="radio"]:after,
 .input[type="checkbox"]:after {
     content: 'check_box_outline_blank';
-    font-family: 'Material Icons';
+    font-family: "Material Icons", sans-serif;
     font-size: 22px;
 }
 
@@ -922,7 +914,7 @@ textarea.input:not([rows]) {
 
     opacity: 0;
     visibility: hidden;
-    transition: ease opacity .3s;
+    transition: opacity ease .3s;
 }
 
 .input[type="radio"]:active:before,
@@ -1045,13 +1037,6 @@ textarea.input:not([rows]) {
 .menu li.divider-horizontal {
     display: block;
     padding: 8px 16px;
-
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .menu li:hover:not([data-class-hover]) {
@@ -1073,7 +1058,7 @@ textarea.input:not([rows]) {
     top: 50%;
     right: 0;
     content: 'chevron_right';
-    font-family: "Material Icons";
+    font-family: "Material Icons", sans-serif;
     padding: 0 8px;
     transform: translateY(-50%);
 }
@@ -1169,9 +1154,9 @@ textarea.input:not([rows]) {
 .tabs .tab-bar {
     position: absolute;
     bottom: 0;
-    border-bottom: 3px solid blue;
+    border-bottom: 3px solid;
     border-color: inherit;
-    transition: all ease .4s;
+    transition: transform ease .4s, width ease .4s;
     will-change: transform, width;
 }
 
@@ -1445,7 +1430,6 @@ textarea.input:not([rows]) {
     position: relative;
     display: block;
     min-height: 1px;
-    transition: all ease .3s;
 }
 
 [class*="xs-col-"], [class*="sm-col-"], [class*="md-col-"], [class*="lg-col-"], [class*="xl-col-"] {
@@ -2462,10 +2446,13 @@ textarea.input:not([rows]) {
     transition: none !important;
 }
 
-.no-select {
+.no-select,
+.btn,
+.menu a,
+.menu li a,
+.menu li.divider-horizontal {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -4217,11 +4204,11 @@ textarea.input:not([rows]) {
 }
 
 .text-black {
-    color: #000
+    color: #000 !important
 }
 
 .text-white {
-    color: #FFF
+    color: #FFF !important;
 }
 
 .text-red-0 {

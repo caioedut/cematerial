@@ -132,7 +132,7 @@
                 $sidebar.sidebar();
             }
 
-            if (e.swipeFromX - $el.offset().left < 8 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
+            if (e.swipeFromX - $el.offset().left < 12 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
                 $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
             }
         })
@@ -140,7 +140,7 @@
             var $el = $(e.target).closest('.layout');
             var $sidebar = $el.find('.layout-sidebar').first();
 
-            if (e.swipeFromX - $el.offset().left < 8 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
+            if (e.swipeFromX - $el.offset().left < 12 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
                 e.preventDefault();
 
                 var translate_x = $sidebar.data('translateX');
@@ -163,7 +163,7 @@
             $sidebar.removeClass('layout-sidebar-swiping').removeAttr('style');
             $sidebar.data('cem.sidebar').$backdrop.removeAttr('style');
 
-            if (e.swipeFromX - $el.offset().left < 8 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
+            if (e.swipeFromX - $el.offset().left < 12 || ($sidebar.data('cem.sidebar') && $(e.target).is($sidebar.data('cem.sidebar').$backdrop))) {
                 if (e.swipeDirectionX == 'left') {
                     $sidebar.sidebar('hide');
                 } else {

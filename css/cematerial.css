@@ -699,14 +699,14 @@ table td:last-child {
 
 .table-responsive {
     display: block;
-    min-height: .01%;
+    min-height: 1px;
     overflow-x: auto;
     width: 100%;
 }
 
 .table-hover tr:hover th,
 .table-hover tr:hover td {
-    background-color: #EEE;
+    background-color: #eee;
 }
 
 .table-content {
@@ -739,7 +739,6 @@ table td:last-child {
 
 .panel-footer {
     border-top: 1px solid #ddd;
-    padding: 16px;
 }
 
 .panel-visible:not(.panel-noscale) {

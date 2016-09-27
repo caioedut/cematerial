@@ -641,6 +641,13 @@
                 return true;
             }
 
+            // Evets swipeleft, swiperight, swipetop, swipebottom
+            for (var i in data.event_params.direction) {
+                if (data.event_params.direction[i]) {
+                    data.$target.trigger($.Event('swipe' + i, data.event_params));
+                }
+            }
+
             data.$target.trigger($.Event('swipemove', data.event_params));
         })
         .on(swipe_touch ? 'touchend' : 'mouseup dragend', function () {

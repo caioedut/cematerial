@@ -503,8 +503,6 @@
             var $sidebar = $el.find('.layout-sidebar').first();
 
             if (e.swipeFromX - $el.offset().left < 16 || $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop)) {
-                e.preventDefault();
-
                 var translate_x = $sidebar.data('translateX');
 
                 // Offset (translateX) | MIN = 0 | MAX = SIDEBAR WIDTH

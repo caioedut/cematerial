@@ -17,6 +17,7 @@ body {
     overflow-x: hidden;
 }
 
+/*DEFAULT TAGS*/
 hr {
     clear: both;
     margin: 16px 0;
@@ -84,6 +85,13 @@ pre {
     padding: 0;
     white-space: pre;
 }
+
+small {
+    font-size: .6em;
+    opacity: .9;
+}
+
+/*MD*/
 
 .md-icon {
     display: inline-block;
@@ -194,6 +202,16 @@ body > .layout {
 .layout .layout-header,
 .layout .layout-footer {
     margin: 0 !important;
+}
+
+.layout-title {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.layout-title small {
+    display: block;
+    opacity: .8;
 }
 
 .layout .layout-content {

@@ -4,7 +4,9 @@
             <i class="md-icon">menu</i>
         </button>
         <div class="grid-col container-md">
-            <h1><?= $title ?></h1>
+            <h1 class="layout-title">
+                <?= $title ?>
+            </h1>
         </div>
     </div>
 </div>

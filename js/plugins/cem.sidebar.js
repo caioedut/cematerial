@@ -92,7 +92,7 @@
     $doc
         .on('click', '[data-toggle="sidebar"]', function (e) {
             var $this = $(this);
-            var $target = CEMaterial.getTarget($this);
+            var $target = CEMaterial.getTarget($this, '.layout-sidebar');
 
             if (!$target.length) {
                 $target = $this.closest('.layout').find('.layout-sidebar').first();
@@ -136,7 +136,13 @@
                 $sidebar.sidebar();
             }
 
-            if (e.swipeFromX - $el.offset().left < 16 || $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop)) {
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+            var is_leftedge = e.swipeFromX - $el.offset().left < 16;
+            var is_righttarget = $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop);
+
+            var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
+
+            if (bl_swipe) {
                 $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
             }
         })
@@ -144,7 +150,15 @@
             var $el = $(e.target).closest('.layout');
             var $sidebar = $el.find('.layout-sidebar').first();
 
-            if (e.swipeFromX - $el.offset().left < 16 || $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop)) {
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+            var is_leftedge = e.swipeFromX - $el.offset().left < 16;
+            var is_righttarget = $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop);
+
+            var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
+
+            if (bl_swipe) {
+                e.preventDefault();
+
                 var translate_x = $sidebar.data('translateX');
 
                 // Offset (translateX) | MIN = 0 | MAX = SIDEBAR WIDTH
@@ -165,7 +179,13 @@
             $sidebar.removeClass('layout-sidebar-swiping').removeAttr('style');
             $sidebar.data('cem.sidebar').$backdrop.removeAttr('style');
 
-            if (e.swipeFromX - $el.offset().left < 16 || $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop)) {
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+            var is_leftedge = e.swipeFromX - $el.offset().left < 16;
+            var is_righttarget = $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop);
+
+            var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
+
+            if (bl_swipe) {
                 if (e.swipeDirectionX == 'left') {
                     $sidebar.sidebar('hide');
                 } else {

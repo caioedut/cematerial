@@ -82,6 +82,13 @@ a, .link, .link-block {
     text-decoration: underline !important;
 }
 
+pre {
+    margin: 0;
+    overflow-x: auto;
+    padding: 0;
+    white-space: pre;
+}
+
 .md-icon {
     display: inline-block;
     font-family: "Material Icons", sans-serif;
@@ -394,6 +401,10 @@ body > .layout {
     width: 100%;
 }
 
+.btn-block + .btn-block {
+    margin-top: 4px;
+}
+
 /*BTN HOVER BEGIN*/
 .btn:before {
     position: absolute;
@@ -456,60 +467,7 @@ body > .layout {
     transform: translateY(50%);
 }
 
-/*CARDS AND DIALOGS*/
-.card,
-.dialog {
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-
-.card-fill {
-    height: 100%;
-    width: 100%;
-}
-
-.card .card-header,
-.dialog .dialog-header,
-.panel .panel-header {
-    display: block;
-    padding: 16px;
-}
-
-.card .card-body,
-.dialog .dialog-body,
-.panel .panel-body {
-    display: block;
-    padding: 8px 16px;
-}
-
-.card .card-footer,
-.dialog .dialog-footer,
-.panel-footer {
-    padding: 4px;
-    text-align: right;
-}
-
-.card .card-title,
-.dialog .dialog-title {
-    margin: 0;
-}
-
-.card .card-img img {
-    display: block;
-    width: 100%;
-}
-
-.card > :first-child {
-    border-radius: 2px 2px 0 0;
-    overflow: hidden;
-}
-
-.card > :last-child {
-    border-radius: 0 0 2px 2px;
-}
-
-/*DIALOGS / MODALS*/
+/*DIALOGS*/
 .dialog {
     position: fixed;
     top: 0;
@@ -517,21 +475,17 @@ body > .layout {
     height: 100%;
     width: 100%;
 
-    background-color: rgba(255, 255, 255, .8);
     display: flex;
-    justify-content: center;
+
+    background-color: rgba(0, 0, 0, .8);
     padding: 30px;
     z-index: 99;
 
     overflow: hidden;
 
-    transition: opacity ease .4s, visibility ease .4s;
+    transition: opacity ease .2s, visibility ease .2s;
     opacity: 0;
     visibility: hidden;
-}
-
-.dialog-dark {
-    background-color: rgba(0, 0, 0, .8);
 }
 
 .dialog-visible {
@@ -540,48 +494,62 @@ body > .layout {
 }
 
 .dialog-content {
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 16px 50px -16px rgba(0, 0, 0, 0.6);
+    margin: auto; /* Center flex item*/
     max-height: 100%;
+    transition: transform ease .3s;
+}
 
-    transition: transform ease .4s;
+.dialog:not(.dialog-visible) .dialog-content {
     transform: scale(.2);
 }
 
-.dialog-visible .dialog-content {
-    transform: scale(1);
-}
-
+/*DIALOGS AND CARDS FLEX*/
 .dialog-content,
-.dialog-top .dialog-content {
-    align-self: flex-start;
-}
-
-.dialog-middle .dialog-content {
-    align-self: center;
-}
-
-.dialog-bottom .dialog-content {
-    align-self: flex-end;;
-}
-
-/*DIALOG FLEX*/
-.dialog-content {
+.card {
+    background-color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
     display: flex !important;
     flex-direction: column;
 }
 
 .dialog-header,
-.dialog-footer {
-    min-height: 45px;
-    width: 100%;
+.card-header {
+    /*flex: 0 0;*/
+    padding: 16px;
 }
 
-.dialog-body {
+.dialog-title,
+.card-title {
+    margin: 0;
+    font-weight: 400;
+}
+
+.dialog-body,
+.card-body {
+    /*flex: 1;*/
     min-height: 0;
     overflow-y: auto;
-    width: 100%;
+    padding: 8px 16px;
+}
+
+.dialog-footer,
+.card-footer {
+    flex: 0 0;
+    margin-top: auto;
+    padding: 4px;
+    text-align: right;
+}
+
+.dialog > :first-child,
+.card > :first-child {
+    border-radius: 2px 2px 0 0;
+    overflow: hidden;
+}
+
+.dialog > :last-child,
+.card > :last-child {
+    border-radius: 0 0 2px 2px;
 }
 
 /* DIVIDER / HORIZONTAL RULE */
@@ -730,6 +698,20 @@ table td:last-child {
 
 .panel-header {
     position: relative;
+    display: block;
+    padding: 16px;
+}
+
+.panel-body {
+    display: block;
+    padding: 8px 16px;
+}
+
+.panel-footer {
+    border-top: 1px solid #ddd;
+    display: block;
+    padding: 4px;
+    text-align: right;
 }
 
 .panel:not(.panel-processed):not(.panel-visible) .panel-body,
@@ -737,20 +719,16 @@ table td:last-child {
     display: none;
 }
 
-.panel-footer {
-    border-top: 1px solid #ddd;
-}
-
-.panel-visible:not(.panel-noscale) {
+.panel-visible:not(.panel-noscale):not([data-scale="0"]) {
     margin-left: -16px;
     margin-right: -16px;
 }
 
-.panel-visible:not(:first-child):not(.panel-nomargin) {
+.panel-visible:not(:first-child):not(.panel-nomargin):not([data-margin="0"]) {
     margin-top: 16px;
 }
 
-.panel-visible:not(:last-child):not(.panel-nomargin) {
+.panel-visible:not(:last-child):not(.panel-nomargin):not([data-margin="0"]) {
     margin-bottom: 16px;
 }
 
@@ -1284,6 +1262,8 @@ textarea.input:not([rows]) {
     flex-flow: row wrap;
     min-width: 100%;
     width: 100%;
+
+    align-items: stretch;
 }
 
 .grid-gutter, .grid-gutter-md {
@@ -1390,6 +1370,12 @@ textarea.input:not([rows]) {
 
 .grid-vertical.grid-reverse {
     flex-direction: column-reverse;
+}
+
+/*GRID CARDS FULL HEIGHT*/
+.grid-cards > * {
+    display: flex !important;
+    justify-content: center;
 }
 
 /*Grid align particular column*/

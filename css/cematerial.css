@@ -23,19 +23,19 @@ hr {
 }
 
 h1 {
-    font-size: 1.6rem;
+    font-size: 2rem;
 }
 
 h2 {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
 }
 
 h3 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 h4 {
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 h5 {
@@ -43,15 +43,11 @@ h5 {
 }
 
 h6 {
-    font-size: .6rem;
+    font-size: .5rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    margin: 1em 0;
-}
-
-p {
+h1, h2, h3, h4, h5, h6, p {
+    font-weight: 400;
     margin: 1em 0;
 }
 
@@ -172,7 +168,7 @@ body > .layout {
     right: 100%;
 
     background-color: #fff;
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    border-right: 1px solid rgba(0, 0, 0, .15);
 
     overflow: hidden;
     overflow-y: auto;
@@ -332,14 +328,14 @@ body > .layout {
 }
 
 .btn-xs {
-    font-size: 0.71rem;
+    font-size: .71rem;
     height: 24px;
     line-height: 24px;
     padding: 0 1rem;
 }
 
 .btn-sm {
-    font-size: 0.85rem;
+    font-size: .85rem;
     height: 30px;
     line-height: 30px;
     padding: 0 1.4rem;
@@ -429,16 +425,16 @@ body > .layout {
 
 /*BTN RAISED (SHADOW)*/
 .btn-raised {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
 }
 
 .btn-raised:hover,
 .btn-raised:focus {
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
 }
 
 .btn-raised:active {
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.18), 0 8px 16px rgba(0, 0, 0, 0.36);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .18), 0 8px 16px rgba(0, 0, 0, .36);
 }
 
 .btn:disabled,
@@ -507,7 +503,7 @@ body > .layout {
 .dialog-content,
 .card {
     background-color: #fff;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     border-radius: 2px;
     display: flex !important;
     flex-direction: column;
@@ -544,7 +540,6 @@ body > .layout {
 .dialog > :first-child,
 .card > :first-child {
     border-radius: 2px 2px 0 0;
-    overflow: hidden;
 }
 
 .dialog > :last-child,
@@ -635,7 +630,7 @@ table th {
     border-top: 1px solid #e9e9e9;
     border-bottom: 1px solid #e9e9e9;
     color: #555;
-    font-size: 0.82rem;
+    font-size: .82rem;
     font-weight: 600;
     padding: 14px 8px;
     text-align: left;
@@ -651,7 +646,7 @@ table td {
     border: 0;
     border-top: 1px solid #e9e9e9;
     border-bottom: 1px solid #e9e9e9;
-    font-size: 0.86rem;
+    font-size: .86rem;
     padding: 14px 8px;
 }
 
@@ -933,8 +928,8 @@ textarea.input:not([rows]) {
     background-color: #dfdfdf;
     border-radius: 16px;
     display: inline-block;
-    font-size: 0.93rem;
-    line-height: 0.93rem;
+    font-size: .93rem;
+    line-height: .93rem;
     height: 32px;
     vertical-align: middle;
     padding: 9px 12px;
@@ -958,7 +953,7 @@ textarea.input:not([rows]) {
     background-color: #616161;
     border-radius: 2px;
     color: #fff;
-    font-size: 0.74rem;
+    font-size: .74rem;
     margin-top: 2px;
     max-width: 100%;
     padding: 6px 8px;
@@ -1049,7 +1044,7 @@ textarea.input:not([rows]) {
     position: absolute;
     background-color: #fff;
     border-radius: 2px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
     min-width: 160px;
     z-index: 99;
 
@@ -1255,65 +1250,52 @@ textarea.input:not([rows]) {
 /*SLIDER THUMB END*/
 
 /*GRID*/
-
 /*GRID HORIZONTAL*/
 .grid {
     display: flex !important;
     flex-flow: row wrap;
     min-width: 100%;
-    width: 100%;
-
-    align-items: stretch;
+    /*width: 100%; this brokes gutter*/
 }
 
 .grid-gutter, .grid-gutter-md {
-    margin-left: -16px;
-    width: calc(100% + 32px);
+    margin: -16px;
 }
 
 .grid-gutter > *, .grid-gutter-md > * {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 16px;
 }
 
 .grid-gutter-xs {
-    margin-left: -4px;
-    width: calc(100% + 8px);
+    margin: -4px;
 }
 
 .grid-gutter-xs > * {
-    padding-left: 4px;
-    padding-right: 4px;
+    padding: 4px;
 }
 
 .grid-gutter-sm {
-    margin-left: -8px;
-    width: calc(100% + 16px);
+    margin: -8px;
 }
 
 .grid-gutter-sm > * {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 8px;
 }
 
 .grid-gutter-lg {
-    margin-left: -32px;
-    width: calc(100% + 64px);
+    margin: -32px;
 }
 
 .grid-gutter-lg > * {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding: 32px;
 }
 
 .grid-gutter-xl {
-    margin-left: -64px;
-    width: calc(100% + 128px);
+    margin: -64px;
 }
 
 .grid-gutter-xl > * {
-    padding-left: 64px;
-    padding-right: 64px;
+    padding: 64px;
 }
 
 .grid-horizontal {
@@ -1410,8 +1392,7 @@ textarea.input:not([rows]) {
 }
 
 /*.xs-col-1, .xs-col-2, .xs-col-3, .xs-col-4, .xs-col-5, .xs-col-6, .xs-col-7, .xs-col-8, .xs-col-9, .xs-col-10, .xs-col-11, .xs-col-12, .sm-col-1, .sm-col-2, .sm-col-3, .sm-col-4, .sm-col-5, .sm-col-6, .sm-col-7, .sm-col-8, .sm-col-9, .sm-col-10, .sm-col-11, .sm-col-12, .md-col-1, .md-col-2, .md-col-3, .md-col-4, .md-col-5, .md-col-6, .md-col-7, .md-col-8, .md-col-9, .md-col-10, .md-col-11, .md-col-12, .lg-col-1, .lg-col-2, .lg-col-3, .lg-col-4, .lg-col-5, .lg-col-6, .lg-col-7, .lg-col-8, .lg-col-9, .lg-col-10, .lg-col-11, .lg-col-12, .xl-col-1, .xl-col-2, .xl-col-3, .xl-col-4, .xl-col-5, .xl-col-6, .xl-col-7, .xl-col-8, .xl-col-9, .xl-col-10, .xl-col-11, .xl-col-12 {*/
-.grid-col,
-[class*="xs-col-"], [class*="sm-col-"], [class*="md-col-"], [class*="lg-col-"], [class*="xl-col-"] {
+.grid-col, [class*="xs-col-"], [class*="sm-col-"], [class*="md-col-"], [class*="lg-col-"], [class*="xl-col-"] {
     position: relative;
     display: block;
     min-height: 1px;
@@ -1440,62 +1421,50 @@ textarea.input:not([rows]) {
 }
 
 .xs-col-1 {
-    min-width: 8.333333%;
     width: 8.333333%;
 }
 
 .xs-col-2 {
-    min-width: 16.666667%;
     width: 16.666667%;
 }
 
 .xs-col-3 {
-    min-width: 25%;
     width: 25%;
 }
 
 .xs-col-4 {
-    min-width: 33.333333%;
     width: 33.333333%;
 }
 
 .xs-col-5 {
-    min-width: 41.666667%;
     width: 41.666667%;
 }
 
 .xs-col-6 {
-    min-width: 50%;
     width: 50%;
 }
 
 .xs-col-7 {
-    min-width: 58.333333%;
     width: 58.333333%;
 }
 
 .xs-col-8 {
-    min-width: 66.666667%;
     width: 66.666667%;
 }
 
 .xs-col-9 {
-    min-width: 75%;
     width: 75%;
 }
 
 .xs-col-10 {
-    min-width: 83.333333%;
     width: 83.333333%;
 }
 
 .xs-col-11 {
-    min-width: 91.666667%;
     width: 91.666667%;
 }
 
 .xs-col-12 {
-    min-width: 100%;
     width: 100%;
 }
 
@@ -1551,10 +1520,6 @@ textarea.input:not([rows]) {
     margin-left: 100%;
 }
 
-.xs-col-right {
-    margin-left: auto;
-}
-
 .xs-break {
     clear: both;
 }
@@ -1599,62 +1564,50 @@ textarea.input:not([rows]) {
 @media (min-width: 600px) {
     /*.sm-col-1, .sm-col-2, .sm-col-3, .sm-col-4, .sm-col-5, .sm-col-6, .sm-col-7, .sm-col-8, .sm-col-9, .sm-col-10, .sm-col-11, .sm-col-12 {float: left;}*/
     .sm-col-1 {
-        min-width: 8.333333%;
         width: 8.333333%;
     }
 
     .sm-col-2 {
-        min-width: 16.666667%;
         width: 16.666667%;
     }
 
     .sm-col-3 {
-        min-width: 25%;
         width: 25%;
     }
 
     .sm-col-4 {
-        min-width: 33.333333%;
         width: 33.333333%;
     }
 
     .sm-col-5 {
-        min-width: 41.666667%;
         width: 41.666667%;
     }
 
     .sm-col-6 {
-        min-width: 50%;
         width: 50%;
     }
 
     .sm-col-7 {
-        min-width: 58.333333%;
         width: 58.333333%;
     }
 
     .sm-col-8 {
-        min-width: 66.666667%;
         width: 66.666667%;
     }
 
     .sm-col-9 {
-        min-width: 75%;
         width: 75%;
     }
 
     .sm-col-10 {
-        min-width: 83.333333%;
         width: 83.333333%;
     }
 
     .sm-col-11 {
-        min-width: 91.666667%;
         width: 91.666667%;
     }
 
     .sm-col-12 {
-        min-width: 100%;
         width: 100%;
     }
 
@@ -1710,10 +1663,6 @@ textarea.input:not([rows]) {
         margin-left: 100%;
     }
 
-    .sm-col-right {
-        margin-left: auto;
-    }
-
     .sm-break {
         clear: both;
     }
@@ -1759,62 +1708,50 @@ textarea.input:not([rows]) {
 @media (min-width: 1024px) {
     /*.md-col-1, .md-col-2, .md-col-3, .md-col-4, .md-col-5, .md-col-6, .md-col-7, .md-col-8, .md-col-9, .md-col-10, .md-col-11, .md-col-12 {float: left;}*/
     .md-col-1 {
-        min-width: 8.333333%;
         width: 8.333333%;
     }
 
     .md-col-2 {
-        min-width: 16.666667%;
         width: 16.666667%;
     }
 
     .md-col-3 {
-        min-width: 25%;
         width: 25%;
     }
 
     .md-col-4 {
-        min-width: 33.333333%;
         width: 33.333333%;
     }
 
     .md-col-5 {
-        min-width: 41.666667%;
         width: 41.666667%;
     }
 
     .md-col-6 {
-        min-width: 50%;
         width: 50%;
     }
 
     .md-col-7 {
-        min-width: 58.333333%;
         width: 58.333333%;
     }
 
     .md-col-8 {
-        min-width: 66.666667%;
         width: 66.666667%;
     }
 
     .md-col-9 {
-        min-width: 75%;
         width: 75%;
     }
 
     .md-col-10 {
-        min-width: 83.333333%;
         width: 83.333333%;
     }
 
     .md-col-11 {
-        min-width: 91.666667%;
         width: 91.666667%;
     }
 
     .md-col-12 {
-        min-width: 100%;
         width: 100%;
     }
 
@@ -1870,10 +1807,6 @@ textarea.input:not([rows]) {
         margin-left: 100%;
     }
 
-    .md-col-right {
-        margin-left: auto;
-    }
-
     .md-break {
         clear: both;
     }
@@ -1919,62 +1852,50 @@ textarea.input:not([rows]) {
 @media (min-width: 1440px) {
     /*.lg-col-1, .lg-col-2, .lg-col-3, .lg-col-4, .lg-col-5, .lg-col-6, .lg-col-7, .lg-col-8, .lg-col-9, .lg-col-10, .lg-col-11, .lg-col-12 {float: left;}*/
     .lg-col-1 {
-        min-width: 8.333333%;
         width: 8.333333%;
     }
 
     .lg-col-2 {
-        min-width: 16.666667%;
         width: 16.666667%;
     }
 
     .lg-col-3 {
-        min-width: 25%;
         width: 25%;
     }
 
     .lg-col-4 {
-        min-width: 33.333333%;
         width: 33.333333%;
     }
 
     .lg-col-5 {
-        min-width: 41.666667%;
         width: 41.666667%;
     }
 
     .lg-col-6 {
-        min-width: 50%;
         width: 50%;
     }
 
     .lg-col-7 {
-        min-width: 58.333333%;
         width: 58.333333%;
     }
 
     .lg-col-8 {
-        min-width: 66.666667%;
         width: 66.666667%;
     }
 
     .lg-col-9 {
-        min-width: 75%;
         width: 75%;
     }
 
     .lg-col-10 {
-        min-width: 83.333333%;
         width: 83.333333%;
     }
 
     .lg-col-11 {
-        min-width: 91.666667%;
         width: 91.666667%;
     }
 
     .lg-col-12 {
-        min-width: 100%;
         width: 100%;
     }
 
@@ -2030,10 +1951,6 @@ textarea.input:not([rows]) {
         margin-left: 100%;
     }
 
-    .lg-col-right {
-        margin-left: auto;
-    }
-
     .lg-break {
         clear: both;
     }
@@ -2077,64 +1994,51 @@ textarea.input:not([rows]) {
 
 /*@media (min-width: 1200px) {*/
 @media (min-width: 1920px) {
-    /*.xl-col-1, .xl-col-2, .xl-col-3, .xl-col-4, .xl-col-5, .xl-col-6, .xl-col-7, .xl-col-8, .xl-col-9, .xl-col-10, .xl-col-11, .xl-col-12 {float: left;}*/
     .xl-col-1 {
-        min-width: 8.333333%;
         width: 8.333333%;
     }
 
     .xl-col-2 {
-        min-width: 16.666667%;
         width: 16.666667%;
     }
 
     .xl-col-3 {
-        min-width: 25%;
         width: 25%;
     }
 
     .xl-col-4 {
-        min-width: 33.333333%;
         width: 33.333333%;
     }
 
     .xl-col-5 {
-        min-width: 41.666667%;
         width: 41.666667%;
     }
 
     .xl-col-6 {
-        min-width: 50%;
         width: 50%;
     }
 
     .xl-col-7 {
-        min-width: 58.333333%;
         width: 58.333333%;
     }
 
     .xl-col-8 {
-        min-width: 66.666667%;
         width: 66.666667%;
     }
 
     .xl-col-9 {
-        min-width: 75%;
         width: 75%;
     }
 
     .xl-col-10 {
-        min-width: 83.333333%;
         width: 83.333333%;
     }
 
     .xl-col-11 {
-        min-width: 91.666667%;
         width: 91.666667%;
     }
 
     .xl-col-12 {
-        min-width: 100%;
         width: 100%;
     }
 
@@ -2188,10 +2092,6 @@ textarea.input:not([rows]) {
 
     .xl-offset-12 {
         margin-left: 100%;
-    }
-
-    .xl-col-right {
-        margin-left: auto;
     }
 
     .xl-break {
@@ -2461,28 +2361,28 @@ textarea.input:not([rows]) {
 }
 
 .add-overlay {
-    box-shadow: inset 0 0 100px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 100px 10px rgba(0, 0, 0, .5);
 }
 
 /*RAISED*/
 .raised-xs {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
 }
 
 .raised-sm {
-    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16), 0 4px 12px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, .16), 0 4px 12px 0 rgba(0, 0, 0, .12);
 }
 
 .raised, .raised-md {
-    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.16), 0 6px 14px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, .16), 0 6px 14px 0 rgba(0, 0, 0, .12);
 }
 
 .raised-lg {
-    box-shadow: 0 8px 11px 0 rgba(0, 0, 0, 0.16), 0 8px 16px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 11px 0 rgba(0, 0, 0, .16), 0 8px 16px 0 rgba(0, 0, 0, .12);
 }
 
 .raised-xl {
-    box-shadow: 0 10px 13px 0 rgba(0, 0, 0, 0.16), 0 10px 18px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 13px 0 rgba(0, 0, 0, .16), 0 10px 18px 0 rgba(0, 0, 0, .12);
 }
 
 /*CONTAINERS*/

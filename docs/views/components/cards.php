@@ -48,8 +48,8 @@
 
         <?php
         $code = '
-<div class="grid grid-cards"> <!-- Grid container -->
-    <div class="grid-col xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-2 container-md"> <!-- Container size -->
+<div class="grid grid-gutter grid-cards"> <!-- Grid container -->
+    <div class="grid-col xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-2"> <!-- Container size -->
         <div class="card">
             <img class="img-fluid" src="img/cards.jpg" alt=""/>
             <div class="card-header">
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div class="grid-col xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-2 container-md"> <!-- Container size -->
+    <div class="grid-col xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-2"> <!-- Container size -->
         <div class="card">
             <img class="img-fluid" src="img/cards2.jpg" alt=""/>
             <div class="card-header">
@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-    <div class="grid-col xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-2 container-md"> <!-- Container size -->
+    <div class="grid-col xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-2"> <!-- Container size -->
         <div class="card">
             <img class="img-fluid" src="img/cards3.jpg" alt=""/>
             <div class="card-header">

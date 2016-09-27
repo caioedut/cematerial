@@ -27,16 +27,6 @@
             $('[data-language]').each(function (i, item) {
                 hljs.highlightBlock(item);
             });
-
-            //            var $doc = $(document);
-            //
-            //            $doc.on('click', '.main-sidebar a', function (e) {
-            //                e.preventDefault();
-            //
-            //                var url = $(this).attr('href');
-            //
-            //                $('.main-content').load(url);
-            //            });
         });
     </script>
 
@@ -52,6 +42,10 @@
         pre code {
             display: block;
             padding: 16px !important;
+        }
+
+        .layout-sidebar .panel {
+            box-shadow: none;
         }
     </style>
 </head>
@@ -76,7 +70,7 @@
                 </a>
                 <div class="panel-body no-padding">
                     <div class="layout-nav">
-                        <a class="<?= $router->view == 'introduction' ? 'bg-grey-2' : '' ?>" href="getting-started/introduction">
+                        <a class="indent <?= $router->view == 'introduction' ? 'bg-grey-2' : '' ?>" href="getting-started/introduction">
                             Introduction
                         </a>
                     </div>
@@ -96,8 +90,11 @@
                 </a>
                 <div class="panel-body no-padding">
                     <div class="layout-nav">
-                        <a class="<?= $router->view == 'overview' ? 'bg-grey-2' : '' ?>" href="layout/overview">
+                        <a class="indent <?= $router->view == 'overview' ? 'bg-grey-2' : '' ?>" href="layout/overview">
                             Overview
+                        </a>
+                        <a class="indent <?= $router->view == 'color-pallete' ? 'bg-grey-2' : '' ?>" href="layout/color-pallete">
+                            Color Pallete
                         </a>
                     </div>
                 </div>
@@ -116,10 +113,10 @@
                 </a>
                 <div class="panel-body no-padding">
                     <div class="layout-nav">
-                        <a class="<?= $router->view == 'buttons' ? 'bg-grey-2' : '' ?>" href="components/buttons">
+                        <a class="indent <?= $router->view == 'buttons' ? 'bg-grey-2' : '' ?>" href="components/buttons">
                             Buttons
                         </a>
-                        <a class="<?= $router->view == 'cards' ? 'bg-grey-2' : '' ?>" href="components/cards">
+                        <a class="indent <?= $router->view == 'cards' ? 'bg-grey-2' : '' ?>" href="components/cards">
                             Cards
                         </a>
                     </div>

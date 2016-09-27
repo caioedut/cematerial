@@ -456,6 +456,10 @@
             var $this = $(this);
             var $target = CEMaterial.getTarget($this, '.layout-sidebar');
 
+            if (!$target.length) {
+                $target = $this.closest('.layout').find('.layout-sidebar').first();
+            }
+
             $this.is('a') ? e.preventDefault() : '';
 
             Plugin.call($target, 'toggle', this);

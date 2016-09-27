@@ -92,7 +92,11 @@
     $doc
         .on('click', '[data-toggle="sidebar"]', function (e) {
             var $this = $(this);
-            var $target = CEMaterial.getTarget($this, '.layout-sidebar');
+            var $target = CEMaterial.getTarget($this);
+
+            if (!$target.length) {
+                $target = $this.closest('.layout').find('.layout-sidebar').first();
+            }
 
             $this.is('a') ? e.preventDefault() : '';
 

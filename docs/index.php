@@ -10,7 +10,8 @@ function load_header($title = 'CEMaterial')
     include 'views/_template/header.php';
 }
 
-function code($str, $lng = 'html') {
+function code($str, $lng = 'html')
+{
     return '<pre><code  data-language="' . $lng . '">' . trim(htmlentities($str)) . '</code></code></pre>';
 }
 
@@ -20,6 +21,11 @@ $router = (object)array(
     'folder' => array_shift($uri),
     'view'   => array_shift($uri)
 );
+
+if (!$router->folder) {
+    $router->folder = 'getting-started';
+    $router->view = 'introduction';
+}
 
 $path = 'views/' . $router->folder . '/' . $router->view . '.php';
 

@@ -268,23 +268,19 @@
         this.$el = $(el);
 
         if (this.options.margin) {
-            this.$el.removeClass('panel-nomargin');
-        } else {
-            this.$el.addClass('panel-nomargin');
+            this.$el.addClass('panel-margin');
         }
 
-        if (this.options.scale) {
-            this.$el.removeClass('panel-noscale');
-        } else {
-            this.$el.addClass('panel-noscale');
+        if (this.options.popout) {
+            this.$el.addClass('panel-popout');
         }
     };
 
     Panel.VERSION = '0.1.1';
 
     Panel.DEFAULTS = {
-        margin: true,
-        scale: true
+        margin: false,
+        popout: false
     };
 
     Panel.prototype.toggle = function (_relatedTarget) {

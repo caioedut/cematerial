@@ -139,48 +139,48 @@
 
                     <div class="grid grid-gutter-xs grid-middle">
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised bg-teal-5 waves btn-xs" type="button">
+                            <button class="btn raised-sm bg-teal-5 waves btn-xs" type="button">
                                 X-Small
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised bg-teal-5 waves btn-sm" type="button">
+                            <button class="btn raised-sm bg-teal-5 waves btn-sm" type="button">
                                 Small
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised bg-teal-5 waves" type="button">
+                            <button class="btn raised-sm bg-teal-5 waves" type="button">
                                 Normal
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised bg-teal-5 waves btn-lg" type="button">
+                            <button class="btn raised-sm bg-teal-5 waves btn-lg" type="button">
                                 Large
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised bg-teal-5 waves btn-xl" type="button">
+                            <button class="btn raised-sm bg-teal-5 waves btn-xl" type="button">
                                 X-Large
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised btn-icon bg-teal-5 waves" type="button">
+                            <button class="btn raised-sm btn-icon bg-teal-5 waves" type="button">
                                 <i class="md-icon">add</i>
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised bg-teal-5 waves" type="button">
+                            <button class="btn raised-sm bg-teal-5 waves" type="button">
                                 <i class="md-icon">add</i>
                                 Icon Text
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised bg-teal-5 waves btn-disabled" type="button">
+                            <button class="btn raised-sm bg-teal-5 waves btn-disabled" type="button">
                                 Disabled
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised waves btn-flat text-teal-5" type="button">
+                            <button class="btn raised-sm waves btn-flat text-teal-5" type="button">
                                 Flat
                             </button>
                         </div>
@@ -191,27 +191,27 @@
 
                     <div class="grid grid-gutter-xs grid-middle">
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised btn-xs btn-circle bg-teal-5 waves" type="button">
+                            <button class="btn raised-sm btn-xs btn-circle bg-teal-5 waves" type="button">
                                 <i class="md-icon">add</i>
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised btn-sm btn-circle bg-teal-5 waves" type="button">
+                            <button class="btn raised-sm btn-sm btn-circle bg-teal-5 waves" type="button">
                                 <i class="md-icon">add</i>
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised btn-md btn-circle bg-teal-5 waves" type="button">
+                            <button class="btn raised-sm btn-md btn-circle bg-teal-5 waves" type="button">
                                 <i class="md-icon">add</i>
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised btn-lg btn-circle bg-teal-5 waves" type="button">
+                            <button class="btn raised-sm btn-lg btn-circle bg-teal-5 waves" type="button">
                                 <i class="md-icon">add</i>
                             </button>
                         </div>
                         <div class="grid-col container-xs">
-                            <button class="btn btn-raised btn-xl btn-circle bg-teal-5 waves" type="button">
+                            <button class="btn raised-sm btn-xl btn-circle bg-teal-5 waves" type="button">
                                 <i class="md-icon">add</i>
                             </button>
                         </div>
@@ -352,18 +352,24 @@
         <section id="chips" class="container-xl">
             <h1>Chips</h1>
 
-            <div>
-                <div class="chips">
-                    Basic chips
+            <div class="grid grid-gutter">
+                <div class="grid-col">
+                    <div class="chips">
+                        Basic chips
+                    </div>
                 </div>
-                <div class="chips">
-                    <div class="chips-img" style="background-image: url('http://www.slidesjs.com/img/example-slide-350-1.jpg')"></div>
-                    Image chips
+                <div class="grid-col">
+                    <div class="chips">
+                        <img src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                        Image chips
+                    </div>
                 </div>
-                <div class="chips">
-                    <div class="chips-img" style="background-image: url('http://www.slidesjs.com/img/example-slide-350-1.jpg')"></div>
-                    Icon chips
-                    <i class="md-icon">close</i>
+                <div class="grid-col">
+                    <div class="chips">
+                        <img src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                        Icon chips
+                        <i class="md-icon">close</i>
+                    </div>
                 </div>
             </div>
         </section>
@@ -650,124 +656,76 @@
                 <small>(Collapse / Accordion)</small>
             </h1>
 
-            <div class="container-lg bg-grey-3">
+            <div class="container-lg bg-grey-2">
                 <div class="panel-group">
                     <div class="panel">
-                        <div class="panel-header">
-
-                            <div class="grid grid-justify grid-middle">
-                                <div class="grid-col col-fill">
-                                    <div class="grid grid-gutter-xs grid-nowrap grid-middle">
-                                        <div class="grid-col xs-col-4">
-                                            <b>Trip Name</b>
-                                        </div>
-                                        <div class="grid-col xs-col-8">
-                                            Caribean cruise
-                                        </div>
-                                    </div>
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-4">
+                                    Trip Name
                                 </div>
-                                <div class="grid-col col-right">
-                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
-                                        <i class="md-icon">keyboard_arrow_down</i>
-                                        <i class="md-icon">keyboard_arrow_up</i>
-                                    </button>
+                                <div class="grid-col xs-col-8">
+                                    Caribean cruise
                                 </div>
                             </div>
-
-                        </div>
+                        </a>
                         <div class="panel-body">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!
                         </div>
                     </div>
-                    <div class="panel">
-                        <div class="panel-header">
-
-                            <div class="grid grid-justify grid-middle">
-                                <div class="grid-col col-fill">
-                                    <div class="grid grid-gutter-xs">
-                                        <div class="grid-col xs-col-4">
-                                            <b>Location</b>
-                                        </div>
-                                        <div class="grid-col xs-col-8">
-                                            Barbados
-                                        </div>
-                                    </div>
+                    <div class="panel panel-margin">
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-4">
+                                    Location
                                 </div>
-                                <div class="grid-col col-right">
-                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
-                                        <i class="md-icon">keyboard_arrow_down</i>
-                                        <i class="md-icon">keyboard_arrow_up</i>
-                                    </button>
+                                <div class="grid-col xs-col-8">
+                                    Barbados
                                 </div>
                             </div>
-
-                        </div>
+                        </a>
                         <div class="panel-body">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!
                         </div>
                         <div class="panel-footer">
-                            <button class="btn" type="button">
+                            <button class="btn btn-flat" type="button">
                                 Cancel
                             </button>
-                            <button class="btn text-blue-5" type="button">
+                            <button class="btn btn-flat text-blue-5" type="button">
                                 Save
                             </button>
                         </div>
                     </div>
-                    <div class="panel">
-                        <div class="panel-header">
-
-                            <div class="grid grid-justify grid-middle">
-                                <div class="grid-col col-fill">
-                                    <div class="grid grid-gutter-xs">
-                                        <div class="grid-col xs-col-4">
-                                            <b>Start and end dates</b>
-                                        </div>
-                                        <div class="grid-col xs-col-3">
-                                            <span class="text-grey-6">Start date:</span> Feb 29, 2016
-                                        </div>
-                                        <div class="grid-col xs-col-3">
-                                            <span class="text-grey-6">End date:</span> Not set
-                                        </div>
-                                    </div>
+                    <div class="panel panel-popout">
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-4">
+                                    Start and end dates
                                 </div>
-                                <div class="grid-col col-right">
-                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
-                                        <i class="md-icon">keyboard_arrow_down</i>
-                                        <i class="md-icon">keyboard_arrow_up</i>
-                                    </button>
+                                <div class="grid-col xs-col-4">
+                                    <span class="text-grey-6">Start date:</span> Feb 29, 2016
+                                </div>
+                                <div class="grid-col xs-col-4">
+                                    <span class="text-grey-6">End date:</span> Not set
                                 </div>
                             </div>
-
-                        </div>
+                        </a>
                         <div class="panel-body">
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
                         </div>
                     </div>
                     <div class="panel">
-                        <div class="panel-header">
-
-                            <div class="grid grid-justify grid-middle">
-                                <div class="grid-col col-fill">
-                                    <div class="grid grid-gutter-xs grid-nowrap grid-middle">
-                                        <div class="grid-col xs-col-4">
-                                            <b>Carrier</b>
-                                        </div>
-                                        <div class="grid-col xs-col-8">
-                                            The best cruise line
-                                        </div>
-                                    </div>
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-4">
+                                    Carrier
                                 </div>
-                                <div class="grid-col col-right">
-                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
-                                        <i class="md-icon">keyboard_arrow_down</i>
-                                        <i class="md-icon">keyboard_arrow_up</i>
-                                    </button>
+                                <div class="grid-col xs-col-8">
+                                    The best cruise line
                                 </div>
                             </div>
-
-                        </div>
+                        </a>
                         <div class="panel-body">
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
@@ -776,30 +734,18 @@
                         </div>
                     </div>
                     <div class="panel">
-                        <div class="panel-header">
-
-                            <div class="grid grid-justify grid-middle">
-                                <div class="grid-col col-fill">
-                                    <div class="grid grid-gutter-xs grid-nowrap grid-middle">
-                                        <div class="grid-col xs-col-4">
-                                            <b>Meal preferences</b>
-                                            <br/>
-                                            <small>Optional</small>
-                                        </div>
-                                        <div class="grid-col xs-col-8">
-                                            Vegetarian
-                                        </div>
-                                    </div>
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-4">
+                                    Meal preferences
+                                    <br/>
+                                    <small>Optional</small>
                                 </div>
-                                <div class="grid-col col-right">
-                                    <button class="btn btn-circle btn-fit-md panel-toggler" type="button" data-toggle="panel">
-                                        <i class="md-icon">keyboard_arrow_down</i>
-                                        <i class="md-icon">keyboard_arrow_up</i>
-                                    </button>
+                                <div class="grid-col xs-col-8">
+                                    Vegetarian
                                 </div>
                             </div>
-
-                        </div>
+                        </a>
                         <div class="panel-body">
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aliquam necessitatibus voluptatum ipsa sequi, nisi modi ullam earum eius repellendus delectus nostrum qui autem quae debitis. Consectetur distinctio atque, necessitatibus!</p>
@@ -991,7 +937,7 @@
                         <div class="layout-footer bg-purple-5">
                             <div class="container-md">
                                 Layout Footer
-                                <button class="btn btn-float btn-xl btn-raised waves right top bg-purple-8" type="button">
+                                <button class="btn btn-float btn-xl raised-sm waves right top bg-purple-8" type="button">
                                     <i class="md-icon">message</i>
                                 </button>
                             </div>
@@ -1158,12 +1104,22 @@
                 <small>(shadow)</small>
             </h1>
 
-            <div class="">
-                <button class="btn btn-icon raised-xs bg-orange-5"></button>
-                <button class="btn btn-icon raised-sm bg-orange-5"></button>
-                <button class="btn btn-icon raised-md bg-orange-5"></button>
-                <button class="btn btn-icon raised-lg bg-orange-5"></button>
-                <button class="btn btn-icon raised-xl bg-orange-5"></button>
+            <div class="grid grid-gutter">
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-xs bg-orange-5"></button>
+                </div>
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-sm bg-orange-5"></button>
+                </div>
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-md bg-orange-5"></button>
+                </div>
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-lg bg-orange-5"></button>
+                </div>
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-xl bg-orange-5"></button>
+                </div>
             </div>
         </section>
 

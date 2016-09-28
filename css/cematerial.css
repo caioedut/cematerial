@@ -87,8 +87,8 @@ pre {
 }
 
 small {
-    font-size: .6em;
-    opacity: .9;
+    font-size: .8em;
+    opacity: .8;
 }
 
 /*MD*/
@@ -373,6 +373,10 @@ body > .layout {
     padding: 0 2.6rem;
 }
 
+.btn-flat {
+    padding: 0 1rem;
+}
+
 /*BTN ICON*/
 .btn-icon,
 .btn-float,
@@ -441,23 +445,9 @@ body > .layout {
     background-color: rgba(255, 255, 255, .2);
 }
 
-/*BTN RAISED (SHADOW)*/
-.btn-raised {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
-}
-
-.btn-raised:hover,
-.btn-raised:focus {
-    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
-}
-
-.btn-raised:active {
-    box-shadow: 0 0 8px rgba(0, 0, 0, .18), 0 8px 16px rgba(0, 0, 0, .36);
-}
-
 .btn:disabled,
 .btn-disabled {
-    box-shadow: none;
+    box-shadow: none !important;
     opacity: .8;
     pointer-events: none;
 }
@@ -630,16 +620,12 @@ table {
     border: 0;
     border-collapse: collapse;
     border-spacing: 0;
-    color: #333;
-    display: table;
-
-    max-width: 100%;
     width: 100%;
 }
 
 table:not(.table-card) {
     background-color: #fff;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, .12);
 }
 
 table thead,
@@ -647,9 +633,9 @@ table th {
     border: 0;
     border-top: 1px solid #e9e9e9;
     border-bottom: 1px solid #e9e9e9;
-    color: #555;
-    font-size: .82rem;
-    font-weight: 600;
+    color: rgba(0, 0, 0, .54);
+    font-size: .85rem;
+    font-weight: normal;
     padding: 14px 8px;
     text-align: left;
     vertical-align: middle;
@@ -664,8 +650,9 @@ table td {
     border: 0;
     border-top: 1px solid #e9e9e9;
     border-bottom: 1px solid #e9e9e9;
-    font-size: .86rem;
-    padding: 14px 8px;
+    color: rgba(0, 0, 0, .87);
+    font-size: .92rem;
+    padding: 12px 8px;
 }
 
 table th:first-child,
@@ -695,24 +682,38 @@ table td:last-child {
 }
 
 /*PANELS / ACCORDION*/
-.panel-group {
-    border-radius: 2px;
-}
-
 .panel {
     background-color: #fff;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    display: block;
     transition: margin ease .3s;
 }
 
-.panel:not(:first-child) {
-    border-top: 1px solid #ddd;
+.panel + .panel {
+    border-top: 1px solid rgba(0, 0, 0, .12);
 }
 
 .panel-header {
     position: relative;
     display: block;
+    font-size: 1.07rem;
     padding: 16px;
+}
+
+/*Panel arrows*/
+.panel-header:after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    content: 'keyboard_arrow_down';
+    font-family: "Material Icons", sans-serif;
+    opacity: .8;
+    padding-right: inherit;
+    transform: translateY(-50%) scale(1.3);
+}
+
+.panel-visible .panel-header:after {
+    content: 'keyboard_arrow_up';
 }
 
 .panel-body {
@@ -721,7 +722,8 @@ table td:last-child {
 }
 
 .panel-footer {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid;
+    border-color: inherit;
     display: block;
     padding: 4px;
     text-align: right;
@@ -732,26 +734,19 @@ table td:last-child {
     display: none;
 }
 
-.panel-visible:not(.panel-noscale):not([data-scale="0"]) {
+.panel-popout.panel-visible {
     margin-left: -16px;
     margin-right: -16px;
 }
 
-.panel-visible:not(:first-child):not(.panel-nomargin):not([data-margin="0"]) {
+.panel-popout.panel-visible:not(:first-child),
+.panel-margin.panel-visible:not(:first-child) {
     margin-top: 16px;
 }
 
-.panel-visible:not(:last-child):not(.panel-nomargin):not([data-margin="0"]) {
+.panel-popout.panel-visible:not(:last-child),
+.panel-margin.panel-visible:not(:last-child) {
     margin-bottom: 16px;
-}
-
-/*PANEL TOGGLER*/
-.panel:not(.panel-visible) .panel-toggler .md-icon:not(:first-child) {
-    display: none;
-}
-
-.panel-visible .panel-toggler .md-icon:first-child:not(:last-child) {
-    display: none;
 }
 
 /*LABELS*/
@@ -945,23 +940,29 @@ textarea.input:not([rows]) {
 .chips {
     background-color: #dfdfdf;
     border-radius: 16px;
-    display: inline-block;
-    font-size: .93rem;
-    line-height: .93rem;
-    height: 32px;
-    vertical-align: middle;
-    padding: 9px 12px;
+    font-size: 0.92rem;
+    line-height: 32px;
+    overflow: hidden;
+    padding: 0 12px;
 }
 
-.chips-img {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.chips .md-icon {
+    background-color: #aaa;
+    border-radius: 50%;
+    height: 16px;
+    line-height: 16px;
+    margin: -2px -4px 0 6px;
+    transform: scale(1);
+    width: 16px;
+}
+
+.chips img {
     border-radius: 16px;
-    display: inline-block;
     height: 32px;
-    margin: -9px 4px -11px -12px;
-    overflow: hidden;
+    line-height: 32px;
+    margin: 0 6px 0 -12px;
+    object-fit: cover;
+    vertical-align: middle;
     width: 32px;
 }
 
@@ -2384,23 +2385,31 @@ textarea.input:not([rows]) {
 
 /*RAISED*/
 .raised-xs {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
 }
 
+.btn.raised-xs:hover,
+.raised-hover.raised-xs:hover,
 .raised-sm {
-    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, .16), 0 4px 12px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
 }
 
+.btn.raised-sm:hover,
+.raised-hover.raised-sm:hover,
 .raised, .raised-md {
-    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, .16), 0 6px 14px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
 }
 
+.btn.raised:hover, .btn.raised-md:hover,
+.raised-hover.raised, .raised-hover.raised-md:hover,
 .raised-lg {
-    box-shadow: 0 8px 11px 0 rgba(0, 0, 0, .16), 0 8px 16px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
 }
 
+.btn.raised-lg:hover,
+.raised-hover.raised-lg:hover,
 .raised-xl {
-    box-shadow: 0 10px 13px 0 rgba(0, 0, 0, .16), 0 10px 18px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 19px 38px rgba(0, 0, 0, .30), 0 15px 12px rgba(0, 0, 0, .22);
 }
 
 /*CONTAINERS*/

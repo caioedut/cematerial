@@ -43,10 +43,6 @@
             display: block;
             padding: 16px !important;
         }
-
-        .layout-sidebar .panel {
-            box-shadow: none;
-        }
     </style>
 </head>
 
@@ -56,17 +52,9 @@
     <div class="layout-sidebar main-sidebar">
 
         <div class="panel-group">
-            <div class="panel <?= !$router->folder || $router->folder == 'getting-started' ? 'panel-visible' : '' ?>" data-scale="0" data-margin="0">
+            <div class="panel <?= !$router->folder || $router->folder == 'getting-started' ? 'panel-visible' : '' ?>">
                 <a class="panel-header" data-toggle="panel">
-                    <div class="grid grid-nowrap grid-middle">
-                        <div class="grid-col">
-                            <h4>Getting started</h4>
-                        </div>
-                        <div class="grid-col col-right panel-toggler">
-                            <i class="md-icon">keyboard_arrow_down</i>
-                            <i class="md-icon">keyboard_arrow_up</i>
-                        </div>
-                    </div>
+                    <h4>Getting started</h4>
                 </a>
                 <div class="panel-body no-padding">
                     <div class="layout-nav">
@@ -76,17 +64,9 @@
                     </div>
                 </div>
             </div>
-            <div class="panel <?= $router->folder == 'layout' ? 'panel-visible' : '' ?>" data-scale="0" data-margin="0">
+            <div class="panel <?= $router->folder == 'layout' ? 'panel-visible' : '' ?>">
                 <a class="panel-header" data-toggle="panel">
-                    <div class="grid grid-nowrap grid-middle">
-                        <div class="grid-col">
-                            <h4>Layout</h4>
-                        </div>
-                        <div class="grid-col col-right panel-toggler">
-                            <i class="md-icon">keyboard_arrow_down</i>
-                            <i class="md-icon">keyboard_arrow_up</i>
-                        </div>
-                    </div>
+                    <h4>Layout</h4>
                 </a>
                 <div class="panel-body no-padding">
                     <div class="layout-nav">
@@ -99,17 +79,9 @@
                     </div>
                 </div>
             </div>
-            <div class="panel <?= $router->folder == 'components' ? 'panel-visible' : '' ?>" data-scale="0" data-margin="0">
+            <div class="panel <?= $router->folder == 'components' ? 'panel-visible' : '' ?>">
                 <a class="panel-header" data-toggle="panel">
-                    <div class="grid grid-nowrap grid-middle">
-                        <div class="grid-col">
-                            <h4>Components</h4>
-                        </div>
-                        <div class="grid-col col-right panel-toggler">
-                            <i class="md-icon">keyboard_arrow_down</i>
-                            <i class="md-icon">keyboard_arrow_up</i>
-                        </div>
-                    </div>
+                    <h4>Components</h4>
                 </a>
                 <div class="panel-body no-padding">
                     <div class="layout-nav">

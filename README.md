@@ -10,6 +10,9 @@ https://caioedut.github.io/CEMaterial/
 
 ## How to use
 ```sh
+<!-- Responsive METATAG -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0"/>
+
 <!-- JQUERY -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 

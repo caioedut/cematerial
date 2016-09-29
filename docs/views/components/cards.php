@@ -20,10 +20,10 @@
             Located two hours south of Sydney in the Southern Highlands of New South Waves, ...
         </div>
         <div class="card-footer">
-            <button class="btn text-blue-5" type="button">
+            <button class="btn btn-flat text-blue-5" type="button">
                 Share
             </button>
-            <button class="btn text-blue-5" type="button">
+            <button class="btn btn-flat text-blue-5" type="button">
                 Explore
             </button>
         </div>
@@ -59,10 +59,10 @@
                 Located two hours south of Sydney in the Southern Highlands of New South Waves
             </div>
             <div class="card-footer">
-                <button class="btn text-blue-5" type="button">
+                <button class="btn btn-flat text-blue-5" type="button">
                     Share
                 </button>
-                <button class="btn text-blue-5" type="button">
+                <button class="btn btn-flat text-blue-5" type="button">
                     Explore
                 </button>
             </div>
@@ -78,10 +78,10 @@
                 Located at the southern tip of the state of New York, the city is the center of the New York metropolitan area, one of the most populous urban agglomerations in the world
             </div>
             <div class="card-footer">
-                <button class="btn text-blue-5" type="button">
+                <button class="btn btn-flat text-blue-5" type="button">
                     Share
                 </button>
-                <button class="btn text-blue-5" type="button">
+                <button class="btn btn-flat text-blue-5" type="button">
                     Explore
                 </button>
             </div>
@@ -97,10 +97,10 @@
                 There are some signs of a calm at noon, and these became more distinct as the sun
             </div>
             <div class="card-footer">
-                <button class="btn text-blue-5" type="button">
+                <button class="btn btn-flat text-blue-5" type="button">
                     Share
                 </button>
-                <button class="btn text-blue-5" type="button">
+                <button class="btn btn-flat text-blue-5" type="button">
                     Explore
                 </button>
             </div>
@@ -137,10 +137,10 @@
                 Located two hours south of Sydney in the Southern Highlands of New South Waves
             </div>
             <div class="card-footer">
-                <button class="btn text-white" type="button">
+                <button class="btn btn-flat text-white" type="button">
                     Share
                 </button>
-                <button class="btn text-white" type="button">
+                <button class="btn btn-flat text-white" type="button">
                     Explore
                 </button>
             </div>
@@ -157,10 +157,10 @@
                 Located at the southern tip of the state of New York, the city is the center of the New York metropolitan area, one of the most populous urban agglomerations in the world
             </div>
             <div class="card-footer bg-white text-green-6">
-                <button class="btn text-green-5" type="button">
+                <button class="btn btn-flat text-green-5" type="button">
                     Share
                 </button>
-                <button class="btn text-green-5" type="button">
+                <button class="btn btn-flat text-green-5" type="button">
                     Explore
                 </button>
             </div>
@@ -176,10 +176,10 @@
                 There are some signs of a calm at noon, and these became more distinct as the sun
             </div>
             <div class="card-footer bg-blue-6">
-                <button class="btn text-white" type="button">
+                <button class="btn btn-flat text-white" type="button">
                     Share
                 </button>
-                <button class="btn text-white" type="button">
+                <button class="btn btn-flat text-white" type="button">
                     Explore
                 </button>
             </div>

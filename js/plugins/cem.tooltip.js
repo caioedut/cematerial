@@ -23,7 +23,7 @@
         }
     };
 
-    Tooltip.VERSION = '0.1.1';
+    Tooltip.VERSION = '0.1.2';
 
     Tooltip.DEFAULTS = {
         html: false,
@@ -32,6 +32,9 @@
 
     Tooltip.prototype.show = function (_relatedTarget) {
         var e; // Event handler
+
+        // If has OTHER OPENNED dropdown, close
+        $('.tooltip-visible').remove();
 
         e = $.Event('cem.tooltip.beforeShow', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
@@ -120,6 +123,10 @@
         })
         .on('mouseleave blur', '[data-tooltip]', function () {
             Plugin.call($(this), 'hide', this);
-        });
+        })
+        .on('wheel mousewheel DOMMouseScroll', function () {
+            $('.tooltip-visible').remove();
+        })
+    ;
 
 }(jQuery);

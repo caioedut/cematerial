@@ -945,7 +945,7 @@ if (!('flex' in document.documentElement.style)) {
         .on('mouseleave blur', '[data-tooltip]', function () {
             Plugin.call($(this), 'hide', this);
         })
-        .on('wheel mousewheel DOMMouseScroll', function () {
+        .on('wheel mousewheel DOMMouseScroll touchstart', function () {
             $('.tooltip-visible').remove();
         })
     ;

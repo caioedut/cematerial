@@ -20,9 +20,11 @@
         if (this.options.popout) {
             this.$el.addClass('panel-popout');
         }
+
+        this.updateHeight();
     };
 
-    Panel.VERSION = '0.1.1';
+    Panel.VERSION = '0.1.2';
 
     Panel.DEFAULTS = {
         margin: false,
@@ -34,7 +36,6 @@
     };
 
     Panel.prototype.show = function (_relatedTarget) {
-        var that = this;
         var e; // Event handler
 
         // If has panel group, close PREVIOUS OPENNED PANEL
@@ -44,26 +45,37 @@
         this.$el.trigger(e);
 
         // Show panel
-        this.$el.find('.panel-body, .panel-footer').finish().slideDown(200, function () {
-            e = $.Event('cem.panel.show', {relatedTarget: _relatedTarget});
-            that.$el.trigger(e);
-        });
-        this.$el.addClass('panel-processed panel-visible');
+        this.updateHeight();
+        this.$el.addClass('panel-visible');
+
+        e = $.Event('cem.panel.show', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
     };
 
     Panel.prototype.hide = function (_relatedTarget) {
-        var that = this;
         var e; // Event handler
 
         e = $.Event('cem.panel.beforeHide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
 
         // Hide panel
-        this.$el.find('.panel-body, .panel-footer').finish().slideUp(200, function () {
-            e = $.Event('cem.panel.hide', {relatedTarget: _relatedTarget});
-            that.$el.trigger(e);
+        this.updateHeight();
+        this.$el.removeClass('panel-visible');
+
+        e = $.Event('cem.panel.hide', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
+    };
+
+    Panel.prototype.updateHeight = function () {
+        this.$el.find('.panel-body, .panel-footer').each(function () {
+            var $el = $(this);
+
+            var $ref = $el.clone().insertAfter($el).addClass('panel-clone').css('height', 'auto');
+            var height = $ref.outerHeight();
+            $ref.remove();
+
+            $el.css('height', height);
         });
-        this.$el.addClass('panel-processed').removeClass('panel-visible');
     };
 
     // PANEL - JQUERY PLUGIN

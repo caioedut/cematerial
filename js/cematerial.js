@@ -1,3 +1,11 @@
+if (typeof jQuery === 'undefined') {
+    throw new Error('CEMaterial requires jQuery');
+}
+
+if (!('flex' in document.documentElement.style)) {
+    throw new Error('Your browser does not support flexbox layout');
+}
+
 /** ========================================================================
  *
  * CEMaterial Dialogs

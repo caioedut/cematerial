@@ -960,6 +960,7 @@ textarea.input:not([rows]) {
 .chips {
     background-color: #dfdfdf;
     border-radius: 16px;
+    display: inline-block;
     font-size: 0.92rem;
     line-height: 32px;
     overflow: hidden;
@@ -1077,6 +1078,11 @@ textarea.input:not([rows]) {
 /*DROPDOWN / DROPUP*/
 .dropdown {
     position: relative;
+    display: inline-block;
+}
+
+.dropdown-block {
+    display: block;
 }
 
 .dropdown-body {

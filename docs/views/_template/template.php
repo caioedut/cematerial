@@ -91,6 +91,12 @@
                         <a class="indent <?= $router->view == 'cards' ? 'bg-grey-2' : '' ?>" href="components/cards">
                             Cards
                         </a>
+                        <a class="indent <?= $router->view == 'chips' ? 'bg-grey-2' : '' ?>" href="components/chips">
+                            Chips
+                        </a>
+                        <a class="indent <?= $router->view == 'dropdown' ? 'bg-grey-2' : '' ?>" href="components/dropdown">
+                            Dropdown
+                        </a>
                     </div>
                 </div>
             </div>

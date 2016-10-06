@@ -797,6 +797,28 @@ table td:last-child {
     transform: translateY(calc(100% + 8px));
 }
 
+/*PLACEHOLDER DEFAULT*/
+::-webkit-input-placeholder {
+    color: inherit;
+    opacity: .6;
+}
+
+:-moz-placeholder {
+    color: inherit;
+    opacity: .6;
+}
+
+::-moz-placeholder {
+    color: inherit;
+    opacity: .6;
+}
+
+:-ms-input-placeholder {
+    color: inherit;
+    opacity: .6;
+}
+
+/*PLACEHOLDER NO FOCUS*/
 .input-placeholder:not(:focus)::-webkit-input-placeholder,
 .label-float .input:not(:focus)::-webkit-input-placeholder {
     color: transparent;

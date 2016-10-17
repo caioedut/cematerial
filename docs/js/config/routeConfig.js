@@ -43,6 +43,12 @@ angular.module('docs').config(function ($stateProvider) {
             templateUrl: 'view/components/chips.html'
         },
         {
+            name: 'dialogs',
+            url: '/components/dialogs',
+            controller: 'components.dialogsCtrl',
+            templateUrl: 'view/components/dialogs.html'
+        },
+        {
             name: 'dropdown',
             url: '/components/dropdown',
             controller: 'components.dropdownCtrl',

@@ -1,0 +1,79 @@
+<html ng-app="docs">
+<head>
+    <!-- Responsive METATAG -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta http-equiv="Content-type" content="text/html;charset=utf-8"/>
+
+    <!-- ANGULAR 1 -->
+    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="lib/angular/angular-sanitize.min.js"></script>
+
+    <!-- JQUERY -->
+    <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+
+    <!-- FONTS -->
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+
+    <!-- CEMATERIAL -->
+    <script type="text/javascript" src="../js/cematerial.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/cematerial.min.css"/>
+
+    <!-- APP -->
+    <link type="text/css" rel="stylesheet" href="css/app.css"/>
+
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <script type="text/javascript" src="js/config/routeConfig.js"></script>
+    <script type="text/javascript" src="js/controllers/layoutCtrl.js"></script>
+
+    <!-- CONTROLLERS -->
+    <script type="text/javascript" src="js/controllers/getting-started/introductionCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/layout/colorPalleteCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/components/buttons.js"></script>
+    <script type="text/javascript" src="js/controllers/components/cards.js"></script>
+    <script type="text/javascript" src="js/controllers/components/chips.js"></script>
+    <script type="text/javascript" src="js/controllers/components/dropdown.js"></script>
+</head>
+<body ng-controller="layoutCtrl">
+<div class="layout">
+    <aside class="layout-sidebar">
+        <div class="container-md bg-{{color}}-6">
+            <h1 class="no-margin">CEMaterial</h1>
+            <small>CSS Framework based on Google Material Design</small>
+        </div>
+        <nav class="panel-group">
+            <div class="panel" ng-repeat="nav in navs">
+                <div class="panel-header link" data-toggle="panel">
+                    {{nav.title}}
+                </div>
+                <div class="panel-body no-padding">
+                    <div class="layout-nav">
+                        <a class="indent" href="{{'#/' + nav.url + '/' + link.url}}" ng-repeat="link in nav.links">
+                            {{link.title}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </aside>
+    <header class="layout-header raised-xs bg-{{color}}-6">
+        <div class="grid grid-middle grid-nowrap">
+            <div class="grid-col">
+                <button class="btn btn-icon btn-circle btn-xl bg-{{color}}-6" data-toggle="sidebar">
+                    <i class="md-icon">menu</i>
+                </button>
+            </div>
+            <div class="grid-col container-md">
+                <h1 class="layout-title">
+                    {{title}}
+                </h1>
+            </div>
+        </div>
+    </header>
+    <main class="layout-content" ui-view>
+    </main>
+</div>
+</body>
+</html>

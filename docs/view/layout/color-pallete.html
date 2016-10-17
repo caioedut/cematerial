@@ -1,0 +1,66 @@
+<section class="container-lg">
+    <h2>Colors</h2>
+    <p>
+        You can combine the colors with some classes, to change ANYTHING:
+    </p>
+    <ul>
+        <li>
+            <code>.bg-*</code> to change background color.
+        </li>
+        <li>
+            <code>.text-*</code> to change text color.
+        </li>
+        <li>
+            <code>.input-*</code> to change the base color of text field.
+        </li>
+        <li>
+            <code>.focus-*</code> to change the base color of text field WHEN focused.
+        </li>
+    </ul>
+
+    <div class="grid grid-gutter">
+        <div class="grid-col xs-col-6 sm-col-4" ng-repeat="color in colors">
+            <div class="container-md bg-{{color}}-6">
+                <b>{{color.toUpperCase()}}</b>
+            </div>
+            <?php foreach (range(0, 9) as $i) { ?>
+            <div class="container-md bg-{{color}}-{{i}}" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9]">
+                <b>
+                    *-{{color}}-{{i}}
+                </b>
+                <b><?= '*-' . $color . '-' . $i ?></b>
+            </div>
+            <?php } ?>
+        </div>
+        <div class="grid-col xs-col-6 sm-col-4">
+            <div class="container-md bg-black">
+                <b>*-black</b>
+            </div>
+            <div class="container-md bg-white">
+                <b>*-white</b>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container-lg">
+    <h2>Data api Events</h2>
+    <p>
+        You can use the data-api to add a class when an event is triggered.
+    </p>
+
+    <ul>
+        <li>
+            <code>[data-class-hover="bg-red-6"]</code> - Add class <code>.bg-red-6</code> when mouse is over element.
+        </li>
+        <li>
+            <code>[data-class-focus="bg-red-6"]</code> - Add class <code>.bg-red-6</code> when element has focus.
+        </li>
+    </ul>
+
+    <div class="card">
+        <div class="card-header" ng-bind-html="html(codes.hover_me)">
+        </div>
+        <pre><code>{{codes.hover_me}}</code></pre>
+    </div>
+</section>

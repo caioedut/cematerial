@@ -706,12 +706,10 @@ if (!('flex' in document.documentElement.style)) {
         this.$list = this.$el.find('.tab-list');
         this.$content = this.$el.find('.tab-content');
 
-        this.$bar = $('<div class="tab-bar"></div>');
-        this.updateBar();
-        this.$list.prepend(this.$bar);
+        this.createBar();
     };
 
-    Tabs.VERSION = '0.1.1';
+    Tabs.VERSION = '0.1.2';
 
     Tabs.DEFAULTS = {};
 
@@ -759,12 +757,31 @@ if (!('flex' in document.documentElement.style)) {
         this.$el.trigger(e);
     };
 
-    Tabs.prototype.updateBar = function () {
+    Tabs.prototype.createBar = function () {
         var $active = this.$list.find('.tab-active');
 
         var pos = $active.position();
         var scroll = this.$list.scrollLeft();
+
         var left = scroll + pos.left;
+        var right = this.$list.outerWidth() - (left + $active.outerWidth());
+
+        this.$bar = $('<div class="tab-bar"></div>').css({
+            left: left,
+            right: right
+        });
+        this.$list.prepend(this.$bar);
+    };
+
+    Tabs.prototype.updateBar = function () {
+        var that = this;
+        var $active = this.$list.find('.tab-active');
+
+        var pos = $active.position();
+        var scroll = this.$list.scrollLeft();
+
+        var left = scroll + pos.left;
+        var right = this.$list.outerWidth() - (left + $active.outerWidth());
 
         if (pos.left + $active.outerWidth() > this.$list.outerWidth()) {
             this.$list.animate({
@@ -777,10 +794,19 @@ if (!('flex' in document.documentElement.style)) {
         }
 
         // Update bar css
-        this.$bar.css({
-            transform: 'translateX(' + left + 'px)',
-            width: $active.outerWidth()
-        });
+        var to_left = pos.left < this.$bar.position().left;
+
+        if (to_left) {
+            this.$bar.css('left', left);
+            setTimeout(function () {
+                that.$bar.css('right', right)
+            }, 100);
+        } else {
+            this.$bar.css('right', right);
+            setTimeout(function () {
+                that.$bar.css('left', left)
+            }, 100);
+        }
     };
 
     // TABS - JQUERY PLUGIN

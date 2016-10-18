@@ -4,10 +4,7 @@
         Cards are set by <code>.card</code> class. You can use the classes <code>.card-header</code>, <code>.card-body</code> and <code>.card-footer</code> to create the respective containers. Also can use <code>.card-title</code> to add an title without margins to card.
     </p>
 
-    <div class="card">
-        <div class="card-header" ng-bind-html="html(codes.basic)"></div>
-        <pre><code>{{codes.basic}}</code></pre>
-    </div>
+    <code-format code="{{codes.basic}}"></code-format>
 </section>
 
 <section class="container-lg">
@@ -16,10 +13,7 @@
         You can simple fill the <code>.card</code> to a <code>.grid</code> container, and make a list of cards with the same size. You need to add <code>.grid-cards</code> to a <code>.grid</code> parent.
     </p>
 
-    <div class="card">
-        <div class="card-header" ng-bind-html="html(codes.grid_cards)"></div>
-        <pre><code>{{codes.grid_cards}}</code></pre>
-    </div>
+    <code-format code="{{codes.grid_cards}}"></code-format>
 </section>
 
 <section class="container-lg">
@@ -28,8 +22,5 @@
         Feel free to use the classes <code>bg-*-*</code> for background color and <code>text-*-*</code> for text color, defined on <a class="link-underline text-blue-5" href="#/layout/color-pallete">Collor Pallet</a>.
     </p>
 
-    <div class="card">
-        <div class="card-header" ng-bind-html="html(codes.colors)"></div>
-        <pre><code>{{codes.colors}}</code></pre>
-    </div>
+    <code-format code="{{codes.colors}}"></code-format>
 </section>

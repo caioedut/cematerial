@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="tabs">
+        <div class="tab-list border-blue-6 bg-grey-1">
+            <a data-toggle="tab">
+                <i class="md-icon">code</i>
+                Code
+            </a>
+            <a class="tab-active" data-toggle="tab">
+                <i class="md-icon">play_arrow</i>
+                Result
+            </a>
+        </div>
+        <div class="tab-content">
+            <pre><code data-language="html">{{code}}</code></pre>
+        </div>
+        <div class="tab-content tab-visible">
+            <div class="container-md" ng-bind-html="html"></div>
+        </div>
+    </div>
+</div>

@@ -1194,7 +1194,7 @@ textarea.input:not([rows]) {
     bottom: 0;
     border-bottom: 3px solid;
     border-color: inherit;
-    transition: left ease .4s, right ease .4s;
+    transition: transform ease .4s, width ease .4s;
     will-change: transform, width;
 }
 

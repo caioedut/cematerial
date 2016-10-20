@@ -1102,7 +1102,8 @@ textarea.input:not([rows]) {
     display: inline-block;
 }
 
-.dropdown-block {
+.dropdown-block,
+.dropdown-body > .dropdown {
     display: block;
 }
 

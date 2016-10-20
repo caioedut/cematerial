@@ -51,6 +51,10 @@ angular.module('docs').controller('layoutCtrl', function ($scope, $sce) {
                 {
                     title: 'Dropdown',
                     url: 'dropdown'
+                },
+                {
+                    title: 'Menus',
+                    url: 'menus'
                 }
             ]
         }

@@ -53,6 +53,12 @@ angular.module('docs').config(function ($stateProvider) {
             url: '/components/dropdown',
             controller: 'components.dropdownCtrl',
             templateUrl: 'view/components/dropdown.html'
+        },
+        {
+            name: 'menus',
+            url: '/components/menus',
+            controller: 'components.menusCtrl',
+            templateUrl: 'view/components/menus.html'
         }
     ];
 

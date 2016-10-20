@@ -1,51 +1,10 @@
 <section class="container-lg">
-    <h2>Style</h2>
+    <h2>Basic Style</h2>
     <p>
         Default menu styles can be set using the class <code>.menu</code>.
     </p>
 
-    <div class="container-md bg-grey-2">
-        <ul class="menu">
-            <li>
-                <a>
-                    <i class="md-icon">visibility</i>
-                    Preview
-                </a>
-            </li>
-            <li>
-                <a>
-                    <i class="md-icon">person_add</i>
-                    Share
-                </a>
-            </li>
-            <li>
-                <a>
-                    <i class="md-icon">link</i>
-                    Get Link
-                </a>
-            </li>
-            <li class="divider-horizontal"></li>
-            <li>
-                <a>
-                    <i class="md-icon">content_copy</i>
-                    Make a copy
-                </a>
-            </li>
-            <li>
-                <a>
-                    <i class="md-icon">get_app</i>
-                    Download
-                </a>
-            </li>
-            <li class="divider-horizontal"></li>
-            <li>
-                <a>
-                    <i class="md-icon">delete</i>
-                    Remove
-                </a>
-            </li>
-        </ul>
-    </div>
+    <code-format code="{{codes.basic}}"></code-format>
 </section>
 
 <section class="container-lg">
@@ -54,28 +13,7 @@
         Use the class <code>.menu-block</code> to fill width;
     </p>
 
-    <div class="container-md bg-grey-2">
-        <ul class="menu menu-block">
-            <li>
-                <a>
-                    <i class="md-icon">visibility</i>
-                    Preview
-                </a>
-            </li>
-            <li>
-                <a>
-                    <i class="md-icon">person_add</i>
-                    Share
-                </a>
-            </li>
-            <li>
-                <a>
-                    <i class="md-icon">link</i>
-                    Get Link
-                </a>
-            </li>
-        </ul>
-    </div>
+    <code-format code="{{codes.block}}"></code-format>
 </section>
 
 <section class="container-lg">
@@ -87,48 +25,7 @@
         Also, you can use <code>[data-class-hover]</code> to combine with <code>bg-*-*</code> and <code>text-*-*</code> classes.
     </p>
 
-    <div class="container-md bg-grey-2">
-        <ul class="menu">
-            <li>
-                <a class="text-blue-6" data-class-hover="bg-blue-6 text-white">
-                    <i class="md-icon">visibility</i>
-                    Preview
-                </a>
-            </li>
-            <li>
-                <a data-class-hover="bg-blue-6">
-                    <i class="md-icon">person_add</i>
-                    Share
-                </a>
-            </li>
-            <li>
-                <a data-class-hover="bg-blue-6">
-                    <i class="md-icon">link</i>
-                    Get Link
-                </a>
-            </li>
-        </ul>
-        <ul class="menu bg-blue-6">
-            <li>
-                <a data-class-hover="bg-blue-7">
-                    <i class="md-icon">visibility</i>
-                    Preview
-                </a>
-            </li>
-            <li>
-                <a data-class-hover="bg-blue-7">
-                    <i class="md-icon">person_add</i>
-                    Share
-                </a>
-            </li>
-            <li>
-                <a data-class-hover="bg-blue-7">
-                    <i class="md-icon">link</i>
-                    Get Link
-                </a>
-            </li>
-        </ul>
-    </div>
+    <code-format code="{{codes.colors}}"></code-format>
 </section>
 
 <section class="container-lg">
@@ -140,39 +37,5 @@
         Remember you can cascade the dropdown so submenus using the class <code>.dropdown</code> on <code>li</code>.
     </p>
 
-    <div class="container-md bg-grey-2">
-        <div class="dropdown">
-            <button class="btn btn-icon bg-blue-6" type="button" data-toggle="dropdown">
-                <i class="md-icon">menu</i>
-            </button>
-            <ul class="dropdown-body bottom left menu">
-                <li>
-                    <a>
-                        <i class="md-icon">visibility</i>
-                        Preview
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a data-toggle="dropdown">
-                        <i class="md-icon">person_add</i>
-                        Share
-                    </a>
-                    <ul class="dropdown-body bottom left-inverse menu">
-                        <li>
-                            <a>Text message</a>
-                        </li>
-                        <li>
-                            <a>E-mail</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a>
-                        <i class="md-icon">link</i>
-                        Get Link
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <code-format code="{{codes.dropdown}}"></code-format>
 </section>

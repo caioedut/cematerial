@@ -1,6 +1,6 @@
 <div class="card">
     <div class="tabs">
-        <div class="tab-list border-blue-6 bg-grey-1">
+        <div class="tabs-nav border-blue-6 bg-grey-1">
             <a data-toggle="tab">
                 <i class="md-icon">code</i>
                 Code
@@ -10,11 +10,13 @@
                 Result
             </a>
         </div>
-        <div class="tab-content">
-            <pre><code data-language="html">{{code}}</code></pre>
-        </div>
-        <div class="tab-content tab-visible">
-            <div class="container-md" ng-bind-html="html"></div>
+        <div class="tabs-list">
+            <div class="tab-content">
+                <pre><code data-language="html">{{code}}</code></pre>
+            </div>
+            <div class="tab-content tab-visible">
+                <div class="container-md" ng-bind-html="html"></div>
+            </div>
         </div>
     </div>
 </div>

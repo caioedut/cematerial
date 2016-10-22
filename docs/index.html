@@ -17,8 +17,8 @@
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 
     <!-- CEMATERIAL -->
-    <script type="text/javascript" src="../js/cematerial.js"></script>
-    <link type="text/css" rel="stylesheet" href="../css/cematerial.css"/>
+    <script type="text/javascript" src="../js/cematerial.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/cematerial.min.css"/>
 
     <!-- APP -->
     <link type="text/css" rel="stylesheet" href="css/app.css"/>
@@ -42,7 +42,7 @@
 </head>
 <body ng-controller="layoutCtrl">
 <div class="layout">
-    <aside class="layout-sidebar">
+    <aside id="main-sidebar" class="layout-sidebar">
         <div class="container-md bg-{{color}}-6">
             <h1 class="no-margin">CEMaterial</h1>
             <small>CSS Framework based on Google Material Design</small>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="panel-body no-padding">
                     <div class="layout-nav">
-                        <a class="indent" href="{{'#/' + nav.url + '/' + link.url}}" ng-repeat="link in nav.links">
+                        <a class="indent" href="{{'#/' + nav.url + '/' + link.url}}" ng-repeat="link in nav.links" ng-click="closeSidebar()">
                             {{link.title}}
                         </a>
                     </div>

@@ -22,7 +22,7 @@
         this.$list.prepend(this.$bar);
     };
 
-    Tabs.VERSION = '0.1.2';
+    Tabs.VERSION = '0.1.6';
 
     Tabs.DEFAULTS = {};
 
@@ -143,17 +143,27 @@
     $(document)
         .on('swipestart', '.tabs-list', function () {
             var $tabs = $(this).closest('.tabs');
+
             if (!$tabs.data('cem.tabs')) {
                 $tabs.tabs();
             }
 
+            var $bar = $tabs.find('.tabs-bar');
+
             $tabs.find('.tabs-bar').addClass('no-transition');
             $(this).find('.tab-visible').addClass('no-transition');
+
+            // GET TRANSLATE X VALUE
+            var translate_x = parseInt($bar.css('transform').split(',')[4]);
+            $bar.data('translateX', translate_x);
         })
         .on('swipemove', '.tabs-list', function (e) {
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+            var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
+                return this.scrollWidth > $(this).outerWidth();
+            }).length;
 
-            if (is_horizontal) {
+            if (is_horizontal && !is_parent_scrollable) {
                 var $el = $(this);
                 var $active = $el.find('.tab-visible');
                 var $bar = $el.closest('.tabs').find('.tabs-bar');
@@ -164,39 +174,32 @@
                 $active.css('marginLeft', e.swipeOffsetX);
 
                 // Move tab bar
-                $bar.css('marginLeft', -(e.swipeOffsetX / $el.outerWidth() * 100));
+                var translateX = $bar.data('translateX') - (e.swipeOffsetX / $el.outerWidth() * 100);
+                $bar.css('transform', 'translateX(' + translateX + 'px)');
             }
         })
         .on('swipeend', '.tabs-list', function (e) {
-            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+            var $el = $(this);
+            var $active = $el.find('.tab-visible');
+            var $bar = $el.closest('.tabs').find('.tabs-bar');
 
-            if (is_horizontal) {
-                var $el = $(this);
-                var $active = $el.find('.tab-visible');
-                var $bar = $el.closest('.tabs').find('.tabs-bar');
+            var offset_start = $active.outerWidth() * 0.3;
+            var $new;
 
-                var offset_start = $active.outerWidth() * 0.40;
-
-                if (Math.abs(e.swipeOffsetX) > offset_start) {
-                    var $new;
-
-                    if (e.swipeOffsetX > 0) {
-                        $new = $active.prev('.tab-content');
-                    } else {
-                        $new = $active.next('.tab-content');
-                    }
-
-                    if ($new && $new.length) {
-                        Plugin.call($el.closest('.tabs'), 'show', $new.get(0));
-                    }
+            if (Math.abs(e.swipeOffsetX) > offset_start) {
+                if (e.swipeOffsetX > 0) {
+                    $new = $active.prev('.tab-content');
+                } else {
+                    $new = $active.next('.tab-content');
                 }
-
-                // Reset tab content
-                $active.css('marginLeft', '');
-
-                // Reset tab bar
-                $bar.css('marginLeft', '');
             }
+
+            $new = $new && $new.length ? $new : $active;
+
+            Plugin.call($el.closest('.tabs'), 'show', $new.get(0));
+
+            // Reset tab content
+            $active.css('marginLeft', '');
 
             $bar.removeClass('no-transition');
             $active.removeClass('no-transition');

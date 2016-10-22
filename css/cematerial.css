@@ -1153,7 +1153,7 @@ textarea.input:not([rows]) {
 }
 
 /*TABS*/
-.tabs .tab-list {
+.tabs-nav {
     position: relative;
     display: block;
     margin: 0;
@@ -1162,16 +1162,16 @@ textarea.input:not([rows]) {
     white-space: nowrap;
 }
 
-.tabs .tab-list > * {
+.tabs-nav > * {
     display: inline-block;
     list-style: none;
 }
 
-.tabs .tab-list li {
+.tabs-nav li {
     border-color: inherit;
 }
 
-.tabs .tab-list a {
+.tabs-nav a {
     border-bottom: 3px solid transparent;
     font-size: 1rem;
     max-width: 160px;
@@ -1186,25 +1186,46 @@ textarea.input:not([rows]) {
     transition: ease border .3s;
 }
 
-.tabs .tab-list .tab-active {
+.tabs .tabs-nav .tab-active {
     border-color: inherit;
 }
 
-.tabs .tab-bar {
+.tabs-bar {
     position: absolute;
     bottom: 0;
     border-bottom: 3px solid;
     border-color: inherit;
-    transition: transform ease .4s, width ease .4s;
-    will-change: transform, width;
+    transition: transform ease .4s, width ease .4s, margin-left ease .4s;
+    will-change: transform, width, left;
 }
 
-.tabs .tab-bar ~ * {
+.tabs-bar ~ * {
     border-color: transparent !important;
 }
 
-.tabs .tab-content:not(.tab-visible) {
-    display: none;
+.tabs-list {
+    display: flex !important;
+    flex-flow: row nowrap;
+    overflow: hidden;
+}
+
+.tab-content {
+    transition: margin-left ease .3s;
+    min-width: 100%;
+    width: 100%;
+}
+
+.tab-content.tab-visible {
+    margin-left: 0;
+}
+
+.tab-content:not(.tab-visible) {
+    height: 0;
+    margin-left: -100%;
+}
+
+.tab-content.tab-visible ~ .tab-content {
+    margin-left: 0;
 }
 
 /*SLIDER / RANGE*/

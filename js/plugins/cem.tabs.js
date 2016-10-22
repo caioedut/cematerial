@@ -14,10 +14,10 @@
         this.$el = $(el).closest('.tabs');
 
         // Create element
-        this.$list = this.$el.find('.tab-list');
-        this.$content = this.$el.find('.tab-content');
+        this.$list = this.$el.find('.tabs-nav');
+        this.$content = this.$el.find('.tabs-list > .tab-content');
 
-        this.$bar = $('<div class="tab-bar"></div>');
+        this.$bar = $('<div class="tabs-bar"></div>');
         this.updateBar();
         this.$list.prepend(this.$bar);
     };
@@ -29,6 +29,10 @@
     Tabs.prototype.show = function (_relatedTarget) {
         var e; // Event handler
 
+        if (!_relatedTarget) {
+            return;
+        }
+
         var $handler = $(_relatedTarget);
 
         // If has OTHER ACTIVE tab, hide
@@ -37,17 +41,29 @@
         e = $.Event('cem.tabs.beforeShow', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
 
-        var $target = CEMaterial.getTarget($handler);
-        if (!$target.length) {
-            // Get tab content (target panel) index
-            var index = $handler.data('index');
-            if (typeof index == 'undefined') {
-                index = $handler.index() - 1;
+        var $target,
+            $nav;
+
+        if ($handler.is('.tab-content')) {
+            $target = $handler;
+            $nav = this.$el.find('.tabs-nav > [data-toggle="tab"]').filter(function () {
+                return $($(this).data('target')).is($target);
+            });
+        } else {
+            $target = CEMaterial.getTarget($handler);
+            $nav = $handler;
+
+            if (!$target.length) {
+                // Get tab content (target panel) by index
+                var index = $nav.data('index');
+                if (typeof index == 'undefined') {
+                    index = $nav.index() - 1;
+                }
+                $target = this.$content.eq(index);
             }
-            $target = this.$content.eq(index);
         }
 
-        $handler.addClass('tab-active');
+        $nav.addClass('tab-active');
         $target.addClass('tab-visible');
 
         this.updateBar();
@@ -127,5 +143,68 @@
 
         Plugin.call($target, 'show', this);
     });
+
+    $(document)
+        .on('swipestart', '.tabs-list', function () {
+            var $tabs = $(this).closest('.tabs');
+            if (!$tabs.data('cem.tabs')) {
+                $tabs.tabs();
+            }
+
+            $tabs.find('.tabs-bar').addClass('no-transition');
+            $(this).find('.tab-visible').addClass('no-transition');
+        })
+        .on('swipemove', '.tabs-list', function (e) {
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+
+            if (is_horizontal) {
+                var $el = $(this);
+                var $active = $el.find('.tab-visible');
+                var $bar = $el.closest('.tabs').find('.tabs-bar');
+
+                e.preventDefault();
+
+                // Move tab content
+                $active.css('marginLeft', e.swipeOffsetX);
+
+                // Move tab bar
+                $bar.css('marginLeft', -(e.swipeOffsetX / $el.outerWidth() * 100));
+            }
+        })
+        .on('swipeend', '.tabs-list', function (e) {
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+
+            if (is_horizontal) {
+                var $el = $(this);
+                var $active = $el.find('.tab-visible');
+                var $bar = $el.closest('.tabs').find('.tabs-bar');
+
+                var offset_start = $active.outerWidth() * 0.40;
+
+                if (Math.abs(e.swipeOffsetX) > offset_start) {
+                    var $new;
+
+                    if (e.swipeOffsetX > 0) {
+                        $new = $active.prev('.tab-content');
+                    } else {
+                        $new = $active.next('.tab-content');
+                    }
+
+                    if ($new && $new.length) {
+                        Plugin.call($el.closest('.tabs'), 'show', $new.get(0));
+                    }
+                }
+
+                // Reset tab content
+                $active.css('marginLeft', '');
+
+                // Reset tab bar
+                $bar.css('marginLeft', '');
+            }
+
+            $bar.removeClass('no-transition');
+            $active.removeClass('no-transition');
+        })
+    ;
 
 }(jQuery);

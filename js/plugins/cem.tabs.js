@@ -35,33 +35,30 @@
 
         var $handler = $(_relatedTarget);
 
-        // If has OTHER ACTIVE tab, hide
-        this.$el.tabs('hide');
-
-        e = $.Event('cem.tabs.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
-
         var $target,
             $nav;
 
         if ($handler.is('.tab-content')) {
             $target = $handler;
-            $nav = this.$el.find('.tabs-nav > [data-toggle="tab"]').filter(function () {
-                return $($(this).data('target')).is($target);
+            $nav = this.$el.find('.tabs-nav > [data-toggle="tab"]').filter(function (i) {
+                return $(CEMaterial.getTarget($(this))).is($target) || i == $target.index();
             });
+            console.log($target)
         } else {
             $target = CEMaterial.getTarget($handler);
             $nav = $handler;
 
             if (!$target.length) {
                 // Get tab content (target panel) by index
-                var index = $nav.data('index');
-                if (typeof index == 'undefined') {
-                    index = $nav.index() - 1;
-                }
-                $target = this.$content.eq(index);
+                $target = this.$content.eq($nav.index() - 1);
             }
         }
+
+        // If has OTHER ACTIVE tab, hide
+        this.$el.tabs('hide');
+
+        e = $.Event('cem.tabs.beforeShow', {relatedTarget: _relatedTarget});
+        this.$el.trigger(e);
 
         $nav.addClass('tab-active');
         $target.addClass('tab-visible');

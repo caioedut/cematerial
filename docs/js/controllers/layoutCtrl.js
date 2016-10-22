@@ -60,6 +60,10 @@ angular.module('docs').controller('layoutCtrl', function ($scope, $sce) {
         }
     ];
 
+    $scope.closeSidebar = function () {
+        $('#main-sidebar').sidebar('hide');
+    };
+
     $scope.html = function (str) {
         return $sce.trustAsHtml(str);
     };

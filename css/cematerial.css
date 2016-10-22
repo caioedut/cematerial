@@ -1195,8 +1195,8 @@ textarea.input:not([rows]) {
     bottom: 0;
     border-bottom: 3px solid;
     border-color: inherit;
-    transition: transform ease .4s, width ease .4s, margin-left ease .4s;
-    will-change: transform, width, left;
+    transition: transform ease .4s, width ease .4s;
+    will-change: transform, width;
 }
 
 .tabs-bar ~ * {

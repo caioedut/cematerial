@@ -305,7 +305,6 @@ if (!('flex' in document.documentElement.style)) {
             $nav = this.$el.find('.tabs-nav > [data-toggle="tab"]').filter(function (i) {
                 return $(CEMaterial.getTarget($(this))).is($target) || i == $target.index();
             });
-            console.log($target)
         } else {
             $target = CEMaterial.getTarget($handler);
             $nav = $handler;

@@ -29,4 +29,4 @@ https://caioedut.github.io/cematerial/
 https://caioedut.github.io/cematerial/
 
 ## Docs
-Soon...
+https://caioedut.github.io/cematerial/docs (under construction)

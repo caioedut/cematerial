@@ -260,6 +260,7 @@ body > .layout {
     }
 
     .layout .layout-sidebar {
+        border-right: 1px solid #D2D2D2;
         max-width: 280px;
         transform: translate3d(100%, 0, 0) !important;
     }
@@ -982,7 +983,7 @@ textarea.input:not([rows]) {
     background-color: #dfdfdf;
     border-radius: 16px;
     display: inline-block;
-    font-size: 0.92rem;
+    font-size: .92rem;
     line-height: 32px;
     overflow: hidden;
     padding: 0 12px;
@@ -1213,6 +1214,10 @@ textarea.input:not([rows]) {
     transition: margin-left ease .3s;
     min-width: 100%;
     width: 100%;
+}
+
+.tabs-noswipe .tab-content {
+    transition: none;
 }
 
 .tab-content.tab-visible {
@@ -2383,6 +2388,11 @@ textarea.input:not([rows]) {
 .raised-hover.raised-lg:hover,
 .raised-xl {
     box-shadow: 0 19px 38px rgba(0, 0, 0, .30), 0 15px 12px rgba(0, 0, 0, .22);
+}
+
+.btn.raised-xl:hover,
+.raised-hover.raised-xl:hover {
+    box-shadow: 0 24px 48px rgba(0, 0, 0, .30), 0 20px 14px rgba(0, 0, 0, .22);
 }
 
 /*CONTAINERS*/

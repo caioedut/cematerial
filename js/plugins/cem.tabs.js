@@ -17,6 +17,10 @@
         this.$list = this.$el.find('.tabs-nav');
         this.$content = this.$el.find('.tabs-list > .tab-content');
 
+        if (!this.options.swipe) {
+            this.$el.addClass('tabs-noswipe');
+        }
+
         this.$bar = $('<div class="tabs-bar"></div>');
         this.updateBar();
         this.$list.prepend(this.$bar);
@@ -24,7 +28,9 @@
 
     Tabs.VERSION = '0.1.6';
 
-    Tabs.DEFAULTS = {};
+    Tabs.DEFAULTS = {
+        swipe: true
+    };
 
     Tabs.prototype.show = function (_relatedTarget) {
         var e; // Event handler
@@ -141,7 +147,7 @@
     });
 
     $(document)
-        .on('swipestart', '.tabs-list', function () {
+        .on('swipestart', '.tabs:not(.tabs-noswipe) .tabs-list', function () {
             var $tabs = $(this).closest('.tabs');
 
             if (!$tabs.data('cem.tabs')) {
@@ -157,7 +163,7 @@
             var translate_x = parseInt($bar.css('transform').split(',')[4]);
             $bar.data('translateX', translate_x);
         })
-        .on('swipemove', '.tabs-list', function (e) {
+        .on('swipemove', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
             var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
                 return this.scrollWidth > $(this).outerWidth();
@@ -178,7 +184,7 @@
                 $bar.css('transform', 'translateX(' + translateX + 'px)');
             }
         })
-        .on('swipeend', '.tabs-list', function (e) {
+        .on('swipeend', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
             var $el = $(this);
             var $active = $el.find('.tab-visible');
             var $bar = $el.closest('.tabs').find('.tabs-bar');

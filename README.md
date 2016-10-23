@@ -1,7 +1,7 @@
 Warning: this project is under development!
 
 # CEMaterial
-https://caioedut.github.io/CEMaterial/
+https://caioedut.github.io/cematerial/
 
 ## Dependences
 - jQuery (https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js)
@@ -26,7 +26,7 @@ https://caioedut.github.io/CEMaterial/
 ```
 
 ## Example
-https://caioedut.github.io/CEMaterial/
+https://caioedut.github.io/cematerial/
 
 ## Docs
 Soon...

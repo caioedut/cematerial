@@ -42,10 +42,12 @@
     <div id="side-main" class="layout-sidebar">
 
         <div class="container-md bg-blue-6">
-            <h1 class="no-margin">CEMaterial</h1>
-            <a class="link-underline" href="http://caioedut.com/" target="_blank">
-                caioedut.com
-            </a>
+            <h1 class="display-1">
+                CEMaterial <br/>
+                <a class="subheader link-underline" href="http://caioedut.com/" target="_blank">
+                    caioedut.com
+                </a>
+            </h1>
         </div>
 
         <div class="layout-nav">
@@ -123,7 +125,7 @@
                 </button>
             </div>
             <div class="grid-col container-md">
-                <h3>Components</h3>
+                <h1 class="title">Components</h1>
             </div>
             <div class="grid-col col-right">
                 <button class="btn btn-icon btn-xl text-white" type="button">
@@ -381,88 +383,62 @@
         <section id="datatables" class="container-lg">
             <h1>Data tables</h1>
 
-            <div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="grid grid-middle grid-nowrap">
-                            <h3 class="card-title">
-                                Nutrition
-                            </h3>
-                            <a class="btn btn-icon btn-circle waves waves-dark col-right">
-                                <i class="md-icon">filter_list</i>
-                            </a>
-                            <a class="btn btn-circle waves waves-dark">
-                                <i class="md-icon">more_vert</i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table-card table-hover">
-                            <thead>
-                            <tr>
-                                <th>
-                                    <input class="input" type="checkbox" data-toggle="table"/>
-                                </th>
-                                <th class="table-content">Dessert (100g serving)</th>
-                                <th>Calories</th>
-                                <th>Fat (g)</th>
-                                <th>Carbs (g)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <input class="input" type="checkbox"/>
-                                </td>
-                                <td>Frozen yogurt</td>
-                                <td class="xs-text-right">159</td>
-                                <td class="xs-text-right">6.0</td>
-                                <td class="xs-text-right">24</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input class="input" type="checkbox"/>
-                                </td>
-                                <td>Ice cream sandwich</td>
-                                <td class="xs-text-right">237</td>
-                                <td class="xs-text-right">9.0</td>
-                                <td class="xs-text-right">37</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input class="input" type="checkbox"/>
-                                </td>
-                                <td>Eclair</td>
-                                <td class="xs-text-right">262</td>
-                                <td class="xs-text-right">16.0</td>
-                                <td class="xs-text-right">24</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer">
-                        <div class="grid grid-gutter-sm grid-middle">
-                            <div class="col-right">
-                                Rows per page:
+            <div class="table-responsive">
+                <table class="table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input class="input" type="checkbox" data-toggle="table"/>
+                        </th>
+                        <th class="table-content">Dessert (100g serving)</th>
+                        <th>Calories</th>
+                        <th>Fat (g)</th>
+                        <th>Carbs (g)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input class="input" type="checkbox"/>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <div data-toggle="dropdown">
+                                    Frozen yogurt (click)
+                                </div>
+                                <div class="dropdown-body dropdown-sm top left">
+                                    <div class="container-md">
+                                        <input class="input text-md input-blue-6" type="text" value="Frozen yogurt"/>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="grid-col">
-                                3
-                            </div>
-                            <div class="grid-col">
-                                1-3 of 30
-                            </div>
-                            <div class="grid-col">
-                                <a class="btn btn-icon waves waves-dark">
-                                    <i class="md-icon">chevron_left</i>
-                                </a>
-                                <a class="btn btn-icon waves waves-dark">
-                                    <i class="md-icon">chevron_right</i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </td>
+                        <td class="xs-text-right">159</td>
+                        <td class="xs-text-right">6.0</td>
+                        <td class="xs-text-right">24</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="input" type="checkbox"/>
+                        </td>
+                        <td>Ice cream sandwich</td>
+                        <td class="xs-text-right">237</td>
+                        <td class="xs-text-right">9.0</td>
+                        <td class="xs-text-right">37</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="input" type="checkbox"/>
+                        </td>
+                        <td>Eclair</td>
+                        <td class="xs-text-right">262</td>
+                        <td class="xs-text-right">16.0</td>
+                        <td class="xs-text-right">24</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
         </section>
 
         <div class="divider-horizontal"></div>
@@ -515,13 +491,14 @@
                         </div>
                     </div>
                     <div class="dialog-body">
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit ante. Aliquam erat volutpat. Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Duis condimentum augue id magna semper rutrum. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Fusce consectetuer risus a nunc. Aliquam ornare wisi eu metus. Integer pellentesque quam vel velit. Duis pulvinar.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Aenean vel massa quis mauris vehicula lacinia. Quisque tincidunt scelerisque libero. Maecenas libero. Etiam dictum tincidunt diam. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Suspendisse nisl. Sed convallis magna eu sem. Cras pede libero, dapibus nec, pretium sit amet, tempor quis, urna.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit ante. Aliquam erat volutpat.</p>
                         <p>
                             <a class="btn waves bg-blue-5" data-toggle="dialog" data-target="#myDialog2">
                                 Open Second Dialog
                             </a>
                         </p>
+                        <p>Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Duis condimentum augue id magna semper rutrum. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Fusce consectetuer risus a nunc. Aliquam ornare wisi eu metus. Integer pellentesque quam vel velit. Duis pulvinar.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Aenean vel massa quis mauris vehicula lacinia. Quisque tincidunt scelerisque libero. Maecenas libero. Etiam dictum tincidunt diam. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Suspendisse nisl. Sed convallis magna eu sem. Cras pede libero, dapibus nec, pretium sit amet, tempor quis, urna.</p>
                         <p>Nam quis nulla. Integer malesuada. In in enim a arcu imperdiet malesuada. Sed vel lectus. Donec odio urna, tempus molestie, porttitor ut, iaculis quis, sem. Phasellus rhoncus. Aenean id metus id velit ullamcorper pulvinar. Vestibulum fermentum tortor id mi. Pellentesque ipsum. Nulla non arcu lacinia neque faucibus fringilla. Nulla non lectus sed nisl molestie malesuada. Proin in tellus sit amet nibh dignissim sagittis. Vivamus luctus egestas leo. Maecenas sollicitudin. Nullam rhoncus aliquam metus. Etiam egestas wisi a erat.</p>
                         <p>Morbi leo mi, nonummy eget, tristique non, rhoncus non, leo. Nullam faucibus mi quis velit. Integer in sapien. Fusce tellus odio, dapibus id, fermentum quis, suscipit id, erat. Fusce aliquam vestibulum ipsum. Aliquam erat volutpat. Pellentesque sapien. Cras elementum. Nulla pulvinar eleifend sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque porta. Vivamus porttitor turpis ac leo.</p>
                     </div>
@@ -919,7 +896,7 @@
                                     </button>
                                 </div>
                                 <div class="grid-col container-md">
-                                    <h3>Layout Header</h3>
+                                    <h3 class="title">Layout Header</h3>
                                 </div>
                                 <div class="grid-col col-right">
                                     <button class="btn btn-icon btn-xl text-white" type="button">
@@ -929,7 +906,7 @@
                             </div>
                         </div>
                         <div class="layout-content container-md">
-                            <h3>Layout Content</h3>
+                            <h3 class="title">Layout Content</h3>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Aenean vel massa quis mauris vehicula lacinia. Quisque tincidunt scelerisque libero. Maecenas libero. Etiam dictum tincidunt diam. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Suspendisse nisl. Sed convallis magna eu sem. Cras pede libero, dapibus nec, pretium sit amet, tempor quis, urna.</p>
                             <p>Praesent in mauris eu tortor porttitor accumsan. Mauris suscipit, ligula sit amet pharetra semper, nibh ante cursus purus, vel sagittis velit mauris vel metus. Aenean fermentum risus id tortor. Integer imperdiet lectus quis justo. Integer tempor. Vivamus ac urna vel leo pretium faucibus. Mauris elementum mauris vitae tortor. In dapibus augue non sapien. Aliquam ante. Curabitur bibendum justo non orci.</p>
                             <p>Praesent in mauris eu tortor porttitor accumsan. Mauris suscipit, ligula sit amet pharetra semper, nibh ante cursus purus, vel sagittis velit mauris vel metus. Aenean fermentum risus id tortor. Integer imperdiet lectus quis justo. Integer tempor. Vivamus ac urna vel leo pretium faucibus. Mauris elementum mauris vitae tortor. In dapibus augue non sapien. Aliquam ante. Curabitur bibendum justo non orci.</p>
@@ -938,7 +915,9 @@
                         </div>
                         <div class="layout-footer bg-purple-5">
                             <div class="container-md">
-                                Layout Footer
+                                <div class="title">
+                                    Layout Footer
+                                </div>
                                 <button class="btn btn-float btn-xl raised-sm waves right top bg-purple-8" type="button">
                                     <i class="md-icon">message</i>
                                 </button>

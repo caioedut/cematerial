@@ -277,6 +277,7 @@ body > .layout {
 /*LAYOUT NAV*/
 .layout-nav {
     display: block;
+    padding: 8px 0;
 }
 
 .layout-nav.nav-hidden {
@@ -308,7 +309,6 @@ body > .layout {
 
 .layout-account {
     position: relative;
-    margin-bottom: 8px;
 }
 
 /*BASE LAYOUT END*/

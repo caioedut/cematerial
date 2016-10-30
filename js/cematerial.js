@@ -6,6 +6,27 @@ if (!('flex' in document.documentElement.style)) {
     throw new Error('Your browser does not support flexbox layout');
 }
 
+$.fn.scrollParent = function (horizontal, vertical) {
+
+    horizontal = typeof horizontal === 'undefined' ? true : false;
+
+    var $el = $(this).parents().filter(function () {
+        var bl = true;
+
+        if (horizontal && this.scrollWidth <= $(this).outerWidth()) {
+            bl = false;
+        }
+
+        if (vertical && this.scrollHeight <= $(this).outerHeight()) {
+            bl = false;
+        }
+
+        return bl;
+    });
+
+    return $el.length ? $el : $('body');
+};
+
 /** ========================================================================
  *
  * CEMaterial Dialogs

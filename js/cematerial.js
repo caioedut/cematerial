@@ -1098,50 +1098,6 @@ jQuery(function ($) {
         })
     ;
 
-    /** // Temporarily disabled
-     $doc
-     .on('mouseup mouseleave', '.waves', function () {
-            var wave = $(this).find('.waves-box span');
-
-            if (wave.css('opacity') == 0.4) {
-                wave.css('opacity', 0);
-            } else {
-                wave.one('transitionend', function () {
-                    wave.css('opacity', 0);
-                });
-            }
-        })
-     .on('mousedown', '.waves', function (e) {
-            var el = $(this);
-            var box = el.find('.waves-box');
-
-            if (!box.length) {
-                box = $('<div class="waves-box"><span></span></div>').appendTo(el);
-                el.trigger('click');
-            }
-
-            var wave = box.find('span').attr('style', 'transition: none;');
-
-            // Get size
-            var size = Math.max(el.outerWidth(), el.outerHeight()) * 2;
-            var offset = el.offset();
-
-            wave
-                .attr('style', '')
-                .css({
-                    left: e.pageX - offset.left,
-                    top: e.pageY - offset.top,
-                    height: size,
-                    width: size,
-                    opacity: .4
-                })
-            ;
-
-            return true;
-        })
-     ;
-     */
-
     // TEXTAREA AUTO GROW
     $doc.on('input', '.input-autogrow', function () {
         var el = $(this);

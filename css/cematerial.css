@@ -2264,6 +2264,7 @@ textarea.input:not([rows]) {
     transition: none !important;
 }
 
+.draggable-on,
 .no-select,
 .btn,
 .menu a,

@@ -318,6 +318,7 @@ body > .layout {
     font-size: 1rem;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
     font-weight: 400;
+    height: 36px;
     line-height: 36px;
     outline: none;
     overflow: hidden;
@@ -329,7 +330,7 @@ body > .layout {
     vertical-align: middle;
     white-space: nowrap;
 
-    height: 36px;
+    -webkit-tap-highlight-color: transparent;
 
     -webkit-appearance: none;
     -moz-appearance: none;

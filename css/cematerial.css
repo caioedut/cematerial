@@ -1191,6 +1191,21 @@ textarea.input:not([rows]) {
     outline: none;
 }
 
+/*WAVES*/
+.waves-body {
+    position: absolute;
+
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: .3;
+
+    height: 1px;
+    width: 1px;
+
+    transform: translate(-50%, -50%);
+    transition: height ease-out .5s, width ease-out .5s, opacity ease-out .3s;
+}
+
 /*SLIDER TRACK BEGIN*/
 .slider::-webkit-slider-runnable-track {
     background-color: #aaa;

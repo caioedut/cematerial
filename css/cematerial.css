@@ -164,8 +164,6 @@ small {
 /*BASE LAYOUT BEGIN*/
 .layout {
     position: relative;
-    display: flex;
-    flex-flow: column nowrap;
     overflow: hidden;
 
     height: 100%;
@@ -206,15 +204,9 @@ body > .layout {
 }
 
 .layout .layout-header,
-.layout .layout-footer {
+.layout .layout-footer,
+.layout .layout-content{
     margin: 0 !important;
-}
-
-.layout .layout-content {
-    margin: 0 !important;
-    min-height: 0;
-    overflow: hidden;
-    overflow-y: auto;
 }
 
 .layout .layout-sidebar ~ * {
@@ -470,19 +462,30 @@ body > .layout {
 }
 
 /*GLOBAL FLEXBOX */
+.layout,
+.dialog-content,
+.card,
 .flex {
     display: flex !important;
     flex-flow: column nowrap;
     width: 100%;
 }
 
+.dialog-header,
+.card-header,
 .flex-header {
 }
 
+.layout-content,
+.dialog-body,
+.card-body,
 .flex-body {
     overflow: auto;
 }
 
+.layout-footer,
+.dialog-footer,
+.card-footer,
 .flex-footer {
     margin-top: auto;
 }
@@ -503,7 +506,7 @@ body > .layout {
 
     overflow: hidden;
 
-    transition: opacity ease .2s, visibility ease .2s;
+    transition: opacity ease .4s, visibility ease .4s;
     opacity: 0;
     visibility: hidden;
 }
@@ -517,25 +520,19 @@ body > .layout {
     margin: auto; /* Center flex item*/
     max-height: 100%;
     transition: transform ease .3s;
-}
-
-.dialog:not(.dialog-visible) .dialog-content {
-    transform: scale(.2);
-}
-
-/*DIALOGS AND CARDS FLEX*/
-.dialog-content,
-.card {
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
-    border-radius: 2px;
-    display: flex !important;
-    flex-direction: column;
     width: max-content;
 }
 
-.card {
-    width: 100%;
+.dialog:not(.dialog-visible) .dialog-content {
+    transform: scale(.1);
+}
+
+/*DIALOGS AND CARDS CSS*/
+.dialog-content,
+.card{
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    border-radius: 2px;
 }
 
 .dialog-header,
@@ -545,16 +542,11 @@ body > .layout {
 
 .dialog-body,
 .card-body {
-    /*flex: 1;*/
-    min-height: 0;
-    overflow-y: auto;
     padding: 8px 16px;
 }
 
 .dialog-footer,
 .card-footer {
-    flex: 0 0;
-    margin-top: auto;
     padding: 4px;
     text-align: right;
 }

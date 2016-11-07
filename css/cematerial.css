@@ -469,6 +469,24 @@ body > .layout {
     transform: translateY(50%);
 }
 
+/*GLOBAL FLEXBOX */
+.flex {
+    display: flex !important;
+    flex-flow: column nowrap;
+    width: 100%;
+}
+
+.flex-header {
+}
+
+.flex-body {
+    overflow: auto;
+}
+
+.flex-footer {
+    margin-top: auto;
+}
+
 /*DIALOGS*/
 .dialog {
     position: fixed;

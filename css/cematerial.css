@@ -203,12 +203,6 @@ body > .layout {
     visibility: visible !important;
 }
 
-.layout .layout-header,
-.layout .layout-footer,
-.layout .layout-content{
-    margin: 0 !important;
-}
-
 .layout .layout-sidebar ~ * {
     position: relative;
     margin-left: auto !important;

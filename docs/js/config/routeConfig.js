@@ -15,6 +15,12 @@ angular.module('docs').config(function ($stateProvider) {
          * Layout
          */
         {
+            name: 'overview',
+            url: '/layout/overview',
+            controller: 'layout.overviewCtrl',
+            templateUrl: 'view/layout/overview.html'
+        },
+        {
             name: 'colorPallete',
             url: '/layout/color-pallete',
             controller: 'layout.colorPalleteCtrl',

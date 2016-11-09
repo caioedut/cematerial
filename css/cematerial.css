@@ -182,7 +182,6 @@ body > .layout {
 
     background-color: #fff;
 
-    overflow: hidden;
     overflow-y: auto;
     z-index: 99;
 
@@ -498,8 +497,6 @@ body > .layout {
     padding: 30px;
     z-index: 99;
 
-    overflow: hidden;
-
     transition: opacity ease .4s, visibility ease .4s;
     opacity: 0;
     visibility: hidden;
@@ -523,7 +520,7 @@ body > .layout {
 
 /*DIALOGS AND CARDS CSS*/
 .dialog-content,
-.card{
+.card {
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     border-radius: 2px;
@@ -1196,6 +1193,10 @@ textarea.input:not([rows]) {
 }
 
 /*WAVES*/
+.waves {
+    position: relative;
+}
+
 .waves-body {
     position: absolute;
 
@@ -1210,110 +1211,38 @@ textarea.input:not([rows]) {
     transition: height ease-out .5s, width ease-out .5s, opacity ease-out .3s;
 }
 
-/*SLIDER TRACK BEGIN*/
-.slider::-webkit-slider-runnable-track {
-    background-color: #aaa;
-    display: block;
-    height: 2px;
-    width: 100%;
-}
-
-.slider::-moz-range-track {
-    background-color: #aaa;
-    display: block;
-    height: 2px;
-    width: 100%;
-}
-
-.slider::-ms-track {
-    background-color: #aaa;
-    display: block;
-    height: 2px;
-    margin: 4px 0;
-    width: 100%;
-}
-
-/*SLIDER TRACK END*/
-
-/*SLIDER THUMB BEGIN*/
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    background-color: #aaa;
-    border-radius: 50%;
-    cursor: pointer;
-
-    margin-top: -6px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-    height: 12px;
-    width: 12px;
-
-    transition: all ease .3s;
-}
-
-.slider::-moz-range-thumb {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    background-color: #aaa;
-    border-radius: 50%;
-    cursor: pointer;
-
-    height: 12px;
-    width: 12px;
-
-    transition: all ease .3s;
-}
-
-.slider::-ms-thumb {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    background-color: #aaa;
-    border-radius: 50%;
-    cursor: pointer;
-
-    margin: auto !important;
-    height: 12px;
-    width: 12px;
-
-    transition: all ease .3s;
-}
-
-/*SLIDER THUMB HOVER*/
-.slider::-webkit-slider-thumb:hover,
-.slider::-webkit-slider-thumb:active {
-    margin-top: -7px;
-    height: 16px;
-    width: 16px;
-}
-
-.slider::-moz-range-thumb:hover,
-.slider::-moz-range-thumb:active {
-    height: 16px;
-    width: 16px;
-}
-
-.slider::-ms-thumb:hover,
-.slider::-ms-thumb:active {
-    height: 16px;
-    width: 16px;
-}
-
-/*SLIDER THUMB END*/
-
-/*GRID*/
-/*GRID HORIZONTAL*/
+/*FLEX GRID SYSTEM*/
 .grid {
+    align-items: stretch;
     display: flex !important;
     flex-flow: row wrap;
-    min-width: 100%;
-    /*width: 100%; this brokes gutter*/
 }
 
+.grid-col {
+    display: block;
+}
+
+.grid-wrap {
+    flex-wrap: wrap;
+}
+
+.grid-nowrap {
+    flex-wrap: nowrap;
+}
+
+.grid-vertical {
+    flex-direction: column;
+}
+
+.grid-reverse {
+    flex-direction: row-reverse;
+}
+
+.grid-vertical.grid-reverse {
+    flex-direction: column-reverse;
+}
+
+/*GRID GUTTER*/
 .grid-gutter, .grid-gutter-md {
     margin: -16px;
 }
@@ -1354,28 +1283,15 @@ textarea.input:not([rows]) {
     padding: 64px;
 }
 
-.grid-horizontal {
-    flex-direction: row;
+/*GRID ALIGNMENT - HORIZONTAL*/
+.grid-left {
+    justify-content: flex-start;
 }
 
-.grid-reverse {
-    flex-direction: row-reverse;
+.grid-right {
+    justify-content: flex-end;
 }
 
-.grid-wrap {
-    flex-wrap: wrap;
-}
-
-.grid-nowrap {
-    flex-wrap: nowrap;
-}
-
-.grid-scroll {
-    overflow: hidden;
-    overflow-x: auto;
-}
-
-/*Grid Horizontal Align*/
 .grid-center {
     justify-content: center;
 }
@@ -1388,35 +1304,26 @@ textarea.input:not([rows]) {
     justify-content: space-around;
 }
 
-/*Grid Vertical Align*/
+/*GRID ALIGNMENT - VERTICAL*/
 .grid-top {
     align-items: flex-start;
-}
-
-.grid-middle {
-    align-items: center;
 }
 
 .grid-bottom {
     align-items: flex-end;
 }
 
-/*GRID VERTICAL*/
-.grid-vertical {
-    flex-direction: column;
+.grid-middle {
+    align-items: center;
 }
 
-.grid-vertical.grid-reverse {
-    flex-direction: column-reverse;
-}
-
-/*GRID CARDS FULL HEIGHT*/
+/*GRID FIT CARDS*/
 .grid-cards > * {
     display: flex !important;
     justify-content: center;
 }
 
-/*Grid align particular column*/
+/*GRID COLs PROPERTIES*/
 .col-left {
     margin-right: auto;
 }
@@ -1447,14 +1354,8 @@ textarea.input:not([rows]) {
     flex: 1;
 }
 
-/*.xs-col-1, .xs-col-2, .xs-col-3, .xs-col-4, .xs-col-5, .xs-col-6, .xs-col-7, .xs-col-8, .xs-col-9, .xs-col-10, .xs-col-11, .xs-col-12, .sm-col-1, .sm-col-2, .sm-col-3, .sm-col-4, .sm-col-5, .sm-col-6, .sm-col-7, .sm-col-8, .sm-col-9, .sm-col-10, .sm-col-11, .sm-col-12, .md-col-1, .md-col-2, .md-col-3, .md-col-4, .md-col-5, .md-col-6, .md-col-7, .md-col-8, .md-col-9, .md-col-10, .md-col-11, .md-col-12, .lg-col-1, .lg-col-2, .lg-col-3, .lg-col-4, .lg-col-5, .lg-col-6, .lg-col-7, .lg-col-8, .lg-col-9, .lg-col-10, .lg-col-11, .lg-col-12, .xl-col-1, .xl-col-2, .xl-col-3, .xl-col-4, .xl-col-5, .xl-col-6, .xl-col-7, .xl-col-8, .xl-col-9, .xl-col-10, .xl-col-11, .xl-col-12 {*/
-.grid-col, [class*="xs-col-"], [class*="sm-col-"], [class*="md-col-"], [class*="lg-col-"], [class*="xl-col-"] {
-    position: relative;
-    display: block;
-    min-height: 1px;
-}
-
 [class*="xs-col-"], [class*="sm-col-"], [class*="md-col-"], [class*="lg-col-"], [class*="xl-col-"] {
+    display: block;
     width: 100%;
 }
 
@@ -1576,10 +1477,6 @@ textarea.input:not([rows]) {
     margin-left: 100%;
 }
 
-.xs-break {
-    clear: both;
-}
-
 .xs-text-left {
     text-align: left;
 }
@@ -1696,10 +1593,6 @@ textarea.input:not([rows]) {
 
     .sm-offset-12 {
         margin-left: 100%;
-    }
-
-    .sm-break {
-        clear: both;
     }
 
     .sm-text-left {
@@ -1821,10 +1714,6 @@ textarea.input:not([rows]) {
         margin-left: 100%;
     }
 
-    .md-break {
-        clear: both;
-    }
-
     .md-text-left {
         text-align: left;
     }
@@ -1944,10 +1833,6 @@ textarea.input:not([rows]) {
         margin-left: 100%;
     }
 
-    .lg-break {
-        clear: both;
-    }
-
     .lg-text-left {
         text-align: left;
     }
@@ -2065,10 +1950,6 @@ textarea.input:not([rows]) {
 
     .xl-offset-12 {
         margin-left: 100%;
-    }
-
-    .xl-break {
-        clear: both;
     }
 
     .xl-text-left {

@@ -316,10 +316,6 @@ body > .layout {
     white-space: nowrap;
 
     -webkit-tap-highlight-color: transparent;
-
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
 }
 
 /*FIREFOX FIX*/
@@ -835,10 +831,6 @@ textarea.input:not([rows]) {
 /*CHECKBOX*/
 .input[type="radio"],
 .input[type="checkbox"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
     position: relative;
     background: none;
     cursor: pointer;
@@ -1176,20 +1168,6 @@ textarea.input:not([rows]) {
 
 .tab-content.tab-visible ~ .tab-content {
     margin-left: 0;
-}
-
-/*SLIDER / RANGE*/
-.slider {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    display: block;
-    width: 100%;
-}
-
-.slider:focus {
-    outline: none;
 }
 
 /*WAVES*/
@@ -2100,7 +2078,7 @@ textarea.input:not([rows]) {
     }
 }
 
-/*GLOBAL USAGE / UTIL*/
+/*GLOBAL USAGE / UTIL / HELPERS*/
 .static {
     position: static !important;
 }
@@ -2165,6 +2143,27 @@ textarea.input:not([rows]) {
     transition: none !important;
 }
 
+.no-style {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 0;
+}
+
+.btn,
+.no-style,
+.input[type="radio"],
+.input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 .draggable-on,
 .no-select,
 .btn,
@@ -2201,6 +2200,11 @@ textarea.input:not([rows]) {
 
 .set-overlay {
     box-shadow: inset 0 0 100px 10px rgba(0, 0, 0, .5);
+}
+
+.set-block {
+    display: block;
+    width: 100%;
 }
 
 /*RAISED*/

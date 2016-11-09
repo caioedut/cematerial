@@ -8,7 +8,7 @@ if (!('flex' in document.documentElement.style)) {
 
 $.fn.scrollParent = function (horizontal, vertical) {
 
-    horizontal = typeof horizontal === 'undefined' ? true : false;
+    horizontal = typeof horizontal === 'undefined';
 
     var $el = $(this).parents().filter(function () {
         var bl = true;
@@ -1122,9 +1122,6 @@ jQuery(function ($) {
     doc.on('DOMNodeInserted', function (e) {
         CEMaterial.init($(e.target));
     });
-
-    // Waves.attach('.waves');
-    // Waves.init();
 });
 
 jQuery(function ($) {
@@ -1147,7 +1144,7 @@ jQuery(function ($) {
     ;
 
     // LABEL TOGGLE
-    var texts = 'input:not([type="radio"]):not([type="checkbox"]):not([type="button"]), select, textarea';
+    var texts = 'input.input:not([type="radio"]):not([type="checkbox"]):not([type="button"])';
     $doc
         .on('focus', texts, function () {
             CEMaterial.onFocus($(this));
@@ -1159,8 +1156,7 @@ jQuery(function ($) {
 
     // TEXTAREA AUTO GROW
     $doc.on('input', '.input-autogrow', function () {
-        var el = $(this);
-        CEMaterial.inputAutoGrow(el);
+        CEMaterial.inputAutoGrow($(this));
     });
 
     // DRAG AND DROP UPLOAD
@@ -1211,30 +1207,22 @@ jQuery(function ($) {
     ;
 
     // DATA TOGGLE
-    $doc.on('click', '[data-toggle]', function (e) {
-        var el = $(this);
-        var action = el.data('toggle').trim();
-        var target;
+    $doc.on('click', '[data-toggle="table"]', function (e) {
+        e.stopPropagation();
 
-        switch (action) {
-            case 'table': {
-                target = CEMaterial.getTarget(el, '.table');
-                var checked = el.prop('checked');
-                target = target.length ? target : el.closest('table');
-                target.find('input[type="checkbox"]').prop('checked', checked);
-                e.stopPropagation();
-                break;
-            }
-            default:
-                break;
-        }
+        var $el = $(this);
+        var target = CEMaterial.getTarget($el, '.table');
+        var checked = $el.prop('checked');
+
+        target = target.length ? target : $el.closest('table');
+        target.find('input[type="checkbox"]').prop('checked', checked);
     });
 });
 
 
 var CEMaterial = {
     init: function (target) {
-        CEMaterial.onBlur(target.find('.label-float .input').not(':button').filter(function () {
+        CEMaterial.onBlur(target.find('.label-float .input').filter(function () {
             return this.value;
         }));
         CEMaterial.inputAutoGrow(target.find('.input-autogrow'));

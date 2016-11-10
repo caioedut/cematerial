@@ -295,6 +295,7 @@ body > .layout {
 /*WAVES*/
 .waves {
     position: relative;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .waves-body {

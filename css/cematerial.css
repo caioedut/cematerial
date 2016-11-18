@@ -612,19 +612,19 @@ small {
 }
 
 .md-icon-xs {
-    font-size: .5em
+    font-size: .7em
 }
 
 .md-icon-sm {
-    font-size: .75em
+    font-size: 1em
 }
 
 .md-icon-lg {
-    font-size: 1.25em
+    font-size: 1.6em
 }
 
 .md-icon-xl {
-    font-size: 1.5em
+    font-size: 1.9em
 }
 
 /*BASE LAYOUT BEGIN*/
@@ -820,7 +820,7 @@ body > .layout {
 }
 
 .btn-flat {
-    padding: 0 .6rem;
+    padding: 0 .8rem;
 }
 
 /*BTN ICON*/
@@ -1104,11 +1104,14 @@ table td:last-child {
 }
 
 .table-responsive {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     display: block;
-    margin: -8px;
     min-height: 1px;
     overflow-x: auto;
-    padding: 8px;
+}
+
+.table-responsive table {
+    box-shadow: none;
 }
 
 .table-hover tr:hover th,
@@ -1176,6 +1179,7 @@ table td:last-child {
 
 .panel:not(.panel-visible) .panel-body:not(.panel-clone),
 .panel:not(.panel-visible) .panel-footer:not(.panel-clone) {
+    border: 0 !important;
     height: 0 !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;

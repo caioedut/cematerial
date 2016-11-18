@@ -15,6 +15,8 @@
         this.options = options || {};
         this.$el = $(el);
 
+        this.$body = this.$el.find('.dropdown-body')
+
         if (this.options.autoclose) {
             var that = this;
             $doc.on('click', function (e) {
@@ -23,7 +25,7 @@
         }
     };
 
-    Dropdown.VERSION = '0.1.1';
+    Dropdown.VERSION = '0.1.2';
 
     Dropdown.DEFAULTS = {
         autoclose: true
@@ -64,15 +66,15 @@
     };
 
     Dropdown.prototype.updatePosition = function () {
-        var $dropbody = this.$el.find('.dropdown-body').css('transform', 'none');
-        var offset = $dropbody.offset();
+        this.$body.find('.dropdown-body').css('transform', 'none');
+        var offset = this.$body.offset();
 
         if (offset.left < 0) {
-            $dropbody.css('transform', 'translateX(' + Math.abs(offset.left) + 'px)');
+            this.$body.css('transform', 'translateX(' + (Math.abs(offset.left) + 4) + 'px)');
         } else {
-            var translate = (offset.left + $dropbody.outerWidth()) - $('body').outerWidth();
+            var translate = (offset.left + this.$body.outerWidth()) - $('body').outerWidth();
             if (translate > 0) {
-                $dropbody.css('transform', 'translateX(-' + translate + 'px)');
+                this.$body.css('transform', 'translateX(-' + (translate + 24) + 'px)');
             }
         }
     };

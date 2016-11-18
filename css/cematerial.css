@@ -1497,6 +1497,7 @@ textarea.input:not([rows]) {
 .menu li.divider-horizontal {
     display: block;
     padding: 8px 16px;
+    white-space: nowrap;
 }
 
 .menu li:hover:not([data-class-hover]) {
@@ -1514,19 +1515,20 @@ textarea.input:not([rows]) {
 
 /*SUBMENU CHEVRON/ARROW*/
 .menu li.dropdown > a:after {
-    position: absolute;
-    top: 50%;
-    right: 0;
     content: 'chevron_right';
     font-family: "Material Icons", sans-serif;
-    padding: 0 8px;
-    transform: translateY(-50%);
+    margin: 0 -9px 0 4px;
+    vertical-align: top;
 }
 
 /*DROPDOWN / DROPUP*/
 .dropdown {
     position: relative;
     display: inline-block;
+}
+
+.dropdown:not(.dropdown-visible) {
+    overflow: hidden;
 }
 
 .dropdown-block,
@@ -1539,7 +1541,7 @@ textarea.input:not([rows]) {
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
-    min-width: 160px;
+    max-width: calc(100vw - 24px);
     z-index: 99;
 
     margin: -10px auto;

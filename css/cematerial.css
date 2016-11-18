@@ -877,6 +877,7 @@ body > .layout {
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0);
+    border-radius: inherit;
     content: '';
     height: 100%;
     transition: ease background .3s;

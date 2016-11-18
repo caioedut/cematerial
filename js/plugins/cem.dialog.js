@@ -7,8 +7,6 @@
 +function ($) {
     'use strict';
 
-    var $doc = $(document);
-
     // CLASS
 
     var Dialog = function (el, options) {
@@ -19,9 +17,8 @@
 
         if (this.options.remote) {
             this.$el
-                .find('.dialog-content')
                 .load(this.options.remote, $.proxy(function () {
-                    this.$element.trigger('cem.dialog.loaded');
+                    that.$el.trigger('cem.dialog.loaded');
                 }, this))
         }
 
@@ -35,24 +32,17 @@
         }
 
         if (this.options.keyboard) {
-            $doc.on('keydown', function (e) {
-                var target = $(e.target);
-                if (e.which == 27 && that == Dialog.OPENED[Dialog.OPENED.length - 1]) {
-                    that.hide(target);
-                }
-            });
+            this.$el.addClass('dialog-keyboard');
         }
     };
 
-    Dialog.VERSION = '0.1.1';
+    Dialog.VERSION = '0.1.2';
 
     Dialog.DEFAULTS = {
         autoclose: true,
         focus: false,
         keyboard: true
     };
-
-    Dialog.OPENED = [];
 
     Dialog.prototype.toggle = function (_relatedTarget) {
         return this.$el.hasClass('dialog-visible') ? this.hide() : this.show(_relatedTarget);
@@ -72,12 +62,6 @@
             this.$el.find(this.options.focus).focus();
         }
 
-        // Add to Dialog.OPENED
-        var last = Dialog.OPENED[Dialog.OPENED.length - 1];
-        if (this != last) {
-            Dialog.OPENED.push(this);
-        }
-
         e = $.Event('cem.dialog.show', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
     };
@@ -90,12 +74,6 @@
 
         // Hide dialog
         this.$el.removeClass('dialog-visible');
-
-        // Remove from Dialog.OPENED
-        var last = Dialog.OPENED[Dialog.OPENED.length - 1];
-        if (this == last) {
-            Dialog.OPENED.pop();
-        }
 
         e = $.Event('cem.dialog.hide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
@@ -125,13 +103,22 @@
     $.fn.dialog.Constructor = Dialog;
 
     // DIALOG - DATA API
-    $doc.on('click', '[data-toggle="dialog"]', function (e) {
-        var $this = $(this);
-        var $target = CEMaterial.getTarget($this, '.dialog');
+    $(document)
+        .on('click', '[data-toggle="dialog"]', function (e) {
+            var $this = $(this);
+            var $target = CEMaterial.getTarget($this, '.dialog');
 
-        $this.is('a') ? e.preventDefault() : '';
+            $this.is('a') ? e.preventDefault() : '';
 
-        Plugin.call($target, 'toggle', this);
-    });
+            Plugin.call($target, 'toggle', this);
+        })
+        .on('keydown', function (e) {
+            // Escape Key
+            if (e.which == 27) {
+                var $target = $('.dialog-visible').last();
+                Plugin.call($target, 'hide');
+            }
+        })
+    ;
 
 }(jQuery);

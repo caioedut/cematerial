@@ -741,27 +741,6 @@ body > .layout {
 
 /*BASE LAYOUT END*/
 
-/*WAVES*/
-.waves {
-    position: relative;
-    overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
-}
-
-.waves-body {
-    position: absolute;
-
-    border-radius: 50% !important;
-    background-color: #fff;
-    opacity: .3;
-
-    height: 1px;
-    width: 1px;
-
-    transform: translate(-50%, -50%);
-    transition: height ease-out .5s, width ease-out .5s, opacity ease-out .3s;
-}
-
 /*BUTTONS*/
 .btn {
     position: relative;

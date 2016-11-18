@@ -921,7 +921,7 @@ body > .layout {
 
 /*GLOBAL FLEXBOX */
 .layout,
-.dialog-content,
+.dialog,
 .card,
 .flex {
     display: flex !important;
@@ -951,40 +951,59 @@ body > .layout {
 /*DIALOGS*/
 .dialog {
     position: fixed;
-    top: 0;
+    top: 50%;
     left: 0;
-    height: 100%;
-    width: 100%;
+    right: 0;
+
+    margin-left: auto;
+    margin-right: auto;
+    transform: translateY(-50%) translateZ(0);
 
     display: flex;
 
-    background-color: rgba(0, 0, 0, .8);
-    padding: 30px;
+    max-height: 92vh;
+    max-width: 92vw;
+
+    width: -moz-max-content;
+    width: -webkit-max-content;
+    width: max-content;
+
     z-index: 99;
 
-    transition: opacity ease .4s, visibility ease .4s;
+    transition: opacity ease .3s, visibility ease .3s;
     opacity: 0;
     visibility: hidden;
 }
 
 .dialog-visible {
+    transform: translateY(-50%) translateZ(0);
     opacity: 1;
     visibility: visible;
 }
 
-.dialog-content {
-    margin: auto; /* Center flex item*/
-    max-height: 100%;
-    transition: transform ease .3s;
-    width: max-content;
+/*DIALOG BACKDROP*/
+.dialog:after {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) translateZ(0);
+
+    background-color: rgba(0, 0, 0, .8);
+    content: '';
+
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
 }
 
-.dialog:not(.dialog-visible) .dialog-content {
-    transform: scale(.1);
+.dialog-header,
+.dialog-body,
+.dialog-footer {
+    background-color: inherit;
 }
 
 /*DIALOGS AND CARDS CSS*/
-.dialog-content,
+.dialog,
 .card {
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
@@ -1007,13 +1026,13 @@ body > .layout {
     text-align: right;
 }
 
-.dialog-content > :first-child,
+.dialog > :first-child,
 .card > :first-child {
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
 }
 
-.dialog-content > :last-child,
+.dialog > :last-child,
 .card > :last-child {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;

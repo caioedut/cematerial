@@ -832,6 +832,12 @@ body > .layout {
     width: 36px;
 }
 
+.btn-icon .md-icon,
+.btn-float .md-icon,
+.btn-circle .md-icon {
+    top: 0;
+}
+
 .btn-icon.btn-xs,
 .btn-float.btn-xs,
 .btn-circle.btn-xs {
@@ -962,8 +968,8 @@ body > .layout {
 
     display: flex;
 
-    max-height: 92vh;
-    max-width: 92vw;
+    max-height: calc(100vh - 32px);
+    max-width: calc(100vw - 32px);
 
     width: -moz-max-content;
     width: -webkit-max-content;

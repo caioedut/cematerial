@@ -26,7 +26,7 @@
         this.$list.prepend(this.$bar);
     };
 
-    Tabs.VERSION = '0.1.6';
+    Tabs.VERSION = '0.1.7';
 
     Tabs.DEFAULTS = {
         swipe: true
@@ -185,6 +185,11 @@
             }
         })
         .on('swipeend', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+            var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
+                return this.scrollWidth > $(this).outerWidth();
+            }).length;
+
             var $el = $(this);
             var $active = $el.find('.tab-visible');
             var $bar = $el.closest('.tabs').find('.tabs-bar');
@@ -192,11 +197,13 @@
             var offset_start = $active.outerWidth() * 0.3;
             var $new;
 
-            if (Math.abs(e.swipeOffsetX) > offset_start) {
-                if (e.swipeOffsetX > 0) {
-                    $new = $active.prev('.tab-content');
-                } else {
-                    $new = $active.next('.tab-content');
+            if (is_horizontal && !is_parent_scrollable) {
+                if (Math.abs(e.swipeOffsetX) > offset_start) {
+                    if (e.swipeOffsetX > 0) {
+                        $new = $active.prev('.tab-content');
+                    } else {
+                        $new = $active.next('.tab-content');
+                    }
                 }
             }
 
@@ -209,6 +216,7 @@
 
             $bar.removeClass('no-transition');
             $active.removeClass('no-transition');
+
         })
     ;
 

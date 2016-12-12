@@ -2765,6 +2765,167 @@ textarea.input:not([rows]) {
     padding: 64px;
 }
 
+/*PADDINGS AND MARGINS*/
+.pad-top-xs {
+    padding-top: 4px;
+}
+
+.pad-top-sm {
+    padding-top: 8px;
+}
+
+.pad-top, .pad-top-md {
+    padding-top: 16px;
+}
+
+.pad-top-lg {
+    padding-top: 32px;
+}
+
+.pad-top-xl {
+    padding-top: 64px;
+}
+
+.pad-bottom-xs {
+    padding-bottom: 4px;
+}
+
+.pad-bottom-sm {
+    padding-bottom: 8px;
+}
+
+.pad-bottom, .pad-bottom-md {
+    padding-bottom: 16px;
+}
+
+.pad-bottom-lg {
+    padding-bottom: 32px;
+}
+
+.pad-bottom-xl {
+    padding-bottom: 64px;
+}
+
+.pad-left-xs {
+    padding-left: 4px;
+}
+
+.pad-left-sm {
+    padding-left: 8px;
+}
+
+.pad-left, .pad-left-md {
+    padding-left: 16px;
+}
+
+.pad-left-lg {
+    padding-left: 32px;
+}
+
+.pad-left-xl {
+    padding-left: 64px;
+}
+
+.pad-right-xs {
+    padding-right: 4px;
+}
+
+.pad-right-sm {
+    padding-right: 8px;
+}
+
+.pad-right, .pad-right-md {
+    padding-right: 16px;
+}
+
+.pad-right-lg {
+    padding-right: 32px;
+}
+
+.pad-right-xl {
+    padding-right: 64px;
+}
+
+.mgn-top-xs {
+    margin-top: 4px;
+}
+
+.mgn-top-sm {
+    margin-top: 8px;
+}
+
+.mgn-top, .mgn-top-md {
+    margin-top: 16px;
+}
+
+.mgn-top-lg {
+    margin-top: 32px;
+}
+
+.mgn-top-xl {
+    margin-top: 64px;
+}
+
+.mgn-bottom-xs {
+    margin-bottom: 4px;
+}
+
+.mgn-bottom-sm {
+    margin-bottom: 8px;
+}
+
+.mgn-bottom, .mgn-bottom-md {
+    margin-bottom: 16px;
+}
+
+.mgn-bottom-lg {
+    margin-bottom: 32px;
+}
+
+.mgn-bottom-xl {
+    margin-bottom: 64px;
+}
+
+.mgn-left-xs {
+    margin-left: 4px;
+}
+
+.mgn-left-sm {
+    margin-left: 8px;
+}
+
+.mgn-left, .mgn-left-md {
+    margin-left: 16px;
+}
+
+.mgn-left-lg {
+    margin-left: 32px;
+}
+
+.mgn-left-xl {
+    margin-left: 64px;
+}
+
+.mgn-right-xs {
+    margin-right: 4px;
+}
+
+.mgn-right-sm {
+    margin-right: 8px;
+}
+
+.mgn-right, .mgn-right-md {
+    margin-right: 16px;
+}
+
+.mgn-right-lg {
+    margin-right: 32px;
+}
+
+.mgn-right-xl {
+    margin-right: 64px;
+}
+
 /*TEXT SIZES*/
 .text-xs {
     font-size: .6em !important;

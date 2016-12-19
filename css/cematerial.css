@@ -700,6 +700,10 @@ body > .layout {
     visibility: visible;
 }
 
+.layout-content {
+    height: 100%;
+}
+
 @media (min-width: 1024px) {
     .layout [data-toggle="sidebar"] {
         display: none !important;
@@ -1152,6 +1156,7 @@ table td:last-child {
 /*PANELS / ACCORDION*/
 .panel {
     background-color: #fff;
+    border-color: transparent;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     display: block;
     transition: margin ease .3s;
@@ -1479,7 +1484,7 @@ textarea.input:not([rows]) {
     will-change: top, left;
 }
 
-.tooltip-nowrap {
+.tooltip:not(.tooltip-wrap) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

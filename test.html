@@ -1,0 +1,199 @@
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="css/cematerial.css"/>
+
+    <script type="text/javascript">
+        function extend() {
+            for (var i = 1; i < arguments.length; i++)
+                for (var key in arguments[i])
+                    if (arguments[i].hasOwnProperty(key))
+                        arguments[0][key] = arguments[i][key];
+            return arguments[0];
+        }
+
+        Element.prototype.on = document.on = function (event, child, fn) {
+            fn = fn || child;
+
+            this.addEventListener(event, function (e) {
+                var el = this;
+
+                if (typeof child === 'string') {
+                    var delegate_to = e.target.closest(child);
+                    if (delegate_to) {
+                        el = delegate_to;
+                    } else {
+                        return;
+                    }
+                }
+
+                fn.call(el, e);
+            });
+
+            return this;
+        };
+
+        Element.prototype.closest = function (selector) {
+            selector = typeof selector === 'function' ? selector.call(this, this) : selector;
+            return this.matches(selector) ? this : (this.parentNode === document ? null : this.parentNode.closest(selector));
+        };
+
+        Element.prototype.parents = function (selector) {
+            var parents = [];
+
+            var parent = this.parentNode;
+            while (parent !== document) {
+                if (selector) {
+                    if (parent.matches(selector)) {
+                        parents.push(parent);
+                    }
+                } else {
+                    parents.push(parent);
+                }
+                parent = parent.parentNode;
+            }
+
+            return parents;
+        };
+
+        NodeList.prototype.not = function (node_or_array) {
+            node_or_array = node_or_array instanceof Element ? [node_or_array] : node_or_array;
+
+            var nodes = [];
+
+            this.forEach(function (node) {
+                var add_node = true;
+
+                node_or_array.forEach(function (not_node) {
+                    if (typeof not_node == 'string') {
+                        if (node.matches(not_node)) {
+                            add_node = false;
+                        }
+                    } else {
+                        if (node === not_node) {
+                            add_node = false;
+                        }
+                    }
+                });
+
+                if (add_node) {
+                    nodes.push(node);
+                }
+            });
+
+            return nodes;
+        }
+    </script>
+
+    <script type="text/javascript" src="js/plugins/cem.dialog.no-jquery.js"></script>
+    <script type="text/javascript" src="js/plugins/cem.dropdown.no-jquery.js"></script>
+    <script type="text/javascript" src="js/plugins/cem.panel.no-jquery.js"></script>
+    <script type="text/javascript" src="js/plugins/cem.tooltip.no-jquery.js"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.querySelector('#modal');
+            modal.addEventListener('cem.dialog.beforeShow', function (e) {
+                console.log(e.type);
+            });
+            modal.addEventListener('cem.dialog.show', function (e) {
+                console.log(e.type);
+            });
+            modal.addEventListener('cem.dialog.beforeHide', function (e) {
+                console.log(e.type);
+            });
+            modal.addEventListener('cem.dialog.hide', function (e) {
+                console.log(e.type);
+            });
+        }, false);
+    </script>
+
+    <style type="text/css">
+        .wrapper {
+            box-sizing: border-box;
+            margin: 0 auto;
+            max-width: 1260px;
+            padding: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <button class="btn btn-flat bg-blue-6" data-toggle="dialog" data-target="#modal" data-focus="button">
+        <i class="md-icon">open</i>
+        Open Dialog
+    </button>
+    <div id="modal" class="dialog">
+        <div class="dialog-header">
+            <h1 class="dialog-title">
+                Dialog Title
+            </h1>
+        </div>
+        <div class="dialog-body">
+            Dialog Body
+        </div>
+        <div class="dialog-footer">
+            <button class="btn btn-flat bg-blue-6" data-toggle="dialog">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="dropdown">
+        <button class="btn btn-flat bg-blue-6" data-toggle="dropdown">
+            Show Dropdown
+        </button>
+        <ul class="dropdown-body menu">
+            <li class="dropdown">
+                <a data-toggle="dropdown">
+                    Menu
+                </a>
+                <div class="dropdown-body">
+                    Menu sub menu
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="panel-group">
+        <div class="panel">
+            <div class="panel-header link no-select" data-toggle="panel">
+                <h1 class="title">
+                    Panel toggler
+                </h1>
+            </div>
+            <div class="panel-body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ea obcaecati quisquam reprehenderit sint. Asperiores dolorum est eveniet fuga necessitatibus officia pariatur perspiciatis quam. Alias commodi enim eum iure nesciunt.
+            </div>
+            <div class="panel-footer">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid culpa, cupiditate debitis hic illo incidunt iste labore nam nulla quas quidem quod repudiandae saepe soluta suscipit tenetur ullam voluptas voluptatibus.
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-header link no-select" data-toggle="panel">
+                <h1 class="title">
+                    Panel toggler
+                </h1>
+            </div>
+            <div class="panel-body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ea obcaecati quisquam reprehenderit sint. Asperiores dolorum est eveniet fuga necessitatibus officia pariatur perspiciatis quam. Alias commodi enim eum iure nesciunt.
+            </div>
+            <div class="panel-footer">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid culpa, cupiditate debitis hic illo incidunt iste labore nam nulla quas quidem quod repudiandae saepe soluta suscipit tenetur ullam voluptas voluptatibus.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <button class="btn btn-flat bg-blue-6" data-tooltip="This is my tooltip">
+        Tooltip
+    </button>
+</div>
+
+</body>
+</html>

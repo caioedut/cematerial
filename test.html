@@ -84,13 +84,22 @@
         }
     </script>
 
+    <!--
+    <script type="text/javascript" src="js/plugins/cem.swipe.no-jquery.js"></script>
+    -->
     <script type="text/javascript" src="js/plugins/cem.dialog.no-jquery.js"></script>
     <script type="text/javascript" src="js/plugins/cem.dropdown.no-jquery.js"></script>
     <script type="text/javascript" src="js/plugins/cem.panel.no-jquery.js"></script>
     <script type="text/javascript" src="js/plugins/cem.tooltip.no-jquery.js"></script>
+    <script type="text/javascript" src="js/plugins/cem.tabs.no-jquery.js"></script>
 
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
+
+            document.on('click', '.panel-header', function (e) {
+                console.log(e)
+            });
+
             var modal = document.querySelector('#modal');
             modal.addEventListener('cem.dialog.beforeShow', function (e) {
                 console.log(e.type);
@@ -170,7 +179,9 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ea obcaecati quisquam reprehenderit sint. Asperiores dolorum est eveniet fuga necessitatibus officia pariatur perspiciatis quam. Alias commodi enim eum iure nesciunt.
             </div>
             <div class="panel-footer">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid culpa, cupiditate debitis hic illo incidunt iste labore nam nulla quas quidem quod repudiandae saepe soluta suscipit tenetur ullam voluptas voluptatibus.
+                <button class="btn btn-flat bg-blue-6">
+                    Confirm
+                </button>
             </div>
         </div>
         <div class="panel">
@@ -183,7 +194,9 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ea obcaecati quisquam reprehenderit sint. Asperiores dolorum est eveniet fuga necessitatibus officia pariatur perspiciatis quam. Alias commodi enim eum iure nesciunt.
             </div>
             <div class="panel-footer">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid culpa, cupiditate debitis hic illo incidunt iste labore nam nulla quas quidem quod repudiandae saepe soluta suscipit tenetur ullam voluptas voluptatibus.
+                <button class="btn btn-flat bg-blue-6">
+                    Confirm
+                </button>
             </div>
         </div>
     </div>
@@ -193,6 +206,66 @@
     <button class="btn btn-flat bg-blue-6" data-tooltip="This is my tooltip">
         Tooltip
     </button>
+</div>
+
+<div class="wrapper">
+    <div class="tabs">
+        <nav class="tabs-nav bg-blue-5 border-yellow-5">
+            <a class="waves" data-toggle="tab" data-target="#tab1">
+                Web
+            </a>
+            <a class="waves tab-active" data-toggle="tab" data-target="#tab2">
+                Shopping
+            </a>
+            <a class="waves" data-toggle="tab" data-target="#tab3">
+                Videos
+            </a>
+            <a class="waves" data-toggle="tab" data-target="#tab4">
+                Images
+            </a>
+            <a class="waves" data-toggle="tab" data-target="#tab5">
+                News
+            </a>
+            <a class="waves" data-toggle="tab" data-target="#tab6">
+                More
+            </a>
+        </nav>
+        <div class="tabs-list set-border">
+            <div id="tab1" class="tab-content">
+                <div class="container-md">
+                    Content tab 1
+                </div>
+            </div>
+            <div id="tab2" class="tab-content tab-visible">
+                <div class="container-md">
+                    Content tab 2 <br/>
+                    Content tab 2
+                </div>
+            </div>
+            <div id="tab3" class="tab-content">
+                <div class="container-md">
+                    Content tab 3
+                </div>
+            </div>
+            <div id="tab4" class="tab-content">
+                <div class="container-md">
+                    Content tab 4
+                </div>
+            </div>
+            <div id="tab5" class="tab-content">
+                <div class="container-md">
+                    Content tab 5 <br/>
+                    Content tab 5 <br/>
+                    Content tab 5
+                </div>
+            </div>
+            <div id="tab6" class="tab-content">
+                <div class="container-md">
+                    Content tab 6
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

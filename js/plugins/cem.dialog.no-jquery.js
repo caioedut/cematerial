@@ -44,7 +44,7 @@
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.dialog.beforeShow');
+        e = new Event('cem.dialog.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -62,7 +62,7 @@
         }
 
         // Event Show
-        e = new Event('cem.dialog.show');
+        e = new Event('cem.dialog.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -71,7 +71,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.dialog.beforeHide');
+        e = new Event('cem.dialog.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -79,7 +79,7 @@
         this.el.classList.remove('dialog-visible');
 
         // Event Hide
-        e = new Event('cem.dialog.hide');
+        e = new Event('cem.dialog.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };

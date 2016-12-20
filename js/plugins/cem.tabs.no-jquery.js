@@ -150,10 +150,14 @@
         })
         .on('swipemove', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            // var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
-            //     return this.scrollWidth > $(this).outerWidth();
-            // }).length;
             var is_parent_scrollable = false;
+
+            // Check parent scrollable
+            e.target.parentsUntil(this).forEach(function (node) {
+                if (node.scrollWidth > node.offsetWidth) {
+                    is_parent_scrollable = true;
+                }
+            });
 
             if (is_horizontal && !is_parent_scrollable) {
                 var active = this.querySelector('.tab-visible');
@@ -171,10 +175,14 @@
         })
         .on('swipeend', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            // var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
-            //     return this.scrollWidth > $(this).outerWidth();
-            // }).length;
             var is_parent_scrollable = false;
+
+            // Check parent scrollable
+            e.target.parentsUntil(this).forEach(function (node) {
+                if (node.scrollWidth > node.offsetWidth) {
+                    is_parent_scrollable = true;
+                }
+            });
 
             var active = this.querySelector('.tab-visible');
             var bar = this.closest('.tabs').querySelector('.tabs-bar');

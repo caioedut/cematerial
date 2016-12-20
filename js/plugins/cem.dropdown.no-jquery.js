@@ -31,7 +31,7 @@
     };
 
     Dropdown.prototype.toggle = function (_relatedTarget) {
-        return this.el.classList.contains('dropdown-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('dropdown-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Dropdown.prototype.show = function (_relatedTarget) {

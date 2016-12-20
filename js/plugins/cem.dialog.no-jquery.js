@@ -37,7 +37,7 @@
     };
 
     Dialog.prototype.toggle = function (_relatedTarget) {
-        return this.el.classList.contains('dialog-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('dialog-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Dialog.prototype.show = function (_relatedTarget) {

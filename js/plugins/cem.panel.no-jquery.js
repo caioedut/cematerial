@@ -38,7 +38,7 @@
     };
 
     Panel.prototype.toggle = function (_relatedTarget) {
-        return this.el.classList.contains('panel-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('panel-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Panel.prototype.show = function (_relatedTarget) {

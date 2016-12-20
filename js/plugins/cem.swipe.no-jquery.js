@@ -14,11 +14,11 @@
         .on(swipe_touch ? 'touchstart' : 'mousedown', function (e) {
             document.swipe = {
                 target: e.target,
-                pos_x: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
-                pos_y: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0),
+                pos_x: e.pageX || (e.touches ? e.touches[0].pageX : 0),
+                pos_y: e.pageY || (e.touches ? e.touches[0].pageY : 0),
                 event_params: {
-                    pageX: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
-                    pageY: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0)
+                    pageX: e.pageX || (e.touches ? e.touches[0].pageX : 0),
+                    pageY: e.pageY || (e.touches ? e.touches[0].pageY : 0)
                 },
                 /**
                  * 0 = No swipe
@@ -35,8 +35,8 @@
 
             var data = document.swipe;
 
-            var target_x = e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0);
-            var target_y = e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0);
+            var target_x = e.pageX || (e.touches ? e.touches[0].pageX : 0);
+            var target_y = e.pageY || (e.touches ? e.touches[0].pageY : 0);
 
             data = extend(data, {
                 event_params: {
@@ -69,8 +69,6 @@
                 var evt = new Event('swipestart', {bubbles: true, cancelable: true, composed: true});
                 evt = extend(evt, data.event_params);
                 data.target.dispatchEvent(evt);
-
-                // console.log(evt)
 
                 data = extend(data, {status: 2});
                 document.swipe = data;

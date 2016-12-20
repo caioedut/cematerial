@@ -1,6 +1,18 @@
 <html>
+
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0"/>
+
+    <title>CEMaterial by CaioEduT</title>
+
+    <!-- JQUERY -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <!-- FONTS -->
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+
+    <!-- CEMATERIAL -->
     <link type="text/css" rel="stylesheet" href="css/cematerial.css"/>
 
     <script type="text/javascript">
@@ -37,7 +49,8 @@
 
         Element.prototype.closest = function (selector) {
             selector = typeof selector === 'function' ? selector.call(this, this) : selector;
-            return this.matches(selector) ? this : (this.parentNode === document ? null : this.parentNode.closest(selector));
+            var equals = typeof selector === 'string' ? this.matches(selector) : this === selector;
+            return equals ? this : (this.parentNode === document ? null : this.parentNode.closest(selector));
         };
 
         Element.prototype.parents = function (selector) {
@@ -53,6 +66,30 @@
                     parents.push(parent);
                 }
                 parent = parent.parentNode;
+            }
+
+            return parents;
+        };
+
+        Element.prototype.parentsUntil = function (node_or_selector, include_until) {
+            var parents = [];
+
+            var parent = this.parentNode;
+
+            if (typeof node_or_selector === 'string') {
+                while (parent !== document && !parent.matches(node_or_selector)) {
+                    parents.push(parent);
+                    parent = parent.parentNode;
+                }
+            } else {
+                while (parent !== document && parent !== node_or_selector) {
+                    parents.push(parent);
+                    parent = parent.parentNode;
+                }
+            }
+
+            if (include_until && parent !== document) {
+                parents.push(parent);
             }
 
             return parents;
@@ -91,183 +128,1406 @@
     <script type="text/javascript" src="js/plugins/cem.dialog.no-jquery.js"></script>
     <script type="text/javascript" src="js/plugins/cem.dropdown.no-jquery.js"></script>
     <script type="text/javascript" src="js/plugins/cem.panel.no-jquery.js"></script>
+    <script type="text/javascript" src="js/plugins/cem.sidebar.no-jquery.js"></script>
     <script type="text/javascript" src="js/plugins/cem.tooltip.no-jquery.js"></script>
     <script type="text/javascript" src="js/plugins/cem.tabs.no-jquery.js"></script>
 
+    <!-- WAVES -->
+    <!--
+    <script type="text/javascript" src="js/plugins/waves/waves.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="js/plugins/waves/waves.min.css"/>
+    -->
+
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-
-//            document.on('click', '.panel-header', function (e) {
-//                console.log(e)
-//            });
-
-            var modal = document.querySelector('#modal');
-            modal.addEventListener('cem.dialog.beforeShow', function (e) {
-                console.log(e.type);
-            });
-            modal.addEventListener('cem.dialog.show', function (e) {
-                console.log(e.type);
-            });
-            modal.addEventListener('cem.dialog.beforeHide', function (e) {
-                console.log(e.type);
-            });
-            modal.addEventListener('cem.dialog.hide', function (e) {
-                console.log(e.type);
-            });
-        }, false);
+        jQuery(function ($) {
+            // Event test
+            $('.dialog')
+                .on('cem.dialog.beforeShow', function () {
+                    console.log('Before Show');
+                })
+                .on('cem.dialog.show', function () {
+                    console.log('Show');
+                })
+                .on('cem.dialog.beforeHide', function () {
+                    console.log('Before Hide');
+                })
+                .on('cem.dialog.hide', function () {
+                    console.log('Hide');
+                });
+        });
     </script>
-
-    <style type="text/css">
-        .wrapper {
-            box-sizing: border-box;
-            margin: 0 auto;
-            max-width: 1260px;
-            padding: 24px;
-        }
-    </style>
 </head>
+
 <body>
 
-<div class="wrapper">
-    <button class="btn btn-flat bg-blue-6" data-toggle="dialog" data-target="#modal" data-focus="button">
-        <i class="md-icon">open</i>
-        Open Dialog
-    </button>
-    <div id="modal" class="dialog">
-        <div class="dialog-header">
-            <h1 class="dialog-title">
-                Dialog Title
+<div class="layout">
+    <div id="side-main" class="layout-sidebar">
+
+        <div class="container-md bg-blue-6">
+            <h1 class="display-1">
+                CEMaterial <br/>
+                <a class="subheader link-underline" href="http://caioedut.com/" target="_blank">
+                    caioedut.com
+                </a>
             </h1>
         </div>
-        <div class="dialog-body">
-            Dialog Body
-        </div>
-        <div class="dialog-footer">
-            <button class="btn btn-flat bg-blue-6" data-toggle="dialog">
-                Close
-            </button>
-        </div>
-    </div>
-</div>
 
-<div class="wrapper">
-    <div class="dropdown">
-        <button class="btn btn-flat bg-blue-6" data-toggle="dropdown">
-            Show Dropdown
-        </button>
-        <ul class="dropdown-body menu">
-            <li class="dropdown">
-                <a data-toggle="dropdown">
-                    Menu
-                </a>
-                <div class="dropdown-body">
-                    Menu sub menu
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>
+        <div class="layout-nav">
+            <a href="#buttons">
+                Buttons
+            </a>
+            <a href="#cards">
+                Cards
+            </a>
+            <a href="#chips">
+                Chips
+            </a>
+            <a href="#datatables">
+                Data tables
+            </a>
+            <a href="#dialogs">
+                Dialogs
+            </a>
+            <a href="#dividers">
+                Dividers
+            </a>
+            <a href="#dropdowns">
+                Dropdowns
+            </a>
+            <a href="#expansionpanels">
+                Expansion panels
+            </a>
+            <a href="#gridlists">
+                Grid lists
+            </a>
+            <a href="#layout">
+                Layout
+            </a>
+            <!--
+            <a href="#lists">
+            Lists
+            </a>
+            -->
+            <a href="#menus">
+                Menus
+            </a>
+            <a href="#raise">
+                Raise
+            </a>
+            <!--
+            <a href="#selectioncontrols">
+            Selection controls
+            </a>
+            -->
+            <a href="#tabs">
+                Tabs
+            </a>
+            <a href="#textfields">
+                Text fields
+            </a>
+            <!--
+            <a href="#toolbars">
+            Toolbars
+            </a>
+            -->
+            <a href="#tooltips">
+                Tooltips
+            </a>
+        </div>
 
-<div class="wrapper">
-    <div class="panel-group">
-        <div class="panel">
-            <div class="panel-header link no-select" data-toggle="panel">
-                <h1 class="title">
-                    Panel toggler
-                </h1>
-            </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ea obcaecati quisquam reprehenderit sint. Asperiores dolorum est eveniet fuga necessitatibus officia pariatur perspiciatis quam. Alias commodi enim eum iure nesciunt.
-            </div>
-            <div class="panel-footer">
-                <button class="btn btn-flat bg-blue-6">
-                    Confirm
+    </div>
+    <header class="layout-header bg-blue-6">
+        <div class="grid grid-middle grid-nowrap">
+            <div class="grid-col" data-toggle="sidebar">
+                &nbsp;&nbsp;
+                <button class="btn btn-icon btn-circle bg-blue-6">
+                    <i class="md-icon md-icon-lg">menu</i>
                 </button>
             </div>
-        </div>
-        <div class="panel">
-            <div class="panel-header link no-select" data-toggle="panel">
-                <h1 class="title">
-                    Panel toggler
+            <div class="grid-col container-md">
+                <h1 class="layout-title">
+                    Components
                 </h1>
             </div>
-            <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus ea obcaecati quisquam reprehenderit sint. Asperiores dolorum est eveniet fuga necessitatibus officia pariatur perspiciatis quam. Alias commodi enim eum iure nesciunt.
-            </div>
-            <div class="panel-footer">
-                <button class="btn btn-flat bg-blue-6">
-                    Confirm
-                </button>
-            </div>
         </div>
-    </div>
-</div>
+    </header>
+    <main class="layout-content">
 
-<div class="wrapper">
-    <button class="btn btn-flat bg-blue-6" data-tooltip="This is my tooltip">
-        Tooltip
-    </button>
-</div>
+        <!--<section class="container-lg">-->
+        <!--<h1>Flex Box</h1>-->
+        <!--<div class="grid grid-gutter-md">-->
+        <!--<div class="grid-col xs-col-4">-->
+        <!--<div class="flex raised-md" style="height: 200px;">-->
+        <!--<div class="flex-header title">-->
+        <!--Flex Header-->
+        <!--</div>-->
+        <!--<div class="flex-body">-->
+        <!--<p>Flex Body</p>-->
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
+        <!--</div>-->
+        <!--<div class="flex-footer">-->
+        <!--Flex Footer-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="grid-col xs-col-4">-->
+        <!--<div class="flex raised-md" style="height: 200px;">-->
+        <!--<div class="flex-header title">-->
+        <!--Flex Header-->
+        <!--</div>-->
+        <!--<div class="flex-body">-->
+        <!--<p>Flex Body</p>-->
+        <!--</div>-->
+        <!--<div class="flex-footer">-->
+        <!--Flex Footer-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="grid-col xs-col-4">-->
+        <!--<div class="flex raised-md" style="height: 200px;">-->
+        <!--<div class="flex-header title">-->
+        <!--Flex Header<br/>-->
+        <!--Flex Header-->
+        <!--</div>-->
+        <!--<div class="flex-body">-->
+        <!--<p>Flex Body</p>-->
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
+        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
+        <!--</div>-->
+        <!--<div class="flex-footer">-->
+        <!--Flex Footer<br/>-->
+        <!--Flex Footer-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</section>-->
 
-<div class="wrapper">
-    <div class="tabs">
-        <nav class="tabs-nav bg-blue-5 border-yellow-5">
-            <a class="waves" data-toggle="tab" data-target="#tab1">
-                Web
-            </a>
-            <a class="waves tab-active" data-toggle="tab" data-target="#tab2">
-                Shopping
-            </a>
-            <a class="waves" data-toggle="tab" data-target="#tab3">
-                Videos
-            </a>
-            <a class="waves" data-toggle="tab" data-target="#tab4">
-                Images
-            </a>
-            <a class="waves" data-toggle="tab" data-target="#tab5">
-                News
-            </a>
-            <a class="waves" data-toggle="tab" data-target="#tab6">
-                More
-            </a>
-        </nav>
-        <div class="tabs-list set-border">
-            <div id="tab1" class="tab-content">
-                <div class="container-md">
-                    Content tab 1
+        <section class="container-lg xs-hidden sm-hidden md-hidden lg-hidden xl-hidden">
+            <h1>Draggable</h1>
+            <div class="grid raised-xs draggable">
+                <div class="grid-col container-md xs-col-12 set-border">
+                    <div class="grid grid-middle">
+                        <div class="grid-col col-fill">
+                            Element 1
+                        </div>
+                        <div class="grid-col">
+                            <button class="btn btn-circle" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-md xs-col-12 set-border">
+                    <div class="grid grid-middle">
+                        <div class="grid-col col-fill">
+                            Element 2
+                        </div>
+                        <div class="grid-col">
+                            <button class="btn btn-circle" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-md xs-col-12 set-border">
+                    <div class="grid grid-middle">
+                        <div class="grid-col col-fill">
+                            Element 3
+                        </div>
+                        <div class="grid-col">
+                            <button class="btn btn-circle" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="tab2" class="tab-content tab-visible">
-                <div class="container-md">
-                    Content tab 2 <br/>
-                    Content tab 2
+        </section>
+
+        <section id="buttons" class="container-lg">
+            <h1>Buttons</h1>
+            <div class="grid grid-gutter">
+                <div class="grid-col container-md">
+                    <h2>Normal</h2>
+
+                    <div class="grid grid-gutter-xs grid-middle">
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm bg-teal-5 waves btn-xs" type="button">
+                                X-Small
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm bg-teal-5 waves btn-sm" type="button">
+                                Small
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm bg-teal-5 waves" type="button">
+                                Normal
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm bg-teal-5 waves btn-lg" type="button">
+                                Large
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm bg-teal-5 waves btn-xl" type="button">
+                                X-Large
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm bg-teal-5 waves btn-disabled" type="button">
+                                Disabled
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm btn-icon bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm btn-flat bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                                Icon Text
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm waves waves-dark btn-flat text-teal-5" type="button">
+                                Flat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-md">
+                    <h2>Circle</h2>
+
+                    <div class="grid grid-gutter-xs grid-middle">
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm btn-xs btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm btn-sm btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm btn-md btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm btn-lg btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <button class="btn raised-sm btn-xl btn-circle bg-teal-5 waves" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="tab3" class="tab-content">
-                <div class="container-md">
-                    Content tab 3
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="cards" class="container-lg">
+            <h1>Cards / Colors</h1>
+
+            <div class="grid grid-gutter-md">
+                <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 container-md">
+                    <div class="card">
+                        <div class="card-body no-padding">
+                            <div class="media-container-sm">
+                                <img class="media-cover" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                            </div>
+                        </div>
+                        <div class="card-header bg-grey-6 relative">
+                            <h3 class="card-title">
+                                Header
+                            </h3>
+                            <button class="btn btn-float btn-xl waves right top bg-grey-8" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="card-body bg-grey-7">
+                            Lorem ipsum dolor sit amet
+                        </div>
+                        <div class="card-body container-md">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dignissimos doloremque earum eius est fugiat id inventore itaque.
+                        </div>
+                        <div class="divider-horizontal"></div>
+                        <div class="card-footer">
+                            <button class="btn btn-flat waves waves-dark" type="button">
+                                Button
+                            </button>
+                            <button class="btn btn-flat waves bg-grey-8" type="button">
+                                Button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 container-md">
+                    <div class="card">
+                        <div class="card-body no-padding">
+                            <div class="media-container-sm">
+                                <img class="media-cover" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                            </div>
+                        </div>
+                        <div class="card-header bg-red-6 relative">
+                            <h3 class="card-title">
+                                Header
+                            </h3>
+                            <button class="btn btn-float btn-xl waves right top bg-red-8" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="card-body bg-red-7">
+                            Lorem ipsum dolor sit amet
+                        </div>
+                        <div class="card-body container-md">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dignissimos doloremque earum eius est fugiat id inventore itaque.
+                        </div>
+                        <div class="divider-horizontal"></div>
+                        <div class="card-footer">
+                            <button class="btn btn-flat waves waves-dark" type="button">
+                                Button
+                            </button>
+                            <button class="btn btn-flat waves bg-red-8" type="button">
+                                Button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 container-md">
+                    <div class="card">
+                        <div class="card-body no-padding">
+                            <div class="media-container-sm">
+                                <img class="media-cover" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                            </div>
+                        </div>
+                        <div class="card-header bg-green-6 relative">
+                            <h3 class="card-title">
+                                Header
+                            </h3>
+                            <button class="btn btn-float btn-xl waves right top bg-green-8" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="card-body bg-green-7">
+                            Lorem ipsum dolor sit amet
+                        </div>
+                        <div class="card-body container-md">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dignissimos doloremque earum eius est fugiat id inventore itaque.
+                        </div>
+                        <div class="divider-horizontal"></div>
+                        <div class="card-footer">
+                            <button class="btn btn-flat waves waves-dark" type="button">
+                                Button
+                            </button>
+                            <button class="btn btn-flat waves bg-green-8" type="button">
+                                Button
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 container-md">
+                    <div class="card">
+                        <div class="card-body no-padding">
+                            <div class="media-container-sm">
+                                <img class="media-cover" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                            </div>
+                        </div>
+                        <div class="card-header bg-blue-6 relative">
+                            <h3 class="card-title">
+                                Header
+                            </h3>
+                            <button class="btn btn-float btn-xl waves right top bg-blue-8" type="button">
+                                <i class="md-icon">add</i>
+                            </button>
+                        </div>
+                        <div class="card-body bg-blue-7">
+                            Lorem ipsum dolor sit amet
+                        </div>
+                        <div class="card-body container-md">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, dignissimos doloremque earum eius est fugiat id inventore itaque.
+                        </div>
+                        <div class="divider-horizontal"></div>
+                        <div class="card-footer">
+                            <button class="btn btn-flat waves waves-dark" type="button">
+                                Button
+                            </button>
+                            <button class="btn btn-flat waves bg-blue-8" type="button">
+                                Button
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="tab4" class="tab-content">
-                <div class="container-md">
-                    Content tab 4
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="chips" class="container-lg">
+            <h1>Chips</h1>
+
+            <div class="grid grid-gutter">
+                <div class="grid-col">
+                    <div class="chips">
+                        Basic chips
+                    </div>
+                </div>
+                <div class="grid-col">
+                    <div class="chips">
+                        <img src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                        Image chips
+                    </div>
+                </div>
+                <div class="grid-col">
+                    <div class="chips">
+                        <img src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                        Icon chips
+                        <i class="md-icon">close</i>
+                    </div>
                 </div>
             </div>
-            <div id="tab5" class="tab-content">
-                <div class="container-md">
-                    Content tab 5 <br/>
-                    Content tab 5 <br/>
-                    Content tab 5
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="datatables" class="container-lg">
+            <h1>Data tables</h1>
+
+            <div class="table-responsive">
+                <table class="table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input class="input" type="checkbox" data-toggle="table"/>
+                        </th>
+                        <th class="table-content">Dessert (100g serving)</th>
+                        <th>Calories</th>
+                        <th>Fat (g)</th>
+                        <th>Carbs (g)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input class="input" type="checkbox"/>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <div data-toggle="dropdown">
+                                    Frozen yogurt (click)
+                                </div>
+                                <div class="dropdown-body dropdown-sm top left">
+                                    <div class="container-md">
+                                        <input class="input text-md input-blue-6" type="text" value="Frozen yogurt"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="xs-text-right">159</td>
+                        <td class="xs-text-right">6.0</td>
+                        <td class="xs-text-right">24</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="input" type="checkbox"/>
+                        </td>
+                        <td>
+                            <input class="no-style set-block" type="text" value="Ice cream sandwich (click)"/>
+                        </td>
+                        <td class="xs-text-right">237</td>
+                        <td class="xs-text-right">9.0</td>
+                        <td class="xs-text-right">37</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="input" type="checkbox"/>
+                        </td>
+                        <td>Eclair</td>
+                        <td class="xs-text-right">262</td>
+                        <td class="xs-text-right">16.0</td>
+                        <td class="xs-text-right">24</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="dividers" class="container-lg">
+            <h1>Dividers</h1>
+            <h2>Divider Horizontal</h2>
+            <div class="grid grid-gutter">
+                <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                    <div class="divider-horizontal container-sm"></div>
+                </div>
+                <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                    <div class="divider-horizontal container-sm border-red-5"></div>
+                </div>
+                <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                    <div class="divider-horizontal container-sm border-green-5"></div>
+                </div>
+                <div class="grid-col xs-col-12 md-col-6 lg-col-3">
+                    <div class="divider-horizontal container-sm border-blue-5"></div>
                 </div>
             </div>
-            <div id="tab6" class="tab-content">
-                <div class="container-md">
-                    Content tab 6
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="dialogs" class="container-lg">
+            <h1>Modal Dialog</h1>
+
+            <div class="grid grid-gutter-xs">
+                <div class="grid-col container-xs">
+                    <a class="btn waves bg-blue-5" data-toggle="dialog" data-target="#myDialog">
+                        Open Dialog
+                    </a>
+                </div>
+                <div class="grid-col container-xs">
+                    <a class="btn waves bg-blue-5" data-toggle="dialog" data-target="#myDialog2">
+                        Open Second Dialog
+                    </a>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="dialog" id="myDialog">
+                <div class="dialog-header">
+                    <div class="grid grid-justify grid-nowrap">
+                        <h1 class="dialog-title">
+                            My first dialog
+                        </h1>
+                        <a class="btn btn-icon btn-fit-md waves waves-dark btn-sm" data-toggle="dialog">
+                            <i class="md-icon">close</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="dialog-body">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Aliquam erat volutpat. Nunc auctor. Mauris pretium quam et urna. Fusce nibh. Duis risus. Curabitur sagittis hendrerit ante. Aliquam erat volutpat.</p>
+                    <p>
+                        <a class="btn waves bg-blue-5" data-toggle="dialog" data-target="#myDialog2">
+                            Open Second Dialog
+                        </a>
+                    </p>
+                    <p>Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Duis condimentum augue id magna semper rutrum. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Fusce consectetuer risus a nunc. Aliquam ornare wisi eu metus. Integer pellentesque quam vel velit. Duis pulvinar.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Aenean vel massa quis mauris vehicula lacinia. Quisque tincidunt scelerisque libero. Maecenas libero. Etiam dictum tincidunt diam. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Suspendisse nisl. Sed convallis magna eu sem. Cras pede libero, dapibus nec, pretium sit amet, tempor quis, urna.</p>
+                    <p>Nam quis nulla. Integer malesuada. In in enim a arcu imperdiet malesuada. Sed vel lectus. Donec odio urna, tempus molestie, porttitor ut, iaculis quis, sem. Phasellus rhoncus. Aenean id metus id velit ullamcorper pulvinar. Vestibulum fermentum tortor id mi. Pellentesque ipsum. Nulla non arcu lacinia neque faucibus fringilla. Nulla non lectus sed nisl molestie malesuada. Proin in tellus sit amet nibh dignissim sagittis. Vivamus luctus egestas leo. Maecenas sollicitudin. Nullam rhoncus aliquam metus. Etiam egestas wisi a erat.</p>
+                    <p>Morbi leo mi, nonummy eget, tristique non, rhoncus non, leo. Nullam faucibus mi quis velit. Integer in sapien. Fusce tellus odio, dapibus id, fermentum quis, suscipit id, erat. Fusce aliquam vestibulum ipsum. Aliquam erat volutpat. Pellentesque sapien. Cras elementum. Nulla pulvinar eleifend sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque porta. Vivamus porttitor turpis ac leo.</p>
+
+                    <p>Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Duis condimentum augue id magna semper rutrum. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Fusce consectetuer risus a nunc. Aliquam ornare wisi eu metus. Integer pellentesque quam vel velit. Duis pulvinar.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Aenean vel massa quis mauris vehicula lacinia. Quisque tincidunt scelerisque libero. Maecenas libero. Etiam dictum tincidunt diam. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Suspendisse nisl. Sed convallis magna eu sem. Cras pede libero, dapibus nec, pretium sit amet, tempor quis, urna.</p>
+                    <p>Nam quis nulla. Integer malesuada. In in enim a arcu imperdiet malesuada. Sed vel lectus. Donec odio urna, tempus molestie, porttitor ut, iaculis quis, sem. Phasellus rhoncus. Aenean id metus id velit ullamcorper pulvinar. Vestibulum fermentum tortor id mi. Pellentesque ipsum. Nulla non arcu lacinia neque faucibus fringilla. Nulla non lectus sed nisl molestie malesuada. Proin in tellus sit amet nibh dignissim sagittis. Vivamus luctus egestas leo. Maecenas sollicitudin. Nullam rhoncus aliquam metus. Etiam egestas wisi a erat.</p>
+                    <p>Morbi leo mi, nonummy eget, tristique non, rhoncus non, leo. Nullam faucibus mi quis velit. Integer in sapien. Fusce tellus odio, dapibus id, fermentum quis, suscipit id, erat. Fusce aliquam vestibulum ipsum. Aliquam erat volutpat. Pellentesque sapien. Cras elementum. Nulla pulvinar eleifend sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque porta. Vivamus porttitor turpis ac leo.</p>
+                </div>
+                <div class="dialog-footer">
+                    <a class="btn btn-flat waves waves-dark" data-toggle="dialog">Cancel</a>
+                    <a class="btn btn-flat waves bg-green-6" data-toggle="dialog">Confirm</a>
+                </div>
+            </div>
+            <div class="dialog" id="myDialog2">
+                <div class="dialog-header">
+                    <div class="grid grid-justify grid-nowrap">
+                        <h1 class="dialog-title">
+                            My second dialog
+                        </h1>
+                        <a class="btn btn-icon btn-fit-md waves waves-dark btn-sm" data-toggle="dialog">
+                            <i class="md-icon">close</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="dialog-body">
+                    <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque molestias nisi obcaecati officia voluptatum! Blanditiis dolores facere ipsam magni saepe sit! Corporis debitis dicta earum expedita labore placeat quisquam vel!</p>-->
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+                <div class="dialog-footer">
+                    <a class="btn btn-flat waves waves-dark" data-toggle="dialog">Cancel</a>
+                    <a class="btn btn-flat waves bg-green-6" data-toggle="dialog">Confirm</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="dropdowns" class="container-lg">
+            <h1>Dropdown / Dropup</h1>
+
+            <div class="grid grid-vertical grid-gutter-xs">
+                <div class="grid-col container-xs">
+                    <div class="grid grid-gutter-xs">
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn btn-flat bg-purple-5" data-toggle="dropdown">
+                                    Dropdown 1
+                                    <i class="md-icon">expand_more</i>
+                                </a>
+                                <div class="dropdown-body dropdown-sm">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn btn-flat bg-purple-5" data-toggle="dropdown">
+                                    Dropup 1
+                                    <i class="md-icon">expand_less</i>
+                                </a>
+                                <div class="dropdown-body dropdown-sm bottom-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-xs">
+                    <div class="grid grid-gutter-xs">
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn btn-flat bg-purple-5" data-toggle="dropdown">
+                                    Dropdown 2
+                                    <i class="md-icon">chevron_right</i>
+                                </a>
+                                <div class="dropdown-body dropdown-sm top left-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn btn-flat bg-purple-5" data-toggle="dropdown">
+                                    <i class="md-icon">chevron_left</i>
+                                    Dropdown 3
+                                </a>
+                                <div class="dropdown-body dropdown-sm top right-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-xs">
+                    <div class="grid grid-gutter-xs">
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn btn-flat bg-purple-5" data-toggle="dropdown">
+                                    Dropup 2
+                                    <i class="md-icon">chevron_right</i>
+                                </a>
+                                <div class="dropdown-body dropdown-sm bottom left-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-col container-xs">
+                            <div class="dropdown">
+                                <a class="btn btn-flat bg-purple-5" data-toggle="dropdown">
+                                    <i class="md-icon">chevron_left</i>
+                                    Dropup 3
+                                </a>
+                                <div class="dropdown-body dropdown-sm bottom right-inverse">
+                                    <div class="container">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="expansionpanels" class="container-lg">
+            <h1>
+                Expansion Panels
+                <small>(Collapse / Accordion)</small>
+            </h1>
+
+            <div class="container-lg bg-grey-2">
+                <div class="panel-group">
+                    <div class="panel">
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-4">
+                                    Trip Name
+                                </div>
+                                <div class="grid-col xs-col-8 sm-visible">
+                                    Caribean cruise
+                                </div>
+                            </div>
+                        </a>
+                        <div class="panel-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Si quae forte-possumus. Explanetur igitur. At ego quem huic anteponam non audeo dicere; Quia dolori non voluptas contraria est, sed doloris privatio. Urgent tamen et nihil remittunt. Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. </p>
+                        </div>
+                    </div>
+                    <div class="panel panel-margin">
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-12 sm-col-4">
+                                    Location
+                                </div>
+                                <div class="grid-col xs-col-8 sm-visible">
+                                    Barbados
+                                </div>
+                            </div>
+                        </a>
+                        <div class="panel-body">
+                            <p>Ita graviter et severe voluptatem secrevit a bono. Ut in geometria, prima si dederis, danda sunt omnia. Itaque nostrum est-quod nostrum dico, artis est-ad ea principia, quae accepimus. Et nemo nimium beatus est; Ne discipulum abducam, times. At, si voluptas esset bonum, desideraret. Hoc est non dividere, sed frangere. Satisne ergo pudori consulat, si quis sine teste libidini pareat? Beatus autem esse in maximarum rerum timore nemo potest. Nihil enim iam habes, quod ad corpus referas; </p>
+                            <p>Atqui reperies, inquit, in hoc quidem pertinacem; Duo enim genera quae erant, fecit tria. Sed haec nihil sane ad rem; Eadem nunc mea adversum te oratio est. Non igitur potestis voluptate omnia dirigentes aut tueri aut retinere virtutem. Id Sextilius factum negabat. Sic enim censent, oportunitatis esse beate vivere. Qui ita affectus, beatum esse numquam probabis; Et certamen honestum et disputatio splendida! omnis est enim de virtutis dignitate contentio. </p>
+                            <p>Quamquam ab iis philosophiam et omnes ingenuas disciplinas habemus; Sic, et quidem diligentius saepiusque ista loquemur inter nos agemusque communiter. Si enim ita est, vide ne facinus facias, cum mori suadeas. Aliena dixit in physicis nec ea ipsa, quae tibi probarentur; Tum Quintus: Est plane, Piso, ut dicis, inquit. Potius inflammat, ut coercendi magis quam dedocendi esse videantur. </p>
+                            <p>Iam enim adesse poterit. Dicimus aliquem hilare vivere; At certe gravius. Quod iam a me expectare noli. Cur igitur easdem res, inquam, Peripateticis dicentibus verbum nullum est, quod non intellegatur? Erat enim Polemonis. Nondum autem explanatum satis, erat, quid maxime natura vellet. Apud ceteros autem philosophos, qui quaesivit aliquid, tacet; </p>
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-flat" type="button">
+                                Cancel
+                            </button>
+                            <button class="btn btn-flat text-blue-5" type="button">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel panel-popout">
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-12 sm-col-4">
+                                    Start and end dates
+                                </div>
+                                <div class="grid-col xs-col-4 xs-hidden">
+                                    <span class="text-grey-6">Start date:</span> Feb 29, 2016
+                                </div>
+                                <div class="grid-col xs-col-4 xs-hidden">
+                                    <span class="text-grey-6">End date:</span> Not set
+                                </div>
+                            </div>
+                        </a>
+                        <div class="panel-body">
+                            <p>Nam de isto magna dissensio est. Esse enim quam vellet iniquus iustus poterat inpune. Nemo nostrum istius generis asotos iucunde putat vivere. Res enim se praeclare habebat, et quidem in utraque parte. Saepe ab Aristotele, a Theophrasto mirabiliter est laudata per se ipsa rerum scientia; At quicum ioca seria, ut dicitur, quicum arcana, quicum occulta omnia? </p>
+                            <p>Sint modo partes vitae beatae. Sed tamen est aliquid, quod nobis non liceat, liceat illis. Quo modo autem optimum, si bonum praeterea nullum est? Eadem nunc mea adversum te oratio est. Saepe ab Aristotele, a Theophrasto mirabiliter est laudata per se ipsa rerum scientia; </p>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-12 sm-col-4">
+                                    Carrier
+                                </div>
+                                <div class="grid-col xs-col-8 xs-hidden">
+                                    The best cruise line
+                                </div>
+                            </div>
+                        </a>
+                        <div class="panel-body">
+                            <p>Ut aliquid scire se gaudeant? Itaque rursus eadem ratione, qua sum paulo ante usus, haerebitis. Quae similitudo in genere etiam humano apparet. Quod cum dixissent, ille contra. Idemne potest esse dies saepius, qui semel fuit? Deinde disputat, quod cuiusque generis animantium statui deceat extremum. Itaque primos congressus copulationesque et consuetudinum instituendarum voluntates fieri propter voluptatem; Nemo nostrum istius generis asotos iucunde putat vivere. </p>
+                            <p>Immo alio genere; Inde sermone vario sex illa a Dipylo stadia confecimus. Ergo id est convenienter naturae vivere, a natura discedere. Idemne, quod iucunde? Sed quot homines, tot sententiae; Si qua in iis corrigere voluit, deteriora fecit. Ea possunt paria non esse. Portenta haec esse dicit, neque ea ratione ullo modo posse vivi; Sed quot homines, tot sententiae; Aliter enim explicari, quod quaeritur, non potest. Sed tempus est, si videtur, et recta quidem ad me. </p>
+                            <p>Proclivi currit oratio. Nec vero sum nescius esse utilitatem in historia, non modo voluptatem. Nonne videmus quanta perturbatio rerum omnium consequatur, quanta confusio? Est enim effectrix multarum et magnarum voluptatum. Sed quae tandem ista ratio est? De illis, cum volemus. Claudii libidini, qui tum erat summo ne imperio, dederetur. Illa argumenta propria videamus, cur omnia sint paria peccata. </p>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <a class="panel-header" data-toggle="panel">
+                            <div class="grid grid-middle">
+                                <div class="grid-col xs-col-12 sm-col-4">
+                                    Meal preferences
+                                    <br/>
+                                    <small>Optional</small>
+                                </div>
+                                <div class="grid-col xs-col-8 xs-hidden">
+                                    Vegetarian
+                                </div>
+                            </div>
+                        </a>
+                        <div class="panel-body">
+                            <p>Virtutis, magnitudinis animi, patientiae, fortitudinis fomentis dolor mitigari solet. Tubulo putas dicere? Non est igitur voluptas bonum. Illa videamus, quae a te de amicitia dicta sunt. Summae mihi videtur inscitiae. Sed emolumenta communia esse dicuntur, recte autem facta et peccata non habentur communia. Ut enim consuetudo loquitur, id solum dicitur honestum, quod est populari fama gloriosum. Quid ergo? </p>
+                            <p>Tum Torquatus: Prorsus, inquit, assentior; Illi enim inter se dissentiunt. Si de re disceptari oportet, nulla mihi tecum, Cato, potest esse dissensio. Aliud igitur esse censet gaudere, aliud non dolere. Quae diligentissime contra Aristonem dicuntur a Chryippo. Facile est hoc cernere in primis puerorum aetatulis. </p>
+                            <p>Scaevola tribunus plebis ferret ad plebem vellentne de ea re quaeri. Duo enim genera quae erant, fecit tria. Easdemne res? Ergo hoc quidem apparet, nos ad agendum esse natos. Scio enim esse quosdam, qui quavis lingua philosophari possint; Cum salvum esse flentes sui respondissent, rogavit essentne fusi hostes. Cur fortior sit, si illud, quod tute concedis, asperum et vix ferendum putabit? Omnes enim iucundum motum, quo sensus hilaretur. Nunc haec primum fortasse audientis servire debemus. Id enim natura desiderat. </p>
+                            <p>Quodcumque in mentem incideret, et quodcumque tamquam occurreret. Duae sunt enim res quoque, ne tu verba solum putes. Restatis igitur vos; Negabat igitur ullam esse artem, quae ipsa a se proficisceretur; Quod idem cum vestri faciant, non satis magnam tribuunt inventoribus gratiam. Deinde qui fit, ut ego nesciam, sciant omnes, quicumque Epicurei esse voluerunt? Quod si ita se habeat, non possit beatam praestare vitam sapientia. At modo dixeras nihil in istis rebus esse, quod interesset. At modo dixeras nihil in istis rebus esse, quod interesset. Falli igitur possumus. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="gridlists" class="container-lg">
+            <h1>Grid lists</h1>
+
+            <h2>Breakpoints</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Extra small</th>
+                        <th>Small</th>
+                        <th>Medium</th>
+                        <th>Large</th>
+                        <th>Extra large</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Class</th>
+                        <td>xs-col-</td>
+                        <td>sm-col-</td>
+                        <td>md-col-</td>
+                        <td>lg-col-</td>
+                        <td>xl-col-</td>
+                    </tr>
+                    <tr>
+                        <th>Point break</th>
+                        <td>All</td>
+                        <td> >= 600px</td>
+                        <td> >= 1024px</td>
+                        <td> >= 1440px</td>
+                        <td> >= 1920px</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Usage</h2>
+            <div class="grid xs-text-center">
+                <div class="md-col-1 bg-grey-1 set-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-1</b><br/>(lg-col-1)<br/>(xl-col-1)
+                </div>
+                <div class="md-col-2 bg-grey-2 set-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-2</b><br/>(lg-col-2)<br/>(xl-col-2)
+                </div>
+                <div class="md-col-3 bg-grey-1 set-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-3</b><br/>(lg-col-3)<br/>(xl-col-3)
+                </div>
+                <div class="md-col-6 bg-grey-2 set-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-6</b><br/>(lg-col-6)<br/>(xl-col-6)
+                </div>
+                <div class="md-col-3 bg-grey-1 set-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-3</b><br/>(lg-col-3)<br/>(xl-col-3)
+                </div>
+                <div class="md-col-4 bg-grey-2 set-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-4</b><br/>(lg-col-4)<br/>(xl-col-4)
+                </div>
+                <div class="md-col-5 bg-grey-1 set-border container-md">
+                    (xs-col-12)<br/>(sm-col-12)<br/><b>md-col-5</b><br/>(lg-col-5)<br/>(xl-col-5)
+                </div>
+            </div>
+
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="layout" class="container-lg" style="padding-top: 0; padding-left: 0; padding-right: 0;">
+            <h1 class="container-lg" style="padding-bottom: 0">
+                Layout
+            </h1>
+            <div class="grid grid-center">
+                <div class="grid-col xs-col-12 md-col-10 lg-col-8 xl-col-6 container bg-grey-3">
+                    <div class="layout set-border set-round bg-white raised-md" style="height: 460px;">
+                        <div id="side-example" class="layout-sidebar">
+
+                            <div class="layout-account">
+                                <img class="media-background" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>
+                                <div class="set-overlay container">
+                                    <div class="grid grid-gutter">
+                                        <div class="xs-col-5 sm-col-4">
+                                            <div class="media-container-lg">
+                                                <img class="media-fluid media-cover set-circle" src="http://www.gbchealth.org/wp-content/uploads/2016/03/user-profile-placeholder.png" alt=""/>
+                                            </div>
+                                        </div>
+                                        <a class="xs-col-12 text-white" data-toggle="nav" data-target="#nav-account">
+                                            <div class="grid grid-middle">
+                                                <div class="grid-col">
+                                                    <b>William Ward</b>
+                                                    <br/>
+                                                    william@ward.com
+                                                </div>
+                                                <div class="grid-col col-right">
+                                                    <i class="md-icon">arrow_drop_down</i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="nav-account" class="layout-nav nav-hidden">
+                                <a>
+                                    <i class="md-icon">account_circle</i>
+                                    Profile
+                                </a>
+                                <div class="divider-horizontal container-sm"></div>
+                                <a>
+                                    <i class="md-icon">add</i>
+                                    Add account
+                                </a>
+                                <a>
+                                    <i class="md-icon">settings</i>
+                                    Manage accounts
+                                </a>
+                            </div>
+
+                            <div class="layout-nav">
+                                <a>
+                                    <i class="md-icon">play_circle_filled</i>
+                                    Listen now
+                                </a>
+                                <a>
+                                    <i class="md-icon">library_music</i>
+                                    Music library
+                                </a>
+                                <a>
+                                    <i class="md-icon">shop</i>
+                                    Buy
+                                </a>
+                                <div class="divider-horizontal container-sm"></div>
+                                <a>
+                                    <i class="md-icon">add_circle</i>
+                                    Upload music
+                                </a>
+                                <a>
+                                    <i class="md-icon">settings</i>
+                                    Settings
+                                </a>
+                                <a>
+                                    <i class="md-icon">delete</i>
+                                    Trash
+                                </a>
+                                <a>
+                                    <i class="md-icon">help</i>
+                                    Help & feedback
+                                </a>
+                            </div>
+                        </div>
+                        <div class="layout-header bg-purple-5">
+                            <div class="grid grid-middle grid-nowrap">
+                                <div class="grid-col" data-toggle="sidebar" data-target="#side-example">
+                                    &nbsp;&nbsp;
+                                    <button class="btn btn-icon btn-circle bg-purple-5" type="button">
+                                        <i class="md-icon md-icon-lg">menu</i>
+                                    </button>
+                                </div>
+                                <div class="grid-col container-md">
+                                    <h1 class="layout-title">
+                                        Layout Header
+                                    </h1>
+                                </div>
+                                <div class="grid-col col-right">
+                                    <button class="btn btn-icon btn-circle bg-purple-5" type="button">
+                                        <i class="md-icon md-icon-lg">search</i>
+                                    </button>
+                                    &nbsp;&nbsp;
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layout-content container-md">
+                            <h3 class="title">Layout Content</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi gravida libero nec velit. Morbi scelerisque luctus velit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Proin mattis lacinia justo. Vestibulum facilisis auctor urna. Aliquam in lorem sit amet leo accumsan lacinia. Integer rutrum, orci vestibulum ullamcorper ultricies, lacus quam ultricies odio, vitae placerat pede sem sit amet enim. Phasellus et lorem id felis nonummy placerat. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Aenean vel massa quis mauris vehicula lacinia. Quisque tincidunt scelerisque libero. Maecenas libero. Etiam dictum tincidunt diam. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Suspendisse nisl. Sed convallis magna eu sem. Cras pede libero, dapibus nec, pretium sit amet, tempor quis, urna.</p>
+                            <p>Praesent in mauris eu tortor porttitor accumsan. Mauris suscipit, ligula sit amet pharetra semper, nibh ante cursus purus, vel sagittis velit mauris vel metus. Aenean fermentum risus id tortor. Integer imperdiet lectus quis justo. Integer tempor. Vivamus ac urna vel leo pretium faucibus. Mauris elementum mauris vitae tortor. In dapibus augue non sapien. Aliquam ante. Curabitur bibendum justo non orci.</p>
+                            <p>Praesent in mauris eu tortor porttitor accumsan. Mauris suscipit, ligula sit amet pharetra semper, nibh ante cursus purus, vel sagittis velit mauris vel metus. Aenean fermentum risus id tortor. Integer imperdiet lectus quis justo. Integer tempor. Vivamus ac urna vel leo pretium faucibus. Mauris elementum mauris vitae tortor. In dapibus augue non sapien. Aliquam ante. Curabitur bibendum justo non orci.</p>
+                            <p>Maecenas ipsum velit, consectetuer eu, lobortis ut, dictum at, dui. In rutrum. Sed ac dolor sit amet purus malesuada congue. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Suspendisse sagittis ultrices augue. Mauris metus. Nunc dapibus tortor vel mi dapibus sollicitudin. Etiam posuere lacus quis dolor. Praesent id justo in neque elementum ultrices. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. In convallis. Fusce suscipit libero eget elit. Praesent vitae arcu tempor neque lacinia pretium. Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus.</p>
+                            <p>Maecenas ipsum velit, consectetuer eu, lobortis ut, dictum at, dui. In rutrum. Sed ac dolor sit amet purus malesuada congue. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Suspendisse sagittis ultrices augue. Mauris metus. Nunc dapibus tortor vel mi dapibus sollicitudin. Etiam posuere lacus quis dolor. Praesent id justo in neque elementum ultrices. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. In convallis. Fusce suscipit libero eget elit. Praesent vitae arcu tempor neque lacinia pretium. Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus.</p>
+                        </div>
+                        <div class="layout-footer bg-purple-5">
+                            <div class="container-md">
+                                <div class="title">
+                                    Layout Footer
+                                </div>
+                                <button class="btn btn-float btn-xl raised-sm waves right top bg-purple-8" type="button">
+                                    <i class="md-icon">message</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="menus" class="container-lg">
+            <h1>Menus</h1>
+
+            <div class="container bg-grey-3">
+
+                <div class="grid">
+                    <div class="grid-col container-md">
+                        <h3>Menu Styles</h3>
+                        <ul class="menu">
+                            <li>
+                                <a>
+                                    <i class="md-icon">account_circle</i>
+                                    Menu Item
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <i class="md-icon">account_circle</i>
+                                    Menu Item
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <i class="md-icon">account_circle</i>
+                                    Menu Item
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid-col container-md">
+                        <h3>Menu inside Dropdown</h3>
+                        <div class="dropdown">
+                            <button class="btn btn-circle bg-purple-5" type="button" data-toggle="dropdown">
+                                <i class="md-icon">menu</i>
+                            </button>
+                            <ul class="dropdown-body top left menu">
+                                <li>
+                                    <a>
+                                        <i class="md-icon">visibility</i>
+                                        Preview
+                                        <!--<i class="md-icon">chevron_right</i>-->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">person_add</i>
+                                        Share
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">link</i>
+                                        Get Link
+                                    </a>
+                                </li>
+                                <li class="divider-horizontal"></li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">content_copy</i>
+                                        Make a copy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">get_app</i>
+                                        Download
+                                    </a>
+                                </li>
+                                <li class="divider-horizontal"></li>
+                                <li>
+                                    <a>
+                                        <i class="md-icon">delete</i>
+                                        Remove
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="grid-col container-md">
+                        <h3>Menu Dropdown Cascading</h3>
+                        <div class="dropdown">
+                            <a class="btn bg-purple-5" data-toggle="dropdown">
+                                File
+                            </a>
+                            <ul class="dropdown-body top-inverse left menu">
+                                <li>
+                                    <a>
+                                        New
+                                        <!--<i class="md-icon">chevron_right</i>-->
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        Open...
+                                    </a>
+                                </li>
+                                <li class="dropdown" data-class-hover="bg-purple-5">
+                                    <a data-toggle="dropdown">
+                                        Open recent
+                                    </a>
+                                    <ul class="dropdown-body top left-inverse menu">
+                                        <li>
+                                            <a>
+                                                Buttons
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                Text Fields
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a>
+                                                Grid
+                                            </a>
+                                        </li>
+                                        <li class="dropdown" data-class-hover="bg-purple-5">
+                                            <a data-toggle="dropdown">
+                                                Submenu 2
+                                            </a>
+                                            <ul class="dropdown-body top right-inverse menu">
+                                                <li>
+                                                    <a>
+                                                        Option 1
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        Option 2
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="divider-horizontal"></li>
+                                <li>
+                                    <a>
+                                        Exit
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="raise" class="container-lg">
+            <h1>
+                Raise
+                <small>(shadow)</small>
+            </h1>
+
+            <div class="grid grid-gutter">
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-xs bg-orange-5"></button>
+                </div>
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-sm bg-orange-5"></button>
+                </div>
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-md bg-orange-5"></button>
+                </div>
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-lg bg-orange-5"></button>
+                </div>
+                <div class="grid-col">
+                    <button class="btn btn-icon raised-xl bg-orange-5"></button>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="tabs" class="container-lg">
+            <h1>Tabs</h1>
+            <div class="tabs">
+                <nav class="tabs-nav bg-blue-5 border-yellow-5">
+                    <a class="waves" data-toggle="tab" data-target="#tab1">
+                        Web
+                    </a>
+                    <a class="waves tab-active" data-toggle="tab" data-target="#tab2">
+                        Shopping
+                    </a>
+                    <a class="waves" data-toggle="tab" data-target="#tab3">
+                        Videos
+                    </a>
+                    <a class="waves" data-toggle="tab" data-target="#tab4">
+                        Images
+                    </a>
+                    <a class="waves" data-toggle="tab" data-target="#tab5">
+                        News
+                    </a>
+                    <a class="waves" data-toggle="tab" data-target="#tab6">
+                        More
+                    </a>
+                </nav>
+                <div class="tabs-list set-border">
+                    <div id="tab1" class="tab-content">
+                        <div class="container-md">
+                            Content tab 1
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab-content tab-visible">
+                        <div class="container-md">
+                            Content tab 2 <br/>
+                            Content tab 2
+                        </div>
+                    </div>
+                    <div id="tab3" class="tab-content">
+                        <div class="container-md">
+                            Content tab 3
+                        </div>
+                    </div>
+                    <div id="tab4" class="tab-content">
+                        <div class="container-md">
+                            Content tab 4
+                        </div>
+                    </div>
+                    <div id="tab5" class="tab-content">
+                        <div class="container-md">
+                            Content tab 5 <br/>
+                            Content tab 5 <br/>
+                            Content tab 5
+                        </div>
+                    </div>
+                    <div id="tab6" class="tab-content">
+                        <div class="container-md">
+                            Content tab 6
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="textfields" class="container-lg">
+            <h1>Text Fields</h1>
+
+            <h2>Input inside Label</h2>
+            <div class="grid grid-gutter-sm">
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label focus-blue-5">
+                        Input color on focus
+                        <input class="input focus-blue-5" type="text"/>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label text-blue-5">
+                        Input colored
+                        <input class="input input-blue-5" type="text"/>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label label-float focus-blue-5">
+                        <span class="label-text">Input floating label</span>
+                        <input class="input focus-blue-5" type="text"/>
+                    </label>
+                </div>
+            </div>
+
+            <h2>Input outside Label</h2>
+            <div class="grid grid-gutter-sm">
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label focus-blue-5" for="input1">
+                        Input color on focus (placeholder)
+                    </label>
+                    <input id="input1" class="input focus-blue-5" type="text" placeholder="Input placeholder"/>
+                </div>
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label text-blue-5" for="input2">
+                        Input colored
+                    </label>
+                    <input id="input2" class="input input-blue-5" type="text"/>
+                </div>
+                <div class="xs-col-12 md-col-4 label-group">
+                    <label class="label label-float focus-blue-5" for="input3">
+                        <span class="label-text">Input floating label (placeholder)</span>
+                    </label>
+                    <input id="input3" class="input input-placeholder focus-blue-5" type="text" placeholder="Input placeholder"/>
+                </div>
+            </div>
+
+            <h2>Others text fields</h2>
+            <div class="grid grid-gutter-sm">
+                <div class="xs-col-12 md-col-3 label-group">
+                    <label class="label focus-blue-5">
+                        Combobox color on focus
+                        <select class="input focus-blue-5">
+                            <option value="">[Select]</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-3 label-group">
+                    <label class="label label-float focus-blue-5">
+                        <span class="label-text">Combobox floating label</span>
+                        <select class="input focus-blue-5">
+                            <option value=""></option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-3 label-group">
+                    <label class="label text-blue-5">
+                        Input (autogrow)
+                        <input class="input input-blue-5 input-autogrow" type="text"/>
+                    </label>
+                </div>
+                <div class="xs-col-12 md-col-3 label-group">
+                    <label class="label focus-blue-5">
+                        Textarea (autogrow)
+                        <textarea class="input focus-blue-5 input-autogrow" rows="1"></textarea>
+                    </label>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="tooltips" class="container-lg">
+            <h1>Tooltips</h1>
+
+            <div class="grid grid-justify grid-gutter-sm">
+                <div class="grid-col container-sm">
+                    <button class="btn bg-purple-5" data-tooltip="Lorem ipsum dolor sit amet, consectetur adipisicing elit">
+                        Fit Left
+                    </button>
+                </div>
+                <div class="grid-col container-sm">
+                    <button class="btn bg-purple-5" data-tooltip="Lorem ipsum dolor sit amet, consectetur adipisicing elit">
+                        Normal Tooltip
+                    </button>
+                </div>
+                <div class="grid-col container-sm">
+                    <div class="grid grid-nowrap">
+                        <div class="grid-col">
+                            <button class="btn btn-icon" data-tooltip="Bold CTRL + B">
+                                <i class="md-icon">format_bold</i>
+                            </button>
+                        </div>
+                        <div class="grid-col">
+                            <button class="btn btn-icon" data-tooltip="Italic CTRL + I">
+                                <i class="md-icon">format_italic</i>
+                            </button>
+                        </div>
+                        <div class="grid-col">
+                            <button class="btn btn-icon" data-tooltip="Underline CTRL + U">
+                                <i class="md-icon">format_underline</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-col container-sm">
+                    <button class="btn bg-purple-5" data-tooltip="Lorem ipsum dolor sit amet, consectetur adipisicing elit">
+                        Fit Right
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal container-lg"></div>
+
+    </main>
 </div>
 
 </body>
+
 </html>

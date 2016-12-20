@@ -1674,7 +1674,7 @@ textarea.input:not([rows]) {
     width: 100%;
 }
 
-.tabs-swipe .tab-content {
+.tabs:not(.tabs-noswipe) .tab-content {
     transition: margin-left ease .3s;
 }
 

@@ -1,5 +1,6 @@
 <html>
 <head>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
     <link type="text/css" rel="stylesheet" href="css/cematerial.css"/>
 
     <script type="text/javascript">
@@ -11,23 +12,25 @@
             return arguments[0];
         }
 
-        Element.prototype.on = document.on = function (event, child, fn) {
+        Element.prototype.on = document.on = function (events, child, fn) {
             fn = fn || child;
+            events = typeof events == 'string' ? events.split(' ') : events;
 
-            this.addEventListener(event, function (e) {
-                var el = this;
+            var el = this;
 
-                if (typeof child === 'string') {
-                    var delegate_to = e.target.closest(child);
-                    if (delegate_to) {
-                        el = delegate_to;
-                    } else {
-                        return;
+            for (var i in events) {
+                this.addEventListener(events[i], function (e) {
+                    if (typeof child === 'string') {
+                        var delegate_to = e.target.closest(child);
+                        if (delegate_to) {
+                            el = delegate_to;
+                        } else {
+                            return;
+                        }
                     }
-                }
-
-                fn.call(el, e);
-            });
+                    fn.call(el, e);
+                });
+            }
 
             return this;
         };
@@ -84,9 +87,7 @@
         }
     </script>
 
-    <!--
     <script type="text/javascript" src="js/plugins/cem.swipe.no-jquery.js"></script>
-    -->
     <script type="text/javascript" src="js/plugins/cem.dialog.no-jquery.js"></script>
     <script type="text/javascript" src="js/plugins/cem.dropdown.no-jquery.js"></script>
     <script type="text/javascript" src="js/plugins/cem.panel.no-jquery.js"></script>
@@ -96,9 +97,9 @@
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
 
-            document.on('click', '.panel-header', function (e) {
-                console.log(e)
-            });
+//            document.on('click', '.panel-header', function (e) {
+//                console.log(e)
+//            });
 
             var modal = document.querySelector('#modal');
             modal.addEventListener('cem.dialog.beforeShow', function (e) {

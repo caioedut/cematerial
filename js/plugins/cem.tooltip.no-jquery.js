@@ -42,7 +42,7 @@
         });
 
         // Event Before Show
-        e = new Event('cem.tooltip.beforeShow');
+        e = new Event('cem.tooltip.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -51,7 +51,7 @@
         this.updatePosition();
 
         // Event Show
-        e = new Event('cem.tooltip.show');
+        e = new Event('cem.tooltip.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -60,15 +60,17 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.tooltip.beforeHide');
+        e = new Event('cem.tooltip.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
         // Hide
-        this.tooltip.parentNode.removeChild(this.tooltip);
+        if (this.tooltip.parentNode) {
+            this.tooltip.parentNode.removeChild(this.tooltip);
+        }
 
         // Event Hide
-        e = new Event('cem.tooltip.hide');
+        e = new Event('cem.tooltip.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -110,21 +112,19 @@
 
     // Events
     document
-        //focus
-        .on('mouseover', '[data-tooltip]', function () {
+        .on('focusin mouseover', '[data-tooltip]', function () {
             var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
             init.show(this);
         })
-        // blur
-        .on('mouseout', '[data-tooltip]', function () {
+        .on('focusout mouseout', '[data-tooltip]', function () {
             var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
             init.hide(this);
         })
-        // .on('wheel mousewheel DOMMouseScroll touchstart', function () {
-        //     document.querySelectorAll('.tooltip-visible').forEach(function (node) {
-        //         node.parentNode.removeChild(node);
-        //     });
-        // })
+        .on('wheel mousewheel DOMMouseScroll touchstart', function () {
+            document.querySelectorAll('.tooltip-visible').forEach(function (node) {
+                node.parentNode.removeChild(node);
+            });
+        })
     ;
 
 }();

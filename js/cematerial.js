@@ -574,14 +574,12 @@ NodeList.prototype.not = function (sel_or_arr) {
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
 
             // GET TRANSLATE X VALUE
-            // var translate_x = sidebar.style.transform.replace(/\D/g, '');
             var translate_x = parseInt(window.getComputedStyle(sidebar, null).getPropertyValue('transform').split(',')[4]);
 
-            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
             var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
             var is_righttarget = e.target.closest(sidebar) || e.target === init.backdrop;
 
-            var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
+            var bl_swipe = is_leftedge || is_righttarget;
 
             if (bl_swipe) {
                 sidebar.classList.add('layout-sidebar-swiping');

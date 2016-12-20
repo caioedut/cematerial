@@ -12,57 +12,104 @@
 
     document
         .on(swipe_touch ? 'touchstart' : 'mousedown', function (e) {
-            document.swipe = true;
-            document.swipe_target = e.target;
+            document.swipe = {
+                target: e.target,
+                pos_x: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
+                pos_y: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0),
+                event_params: {
+                    pageX: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
+                    pageY: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0)
+                },
+                /**
+                 * 0 = No swipe
+                 * 1 = Swipe start
+                 * 2 = Swipe move
+                 */
+                status: 1
+            };
         })
         .on(swipe_touch ? 'touchmove' : 'mousemove', function (e) {
             if (!document.swipe) {
-                return;
+                return true;
             }
 
-            var evt;
+            var data = document.swipe;
 
-            if (!document.swipe_triggered) {
-                console.log('SWIPE START');
-                document.swipe_triggered = true;
+            var target_x = e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0);
+            var target_y = e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0);
 
-                evt = Object.defineProperties(new Event('swipe', {bubbles: true, cancelable: true, composed: true}), {
-                    is_start: {value: true},
-                    is_move: {value: false},
-                    is_end: {value: false},
-                    target: {value: e.target},
-                    currentTarget: {value: document.swipe_target}
-                });
+            data = extend(data, {
+                event_params: {
+                    direction: {
+                        bottom: data.pos_y < target_y,
+                        left: data.pos_x > target_x,
+                        right: data.pos_x < target_x,
+                        top: data.pos_y > target_y
+                    },
+                    swipeDirectionX: data.event_params.pageX > target_x ? 'left' : 'right',
+                    swipeDirectionY: data.event_params.pageY > target_y ? 'top' : 'bottom',
+                    swipeFromX: data.pos_x,
+                    swipeFromY: data.pos_y,
+                    swipeToX: target_x,
+                    swipeToY: target_y,
+                    swipeOffsetX: target_x - data.pos_x,
+                    swipeOffsetY: target_y - data.pos_y,
 
-                e.target.dispatchEvent(evt);
-            }
-
-            console.log('SWIPE MOVE');
-
-            evt = Object.defineProperties(new Event('swipe', {bubbles: true, cancelable: true, composed: true}), {
-                is_start: {value: false},
-                is_move: {value: true},
-                is_end: {value: false},
-                target: {value: e.target},
-                currentTarget: {value: document.swipe_target}
+                    // Default
+                    pageX: target_x,
+                    pageY: target_y,
+                    preventDefault: e.preventDefault
+                }
             });
 
-            e.target.dispatchEvent(evt);
-        })
-        .on(swipe_touch ? 'touchend' : 'mouseup', function (e) {
-            if (document.swipe_triggered) {
-                var evt = Object.defineProperties(new Event('swipe', {bubbles: true, cancelable: true, composed: true}), {
-                    is_start: {value: false},
-                    is_move: {value: false},
-                    is_end: {value: true},
-                    target: {value: e.target},
-                    currentTarget: {value: document.swipe_target}
-                });
-                e.target.dispatchEvent(evt);
+            document.swipe = data;
+
+            if (data.status == 1) {
+                // Event swipestart
+                var evt = new Event('swipestart', {bubbles: true, cancelable: true, composed: true});
+                evt = extend(evt, data.event_params);
+                data.target.dispatchEvent(evt);
+
+                // console.log(evt)
+
+                data = extend(data, {status: 2});
+                document.swipe = data;
             }
 
-            document.swipe = false;
-            document.swipe_triggered = false;
+            if (data.status != 2) {
+                return true;
+            }
+
+            // Evets swipeleft, swiperight, swipetop, swipebottom
+            for (var i in data.event_params.direction) {
+                if (data.event_params.direction[i]) {
+                    evt = new Event('swipe' + i, {bubbles: true, cancelable: true, composed: true});
+                    evt = extend(evt, data.event_params);
+                    data.target.dispatchEvent(evt);
+                }
+            }
+
+            evt = new Event('swipemove', {bubbles: true, cancelable: true, composed: true});
+            evt = extend(evt, data.event_params);
+            data.target.dispatchEvent(evt);
+        })
+        .on(swipe_touch ? 'touchend' : 'mouseup dragend', function () {
+            if (!document.swipe) {
+                return true;
+            }
+
+            var data = document.swipe;
+
+            if (data.status) {
+                if (data.status == 2) {
+                    var evt = new Event('swipeend', {bubbles: true, cancelable: true, composed: true});
+                    evt = extend(evt, data.event_params);
+                    data.target.dispatchEvent(evt);
+                }
+
+                data = extend(data, {status: 0});
+                document.swipe = data;
+            }
         })
     ;
 

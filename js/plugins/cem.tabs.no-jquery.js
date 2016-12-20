@@ -19,10 +19,10 @@
         this.list = this.el.querySelector('.tabs-nav');
         this.content = this.el.querySelectorAll('.tabs-list > .tab-content');
 
-        if (this.options.swipe && this.options.swipe != '0') {
-            this.el.classList.add('tabs-swipe');
+        if (!this.options.swipe || this.options.swipe == '0') {
+            this.el.classList.add('tabs-noswipe');
         } else {
-            this.el.classList.remove('tabs-swipe');
+            this.el.classList.remove('tabs-noswipe');
         }
 
         this.bar = document.createElement('div');
@@ -52,14 +52,12 @@
         if (handler.matches('.tab-content')) {
             target = handler;
 
-            nav = this.list.querySelectorAll('[data-toggle="tab"]').filter(function (node, i) {
-                var target_index = Array.prototype.indexOf.call(this.content, node);
-                return document.querySelector(node.dataset.target) === target || i == target_index;
+            this.list.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
+                var target_index = Array.prototype.indexOf.call(node.parentNode, node);
+                if (document.querySelector(node.dataset.target) === target || i == target_index) {
+                    nav = node;
+                }
             });
-
-            // $nav = this.$el.find('.tabs-nav > [data-toggle="tab"]').filter(function (i) {
-            //     return $(CEMaterial.getTarget($(this))).is($target) || i == $target.index();
-            // });
         } else {
             target = document.querySelector(handler.dataset.target);
             nav = handler;
@@ -75,7 +73,7 @@
         this.hide();
 
         // Event Before Show
-        e = new Event('cem.tabs.beforeShow');
+        e = new Event('cem.tabs.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -85,7 +83,7 @@
         this.updateBar();
 
         // Event Show
-        e = new Event('cem.tabs.show');
+        e = new Event('cem.tabs.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -94,7 +92,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.tabs.beforeHide');
+        e = new Event('cem.tabs.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -103,7 +101,7 @@
         this.el.querySelector('.tab-content.tab-visible').classList.remove('tab-visible');
 
         // Event Hide
-        e = new Event('cem.tabs.hide');
+        e = new Event('cem.tabs.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -134,18 +132,13 @@
     };
 
     // Events
-    document.on('click', '[data-toggle="tab"]', function () {
-        var target = this.closest('.tabs');
-        var init = target['cem.tabs'] || new Tabs(target, extend({}, Tabs.DEFAULTS, target.dataset, this.dataset));
-        init.show(this);
-    });
-
-
-    /**
     document
-        // .on('swipestart', '.tabs.tabs-swipe .tabs-list', function () {
-        .on('swipestart', '.tabs-list', function () {
-            console.log("AAA");
+        .on('click', '[data-toggle="tab"]', function () {
+            var target = this.closest('.tabs');
+            var init = target['cem.tabs'] || new Tabs(target, extend({}, Tabs.DEFAULTS, target.dataset, this.dataset));
+            init.show(this);
+        })
+        .on('swipestart', '.tabs:not(.tabs-noswipe) .tabs-list', function () {
             var tabs = this.closest('.tabs');
             var init = tabs['cem.tabs'] || new Tabs(tabs, extend({}, Tabs.DEFAULTS, tabs.dataset));
 
@@ -153,9 +146,9 @@
             this.querySelector('.tab-visible').classList.add('no-transition');
 
             // GET TRANSLATE X VALUE
-            init.bar.dataset.translateX = parseInt(init.bar.style.transform.split(',')[4]);
+            init.bar.dataset.translateX = init.bar.style.transform.replace(/\D/g, '');
         })
-        .on('swipemove', '.tabs.tabs-swipe .tabs-list', function (e) {
+        .on('swipemove', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
             // var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
             //     return this.scrollWidth > $(this).outerWidth();
@@ -176,7 +169,7 @@
                 bar.style.transform = 'translateX(' + translateX + 'px)';
             }
         })
-        .on('swipeend', '.tabs.tabs-swipe .tabs-list', function (e) {
+        .on('swipeend', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
             // var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
             //     return this.scrollWidth > $(this).outerWidth();
@@ -199,17 +192,15 @@
                 }
             }
 
+            bar.classList.remove('no-transition');
+            active.classList.remove('no-transition');
+
             new_active = new_active || active;
             this.closest('.tabs')['cem.tabs'].show(new_active);
 
             // Reset tab content
             active.style.marginLeft = '';
-
-            bar.classList.remove('no-transition');
-            active.classList.remove('no-transition');
-
         })
     ;
-    **/
 
 }();

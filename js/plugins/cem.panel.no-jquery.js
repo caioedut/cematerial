@@ -52,7 +52,7 @@
         }
 
         // Event Before Show
-        e = new Event('cem.panel.beforeShow');
+        e = new Event('cem.panel.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -61,7 +61,7 @@
         this.el.classList.add('panel-visible');
 
         // Event Show
-        e = new Event('cem.panel.show');
+        e = new Event('cem.panel.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -70,7 +70,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.panel.beforeHide');
+        e = new Event('cem.panel.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -79,7 +79,7 @@
         this.el.classList.remove('panel-visible');
 
         // Event Hide
-        e = new Event('cem.panel.hide');
+        e = new Event('cem.panel.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };

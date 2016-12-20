@@ -1408,34 +1408,6 @@ textarea.input:not([rows]) {
     visibility: visible;
 }
 
-/*INPUT FILE DRAG DROP*/
-.filedrop {
-    position: relative;
-}
-
-.filedrop input[type="file"],
-.filedrop .filedrop-list ~ * {
-    display: none;
-}
-
-.filedrop:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, .2);
-    content: '';
-
-    height: 100%;
-    width: 100%;
-
-    opacity: 0;
-    transition: ease opacity .3s;
-}
-
-.filedrop.filedrop-dragover:after {
-    opacity: 1;
-}
-
 /*CHIPS*/
 .chips {
     background-color: #dfdfdf;

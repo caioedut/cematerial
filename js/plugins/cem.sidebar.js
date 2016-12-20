@@ -4,25 +4,25 @@
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
-
-    var $doc = $(document);
 
     // CLASS
 
     var Sidebar = function (el, options) {
         this.options = options || {};
-        this.$el = $(el);
+        this.el = el;
 
-        this.$backdrop = $('<div class="layout-sidebar-backdrop"></div>').insertAfter(this.$el);
+        this.el['cem.sidebar'] = this;
 
-        var that = this;
+        this.backdrop = document.createElement('div');
+        this.backdrop.classList.add('layout-sidebar-backdrop');
+        this.el.parentNode.insertBefore(this.backdrop, this.el.nextSibling);
 
-        if (this.options.autoclose) {
-            $doc.on('click', function (e) {
-                that.$el.not($(e.target).closest('.layout-sidebar-visible')).sidebar('hide');
-            });
+        if (this.options.autoclose && this.options.autoclose != '0') {
+            this.el.classList.add('sidebar-autoclose');
+        } else {
+            this.el.classList.remove('sidebar-autoclose');
         }
     };
 
@@ -33,166 +33,152 @@
     };
 
     Sidebar.prototype.toggle = function (_relatedTarget) {
-        return this.$el.hasClass('layout-sidebar-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('layout-sidebar-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Sidebar.prototype.show = function (_relatedTarget) {
         var that = this;
         var e; // Event handler
 
-        e = $.Event('cem.sidebar.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Show
+        e = new Event('cem.sidebar.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Show sidebar
+        // Show
         setTimeout(function () {
-            that.$el.addClass('layout-sidebar-visible');
+            that.el.classList.add('layout-sidebar-visible');
         }, 1);
 
-        e = $.Event('cem.sidebar.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.sidebar.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Sidebar.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.sidebar.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.sidebar.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide sidebar
-        this.$el.removeClass('layout-sidebar-visible');
+        // Hide
+        this.el.classList.remove('layout-sidebar-visible');
 
-        e = $.Event('cem.sidebar.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.sidebar.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
-    // SIDEBAR - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Sidebar.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var sidebar = $this.data('cem.sidebar');
-
-            if (!sidebar) {
-                sidebar = new Sidebar(this, options);
-                $this.data('cem.sidebar', sidebar);
-            }
-
-            if (typeof action == 'string') {
-                sidebar[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.sidebar = Plugin;
-    $.fn.sidebar.Constructor = Sidebar;
-
-    // SIDEBAR - DATA API
-    $doc
-        .on('click', '[data-toggle="sidebar"]', function (e) {
-            var $this = $(this);
-            var $target = CEMaterial.getTarget($this, '.layout-sidebar');
-
-            if (!$target.length) {
-                $target = $this.closest('.layout').find('.layout-sidebar').first();
-            }
-
-            $this.is('a') ? e.preventDefault() : '';
-
-            Plugin.call($target, 'toggle', this);
+    // Events
+    document
+        .on('click', '[data-toggle="sidebar"]', function () {
+            var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.layout-sidebar');
+            target = target || this.closest('.layout').querySelector('.layout-sidebar');
+            var init = target['cem.sidebar'] || new Sidebar(target, extend({}, Sidebar.DEFAULTS, target.dataset, this.dataset));
+            init.toggle(this);
         })
-        .on('click', '[data-toggle="nav"]', function (e) {
-            var $this = $(this);
-            var $sidebar = $this.closest('.layout-sidebar');
-
-            $this.is('a') ? e.preventDefault() : '';
-
-            Plugin.call($sidebar, 'show', this);
+        // Autoclose
+        .on('click', '.layout-sidebar-visible.sidebar-autoclose ~ .layout-sidebar-backdrop', function () {
+            var target = this.previousElementSibling;
+            var init = target['cem.sidebar'] || new Sidebar(target, extend({}, Sidebar.DEFAULTS, target.dataset));
+            init.hide(this);
+        })
+        // Sidebar Navs
+        .on('click', '[data-toggle="nav"]', function () {
+            var sidebar = this.closest('.layout-sidebar');
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
+            init.show(this);
 
             // Sidenav click
-            var $target = $sidebar.find(CEMaterial.getTarget($this));
-
-            if ($target.hasClass('nav-hidden')) {
-                $sidebar.find('.layout-nav').addClass('nav-hidden');
-                $target.removeClass('nav-hidden');
-            } else {
-                $sidebar.find('.layout-nav').removeClass('nav-hidden');
-                $target.addClass('nav-hidden');
+            var target = sidebar.querySelector(this.dataset.target);
+            if (target) {
+                if (target.classList.contains('nav-hidden')) {
+                    sidebar.querySelectorAll('.layout-nav').forEach(function (node) {
+                        node.classList.add('nav-hidden');
+                    });
+                    target.classList.remove('nav-hidden');
+                } else {
+                    sidebar.querySelectorAll('.layout-nav').forEach(function (node) {
+                        node.classList.remove('nav-hidden');
+                    });
+                    target.classList.add('nav-hidden');
+                }
             }
         })
     ;
 
-    $doc
+
+    document
         .on('swipestart', '.layout', function (e) {
-            var $el = $(e.target).closest('.layout');
-            var $sidebar = $el.find('.layout-sidebar').first();
+            var el = this;
+            var sidebar = el.querySelector('.layout-sidebar');
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
 
             // GET TRANSLATE X VALUE
-            var translate_x = parseInt($sidebar.css('transform').split(',')[4]);
-
-            // Create a backdrop if not exists (INIT SIDEBAR PLUGIN)
-            if (!$sidebar.data('cem.sidebar')) {
-                $sidebar.sidebar();
-            }
+            // var translate_x = sidebar.style.transform.replace(/\D/g, '');
+            var translate_x = parseInt(window.getComputedStyle(sidebar, null).getPropertyValue('transform').split(',')[4]);
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_leftedge = e.swipeFromX - $el.offset().left < 16;
-            var is_righttarget = $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop);
+            var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
+            var is_righttarget = e.target.closest(sidebar) || e.target === init.backdrop;
 
             var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
             if (bl_swipe) {
-                $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
+                sidebar.classList.add('layout-sidebar-swiping');
+                sidebar.dataset.translateX = translate_x;
             }
         })
         .on('swipemove', '.layout', function (e) {
-            var $el = $(e.target).closest('.layout');
-            var $sidebar = $el.find('.layout-sidebar').first();
+            var el = this;
+            var sidebar = el.querySelector('.layout-sidebar');
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_leftedge = e.swipeFromX - $el.offset().left < 16;
-            var is_righttarget = $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop);
+            var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
+            var is_righttarget = e.target.closest(sidebar) || e.target === init.backdrop;
 
             var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
             if (bl_swipe) {
                 e.preventDefault();
 
-                var translate_x = $sidebar.data('translateX');
+                var translate_x = sidebar.dataset.translateX;
 
                 // Offset (translateX) | MIN = 0 | MAX = SIDEBAR WIDTH
-                var width = $sidebar.outerWidth();
-                var offset = Math.max(0, Math.min(width, translate_x + e.swipeOffsetX));
+                var width = sidebar.offsetWidth;
+                var offset = Math.max(0, Math.min(width, parseInt(translate_x) + parseInt(e.swipeOffsetX)));
 
                 // Backdrop opacity percent
                 var opacity = offset / width;
 
-                $sidebar.css('transform', 'translateX(' + offset + 'px)');
-                $sidebar.data('cem.sidebar').$backdrop.css('opacity', opacity);
+                sidebar.style.transform = 'translateX(' + offset + 'px)';
+                init.backdrop.style.opacity = opacity;
             }
         })
         .on('swipeend', '.layout', function (e) {
-            var $el = $(e.target).closest('.layout');
-            var $sidebar = $el.find('.layout-sidebar').first();
+            var el = this;
+            var sidebar = el.querySelector('.layout-sidebar');
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
 
-            $sidebar.removeClass('layout-sidebar-swiping').removeAttr('style');
-            $sidebar.data('cem.sidebar').$backdrop.removeAttr('style');
+            sidebar.classList.remove('layout-sidebar-swiping');
+            sidebar.removeAttribute('style');
+            init.backdrop.removeAttribute('style');
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_leftedge = e.swipeFromX - $el.offset().left < 16;
-            var is_righttarget = $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop);
+            var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
+            var is_righttarget = e.target.closest(sidebar) || e.target === init.backdrop;
 
             var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
             if (bl_swipe) {
-                if (e.swipeDirectionX == 'left') {
-                    $sidebar.sidebar('hide');
-                } else {
-                    $sidebar.sidebar('show');
-                }
+                e.swipeDirectionX == 'left' ? init.hide() : init.show();
             }
         })
     ;
 
-}(jQuery);
+}();

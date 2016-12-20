@@ -5,9 +5,6 @@
 
     <title>CEMaterial by CaioEduT</title>
 
-    <!-- JQUERY -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
     <!-- FONTS -->
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
@@ -15,147 +12,13 @@
     <!-- CEMATERIAL -->
     <link type="text/css" rel="stylesheet" href="css/cematerial.css"/>
 
-    <script type="text/javascript">
-        function extend() {
-            for (var i = 1; i < arguments.length; i++)
-                for (var key in arguments[i])
-                    if (arguments[i].hasOwnProperty(key))
-                        arguments[0][key] = arguments[i][key];
-            return arguments[0];
-        }
-
-        Element.prototype.on = document.on = function (events, child, fn) {
-            fn = fn || child;
-            events = typeof events == 'string' ? events.split(' ') : events;
-
-            var el = this;
-
-            for (var i in events) {
-                this.addEventListener(events[i], function (e) {
-                    if (typeof child === 'string') {
-                        var delegate_to = e.target.closest(child);
-                        if (delegate_to) {
-                            el = delegate_to;
-                        } else {
-                            return;
-                        }
-                    }
-                    fn.call(el, e);
-                });
-            }
-
-            return this;
-        };
-
-        Element.prototype.closest = function (selector) {
-            selector = typeof selector === 'function' ? selector.call(this, this) : selector;
-            var equals = typeof selector === 'string' ? this.matches(selector) : this === selector;
-            return equals ? this : (this.parentNode === document ? null : this.parentNode.closest(selector));
-        };
-
-        Element.prototype.parents = function (selector) {
-            var parents = [];
-
-            var parent = this.parentNode;
-            while (parent !== document) {
-                if (selector) {
-                    if (parent.matches(selector)) {
-                        parents.push(parent);
-                    }
-                } else {
-                    parents.push(parent);
-                }
-                parent = parent.parentNode;
-            }
-
-            return parents;
-        };
-
-        Element.prototype.parentsUntil = function (node_or_selector, include_until) {
-            var parents = [];
-
-            var parent = this.parentNode;
-
-            if (typeof node_or_selector === 'string') {
-                while (parent !== document && !parent.matches(node_or_selector)) {
-                    parents.push(parent);
-                    parent = parent.parentNode;
-                }
-            } else {
-                while (parent !== document && parent !== node_or_selector) {
-                    parents.push(parent);
-                    parent = parent.parentNode;
-                }
-            }
-
-            if (include_until && parent !== document) {
-                parents.push(parent);
-            }
-
-            return parents;
-        };
-
-        NodeList.prototype.not = function (node_or_array) {
-            node_or_array = node_or_array instanceof Element ? [node_or_array] : node_or_array;
-
-            var nodes = [];
-
-            this.forEach(function (node) {
-                var add_node = true;
-
-                node_or_array.forEach(function (not_node) {
-                    if (typeof not_node == 'string') {
-                        if (node.matches(not_node)) {
-                            add_node = false;
-                        }
-                    } else {
-                        if (node === not_node) {
-                            add_node = false;
-                        }
-                    }
-                });
-
-                if (add_node) {
-                    nodes.push(node);
-                }
-            });
-
-            return nodes;
-        }
-    </script>
-
-    <script type="text/javascript" src="js/plugins/cem.swipe.no-jquery.js"></script>
-    <script type="text/javascript" src="js/plugins/cem.dialog.no-jquery.js"></script>
-    <script type="text/javascript" src="js/plugins/cem.dropdown.no-jquery.js"></script>
-    <script type="text/javascript" src="js/plugins/cem.panel.no-jquery.js"></script>
-    <script type="text/javascript" src="js/plugins/cem.sidebar.no-jquery.js"></script>
-    <script type="text/javascript" src="js/plugins/cem.tooltip.no-jquery.js"></script>
-    <script type="text/javascript" src="js/plugins/cem.tabs.no-jquery.js"></script>
+    <script type="text/javascript" src="js/cematerial.js"></script>
 
     <!-- WAVES -->
     <!--
     <script type="text/javascript" src="js/plugins/waves/waves.min.js"></script>
     <link type="text/css" rel="stylesheet" href="js/plugins/waves/waves.min.css"/>
     -->
-
-    <script type="text/javascript">
-        jQuery(function ($) {
-            // Event test
-            $('.dialog')
-                .on('cem.dialog.beforeShow', function () {
-                    console.log('Before Show');
-                })
-                .on('cem.dialog.show', function () {
-                    console.log('Show');
-                })
-                .on('cem.dialog.beforeHide', function () {
-                    console.log('Before Hide');
-                })
-                .on('cem.dialog.hide', function () {
-                    console.log('Hide');
-                });
-        });
-    </script>
 </head>
 
 <body>
@@ -1416,7 +1279,7 @@
                 <div class="xs-col-12 md-col-4 label-group">
                     <label class="label label-float focus-blue-5">
                         <span class="label-text">Input floating label</span>
-                        <input class="input focus-blue-5" type="text"/>
+                        <input class="input focus-blue-5" type="text" value="ASDASDASDASDASD"/>
                     </label>
                 </div>
             </div>

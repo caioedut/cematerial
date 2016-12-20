@@ -4,22 +4,25 @@
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
 
     // CLASS
 
     var Tooltip = function (el, options) {
         this.options = options || {};
-        this.$el = $(el);
+        this.el = el;
+
+        this.el['cem.tooltip'] = this;
 
         // Create element
-        this.$tooltip = $('<span class="tooltip"></span>');
+        this.tooltip = document.createElement('span');
+        this.tooltip.classList.add('tooltip');
 
         if (this.options.wrap) {
-            this.$tooltip.removeClass('tooltip-nowrap');
+            this.tooltip.classList.add('tooltip-wrap');
         } else {
-            this.$tooltip.addClass('tooltip-nowrap');
+            this.tooltip.classList.remove('tooltip-wrap');
         }
     };
 
@@ -33,100 +36,95 @@
     Tooltip.prototype.show = function (_relatedTarget) {
         var e; // Event handler
 
-        // If has OTHER OPENNED dropdown, close
-        $('.tooltip-visible').remove();
+        // Close others openned
+        document.querySelectorAll('.tooltip-visible').forEach(function (node) {
+            node.parentNode.removeChild(node);
+        });
 
-        e = $.Event('cem.tooltip.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Show
+        e = new Event('cem.tooltip.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
+        // Show
         this.updateTitle();
         this.updatePosition();
 
-        e = $.Event('cem.tooltip.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.tooltip.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Tooltip.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.tooltip.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.tooltip.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide tooltip
-        this.$tooltip.removeClass('tooltip-visible').remove();
+        // Hide
+        if (this.tooltip.parentNode) {
+            this.tooltip.parentNode.removeChild(this.tooltip);
+        }
 
-        e = $.Event('cem.tooltip.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.tooltip.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Tooltip.prototype.updateTitle = function () {
-        if (!this.$el.data('tooltip')) {
-            this.$el.data('tooltip', this.$el.attr('title'));
+        if (!this.el.dataset.tooltip) {
+            this.el.dataset.tooltip = this.el.getAttribute('title');
         }
 
-        var title = this.$el.data('tooltip');
+        var title = this.el.dataset.tooltip;
 
         // Strip tags
         if (!this.options.html) {
-            title = $("<div/>").html(title).text();
+            var tmp = document.createElement('div');
+            tmp.innerHTML = title;
+            title = tmp.textContent || tmp.innerText;
         }
 
-        this.$tooltip.html(title);
+        this.tooltip.innerHTML = title;
     };
 
     Tooltip.prototype.updatePosition = function () {
-        this.$tooltip.appendTo('body');
+        document.body.appendChild(this.tooltip);
 
-        var offset = this.$el.offset();
-        var width = this.$tooltip.outerWidth();
+        var offset = {top: this.el.offsetTop, left: this.el.offsetLeft};
+        var width = this.tooltip.offsetWidth;
 
         // Offset left (MIN = 0px)
-        var left = Math.max(offset.left + (this.$el.outerWidth() / 2) - (width / 2), 0);
+        var left = Math.max(offset.left + (this.el.offsetWidth / 2) - (width / 2), 0);
 
         // Offset left (MAX = BODY WIDTH - TOOLTIP WIDTH)
-        left = Math.min(left, $('body').outerWidth() - width);
+        left = Math.min(left, document.body.offsetWidth - width);
 
         // Update css position
-        this.$tooltip.css({
-            top: offset.top + this.$el.outerHeight(),
-            left: left
-        }).addClass('tooltip-visible');
+        this.tooltip.style.top = offset.top + this.el.offsetHeight;
+        this.tooltip.style.left = left;
+        this.tooltip.classList.add('tooltip-visible');
     };
 
-    // TOOLTIP - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Tooltip.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var tooltip = $this.data('cem.tooltip');
-
-            if (!tooltip) {
-                tooltip = new Tooltip(this, options);
-                $this.data('cem.tooltip', tooltip);
-            }
-
-            if (typeof action == 'string') {
-                tooltip[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.tooltip = Plugin;
-    $.fn.tooltip.Constructor = Tooltip;
-
-    // TOOLTIP - DATA API
-    $(document)
-        .on('mouseover focus', '[data-tooltip]', function () {
-            Plugin.call($(this), 'show', this);
+    // Events
+    document
+        .on('focusin mouseover', '[data-tooltip]', function () {
+            var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
+            init.show(this);
         })
-        .on('mouseleave blur', '[data-tooltip]', function () {
-            Plugin.call($(this), 'hide', this);
+        .on('focusout mouseout', '[data-tooltip]', function () {
+            var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
+            init.hide(this);
         })
         .on('wheel mousewheel DOMMouseScroll touchstart', function () {
-            $('.tooltip-visible').remove();
+            document.querySelectorAll('.tooltip-visible').forEach(function (node) {
+                node.parentNode.removeChild(node);
+            });
         })
     ;
 
-}(jQuery);
+}();

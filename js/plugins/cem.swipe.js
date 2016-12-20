@@ -6,20 +6,19 @@
 
 +(function () {
 
-    var $doc = $(document);
     var swipe_touch = 'ontouchstart' in document.documentElement;
 
     // Event creation
 
-    $doc
+    document
         .on(swipe_touch ? 'touchstart' : 'mousedown', function (e) {
-            var data = {
-                $target: $(e.target),
-                pos_x: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
-                pos_y: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0),
+            document.swipe = {
+                target: e.target,
+                pos_x: e.pageX || (e.touches ? e.touches[0].pageX : 0),
+                pos_y: e.pageY || (e.touches ? e.touches[0].pageY : 0),
                 event_params: {
-                    pageX: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
-                    pageY: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0)
+                    pageX: e.pageX || (e.touches ? e.touches[0].pageX : 0),
+                    pageY: e.pageY || (e.touches ? e.touches[0].pageY : 0)
                 },
                 /**
                  * 0 = No swipe
@@ -28,20 +27,18 @@
                  */
                 status: 1
             };
-
-            $doc.data('swipe', data);
         })
         .on(swipe_touch ? 'touchmove' : 'mousemove', function (e) {
-            if (!$doc.data('swipe')) {
+            if (!document.swipe) {
                 return true;
             }
 
-            var data = $doc.data('swipe');
+            var data = document.swipe;
 
-            var target_x = e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0);
-            var target_y = e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0);
+            var target_x = e.pageX || (e.touches ? e.touches[0].pageX : 0);
+            var target_y = e.pageY || (e.touches ? e.touches[0].pageY : 0);
 
-            data = $.extend(data, {
+            data = extend(data, {
                 event_params: {
                     direction: {
                         bottom: data.pos_y < target_y,
@@ -61,18 +58,20 @@
                     // Default
                     pageX: target_x,
                     pageY: target_y,
-                    preventDefault: function () {
-                        e.preventDefault();
-                    }
+                    preventDefault: e.preventDefault
                 }
             });
 
-            $doc.data('swipe', data);
+            document.swipe = data;
 
             if (data.status == 1) {
-                data.$target.trigger($.Event('swipestart', data.event_params));
-                data = $.extend(data, {status: 2});
-                $doc.data('swipe', data);
+                // Event swipestart
+                var evt = new Event('swipestart', {bubbles: true, cancelable: true, composed: true});
+                evt = extend(evt, data.event_params);
+                data.target.dispatchEvent(evt);
+
+                data = extend(data, {status: 2});
+                document.swipe = data;
             }
 
             if (data.status != 2) {
@@ -82,26 +81,32 @@
             // Evets swipeleft, swiperight, swipetop, swipebottom
             for (var i in data.event_params.direction) {
                 if (data.event_params.direction[i]) {
-                    data.$target.trigger($.Event('swipe' + i, data.event_params));
+                    evt = new Event('swipe' + i, {bubbles: true, cancelable: true, composed: true});
+                    evt = extend(evt, data.event_params);
+                    data.target.dispatchEvent(evt);
                 }
             }
 
-            data.$target.trigger($.Event('swipemove', data.event_params));
+            evt = new Event('swipemove', {bubbles: true, cancelable: true, composed: true});
+            evt = extend(evt, data.event_params);
+            data.target.dispatchEvent(evt);
         })
         .on(swipe_touch ? 'touchend' : 'mouseup dragend', function () {
-            if (!$doc.data('swipe')) {
+            if (!document.swipe) {
                 return true;
             }
 
-            var data = $doc.data('swipe');
+            var data = document.swipe;
 
             if (data.status) {
                 if (data.status == 2) {
-                    data.$target.trigger($.Event('swipeend', data.event_params));
+                    var evt = new Event('swipeend', {bubbles: true, cancelable: true, composed: true});
+                    evt = extend(evt, data.event_params);
+                    data.target.dispatchEvent(evt);
                 }
 
-                data = $.extend(data, {status: 0});
-                $doc.data('swipe', data);
+                data = extend(data, {status: 0});
+                document.swipe = data;
             }
         })
     ;

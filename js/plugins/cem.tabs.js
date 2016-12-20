@@ -4,26 +4,31 @@
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
 
     // CLASS
 
     var Tabs = function (el, options) {
         this.options = options || {};
-        this.$el = $(el).closest('.tabs');
+        this.el = el.closest('.tabs');
+
+        this.el['cem.tabs'] = this;
 
         // Create element
-        this.$list = this.$el.find('.tabs-nav');
-        this.$content = this.$el.find('.tabs-list > .tab-content');
+        this.list = this.el.querySelector('.tabs-nav');
+        this.content = this.el.querySelectorAll('.tabs-list > .tab-content');
 
-        if (!this.options.swipe) {
-            this.$el.addClass('tabs-noswipe');
+        if (!this.options.swipe || this.options.swipe == '0') {
+            this.el.classList.add('tabs-noswipe');
+        } else {
+            this.el.classList.remove('tabs-noswipe');
         }
 
-        this.$bar = $('<div class="tabs-bar"></div>');
+        this.bar = document.createElement('div');
+        this.bar.classList.add('tabs-bar');
         this.updateBar();
-        this.$list.prepend(this.$bar);
+        this.list.insertBefore(this.bar, this.list.firstChild);
     };
 
     Tabs.VERSION = '0.1.7';
@@ -39,185 +44,171 @@
             return;
         }
 
-        var $handler = $(_relatedTarget);
+        var handler = _relatedTarget;
 
-        var $target,
-            $nav;
+        var target,
+            nav;
 
-        if ($handler.is('.tab-content')) {
-            $target = $handler;
-            $nav = this.$el.find('.tabs-nav > [data-toggle="tab"]').filter(function (i) {
-                return $(CEMaterial.getTarget($(this))).is($target) || i == $target.index();
+        if (handler.matches('.tab-content')) {
+            target = handler;
+
+            this.list.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
+                var target_index = Array.prototype.indexOf.call(node.parentNode, node);
+                if (document.querySelector(node.dataset.target) === target || i == target_index) {
+                    nav = node;
+                }
             });
         } else {
-            $target = CEMaterial.getTarget($handler);
-            $nav = $handler;
+            target = document.querySelector(handler.dataset.target);
+            nav = handler;
 
-            if (!$target.length) {
+            if (!target) {
                 // Get tab content (target panel) by index
-                $target = this.$content.eq($nav.index() - 1);
+                var nav_index = Array.prototype.indexOf.call(this.list, nav);
+                target = this.list.querySelector(':nth-child(' + nav_index + ')');
             }
         }
 
-        // If has OTHER ACTIVE tab, hide
-        this.$el.tabs('hide');
+        // Close others openned
+        this.hide();
 
-        e = $.Event('cem.tabs.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Show
+        e = new Event('cem.tabs.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        $nav.addClass('tab-active');
-        $target.addClass('tab-visible');
-
+        // Show
+        nav.classList.add('tab-active');
+        target.classList.add('tab-visible');
         this.updateBar();
 
-        e = $.Event('cem.tabs.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.tabs.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Tabs.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.tabs.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.tabs.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide tab
-        this.$list.find('.tab-active').removeClass('tab-active');
-        this.$el.find('.tab-content.tab-visible').removeClass('tab-visible');
+        // Hide
+        this.list.querySelector('.tab-active').classList.remove('tab-active');
+        this.el.querySelector('.tab-content.tab-visible').classList.remove('tab-visible');
 
-        e = $.Event('cem.tabs.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.tabs.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Tabs.prototype.updateBar = function () {
-        var $active = this.$list.find('.tab-active');
+        var active = this.list.querySelector('.tab-active');
 
-        var pos = $active.position();
-        var scroll = this.$list.scrollLeft();
+        var pos = {left: active.offsetLeft - this.list.scrollLeft};
+        var scroll = this.list.scrollLeft;
 
         var left = scroll + pos.left;
 
-        if (pos.left + $active.outerWidth() > this.$list.outerWidth()) {
-            this.$list.animate({
-                scrollLeft: left - this.$list.outerWidth() + $active.outerWidth()
-            }, 200);
+        if (pos.left + active.offsetWidth > this.list.offsetWidth) {
+            this.list.scrollLeft = left - this.list.offsetWidth + active.offsetWidth;
+            // this.$list.animate({
+            //     scrollLeft: left - this.$list.offsetWidth + $active.offsetWidth
+            // }, 200);
         } else if (pos.left < 0) {
-            this.$list.animate({
-                scrollLeft: left
-            }, 200);
+            this.list.scrollLeft = left;
+            // this.$list.animate({
+            //     scrollLeft: left
+            // }, 200);
         }
 
         // Update bar css
-        this.$bar.css({
-            transform: 'translateX(' + left + 'px)',
-            width: $active.outerWidth()
-        });
+        this.bar.style.transform = 'translateX(' + left + 'px)';
+        this.bar.style.width = active.offsetWidth;
     };
 
-    // TABS - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Tabs.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var tabs = $this.data('cem.tabs');
-
-            if (!tabs) {
-                tabs = new Tabs(this, options);
-                $this.data('cem.tabs', tabs);
-            }
-
-            if (typeof action == 'string') {
-                tabs[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.tabs = Plugin;
-    $.fn.tabs.Constructor = Tabs;
-
-    // TABS - DATA API
-    $(document).on('click', '[data-toggle="tab"]', function (e) {
-        var $this = $(this);
-        var $target = $this.closest('.tabs');
-
-        $this.is('a') ? e.preventDefault() : '';
-
-        Plugin.call($target, 'show', this);
-    });
-
-    $(document)
+    // Events
+    document
+        .on('click', '[data-toggle="tab"]', function () {
+            var target = this.closest('.tabs');
+            var init = target['cem.tabs'] || new Tabs(target, extend({}, Tabs.DEFAULTS, target.dataset, this.dataset));
+            init.show(this);
+        })
         .on('swipestart', '.tabs:not(.tabs-noswipe) .tabs-list', function () {
-            var $tabs = $(this).closest('.tabs');
+            var tabs = this.closest('.tabs');
+            var init = tabs['cem.tabs'] || new Tabs(tabs, extend({}, Tabs.DEFAULTS, tabs.dataset));
 
-            if (!$tabs.data('cem.tabs')) {
-                $tabs.tabs();
-            }
-
-            var $bar = $tabs.find('.tabs-bar');
-
-            $tabs.find('.tabs-bar').addClass('no-transition');
-            $(this).find('.tab-visible').addClass('no-transition');
+            init.bar.classList.add('no-transition');
+            this.querySelector('.tab-visible').classList.add('no-transition');
 
             // GET TRANSLATE X VALUE
-            var translate_x = parseInt($bar.css('transform').split(',')[4]);
-            $bar.data('translateX', translate_x);
+            init.bar.dataset.translateX = init.bar.style.transform.replace(/\D/g, '');
         })
         .on('swipemove', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
-                return this.scrollWidth > $(this).outerWidth();
-            }).length;
+            var is_parent_scrollable = false;
+
+            // Check parent scrollable
+            e.target.parentsUntil(this).forEach(function (node) {
+                if (node.scrollWidth > node.offsetWidth) {
+                    is_parent_scrollable = true;
+                }
+            });
 
             if (is_horizontal && !is_parent_scrollable) {
-                var $el = $(this);
-                var $active = $el.find('.tab-visible');
-                var $bar = $el.closest('.tabs').find('.tabs-bar');
+                var active = this.querySelector('.tab-visible');
+                var bar = this.closest('.tabs').querySelector('.tabs-bar');
 
                 e.preventDefault();
 
                 // Move tab content
-                $active.css('marginLeft', e.swipeOffsetX);
+                active.style.marginLeft = e.swipeOffsetX;
 
                 // Move tab bar
-                var translateX = $bar.data('translateX') - (e.swipeOffsetX / $el.outerWidth() * 100);
-                $bar.css('transform', 'translateX(' + translateX + 'px)');
+                var translateX = bar.dataset.translateX - (e.swipeOffsetX / this.offsetWidth * 100);
+                bar.style.transform = 'translateX(' + translateX + 'px)';
             }
         })
         .on('swipeend', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
-                return this.scrollWidth > $(this).outerWidth();
-            }).length;
+            var is_parent_scrollable = false;
 
-            var $el = $(this);
-            var $active = $el.find('.tab-visible');
-            var $bar = $el.closest('.tabs').find('.tabs-bar');
+            // Check parent scrollable
+            e.target.parentsUntil(this).forEach(function (node) {
+                if (node.scrollWidth > node.offsetWidth) {
+                    is_parent_scrollable = true;
+                }
+            });
 
-            var offset_start = $active.outerWidth() * 0.3;
-            var $new;
+            var active = this.querySelector('.tab-visible');
+            var bar = this.closest('.tabs').querySelector('.tabs-bar');
+
+            var offset_start = active.offsetWidth * 0.3;
+            var new_active;
 
             if (is_horizontal && !is_parent_scrollable) {
                 if (Math.abs(e.swipeOffsetX) > offset_start) {
                     if (e.swipeOffsetX > 0) {
-                        $new = $active.prev('.tab-content');
+                        new_active = active.previousElementSibling;
                     } else {
-                        $new = $active.next('.tab-content');
+                        new_active = active.nextElementSibling;
                     }
                 }
             }
 
-            $new = $new && $new.length ? $new : $active;
+            bar.classList.remove('no-transition');
+            active.classList.remove('no-transition');
 
-            Plugin.call($el.closest('.tabs'), 'show', $new.get(0));
+            new_active = new_active || active;
+            this.closest('.tabs')['cem.tabs'].show(new_active);
 
             // Reset tab content
-            $active.css('marginLeft', '');
-
-            $bar.removeClass('no-transition');
-            $active.removeClass('no-transition');
-
+            active.style.marginLeft = '';
         })
     ;
 
-}(jQuery);
+}();

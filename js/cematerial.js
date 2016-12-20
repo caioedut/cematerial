@@ -1,11 +1,140 @@
-if (typeof jQuery === 'undefined') {
-    throw new Error('CEMaterial requires jQuery');
-}
-
 if (!('flex' in document.documentElement.style)) {
     throw new Error('Your browser does not support flexbox layout');
 }
 
+/****************************************************
+ *                                                  *
+ *              HELPERS AND PROTOTYPIES             *
+ *                                                  *
+ ****************************************************/
+
+function extend() {
+    for (var i = 1; i < arguments.length; i++)
+        for (var key in arguments[i])
+            if (arguments[i].hasOwnProperty(key))
+                arguments[0][key] = arguments[i][key];
+    return arguments[0];
+}
+
+Element.prototype.on = document.on = function (events, child, fn) {
+    fn = fn || child;
+    events = typeof events == 'string' ? events.split(' ') : events;
+
+    var el = this;
+
+    for (var i in events) {
+        this.addEventListener(events[i], function (e) {
+            if (typeof child === 'string' && e.target !== document) {
+                var delegate_to = e.target.closest(child);
+                if (delegate_to) {
+                    el = delegate_to;
+                } else {
+                    return;
+                }
+            }
+            fn.call(el, e);
+        });
+    }
+
+    return this;
+};
+
+Element.prototype.is = function (node_or_selector) {
+    if (typeof node_or_selector === 'string') {
+        return this.matches(node_or_selector);
+    } else if (node_or_selector instanceof Element) {
+        return this === node_or_selector;
+    }
+    return false;
+};
+
+Element.prototype.closest = function (selector) {
+    selector = typeof selector === 'function' ? selector.call(this, this) : selector;
+    return this.is(selector) ? this : (this.parentNode === document ? null : this.parentNode.closest(selector));
+};
+
+Element.prototype.parents = function (selector) {
+    var parents = [];
+
+    var parent = this.parentNode;
+    while (parent !== document) {
+        if (selector) {
+            if (parent.matches(selector)) {
+                parents.push(parent);
+            }
+        } else {
+            parents.push(parent);
+        }
+        parent = parent.parentNode;
+    }
+
+    return parents;
+};
+
+Element.prototype.parentsUntil = function (node_or_selector, include_until) {
+    var parents = [];
+
+    var parent = this.parentNode;
+
+    if (typeof node_or_selector === 'string') {
+        while (parent !== document && !parent.matches(node_or_selector)) {
+            parents.push(parent);
+            parent = parent.parentNode;
+        }
+    } else {
+        while (parent !== document && parent !== node_or_selector) {
+            parents.push(parent);
+            parent = parent.parentNode;
+        }
+    }
+
+    if (include_until && parent !== document) {
+        parents.push(parent);
+    }
+
+    return parents;
+};
+
+NodeList.prototype.filter = function (criteria, filter_not) {
+    var nodes = [];
+
+    if (typeof criteria === 'function') {
+        this.forEach(function (node, i) {
+            if (criteria.call(node, node, i)) {
+                nodes.push(node);
+            }
+        });
+    } else {
+        var arr = criteria instanceof Array ? criteria : [criteria];
+
+        this.forEach(function (node) {
+            var add_node = !!filter_not;
+
+            arr.forEach(function (filter) {
+                if (node.is(filter)) {
+                    add_node = !add_node;
+                }
+            });
+
+            if (add_node) {
+                nodes.push(node);
+            }
+        });
+    }
+
+    return nodes;
+};
+
+NodeList.prototype.not = function (sel_or_arr) {
+    return this.filter(sel_or_arr, true);
+};
+
+
+/****************************************************
+ *                                                  *
+ *                      PLUGINS                     *
+ *                                                  *
+ ****************************************************/
 
 /** ========================================================================
  *
@@ -13,35 +142,27 @@ if (!('flex' in document.documentElement.style)) {
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
 
     // CLASS
 
     var Dialog = function (el, options) {
-        var that = this;
-
         this.options = options || {};
-        this.$el = $(el);
+        this.el = el;
 
-        if (this.options.remote) {
-            this.$el
-                .load(this.options.remote, $.proxy(function () {
-                    that.$el.trigger('cem.dialog.loaded');
-                }, this))
+        this.el['cem.dialog'] = this;
+
+        if (this.options.autoclose && this.options.autoclose != '0') {
+            this.el.classList.add('dialog-autoclose');
+        } else {
+            this.el.classList.remove('dialog-autoclose');
         }
 
-        if (this.options.autoclose) {
-            this.$el.on('click', function (e) {
-                var target = $(e.target);
-                if (target.is(that.$el)) {
-                    that.hide(target);
-                }
-            });
-        }
-
-        if (this.options.keyboard) {
-            this.$el.addClass('dialog-keyboard');
+        if (this.options.keyboard && this.options.keyboard != '0') {
+            this.el.classList.add('dialog-keyboard');
+        } else {
+            this.el.classList.remove('dialog-keyboard');
         }
     };
 
@@ -54,83 +175,78 @@ if (!('flex' in document.documentElement.style)) {
     };
 
     Dialog.prototype.toggle = function (_relatedTarget) {
-        return this.$el.hasClass('dialog-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('dialog-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Dialog.prototype.show = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.dialog.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Show
+        e = new Event('cem.dialog.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Show dialog
-        this.$el.addClass('dialog-visible');
+        // Show
+        this.el.classList.add('dialog-visible');
 
-        // Focus
+        // Auto Focus
         if (this.options.focus) {
-            this.$el.find(this.options.focus).focus();
+            var el_focus = this.el.querySelector(this.options.focus);
+            if (el_focus && el_focus.focus) {
+                setTimeout(function () {
+                    el_focus.focus();
+                }, 400);
+            }
         }
 
-        e = $.Event('cem.dialog.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.dialog.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Dialog.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.dialog.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.dialog.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide dialog
-        this.$el.removeClass('dialog-visible');
+        // Hide
+        this.el.classList.remove('dialog-visible');
 
-        e = $.Event('cem.dialog.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.dialog.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
-    // DIALOG - JQUERY PLUGIN
+    // Events
 
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Dialog.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var dialog = $this.data('cem.dialog');
-
-            if (!dialog) {
-                dialog = new Dialog(this, options);
-                $this.data('cem.dialog', dialog);
-            }
-
-            if (typeof action == 'string') {
-                dialog[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.dialog = Plugin;
-    $.fn.dialog.Constructor = Dialog;
-
-    // DIALOG - DATA API
-    $(document)
-        .on('click', '[data-toggle="dialog"]', function (e) {
-            var $this = $(this);
-            var $target = CEMaterial.getTarget($this, '.dialog');
-
-            $this.is('a') ? e.preventDefault() : '';
-
-            Plugin.call($target, 'toggle', this);
+    document
+        .on('click', '[data-toggle="dialog"]', function () {
+            var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.dialog');
+            var init = target['cem.dialog'] || new Dialog(target, extend({}, Dialog.DEFAULTS, target.dataset, this.dataset));
+            init.toggle(this);
         })
+        // Autoclose
+        .on('click', '.dialog-visible.dialog-autoclose', function (e) {
+            if (this === e.target) {
+                var init = this['cem.dialog'] || new Dialog(this, extend({}, Dialog.DEFAULTS, this.dataset));
+                init.hide();
+            }
+        })
+        // Escape Key
         .on('keydown', function (e) {
-            // Escape Key
             if (e.which == 27) {
-                var $target = $('.dialog-visible').last();
-                Plugin.call($target, 'hide');
+                var target = document.querySelectorAll('.dialog-visible.dialog-keyboard');
+                target.length ? target[target.length - 1]['cem.dialog'].hide() : '';
             }
         })
     ;
 
-}(jQuery);
+}();
 
 
 /** ========================================================================
@@ -139,24 +255,23 @@ if (!('flex' in document.documentElement.style)) {
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
-
-    var $doc = $(document);
 
     // CLASS
 
     var Dropdown = function (el, options) {
         this.options = options || {};
-        this.$el = $(el);
+        this.el = el;
 
-        this.$body = this.$el.find('.dropdown-body')
+        this.el['cem.dropdown'] = this;
 
-        if (this.options.autoclose) {
-            var that = this;
-            $doc.on('click', function (e) {
-                that.$el.not($(e.target).parents('.dropdown-visible')).dropdown('hide');
-            });
+        this.body = this.el.querySelector('.dropdown-body');
+
+        if (this.options.autoclose && this.options.autoclose != '0') {
+            this.el.classList.add('dropdown-autoclose');
+        } else {
+            this.el.classList.remove('dropdown-autoclose');
         }
     };
 
@@ -167,312 +282,64 @@ if (!('flex' in document.documentElement.style)) {
     };
 
     Dropdown.prototype.toggle = function (_relatedTarget) {
-        return this.$el.hasClass('dropdown-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('dropdown-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Dropdown.prototype.show = function (_relatedTarget) {
         var e; // Event handler
 
-        // If has OTHER OPENNED dropdown, close
-        $doc.find('.dropdown.dropdown-visible').not(this.$el.parents('.dropdown-visible')).dropdown('hide');
+        // Event Before Show
+        e = new Event('cem.dropdown.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        e = $.Event('cem.dropdown.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Show
+        this.el.classList.add('dropdown-visible');
+        // this.updatePosition();
 
-        // Show dropdown
-        this.$el.addClass('dropdown-visible');
-        this.updatePosition();
-
-        e = $.Event('cem.dropdown.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.dropdown.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Dropdown.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.dropdown.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.dropdown.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide dropdown
-        this.$el.removeClass('dropdown-visible');
+        // Hide
+        this.el.classList.remove('dropdown-visible');
 
-        e = $.Event('cem.dropdown.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.dropdown.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
-    Dropdown.prototype.updatePosition = function () {
-        this.$body.find('.dropdown-body').css('transform', 'none');
-        var offset = this.$body.offset();
+    // Events
+    document
+        .on('click', '[data-toggle="dropdown"]', function () {
+            var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.dropdown');
+            var init = target['cem.dropdown'] || new Dropdown(target, extend({}, Dropdown.DEFAULTS, target.dataset, this.dataset));
+            init.toggle(this);
+        })
+        // Autoclose
+        .on('click', function (e) {
+            var parents = e.target.parents('.dropdown-visible');
+            var drops = document.querySelectorAll('.dropdown-visible.dropdown-autoclose').not(parents);
 
-        if (offset.left < 0) {
-            this.$body.css('transform', 'translateX(' + (Math.abs(offset.left) + 4) + 'px)');
-        } else {
-            var translate = (offset.left + this.$body.outerWidth()) - $('body').outerWidth();
-            if (translate > 0) {
-                this.$body.css('transform', 'translateX(-' + (translate + 24) + 'px)');
-            }
-        }
-    };
-
-    // DROPDOWN - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Dropdown.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var dropdown = $this.data('cem.dropdown');
-
-            if (!dropdown) {
-                dropdown = new Dropdown(this, options);
-                $this.data('cem.dropdown', dropdown);
-            }
-
-            if (typeof action == 'string') {
-                dropdown[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.dropdown = Plugin;
-    $.fn.dropdown.Constructor = Dropdown;
-
-    // DROPDOWN - DATA API
-    $doc.on('click', '[data-toggle="dropdown"]', function (e) {
-        var $this = $(this);
-        var $target = CEMaterial.getTarget($this, '.dropdown');
-
-        $this.is('a') ? e.preventDefault() : '';
-
-        Plugin.call($target, 'toggle', this);
-    });
-
-}(jQuery);
-
-
-/** ========================================================================
- *
- * CEMaterial Tabs
- *
- * ======================================================================== */
-
-+function ($) {
-    'use strict';
-
-    // CLASS
-
-    var Tabs = function (el, options) {
-        this.options = options || {};
-        this.$el = $(el).closest('.tabs');
-
-        // Create element
-        this.$list = this.$el.find('.tabs-nav');
-        this.$content = this.$el.find('.tabs-list > .tab-content');
-
-        if (!this.options.swipe) {
-            this.$el.addClass('tabs-noswipe');
-        }
-
-        this.$bar = $('<div class="tabs-bar"></div>');
-        this.updateBar();
-        this.$list.prepend(this.$bar);
-    };
-
-    Tabs.VERSION = '0.1.7';
-
-    Tabs.DEFAULTS = {
-        swipe: true
-    };
-
-    Tabs.prototype.show = function (_relatedTarget) {
-        var e; // Event handler
-
-        if (!_relatedTarget) {
-            return;
-        }
-
-        var $handler = $(_relatedTarget);
-
-        var $target,
-            $nav;
-
-        if ($handler.is('.tab-content')) {
-            $target = $handler;
-            $nav = this.$el.find('.tabs-nav > [data-toggle="tab"]').filter(function (i) {
-                return $(CEMaterial.getTarget($(this))).is($target) || i == $target.index();
+            drops.forEach(function (el) {
+                var init = el['cem.dropdown'] || new Dropdown(el, extend({}, Dropdown.DEFAULTS, el.dataset));
+                init.hide();
             });
-        } else {
-            $target = CEMaterial.getTarget($handler);
-            $nav = $handler;
-
-            if (!$target.length) {
-                // Get tab content (target panel) by index
-                $target = this.$content.eq($nav.index() - 1);
-            }
-        }
-
-        // If has OTHER ACTIVE tab, hide
-        this.$el.tabs('hide');
-
-        e = $.Event('cem.tabs.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
-
-        $nav.addClass('tab-active');
-        $target.addClass('tab-visible');
-
-        this.updateBar();
-
-        e = $.Event('cem.tabs.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
-    };
-
-    Tabs.prototype.hide = function (_relatedTarget) {
-        var e; // Event handler
-
-        e = $.Event('cem.tabs.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
-
-        // Hide tab
-        this.$list.find('.tab-active').removeClass('tab-active');
-        this.$el.find('.tab-content.tab-visible').removeClass('tab-visible');
-
-        e = $.Event('cem.tab.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
-    };
-
-    Tabs.prototype.updateBar = function () {
-        var $active = this.$list.find('.tab-active');
-
-        var pos = $active.position();
-        var scroll = this.$list.scrollLeft();
-
-        var left = scroll + pos.left;
-
-        if (pos.left + $active.outerWidth() > this.$list.outerWidth()) {
-            this.$list.animate({
-                scrollLeft: left - this.$list.outerWidth() + $active.outerWidth()
-            }, 200);
-        } else if (pos.left < 0) {
-            this.$list.animate({
-                scrollLeft: left
-            }, 200);
-        }
-
-        // Update bar css
-        this.$bar.css({
-            transform: 'translateX(' + left + 'px)',
-            width: $active.outerWidth()
-        });
-    };
-
-    // TABS - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Tabs.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var tabs = $this.data('cem.tabs');
-
-            if (!tabs) {
-                tabs = new Tabs(this, options);
-                $this.data('cem.tabs', tabs);
-            }
-
-            if (typeof action == 'string') {
-                tabs[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.tabs = Plugin;
-    $.fn.tabs.Constructor = Tabs;
-
-    // TABS - DATA API
-    $(document).on('click', '[data-toggle="tab"]', function (e) {
-        var $this = $(this);
-        var $target = $this.closest('.tabs');
-
-        $this.is('a') ? e.preventDefault() : '';
-
-        Plugin.call($target, 'show', this);
-    });
-
-    $(document)
-        .on('swipestart', '.tabs:not(.tabs-noswipe) .tabs-list', function () {
-            var $tabs = $(this).closest('.tabs');
-
-            if (!$tabs.data('cem.tabs')) {
-                $tabs.tabs();
-            }
-
-            var $bar = $tabs.find('.tabs-bar');
-
-            $tabs.find('.tabs-bar').addClass('no-transition');
-            $(this).find('.tab-visible').addClass('no-transition');
-
-            // GET TRANSLATE X VALUE
-            var translate_x = parseInt($bar.css('transform').split(',')[4]);
-            $bar.data('translateX', translate_x);
-        })
-        .on('swipemove', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
-            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
-                return this.scrollWidth > $(this).outerWidth();
-            }).length;
-
-            if (is_horizontal && !is_parent_scrollable) {
-                var $el = $(this);
-                var $active = $el.find('.tab-visible');
-                var $bar = $el.closest('.tabs').find('.tabs-bar');
-
-                e.preventDefault();
-
-                // Move tab content
-                $active.css('marginLeft', e.swipeOffsetX);
-
-                // Move tab bar
-                var translateX = $bar.data('translateX') - (e.swipeOffsetX / $el.outerWidth() * 100);
-                $bar.css('transform', 'translateX(' + translateX + 'px)');
-            }
-        })
-        .on('swipeend', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
-            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_parent_scrollable = $(e.target).parentsUntil($(this)).filter(function () {
-                return this.scrollWidth > $(this).outerWidth();
-            }).length;
-
-            var $el = $(this);
-            var $active = $el.find('.tab-visible');
-            var $bar = $el.closest('.tabs').find('.tabs-bar');
-
-            var offset_start = $active.outerWidth() * 0.3;
-            var $new;
-
-            if (is_horizontal && !is_parent_scrollable) {
-                if (Math.abs(e.swipeOffsetX) > offset_start) {
-                    if (e.swipeOffsetX > 0) {
-                        $new = $active.prev('.tab-content');
-                    } else {
-                        $new = $active.next('.tab-content');
-                    }
-                }
-            }
-
-            $new = $new && $new.length ? $new : $active;
-
-            Plugin.call($el.closest('.tabs'), 'show', $new.get(0));
-
-            // Reset tab content
-            $active.css('marginLeft', '');
-
-            $bar.removeClass('no-transition');
-            $active.removeClass('no-transition');
-
         })
     ;
 
-}(jQuery);
+}();
 
 
 /** ========================================================================
@@ -481,27 +348,33 @@ if (!('flex' in document.documentElement.style)) {
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
 
     // CLASS
 
     var Panel = function (el, options) {
         this.options = options || {};
-        this.$el = $(el);
+        this.el = el;
 
-        if (this.options.margin) {
-            this.$el.addClass('panel-margin');
+        this.el['cem.panel'] = this;
+
+        if (this.options.margin && this.options.margin != '0') {
+            this.el.classList.add('panel-margin');
+        } else {
+            this.el.classList.remove('panel-margin');
         }
 
-        if (this.options.popout) {
-            this.$el.addClass('panel-popout');
+        if (this.options.popout && this.options.popout != '0') {
+            this.el.classList.add('panel-popout');
+        } else {
+            this.el.classList.remove('panel-popout');
         }
 
         this.updateHeight();
     };
 
-    Panel.VERSION = '0.1.6';
+    Panel.VERSION = '0.1.2';
 
     Panel.DEFAULTS = {
         margin: false,
@@ -509,86 +382,75 @@ if (!('flex' in document.documentElement.style)) {
     };
 
     Panel.prototype.toggle = function (_relatedTarget) {
-        return this.$el.hasClass('panel-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('panel-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Panel.prototype.show = function (_relatedTarget) {
         var e; // Event handler
 
         // If has panel group, close PREVIOUS OPENNED PANEL
-        this.$el.closest('.panel-group').find('.panel.panel-visible').panel('hide');
+        var to_hide = this.el.closest('.panel-group').querySelector('.panel-visible');
+        if (to_hide) {
+            var init = to_hide['cem.panel'] || new Panel(to_hide, extend({}, Panel.DEFAULTS, to_hide.dataset));
+            init.hide();
+        }
 
-        e = $.Event('cem.panel.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Show
+        e = new Event('cem.panel.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Show panel
+        // Show
         this.updateHeight();
-        this.$el.addClass('panel-visible');
+        this.el.classList.add('panel-visible');
 
-        e = $.Event('cem.panel.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.panel.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Panel.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.panel.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.panel.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide panel
+        // Hide
         this.updateHeight();
-        this.$el.removeClass('panel-visible');
+        this.el.classList.remove('panel-visible');
 
-        e = $.Event('cem.panel.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.panel.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Panel.prototype.updateHeight = function () {
-        this.$el.find('.panel-body, .panel-footer').each(function () {
-            var $el = $(this);
+        this.el.querySelectorAll('.panel-body, .panel-footer').forEach(function (node) {
+            var ref = node.cloneNode(true);
+            ref.classList.add('panel-clone');
+            ref.style.height = 'auto';
 
-            var $ref = $el.clone().insertAfter($el).addClass('panel-clone').css('height', 'auto');
-            var height = $ref.outerHeight();
-            $ref.remove();
+            node.parentNode.insertBefore(ref, node.nextSibling);
 
-            $el.css('height', height);
+            var height = ref.offsetHeight;
+            ref.parentNode.removeChild(ref);
+
+            node.style.height = height;
         });
     };
 
-    // PANEL - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Panel.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var panel = $this.data('cem.panel');
-
-            if (!panel) {
-                panel = new Panel(this, options);
-                $this.data('cem.panel', panel);
-            }
-
-            if (typeof action == 'string') {
-                panel[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.panel = Plugin;
-    $.fn.panel.Constructor = Panel;
-
-    // PANEL - DATA API
-    $(document).on('click', '[data-toggle="panel"]', function (e) {
-        var $this = $(this);
-        var $target = CEMaterial.getTarget($this, '.panel');
-
-        $this.is('a') ? e.preventDefault() : '';
-
-        Plugin.call($target, 'toggle', this);
+    // Events
+    document.on('click', '[data-toggle="panel"]', function () {
+        var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.panel');
+        var init = target['cem.panel'] || new Panel(target, extend({}, Panel.DEFAULTS, target.dataset, this.dataset));
+        init.toggle(this);
     });
 
-}(jQuery);
+}();
 
 
 /** ========================================================================
@@ -597,25 +459,25 @@ if (!('flex' in document.documentElement.style)) {
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
-
-    var $doc = $(document);
 
     // CLASS
 
     var Sidebar = function (el, options) {
         this.options = options || {};
-        this.$el = $(el);
+        this.el = el;
 
-        this.$backdrop = $('<div class="layout-sidebar-backdrop"></div>').insertAfter(this.$el);
+        this.el['cem.sidebar'] = this;
 
-        var that = this;
+        this.backdrop = document.createElement('div');
+        this.backdrop.classList.add('layout-sidebar-backdrop');
+        this.el.parentNode.insertBefore(this.backdrop, this.el.nextSibling);
 
-        if (this.options.autoclose) {
-            $doc.on('click', function (e) {
-                that.$el.not($(e.target).closest('.layout-sidebar-visible')).sidebar('hide');
-            });
+        if (this.options.autoclose && this.options.autoclose != '0') {
+            this.el.classList.add('sidebar-autoclose');
+        } else {
+            this.el.classList.remove('sidebar-autoclose');
         }
     };
 
@@ -626,169 +488,155 @@ if (!('flex' in document.documentElement.style)) {
     };
 
     Sidebar.prototype.toggle = function (_relatedTarget) {
-        return this.$el.hasClass('layout-sidebar-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('layout-sidebar-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Sidebar.prototype.show = function (_relatedTarget) {
         var that = this;
         var e; // Event handler
 
-        e = $.Event('cem.sidebar.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Show
+        e = new Event('cem.sidebar.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Show sidebar
+        // Show
         setTimeout(function () {
-            that.$el.addClass('layout-sidebar-visible');
+            that.el.classList.add('layout-sidebar-visible');
         }, 1);
 
-        e = $.Event('cem.sidebar.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.sidebar.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Sidebar.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.sidebar.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.sidebar.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide sidebar
-        this.$el.removeClass('layout-sidebar-visible');
+        // Hide
+        this.el.classList.remove('layout-sidebar-visible');
 
-        e = $.Event('cem.sidebar.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.sidebar.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
-    // SIDEBAR - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Sidebar.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var sidebar = $this.data('cem.sidebar');
-
-            if (!sidebar) {
-                sidebar = new Sidebar(this, options);
-                $this.data('cem.sidebar', sidebar);
-            }
-
-            if (typeof action == 'string') {
-                sidebar[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.sidebar = Plugin;
-    $.fn.sidebar.Constructor = Sidebar;
-
-    // SIDEBAR - DATA API
-    $doc
-        .on('click', '[data-toggle="sidebar"]', function (e) {
-            var $this = $(this);
-            var $target = CEMaterial.getTarget($this, '.layout-sidebar');
-
-            if (!$target.length) {
-                $target = $this.closest('.layout').find('.layout-sidebar').first();
-            }
-
-            $this.is('a') ? e.preventDefault() : '';
-
-            Plugin.call($target, 'toggle', this);
+    // Events
+    document
+        .on('click', '[data-toggle="sidebar"]', function () {
+            var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.layout-sidebar');
+            target = target || this.closest('.layout').querySelector('.layout-sidebar');
+            var init = target['cem.sidebar'] || new Sidebar(target, extend({}, Sidebar.DEFAULTS, target.dataset, this.dataset));
+            init.toggle(this);
         })
-        .on('click', '[data-toggle="nav"]', function (e) {
-            var $this = $(this);
-            var $sidebar = $this.closest('.layout-sidebar');
-
-            $this.is('a') ? e.preventDefault() : '';
-
-            Plugin.call($sidebar, 'show', this);
+        // Autoclose
+        .on('click', '.layout-sidebar-visible.sidebar-autoclose ~ .layout-sidebar-backdrop', function () {
+            var target = this.previousElementSibling;
+            var init = target['cem.sidebar'] || new Sidebar(target, extend({}, Sidebar.DEFAULTS, target.dataset));
+            init.hide(this);
+        })
+        // Sidebar Navs
+        .on('click', '[data-toggle="nav"]', function () {
+            var sidebar = this.closest('.layout-sidebar');
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
+            init.show(this);
 
             // Sidenav click
-            var $target = $sidebar.find(CEMaterial.getTarget($this));
-
-            if ($target.hasClass('nav-hidden')) {
-                $sidebar.find('.layout-nav').addClass('nav-hidden');
-                $target.removeClass('nav-hidden');
-            } else {
-                $sidebar.find('.layout-nav').removeClass('nav-hidden');
-                $target.addClass('nav-hidden');
+            var target = sidebar.querySelector(this.dataset.target);
+            if (target) {
+                if (target.classList.contains('nav-hidden')) {
+                    sidebar.querySelectorAll('.layout-nav').forEach(function (node) {
+                        node.classList.add('nav-hidden');
+                    });
+                    target.classList.remove('nav-hidden');
+                } else {
+                    sidebar.querySelectorAll('.layout-nav').forEach(function (node) {
+                        node.classList.remove('nav-hidden');
+                    });
+                    target.classList.add('nav-hidden');
+                }
             }
         })
     ;
 
-    $doc
+
+    document
         .on('swipestart', '.layout', function (e) {
-            var $el = $(e.target).closest('.layout');
-            var $sidebar = $el.find('.layout-sidebar').first();
+            var el = this;
+            var sidebar = el.querySelector('.layout-sidebar');
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
 
             // GET TRANSLATE X VALUE
-            var translate_x = parseInt($sidebar.css('transform').split(',')[4]);
-
-            // Create a backdrop if not exists (INIT SIDEBAR PLUGIN)
-            if (!$sidebar.data('cem.sidebar')) {
-                $sidebar.sidebar();
-            }
+            // var translate_x = sidebar.style.transform.replace(/\D/g, '');
+            var translate_x = parseInt(window.getComputedStyle(sidebar, null).getPropertyValue('transform').split(',')[4]);
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_leftedge = e.swipeFromX - $el.offset().left < 16;
-            var is_righttarget = $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop);
+            var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
+            var is_righttarget = e.target.closest(sidebar) || e.target === init.backdrop;
 
             var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
             if (bl_swipe) {
-                $sidebar.addClass('layout-sidebar-swiping').data('translateX', translate_x);
+                sidebar.classList.add('layout-sidebar-swiping');
+                sidebar.dataset.translateX = translate_x;
             }
         })
         .on('swipemove', '.layout', function (e) {
-            var $el = $(e.target).closest('.layout');
-            var $sidebar = $el.find('.layout-sidebar').first();
+            var el = this;
+            var sidebar = el.querySelector('.layout-sidebar');
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_leftedge = e.swipeFromX - $el.offset().left < 16;
-            var is_righttarget = $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop);
+            var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
+            var is_righttarget = e.target.closest(sidebar) || e.target === init.backdrop;
 
             var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
             if (bl_swipe) {
                 e.preventDefault();
 
-                var translate_x = $sidebar.data('translateX');
+                var translate_x = sidebar.dataset.translateX;
 
                 // Offset (translateX) | MIN = 0 | MAX = SIDEBAR WIDTH
-                var width = $sidebar.outerWidth();
-                var offset = Math.max(0, Math.min(width, translate_x + e.swipeOffsetX));
+                var width = sidebar.offsetWidth;
+                var offset = Math.max(0, Math.min(width, parseInt(translate_x) + parseInt(e.swipeOffsetX)));
 
                 // Backdrop opacity percent
                 var opacity = offset / width;
 
-                $sidebar.css('transform', 'translateX(' + offset + 'px)');
-                $sidebar.data('cem.sidebar').$backdrop.css('opacity', opacity);
+                sidebar.style.transform = 'translateX(' + offset + 'px)';
+                init.backdrop.style.opacity = opacity;
             }
         })
         .on('swipeend', '.layout', function (e) {
-            var $el = $(e.target).closest('.layout');
-            var $sidebar = $el.find('.layout-sidebar').first();
+            var el = this;
+            var sidebar = el.querySelector('.layout-sidebar');
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
 
-            $sidebar.removeClass('layout-sidebar-swiping').removeAttr('style');
-            $sidebar.data('cem.sidebar').$backdrop.removeAttr('style');
+            sidebar.classList.remove('layout-sidebar-swiping');
+            sidebar.removeAttribute('style');
+            init.backdrop.removeAttribute('style');
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-            var is_leftedge = e.swipeFromX - $el.offset().left < 16;
-            var is_righttarget = $(e.target).closest($sidebar).length || $(e.target).is($sidebar.data('cem.sidebar').$backdrop);
+            var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
+            var is_righttarget = e.target.closest(sidebar) || e.target === init.backdrop;
 
             var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
             if (bl_swipe) {
-                if (e.swipeDirectionX == 'left') {
-                    $sidebar.sidebar('hide');
-                } else {
-                    $sidebar.sidebar('show');
-                }
+                e.swipeDirectionX == 'left' ? init.hide() : init.show();
             }
         })
     ;
 
-}(jQuery);
+}();
 
 
 /** ========================================================================
@@ -799,20 +647,19 @@ if (!('flex' in document.documentElement.style)) {
 
 +(function () {
 
-    var $doc = $(document);
     var swipe_touch = 'ontouchstart' in document.documentElement;
 
     // Event creation
 
-    $doc
+    document
         .on(swipe_touch ? 'touchstart' : 'mousedown', function (e) {
-            var data = {
-                $target: $(e.target),
-                pos_x: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
-                pos_y: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0),
+            document.swipe = {
+                target: e.target,
+                pos_x: e.pageX || (e.touches ? e.touches[0].pageX : 0),
+                pos_y: e.pageY || (e.touches ? e.touches[0].pageY : 0),
                 event_params: {
-                    pageX: e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0),
-                    pageY: e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0)
+                    pageX: e.pageX || (e.touches ? e.touches[0].pageX : 0),
+                    pageY: e.pageY || (e.touches ? e.touches[0].pageY : 0)
                 },
                 /**
                  * 0 = No swipe
@@ -821,20 +668,18 @@ if (!('flex' in document.documentElement.style)) {
                  */
                 status: 1
             };
-
-            $doc.data('swipe', data);
         })
         .on(swipe_touch ? 'touchmove' : 'mousemove', function (e) {
-            if (!$doc.data('swipe')) {
+            if (!document.swipe) {
                 return true;
             }
 
-            var data = $doc.data('swipe');
+            var data = document.swipe;
 
-            var target_x = e.pageX || (e.originalEvent.touches ? e.originalEvent.touches[0].pageX : 0);
-            var target_y = e.pageY || (e.originalEvent.touches ? e.originalEvent.touches[0].pageY : 0);
+            var target_x = e.pageX || (e.touches ? e.touches[0].pageX : 0);
+            var target_y = e.pageY || (e.touches ? e.touches[0].pageY : 0);
 
-            data = $.extend(data, {
+            data = extend(data, {
                 event_params: {
                     direction: {
                         bottom: data.pos_y < target_y,
@@ -854,18 +699,20 @@ if (!('flex' in document.documentElement.style)) {
                     // Default
                     pageX: target_x,
                     pageY: target_y,
-                    preventDefault: function () {
-                        e.preventDefault();
-                    }
+                    preventDefault: e.preventDefault
                 }
             });
 
-            $doc.data('swipe', data);
+            document.swipe = data;
 
             if (data.status == 1) {
-                data.$target.trigger($.Event('swipestart', data.event_params));
-                data = $.extend(data, {status: 2});
-                $doc.data('swipe', data);
+                // Event swipestart
+                var evt = new Event('swipestart', {bubbles: true, cancelable: true, composed: true});
+                evt = extend(evt, data.event_params);
+                data.target.dispatchEvent(evt);
+
+                data = extend(data, {status: 2});
+                document.swipe = data;
             }
 
             if (data.status != 2) {
@@ -875,26 +722,32 @@ if (!('flex' in document.documentElement.style)) {
             // Evets swipeleft, swiperight, swipetop, swipebottom
             for (var i in data.event_params.direction) {
                 if (data.event_params.direction[i]) {
-                    data.$target.trigger($.Event('swipe' + i, data.event_params));
+                    evt = new Event('swipe' + i, {bubbles: true, cancelable: true, composed: true});
+                    evt = extend(evt, data.event_params);
+                    data.target.dispatchEvent(evt);
                 }
             }
 
-            data.$target.trigger($.Event('swipemove', data.event_params));
+            evt = new Event('swipemove', {bubbles: true, cancelable: true, composed: true});
+            evt = extend(evt, data.event_params);
+            data.target.dispatchEvent(evt);
         })
         .on(swipe_touch ? 'touchend' : 'mouseup dragend', function () {
-            if (!$doc.data('swipe')) {
+            if (!document.swipe) {
                 return true;
             }
 
-            var data = $doc.data('swipe');
+            var data = document.swipe;
 
             if (data.status) {
                 if (data.status == 2) {
-                    data.$target.trigger($.Event('swipeend', data.event_params));
+                    var evt = new Event('swipeend', {bubbles: true, cancelable: true, composed: true});
+                    evt = extend(evt, data.event_params);
+                    data.target.dispatchEvent(evt);
                 }
 
-                data = $.extend(data, {status: 0});
-                $doc.data('swipe', data);
+                data = extend(data, {status: 0});
+                document.swipe = data;
             }
         })
     ;
@@ -904,26 +757,245 @@ if (!('flex' in document.documentElement.style)) {
 
 /** ========================================================================
  *
+ * CEMaterial Tabs
+ *
+ * ======================================================================== */
+
++function () {
+    'use strict';
+
+    // CLASS
+
+    var Tabs = function (el, options) {
+        this.options = options || {};
+        this.el = el.closest('.tabs');
+
+        this.el['cem.tabs'] = this;
+
+        // Create element
+        this.list = this.el.querySelector('.tabs-nav');
+        this.content = this.el.querySelectorAll('.tabs-list > .tab-content');
+
+        if (!this.options.swipe || this.options.swipe == '0') {
+            this.el.classList.add('tabs-noswipe');
+        } else {
+            this.el.classList.remove('tabs-noswipe');
+        }
+
+        this.bar = document.createElement('div');
+        this.bar.classList.add('tabs-bar');
+        this.updateBar();
+        this.list.insertBefore(this.bar, this.list.firstChild);
+    };
+
+    Tabs.VERSION = '0.1.7';
+
+    Tabs.DEFAULTS = {
+        swipe: true
+    };
+
+    Tabs.prototype.show = function (_relatedTarget) {
+        var e; // Event handler
+
+        if (!_relatedTarget) {
+            return;
+        }
+
+        var handler = _relatedTarget;
+
+        var target,
+            nav;
+
+        if (handler.matches('.tab-content')) {
+            target = handler;
+
+            this.list.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
+                var target_index = Array.prototype.indexOf.call(node.parentNode, node);
+                if (document.querySelector(node.dataset.target) === target || i == target_index) {
+                    nav = node;
+                }
+            });
+        } else {
+            target = document.querySelector(handler.dataset.target);
+            nav = handler;
+
+            if (!target) {
+                // Get tab content (target panel) by index
+                var nav_index = Array.prototype.indexOf.call(this.list, nav);
+                target = this.list.querySelector(':nth-child(' + nav_index + ')');
+            }
+        }
+
+        // Close others openned
+        this.hide();
+
+        // Event Before Show
+        e = new Event('cem.tabs.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
+
+        // Show
+        nav.classList.add('tab-active');
+        target.classList.add('tab-visible');
+        this.updateBar();
+
+        // Event Show
+        e = new Event('cem.tabs.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
+    };
+
+    Tabs.prototype.hide = function (_relatedTarget) {
+        var e; // Event handler
+
+        // Event Before Hide
+        e = new Event('cem.tabs.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
+
+        // Hide
+        this.list.querySelector('.tab-active').classList.remove('tab-active');
+        this.el.querySelector('.tab-content.tab-visible').classList.remove('tab-visible');
+
+        // Event Hide
+        e = new Event('cem.tabs.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
+    };
+
+    Tabs.prototype.updateBar = function () {
+        var active = this.list.querySelector('.tab-active');
+
+        var pos = {left: active.offsetLeft - this.list.scrollLeft};
+        var scroll = this.list.scrollLeft;
+
+        var left = scroll + pos.left;
+
+        if (pos.left + active.offsetWidth > this.list.offsetWidth) {
+            this.list.scrollLeft = left - this.list.offsetWidth + active.offsetWidth;
+            // this.$list.animate({
+            //     scrollLeft: left - this.$list.offsetWidth + $active.offsetWidth
+            // }, 200);
+        } else if (pos.left < 0) {
+            this.list.scrollLeft = left;
+            // this.$list.animate({
+            //     scrollLeft: left
+            // }, 200);
+        }
+
+        // Update bar css
+        this.bar.style.transform = 'translateX(' + left + 'px)';
+        this.bar.style.width = active.offsetWidth;
+    };
+
+    // Events
+    document
+        .on('click', '[data-toggle="tab"]', function () {
+            var target = this.closest('.tabs');
+            var init = target['cem.tabs'] || new Tabs(target, extend({}, Tabs.DEFAULTS, target.dataset, this.dataset));
+            init.show(this);
+        })
+        .on('swipestart', '.tabs:not(.tabs-noswipe) .tabs-list', function () {
+            var tabs = this.closest('.tabs');
+            var init = tabs['cem.tabs'] || new Tabs(tabs, extend({}, Tabs.DEFAULTS, tabs.dataset));
+
+            init.bar.classList.add('no-transition');
+            this.querySelector('.tab-visible').classList.add('no-transition');
+
+            // GET TRANSLATE X VALUE
+            init.bar.dataset.translateX = init.bar.style.transform.replace(/\D/g, '');
+        })
+        .on('swipemove', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+            var is_parent_scrollable = false;
+
+            // Check parent scrollable
+            e.target.parentsUntil(this).forEach(function (node) {
+                if (node.scrollWidth > node.offsetWidth) {
+                    is_parent_scrollable = true;
+                }
+            });
+
+            if (is_horizontal && !is_parent_scrollable) {
+                var active = this.querySelector('.tab-visible');
+                var bar = this.closest('.tabs').querySelector('.tabs-bar');
+
+                e.preventDefault();
+
+                // Move tab content
+                active.style.marginLeft = e.swipeOffsetX;
+
+                // Move tab bar
+                var translateX = bar.dataset.translateX - (e.swipeOffsetX / this.offsetWidth * 100);
+                bar.style.transform = 'translateX(' + translateX + 'px)';
+            }
+        })
+        .on('swipeend', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+            var is_parent_scrollable = false;
+
+            // Check parent scrollable
+            e.target.parentsUntil(this).forEach(function (node) {
+                if (node.scrollWidth > node.offsetWidth) {
+                    is_parent_scrollable = true;
+                }
+            });
+
+            var active = this.querySelector('.tab-visible');
+            var bar = this.closest('.tabs').querySelector('.tabs-bar');
+
+            var offset_start = active.offsetWidth * 0.3;
+            var new_active;
+
+            if (is_horizontal && !is_parent_scrollable) {
+                if (Math.abs(e.swipeOffsetX) > offset_start) {
+                    if (e.swipeOffsetX > 0) {
+                        new_active = active.previousElementSibling;
+                    } else {
+                        new_active = active.nextElementSibling;
+                    }
+                }
+            }
+
+            bar.classList.remove('no-transition');
+            active.classList.remove('no-transition');
+
+            new_active = new_active || active;
+            this.closest('.tabs')['cem.tabs'].show(new_active);
+
+            // Reset tab content
+            active.style.marginLeft = '';
+        })
+    ;
+
+}();
+
+
+/** ========================================================================
+ *
  * CEMaterial Tooltips
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
 
     // CLASS
 
     var Tooltip = function (el, options) {
         this.options = options || {};
-        this.$el = $(el);
+        this.el = el;
+
+        this.el['cem.tooltip'] = this;
 
         // Create element
-        this.$tooltip = $('<span class="tooltip"></span>');
+        this.tooltip = document.createElement('span');
+        this.tooltip.classList.add('tooltip');
 
         if (this.options.wrap) {
-            this.$tooltip.removeClass('tooltip-nowrap');
+            this.tooltip.classList.add('tooltip-wrap');
         } else {
-            this.$tooltip.addClass('tooltip-nowrap');
+            this.tooltip.classList.remove('tooltip-wrap');
         }
     };
 
@@ -937,281 +1009,197 @@ if (!('flex' in document.documentElement.style)) {
     Tooltip.prototype.show = function (_relatedTarget) {
         var e; // Event handler
 
-        // If has OTHER OPENNED dropdown, close
-        $('.tooltip-visible').remove();
+        // Close others openned
+        document.querySelectorAll('.tooltip-visible').forEach(function (node) {
+            node.parentNode.removeChild(node);
+        });
 
-        e = $.Event('cem.tooltip.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Show
+        e = new Event('cem.tooltip.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
+        // Show
         this.updateTitle();
         this.updatePosition();
 
-        e = $.Event('cem.tooltip.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.tooltip.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Tooltip.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.tooltip.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.tooltip.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide tooltip
-        this.$tooltip.removeClass('tooltip-visible').remove();
+        // Hide
+        if (this.tooltip.parentNode) {
+            this.tooltip.parentNode.removeChild(this.tooltip);
+        }
 
-        e = $.Event('cem.tooltip.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.tooltip.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Tooltip.prototype.updateTitle = function () {
-        if (!this.$el.data('tooltip')) {
-            this.$el.data('tooltip', this.$el.attr('title'));
+        if (!this.el.dataset.tooltip) {
+            this.el.dataset.tooltip = this.el.getAttribute('title');
         }
 
-        var title = this.$el.data('tooltip');
+        var title = this.el.dataset.tooltip;
 
         // Strip tags
         if (!this.options.html) {
-            title = $("<div/>").html(title).text();
+            var tmp = document.createElement('div');
+            tmp.innerHTML = title;
+            title = tmp.textContent || tmp.innerText;
         }
 
-        this.$tooltip.html(title);
+        this.tooltip.innerHTML = title;
     };
 
     Tooltip.prototype.updatePosition = function () {
-        this.$tooltip.appendTo('body');
+        document.body.appendChild(this.tooltip);
 
-        var offset = this.$el.offset();
-        var width = this.$tooltip.outerWidth();
+        var offset = {top: this.el.offsetTop, left: this.el.offsetLeft};
+        var width = this.tooltip.offsetWidth;
 
         // Offset left (MIN = 0px)
-        var left = Math.max(offset.left + (this.$el.outerWidth() / 2) - (width / 2), 0);
+        var left = Math.max(offset.left + (this.el.offsetWidth / 2) - (width / 2), 0);
 
         // Offset left (MAX = BODY WIDTH - TOOLTIP WIDTH)
-        left = Math.min(left, $('body').outerWidth() - width);
+        left = Math.min(left, document.body.offsetWidth - width);
 
         // Update css position
-        this.$tooltip.css({
-            top: offset.top + this.$el.outerHeight(),
-            left: left
-        }).addClass('tooltip-visible');
+        this.tooltip.style.top = offset.top + this.el.offsetHeight;
+        this.tooltip.style.left = left;
+        this.tooltip.classList.add('tooltip-visible');
     };
 
-    // TOOLTIP - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Tooltip.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var tooltip = $this.data('cem.tooltip');
-
-            if (!tooltip) {
-                tooltip = new Tooltip(this, options);
-                $this.data('cem.tooltip', tooltip);
-            }
-
-            if (typeof action == 'string') {
-                tooltip[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.tooltip = Plugin;
-    $.fn.tooltip.Constructor = Tooltip;
-
-    // TOOLTIP - DATA API
-    $(document)
-        .on('mouseover focus', '[data-tooltip]', function () {
-            Plugin.call($(this), 'show', this);
+    // Events
+    document
+        .on('focusin mouseover', '[data-tooltip]', function () {
+            var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
+            init.show(this);
         })
-        .on('mouseleave blur', '[data-tooltip]', function () {
-            Plugin.call($(this), 'hide', this);
+        .on('focusout mouseout', '[data-tooltip]', function () {
+            var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
+            init.hide(this);
         })
         .on('wheel mousewheel DOMMouseScroll touchstart', function () {
-            $('.tooltip-visible').remove();
+            document.querySelectorAll('.tooltip-visible').forEach(function (node) {
+                node.parentNode.removeChild(node);
+            });
         })
     ;
 
-}(jQuery);
+}();
 
 
-// INIT CEMATERIAL
-jQuery(function ($) {
-    var doc = $(document);
-    CEMaterial.init(doc);
-    doc.on('DOMNodeInserted', function (e) {
-        CEMaterial.init($(e.target));
+/****************************************************
+ *                                                  *
+ *               CEMATERIAL FUNCTIONS               *
+ *                                                  *
+ ****************************************************/
+
+document.on('DOMContentLoaded', function () {
+
+    // Prepare and init CEMaterial
+    CEMaterial.init(document);
+    document.on('DOMNodeInserted', function (e) {
+        CEMaterial.init(e.target);
     });
-});
 
-jQuery(function ($) {
-    var $doc = $(document);
-
-    // CLASS BINDING
-    $doc
-        .on('focus', '[data-class-focus]', function () {
-            CEMaterial.bindClassEvent($(this), 'focus');
-        })
-        .on('blur', '[data-class-focus]', function () {
-            CEMaterial.unbindClassEvent($(this), 'focus');
-        })
-        .on('mouseenter', '[data-class-hover]', function () {
-            CEMaterial.bindClassEvent($(this), 'hover');
-        })
-        .on('mouseleave', '[data-class-hover]', function () {
-            CEMaterial.unbindClassEvent($(this), 'hover');
-        })
-    ;
-
-    // LABEL TOGGLE
-    var texts = 'input.input:not([type="radio"]):not([type="checkbox"]):not([type="button"])';
-    $doc
+    // Label toggle, text fields
+    var texts = '.input:not([type="radio"]):not([type="checkbox"]):not([type="button"])';
+    document
         .on('focus', texts, function () {
-            CEMaterial.onFocus($(this));
+            CEMaterial.onFocus(this);
         })
         .on('blur', texts, function () {
-            CEMaterial.onBlur($(this));
+            CEMaterial.onBlur(this);
         })
     ;
 
-    // TEXTAREA AUTO GROW
-    $doc.on('input', '.input-autogrow', function () {
-        CEMaterial.inputAutoGrow($(this));
+    // Text field auto grow
+    document.on('input', '.input-autogrow', function () {
+        CEMaterial.inputAutoGrow(this);
     });
 
-    // DRAG AND DROP UPLOAD
-    $doc
-        .on('drag dragstart dragend dragover dragenter dragleave drop', '.filedrop', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        })
-        .on('dragover dragenter', '.filedrop', function () {
-            $(this).addClass('filedrop-dragover');
-        })
-        .on('dragleave drop', '.filedrop', function () {
-            $(this).removeClass('filedrop-dragover');
-        })
-        .on('drop', '.filedrop', function (e) {
-            e.preventDefault();
-
-            var el = $(this);
-            var input = el.find('input[type="file"]');
-            var files = e.originalEvent.dataTransfer.files || [];
-            var accept = (input.attr('accept') || "").split(',');
-
-            input.prop('files', files);
-        })
-        .on('change', '.filedrop input[type="file"]', function (e) {
-            var input = $(this);
-            var el = input.closest('.filedrop');
-            var files = e.target.files;
-
-            el.find('img, .filedrop-list').remove();
-
-            if (files && files.length) {
-                var list = $('<div class="filedrop-list"></div>').prependTo(el);
-
-                for (var i in files) {
-                    if (isNaN(i)) {
-                        break;
-                    }
-
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        list.append('<img class="img-fluid" src="' + e.target.result + '"/>');
-                    };
-                    reader.readAsDataURL(files[i]);
-                }
-            }
-        })
-    ;
-
-    // DATA TOGGLE
-    $doc.on('click', '[data-toggle="table"]', function (e) {
+    // Table checkbox toggle
+    document.on('click', '[data-toggle="table"]', function (e) {
         e.stopPropagation();
 
-        var $el = $(this);
-        var target = CEMaterial.getTarget($el, '.table');
-        var checked = $el.prop('checked');
+        var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('table');
+        var checked = this.checked;
 
-        target = target.length ? target : $el.closest('table');
-        target.find('input[type="checkbox"]').prop('checked', checked);
+        target.querySelectorAll('input[type="checkbox"]').forEach(function (node) {
+            node.checked = checked;
+        });
     });
+
 });
 
 
 var CEMaterial = {
     init: function (target) {
-        CEMaterial.onBlur(target.find('.label-float .input').filter(function () {
-            return this.value;
-        }));
-        CEMaterial.inputAutoGrow(target.find('.input-autogrow'));
-    },
-    getTarget: function (el, parent) {
-        if (el.data('target')) {
-            return $(el.data('target'));
-        } else if (el.attr('href') && el.attr('href') != '#') {
-            return $(el.attr('href'));
-        } else if (parent) {
-            return el.closest(parent);
-        }
+        CEMaterial.onBlur(
+            target.querySelectorAll('.label-float .input').filter(function (node) {
+                return node.value;
+            })
+        );
 
-        return new jQuery();
+        CEMaterial.inputAutoGrow(target.querySelectorAll('.input-autogrow'));
     },
-    getLabels: function (el) {
-        var label = el.closest('label,.label');
-        var id = el.attr('id');
+    getTarget: function (node, parent) {
+        return node.dataset.target || node.getAttribute('href') || node.closest(parent) || null;
+    },
+    getLabels: function (node) {
+        var label = [node.closest('label,.label')];
 
-        if (id) {
-            label = label.add($('label[for="' + id + '"]'));
+        if (node.id) {
+            label.push(document.querySelector('label[for="' + node.id + '"]'));
         }
 
         return label;
     },
-    onFocus: function (els) {
-        if (els.length) {
-            els.each(function () {
-                var el = $(this);
-                var label = CEMaterial.getLabels(el);
-                label.addClass('label-active label-focus');
+    onFocus: function (nodes) {
+        if (nodes && nodes.length) {
+            nodes.forEach(function (node) {
+                CEMaterial.getLabels(node).forEach(function (label) {
+                    label.classList.add('label-active', 'label-focus');
+                });
             });
         }
     },
-    onBlur: function (els) {
-        if (els.length) {
-            els.each(function () {
-                var el = $(this);
-                var label = CEMaterial.getLabels(el).removeClass('label-focus');
-
+    onBlur: function (nodes) {
+        if (nodes.length) {
+            nodes.forEach(function (node) {
                 // Check LABEL FLOATING
-                var value = el.val() || '';
+                var value = node.value || '';
                 var has_value = value instanceof Array ? value.length : value.trim();
 
-                label.toggleClass('label-active', has_value ? true : false);
+                CEMaterial.getLabels(node).forEach(function (label) {
+                    label.classList.remove('label-focus');
+                    has_value ? label.classList.add('label-active') : label.classList.remove('label-active');
+                });
             });
         }
     },
-    bindClassEvent: function (el, event) {
-        var clazz = el.data('class-' + event);
-
-        if (!el.hasClass(clazz)) {
-            el.data(event + '-remove', clazz);
-            el.addClass(clazz);
-        }
-    },
-    unbindClassEvent: function (el, event) {
-        el.removeClass(el.data(event + '-remove'));
-    },
-    inputAutoGrow: function (els) {
-        els.each(function () {
-            var el = $(this);
-            if (el.is('textarea')) {
-                this.style.height = '';
-                /* Reset the height*/
-                this.style.height = this.scrollHeight + 'px';
-            } else if (el.is('input') && el.val()) {
-                el.prop('size', el.val().length);
+    inputAutoGrow: function (nodes) {
+        nodes.forEach(function (node) {
+            if (node.is('textarea')) {
+                node.style.height = '';
+                node.style.height = node.scrollHeight + 'px';
+            } else if (node.is('input') && node.value) {
+                node.size = node.value.length;
             }
         });
     }

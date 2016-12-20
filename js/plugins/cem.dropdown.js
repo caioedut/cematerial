@@ -4,24 +4,23 @@
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
-
-    var $doc = $(document);
 
     // CLASS
 
     var Dropdown = function (el, options) {
         this.options = options || {};
-        this.$el = $(el);
+        this.el = el;
 
-        this.$body = this.$el.find('.dropdown-body')
+        this.el['cem.dropdown'] = this;
 
-        if (this.options.autoclose) {
-            var that = this;
-            $doc.on('click', function (e) {
-                that.$el.not($(e.target).parents('.dropdown-visible')).dropdown('hide');
-            });
+        this.body = this.el.querySelector('.dropdown-body');
+
+        if (this.options.autoclose && this.options.autoclose != '0') {
+            this.el.classList.add('dropdown-autoclose');
+        } else {
+            this.el.classList.remove('dropdown-autoclose');
         }
     };
 
@@ -32,84 +31,61 @@
     };
 
     Dropdown.prototype.toggle = function (_relatedTarget) {
-        return this.$el.hasClass('dropdown-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('dropdown-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Dropdown.prototype.show = function (_relatedTarget) {
         var e; // Event handler
 
-        // If has OTHER OPENNED dropdown, close
-        $doc.find('.dropdown.dropdown-visible').not(this.$el.parents('.dropdown-visible')).dropdown('hide');
+        // Event Before Show
+        e = new Event('cem.dropdown.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        e = $.Event('cem.dropdown.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Show
+        this.el.classList.add('dropdown-visible');
+        // this.updatePosition();
 
-        // Show dropdown
-        this.$el.addClass('dropdown-visible');
-        this.updatePosition();
-
-        e = $.Event('cem.dropdown.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.dropdown.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Dropdown.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.dropdown.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.dropdown.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide dropdown
-        this.$el.removeClass('dropdown-visible');
+        // Hide
+        this.el.classList.remove('dropdown-visible');
 
-        e = $.Event('cem.dropdown.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.dropdown.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
-    Dropdown.prototype.updatePosition = function () {
-        this.$body.find('.dropdown-body').css('transform', 'none');
-        var offset = this.$body.offset();
+    // Events
+    document
+        .on('click', '[data-toggle="dropdown"]', function () {
+            var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.dropdown');
+            var init = target['cem.dropdown'] || new Dropdown(target, extend({}, Dropdown.DEFAULTS, target.dataset, this.dataset));
+            init.toggle(this);
+        })
+        // Autoclose
+        .on('click', function (e) {
+            var parents = e.target.parents('.dropdown-visible');
+            var drops = document.querySelectorAll('.dropdown-visible.dropdown-autoclose').not(parents);
 
-        if (offset.left < 0) {
-            this.$body.css('transform', 'translateX(' + (Math.abs(offset.left) + 4) + 'px)');
-        } else {
-            var translate = (offset.left + this.$body.outerWidth()) - $('body').outerWidth();
-            if (translate > 0) {
-                this.$body.css('transform', 'translateX(-' + (translate + 24) + 'px)');
-            }
-        }
-    };
+            drops.forEach(function (el) {
+                var init = el['cem.dropdown'] || new Dropdown(el, extend({}, Dropdown.DEFAULTS, el.dataset));
+                init.hide();
+            });
+        })
+    ;
 
-    // DROPDOWN - JQUERY PLUGIN
-
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Dropdown.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var dropdown = $this.data('cem.dropdown');
-
-            if (!dropdown) {
-                dropdown = new Dropdown(this, options);
-                $this.data('cem.dropdown', dropdown);
-            }
-
-            if (typeof action == 'string') {
-                dropdown[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.dropdown = Plugin;
-    $.fn.dropdown.Constructor = Dropdown;
-
-    // DROPDOWN - DATA API
-    $doc.on('click', '[data-toggle="dropdown"]', function (e) {
-        var $this = $(this);
-        var $target = CEMaterial.getTarget($this, '.dropdown');
-
-        $this.is('a') ? e.preventDefault() : '';
-
-        Plugin.call($target, 'toggle', this);
-    });
-
-}(jQuery);
+}();

@@ -6,9 +6,6 @@ angular.module('docs').controller('gettingStarted.introductionCtrl', function ($
             '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0"/>'
         ),
         dependences: (
-            '<!-- JQUERY -->' + "\n" +
-            '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>' + "\n" +
-            "\n" +
             '<!-- FONTS -->' + "\n" +
             '<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>' + "\n" +
             '<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>'

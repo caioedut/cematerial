@@ -4,35 +4,27 @@
  *
  * ======================================================================== */
 
-+function ($) {
++function () {
     'use strict';
 
     // CLASS
 
     var Dialog = function (el, options) {
-        var that = this;
-
         this.options = options || {};
-        this.$el = $(el);
+        this.el = el;
 
-        if (this.options.remote) {
-            this.$el
-                .load(this.options.remote, $.proxy(function () {
-                    that.$el.trigger('cem.dialog.loaded');
-                }, this))
+        this.el['cem.dialog'] = this;
+
+        if (this.options.autoclose && this.options.autoclose != '0') {
+            this.el.classList.add('dialog-autoclose');
+        } else {
+            this.el.classList.remove('dialog-autoclose');
         }
 
-        if (this.options.autoclose) {
-            this.$el.on('click', function (e) {
-                var target = $(e.target);
-                if (target.is(that.$el)) {
-                    that.hide(target);
-                }
-            });
-        }
-
-        if (this.options.keyboard) {
-            this.$el.addClass('dialog-keyboard');
+        if (this.options.keyboard && this.options.keyboard != '0') {
+            this.el.classList.add('dialog-keyboard');
+        } else {
+            this.el.classList.remove('dialog-keyboard');
         }
     };
 
@@ -45,80 +37,75 @@
     };
 
     Dialog.prototype.toggle = function (_relatedTarget) {
-        return this.$el.hasClass('dialog-visible') ? this.hide() : this.show(_relatedTarget);
+        return this.el.classList.contains('dialog-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
     };
 
     Dialog.prototype.show = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.dialog.beforeShow', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Show
+        e = new Event('cem.dialog.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Show dialog
-        this.$el.addClass('dialog-visible');
+        // Show
+        this.el.classList.add('dialog-visible');
 
-        // Focus
+        // Auto Focus
         if (this.options.focus) {
-            this.$el.find(this.options.focus).focus();
+            var el_focus = this.el.querySelector(this.options.focus);
+            if (el_focus && el_focus.focus) {
+                setTimeout(function () {
+                    el_focus.focus();
+                }, 400);
+            }
         }
 
-        e = $.Event('cem.dialog.show', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Show
+        e = new Event('cem.dialog.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
     Dialog.prototype.hide = function (_relatedTarget) {
         var e; // Event handler
 
-        e = $.Event('cem.dialog.beforeHide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Before Hide
+        e = new Event('cem.dialog.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
 
-        // Hide dialog
-        this.$el.removeClass('dialog-visible');
+        // Hide
+        this.el.classList.remove('dialog-visible');
 
-        e = $.Event('cem.dialog.hide', {relatedTarget: _relatedTarget});
-        this.$el.trigger(e);
+        // Event Hide
+        e = new Event('cem.dialog.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
     };
 
-    // DIALOG - JQUERY PLUGIN
+    // Events
 
-    function Plugin(action, _relatedTarget) {
-        return this.each(function () {
-            var $this = $(this);
-            var options = $.extend({}, Dialog.DEFAULTS, $this.data(), typeof action == 'object' ? action : {});
-
-            var dialog = $this.data('cem.dialog');
-
-            if (!dialog) {
-                dialog = new Dialog(this, options);
-                $this.data('cem.dialog', dialog);
-            }
-
-            if (typeof action == 'string') {
-                dialog[action](_relatedTarget);
-            }
-        });
-    }
-
-    $.fn.dialog = Plugin;
-    $.fn.dialog.Constructor = Dialog;
-
-    // DIALOG - DATA API
-    $(document)
-        .on('click', '[data-toggle="dialog"]', function (e) {
-            var $this = $(this);
-            var $target = CEMaterial.getTarget($this, '.dialog');
-
-            $this.is('a') ? e.preventDefault() : '';
-
-            Plugin.call($target, 'toggle', this);
+    document
+        .on('click', '[data-toggle="dialog"]', function () {
+            var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.dialog');
+            var init = target['cem.dialog'] || new Dialog(target, extend({}, Dialog.DEFAULTS, target.dataset, this.dataset));
+            init.toggle(this);
         })
+        // Autoclose
+        .on('click', '.dialog-visible.dialog-autoclose', function (e) {
+            if (this === e.target) {
+                var init = this['cem.dialog'] || new Dialog(this, extend({}, Dialog.DEFAULTS, this.dataset));
+                init.hide();
+            }
+        })
+        // Escape Key
         .on('keydown', function (e) {
-            // Escape Key
             if (e.which == 27) {
-                var $target = $('.dialog-visible').last();
-                Plugin.call($target, 'hide');
+                var target = document.querySelectorAll('.dialog-visible.dialog-keyboard');
+                target.length ? target[target.length - 1]['cem.dialog'].hide() : '';
             }
         })
     ;
 
-}(jQuery);
+}();

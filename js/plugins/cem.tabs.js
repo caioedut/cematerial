@@ -84,7 +84,7 @@
         this.$list.find('.tab-active').removeClass('tab-active');
         this.$el.find('.tab-content.tab-visible').removeClass('tab-visible');
 
-        e = $.Event('cem.tab.hide', {relatedTarget: _relatedTarget});
+        e = $.Event('cem.tabs.hide', {relatedTarget: _relatedTarget});
         this.$el.trigger(e);
     };
 

@@ -1670,13 +1670,12 @@ textarea.input:not([rows]) {
 }
 
 .tab-content {
-    transition: margin-left ease .3s;
     min-width: 100%;
     width: 100%;
 }
 
-.tabs-noswipe .tab-content {
-    transition: none;
+.tabs-swipe .tab-content {
+    transition: margin-left ease .3s;
 }
 
 .tab-content.tab-visible {

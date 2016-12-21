@@ -52,8 +52,12 @@
         if (handler.matches('.tab-content')) {
             target = handler;
 
+            var target_index = 0;
+            this.el.querySelectorAll('.tab-content').forEach(function (node, i) {
+                target_index = node === target ? i : target_index;
+            });
+
             this.list.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
-                var target_index = Array.prototype.indexOf.call(node.parentNode, node);
                 if (document.querySelector(node.dataset.target) === target || i == target_index) {
                     nav = node;
                 }
@@ -64,8 +68,12 @@
 
             if (!target) {
                 // Get tab content (target panel) by index
-                var nav_index = Array.prototype.indexOf.call(this.list, nav);
-                target = this.list.querySelector(':nth-child(' + nav_index + ')');
+                var nav_index = 0;
+                this.list.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
+                    nav_index = node === nav ? i + 1 : nav_index;
+                });
+
+                target = this.el.querySelector('.tab-content:nth-child(' + nav_index + ')');
             }
         }
 

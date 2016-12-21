@@ -807,8 +807,12 @@ NodeList.prototype.not = function (sel_or_arr) {
         if (handler.matches('.tab-content')) {
             target = handler;
 
+            var target_index = 0;
+            this.el.querySelectorAll('.tab-content').forEach(function (node, i) {
+                target_index = node === target ? i : target_index;
+            });
+
             this.list.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
-                var target_index = Array.prototype.indexOf.call(node.parentNode, node);
                 if (document.querySelector(node.dataset.target) === target || i == target_index) {
                     nav = node;
                 }
@@ -819,8 +823,12 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             if (!target) {
                 // Get tab content (target panel) by index
-                var nav_index = Array.prototype.indexOf.call(this.list, nav);
-                target = this.list.querySelector(':nth-child(' + nav_index + ')');
+                var nav_index = 0;
+                this.list.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
+                    nav_index = node === nav ? i + 1 : nav_index;
+                });
+
+                target = this.el.querySelector('.tab-content:nth-child(' + nav_index + ')');
             }
         }
 
@@ -1111,9 +1119,11 @@ document.on('DOMContentLoaded', function () {
 
     // Prepare and init CEMaterial
     CEMaterial.init(document);
-    document.on('DOMNodeInserted', function (e) {
-        CEMaterial.init(e.target);
-    });
+
+    // @deprecated
+    // document.on('DOMNodeInserted', function (e) {
+    //     CEMaterial.init(e.target);
+    // });
 
     // Label toggle, text fields
     var texts = '.input:not([type="radio"]):not([type="checkbox"]):not([type="button"])';
@@ -1148,13 +1158,15 @@ document.on('DOMContentLoaded', function () {
 
 var CEMaterial = {
     init: function (target) {
-        CEMaterial.onBlur(
-            target.querySelectorAll('.label-float .input').filter(function (node) {
-                return node.value;
-            })
-        );
+        if (target instanceof Element) {
+            CEMaterial.onBlur(
+                target.querySelectorAll('.label-float .input').filter(function (node) {
+                    return node.value;
+                })
+            );
 
-        CEMaterial.inputAutoGrow(target.querySelectorAll('.input-autogrow'));
+            CEMaterial.inputAutoGrow(target.querySelectorAll('.input-autogrow'));
+        }
     },
     getTarget: function (node, parent) {
         return node.dataset.target || node.getAttribute('href') || node.closest(parent) || null;

@@ -61,7 +61,7 @@ angular.module('docs').controller('layoutCtrl', function ($scope, $sce) {
     ];
 
     $scope.closeSidebar = function () {
-        $('#main-sidebar').sidebar('hide');
+        document.querySelector('#main-sidebar')['cem.sidebar'].hide();
     };
 
     $scope.html = function (str) {

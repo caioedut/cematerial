@@ -481,7 +481,7 @@ body {
 
 /** TYPOGRAPHY **/
 .caption {
-    font-size: 0.86rem;
+    font-size: .86rem;
 }
 
 .subheader {
@@ -589,7 +589,7 @@ small {
     font-family: "Material Icons", sans-serif;
     font-weight: normal;
     font-style: normal;
-    font-size: 1.3em; /* Preferred icon size */
+    font-size: 1.3em;
     letter-spacing: normal;
     line-height: inherit;
     text-align: center;
@@ -601,6 +601,7 @@ small {
 
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
+
     /* Support for Safari and Chrome. */
     text-rendering: optimizeLegibility;
 
@@ -648,6 +649,7 @@ body > .layout {
     right: 100%;
 
     background-color: #fff;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, .35);
 
     overflow-y: auto;
     z-index: 99;
@@ -711,6 +713,7 @@ body > .layout {
 
     .layout .layout-sidebar {
         border-right: 1px solid #D2D2D2;
+        box-shadow: none;
         max-width: 280px;
         transform: translate3d(100%, 0, 0) !important;
     }
@@ -785,45 +788,38 @@ body > .layout {
     transition: ease all .3s;
     vertical-align: middle;
     white-space: nowrap;
-
-    -webkit-tap-highlight-color: transparent;
-}
-
-/*FIREFOX FIX*/
-.btn::-moz-focus-inner {
-    padding: 0;
-    border: 0;
 }
 
 .btn-xs {
-    font-size: .71rem;
+    font-size: .8rem;
     height: 24px;
     line-height: 24px;
     padding: 0 1rem;
 }
 
 .btn-sm {
-    font-size: .85rem;
+    font-size: .9rem;
     height: 30px;
     line-height: 30px;
     padding: 0 1.4rem;
 }
 
 .btn-lg {
-    font-size: 1.14rem;
-    height: 42px;
-    line-height: 42px;
-    padding: 0 2.2rem;
+    font-size: 1.3rem;
+    height: 48px;
+    line-height: 48px;
+    padding: 0 2.4rem;
 }
 
 .btn-xl {
-    font-size: 1.28rem;
-    height: 48px;
-    line-height: 48px;
-    padding: 0 2.6rem;
+    font-size: 1.6rem;
+    height: 64px;
+    line-height: 64px;
+    padding: 0 3.2rem;
 }
 
 .btn-flat {
+    font-weight: 500;
     padding: 0 .8rem;
 }
 
@@ -857,13 +853,13 @@ body > .layout {
 .btn-icon.btn-lg,
 .btn-float.btn-lg,
 .btn-circle.btn-lg {
-    width: 42px;
+    width: 48px;
 }
 
 .btn-icon.btn-xl,
 .btn-float.btn-xl,
 .btn-circle.btn-xl {
-    width: 48px;
+    width: 64px;
 }
 
 .btn-lower {
@@ -2636,6 +2632,12 @@ textarea.input:not([rows]) {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+.no-tap,
+.btn,
+[data-toggle] {
+    -webkit-tap-highlight-color: transparent;
 }
 
 .draggable-on,

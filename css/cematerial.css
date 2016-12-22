@@ -583,49 +583,43 @@ small {
 }
 
 .md-icon {
-    position: relative;
-    top: -1px;
+    direction: ltr;
     display: inline-block;
-    font-family: "Material Icons", sans-serif;
-    font-weight: normal;
+    font-family: 'Material Icons', sans-serif;
+    font-size: 24px;
     font-style: normal;
-    font-size: 1.3em;
+    font-weight: normal;
     letter-spacing: normal;
-    line-height: inherit;
-    text-align: center;
+    line-height: 1;
     text-transform: none;
     vertical-align: middle;
     word-wrap: normal;
     white-space: nowrap;
-    direction: ltr;
 
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
-
     /* Support for Safari and Chrome. */
     text-rendering: optimizeLegibility;
-
     /* Support for Firefox. */
     -moz-osx-font-smoothing: grayscale;
-
     /* Support for IE. */
     font-feature-settings: 'liga';
 }
 
 .md-icon-xs {
-    font-size: .7em
+    font-size: 16px;
 }
 
 .md-icon-sm {
-    font-size: 1em
+    font-size: 20px;
 }
 
 .md-icon-lg {
-    font-size: 1.6em
+    font-size: 28px;
 }
 
 .md-icon-xl {
-    font-size: 1.9em
+    font-size: 32px;
 }
 
 /*BASE LAYOUT BEGIN*/
@@ -750,7 +744,6 @@ body > .layout {
 }
 
 .layout-nav a .md-icon {
-    font-size: 1.7em;
     opacity: .8;
     padding-right: 1em;
 }
@@ -830,12 +823,6 @@ body > .layout {
     padding: 0;
     text-align: center;
     width: 36px;
-}
-
-.btn-icon .md-icon,
-.btn-float .md-icon,
-.btn-circle .md-icon {
-    top: 0;
 }
 
 .btn-icon.btn-xs,
@@ -1419,9 +1406,7 @@ textarea.input:not([rows]) {
     background-color: #aaa;
     border-radius: 50%;
     font-size: 14px;
-    height: 16px;
-    line-height: 16px;
-    width: 16px;
+    padding: 1px;
 }
 
 .chips img {
@@ -1504,8 +1489,8 @@ textarea.input:not([rows]) {
 }
 
 .menu a > .md-icon {
-    margin-left: 12px;
-    margin-right: 12px;
+    margin-left: .5em;
+    margin-right: .5em;
 }
 
 .menu a > .md-icon:first-child {

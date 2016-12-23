@@ -643,7 +643,6 @@ body > .layout {
     right: 100%;
 
     background-color: #fff;
-    box-shadow: 2px 0 15px rgba(0, 0, 0, .35);
 
     overflow-y: auto;
     z-index: 99;
@@ -661,6 +660,7 @@ body > .layout {
 
 .layout-sidebar-swiping,
 .layout-sidebar-swiping + .layout-sidebar-backdrop {
+    box-shadow: 2px 0 15px rgba(0, 0, 0, .35);
     transition: none !important;
     visibility: visible !important;
 }

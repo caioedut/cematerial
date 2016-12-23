@@ -45,8 +45,15 @@
 <div class="layout">
     <aside id="main-sidebar" class="layout-sidebar">
         <div class="container-md bg-{{color}}-6">
-            <h1 class="display-2 no-margin">CEMaterial</h1>
-            <small>CSS Framework based on Google Material Design</small>
+            <div class="grid">
+                <div class="grid-col xs-col-3 pad-bottom">
+                    <img class="img-fluid" src="img/md-logo.png" alt="Material Design Logo"/>
+                </div>
+                <div class="grid-col xs-col-12">
+                    <h1 class="display-2 no-margin">CEMaterial</h1>
+                    <small>CSS Framework based on Google Material Design</small>
+                </div>
+            </div>
         </div>
         <nav class="panel-group">
             <div class="panel" ng-repeat="nav in navs">
@@ -65,10 +72,9 @@
     </aside>
     <header class="layout-header raised-xs bg-{{color}}-6">
         <div class="grid grid-middle grid-nowrap">
-            <div class="grid-col" data-toggle="sidebar">
-                &nbsp;&nbsp;
+            <div class="grid-col pad-left-sm" data-toggle="sidebar">
                 <button class="btn btn-icon btn-circle bg-{{color}}-6">
-                    <i class="md-icon md-icon-lg">menu</i>
+                    <i class="md-icon">menu</i>
                 </button>
             </div>
             <div class="grid-col container-md">

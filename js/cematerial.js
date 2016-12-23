@@ -95,6 +95,14 @@ Element.prototype.parentsUntil = function (node_or_selector, include_until) {
     return parents;
 };
 
+NodeList.prototype.toArray = function () {
+    var nodes = [];
+    this.forEach(function (node) {
+        nodes.push(node);
+    });
+    return nodes;
+};
+
 NodeList.prototype.filter = function (criteria, filter_not) {
     var nodes = [];
 
@@ -1128,10 +1136,10 @@ document.on('DOMContentLoaded', function () {
     // Label toggle, text fields
     var texts = '.input:not([type="radio"]):not([type="checkbox"]):not([type="button"])';
     document
-        .on('focus', texts, function () {
+        .on('focusin', texts, function () {
             CEMaterial.onFocus(this);
         })
-        .on('blur', texts, function () {
+        .on('focusout', texts, function () {
             CEMaterial.onBlur(this);
         })
     ;
@@ -1159,13 +1167,17 @@ document.on('DOMContentLoaded', function () {
 var CEMaterial = {
     init: function (target) {
         if (target instanceof Element) {
-            CEMaterial.onBlur(
-                target.querySelectorAll('.label-float .input').filter(function (node) {
+            target.querySelectorAll('.label-float .input')
+                .filter(function (node) {
                     return node.value;
                 })
-            );
+                .forEach(function (node) {
+                    CEMaterial.onBlur(node);
+                });
 
-            CEMaterial.inputAutoGrow(target.querySelectorAll('.input-autogrow'));
+            target.querySelectorAll('.input-autogrow').forEach(function (node) {
+                CEMaterial.inputAutoGrow(node);
+            });
         }
     },
     getTarget: function (node, parent) {
@@ -1175,42 +1187,40 @@ var CEMaterial = {
         var label = [node.closest('label,.label')];
 
         if (node.id) {
-            label.push(document.querySelector('label[for="' + node.id + '"]'));
+            label = label.concat(document.querySelectorAll('label[for="' + node.id + '"]').toArray());
         }
 
-        return label;
+        return label.filter(function (node) {
+            return node;
+        });
     },
-    onFocus: function (nodes) {
-        if (nodes && nodes.length) {
-            nodes.forEach(function (node) {
-                CEMaterial.getLabels(node).forEach(function (label) {
-                    label.classList.add('label-active', 'label-focus');
-                });
+    onFocus: function (node) {
+        if (node) {
+            CEMaterial.getLabels(node).forEach(function (label) {
+                label.classList.add('label-active', 'label-focus');
             });
         }
     },
-    onBlur: function (nodes) {
-        if (nodes.length) {
-            nodes.forEach(function (node) {
-                // Check LABEL FLOATING
-                var value = node.value || '';
-                var has_value = value instanceof Array ? value.length : value.trim();
+    onBlur: function (node) {
+        if (node) {
+            // Check LABEL FLOATING
+            var value = node.value || '';
+            var has_value = value instanceof Array ? value.length : value.trim();
 
-                CEMaterial.getLabels(node).forEach(function (label) {
-                    label.classList.remove('label-focus');
-                    has_value ? label.classList.add('label-active') : label.classList.remove('label-active');
-                });
+            CEMaterial.getLabels(node).forEach(function (label) {
+                label.classList.remove('label-focus');
+                has_value ? label.classList.add('label-active') : label.classList.remove('label-active');
             });
         }
     },
-    inputAutoGrow: function (nodes) {
-        nodes.forEach(function (node) {
+    inputAutoGrow: function (node) {
+        if (node) {
             if (node.is('textarea')) {
                 node.style.height = '';
                 node.style.height = node.scrollHeight + 'px';
             } else if (node.is('input') && node.value) {
                 node.size = node.value.length;
             }
-        });
+        }
     }
 };

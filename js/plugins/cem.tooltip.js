@@ -10,19 +10,20 @@
     // CLASS
 
     var Tooltip = function (el, options) {
-        this.options = options || {};
         this.el = el;
+        this.options = extend({}, Tooltip.DEFAULTS, el.dataset, options || {});
+
+        if (this.el['cem.tooltip']) {
+            this.tooltip = this.el['cem.tooltip'].tooltip;
+        } else {
+            this.tooltip = document.createElement('span');
+            this.tooltip.classList.add('tooltip');
+        }
 
         this.el['cem.tooltip'] = this;
 
-        // Create element
-        this.tooltip = document.createElement('span');
-        this.tooltip.classList.add('tooltip');
-
         if (this.options.wrap) {
             this.tooltip.classList.add('tooltip-wrap');
-        } else {
-            this.tooltip.classList.remove('tooltip-wrap');
         }
     };
 
@@ -95,7 +96,7 @@
     Tooltip.prototype.updatePosition = function () {
         document.body.appendChild(this.tooltip);
 
-        var offset = {top: this.el.offsetTop, left: this.el.offsetLeft};
+        var offset = this.el.offset();
         var width = this.tooltip.offsetWidth;
 
         // Offset left (MIN = 0px)
@@ -107,17 +108,18 @@
         // Update css position
         this.tooltip.style.top = offset.top + this.el.offsetHeight;
         this.tooltip.style.left = left;
+
         this.tooltip.classList.add('tooltip-visible');
     };
 
     // Events
     document
         .on('focusin mouseover', '[data-tooltip]', function () {
-            var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
+            var init = this['cem.tooltip'] || new Tooltip(this);
             init.show(this);
         })
         .on('focusout mouseout', '[data-tooltip]', function () {
-            var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
+            var init = this['cem.tooltip'] || new Tooltip(this);
             init.hide(this);
         })
         .on('wheel mousewheel DOMMouseScroll touchstart', function () {

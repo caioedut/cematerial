@@ -596,6 +596,9 @@ small {
     word-wrap: normal;
     white-space: nowrap;
 
+    margin-top: -4px;
+    margin-bottom: -4px;
+
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
     /* Support for Safari and Chrome. */

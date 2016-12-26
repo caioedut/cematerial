@@ -461,7 +461,9 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el = el;
         this.options = extend({}, Sidebar.DEFAULTS, el.dataset, options || {});
 
-        if (!this.el['cem.sidebar']) {
+        if (this.el['cem.sidebar']) {
+            this.backdrop = this.el['cem.sidebar'].backdrop;
+        } else {
             this.backdrop = document.createElement('div');
             this.backdrop.classList.add('layout-sidebar-backdrop');
             this.el.parentNode.insertBefore(this.backdrop, this.el.nextSibling);
@@ -756,28 +758,30 @@ NodeList.prototype.not = function (sel_or_arr) {
     // CLASS
 
     var Tabs = function (el, options) {
-        this.options = options || {};
         this.el = el.closest('.tabs');
+        this.options = extend({}, Tabs.DEFAULTS, el.dataset, options || {});
 
-        this.el['cem.tabs'] = this;
-
-        // Create element
         this.list = this.el.querySelector('.tabs-nav');
         this.content = this.el.querySelectorAll('.tabs-list > .tab-content');
 
-        if (!this.options.swipe || this.options.swipe == '0') {
-            this.el.classList.add('tabs-noswipe');
+        if (this.el['cem.sidebar']) {
+            this.bar = this.el['cem.sidebar'].bar;
+            this.updateBar();
         } else {
-            this.el.classList.remove('tabs-noswipe');
+            this.bar = document.createElement('div');
+            this.bar.classList.add('tabs-bar');
+            this.updateBar();
+            this.list.insertBefore(this.bar, this.list.firstChild);
         }
 
-        this.bar = document.createElement('div');
-        this.bar.classList.add('tabs-bar');
-        this.updateBar();
-        this.list.insertBefore(this.bar, this.list.firstChild);
+        this.el['cem.tabs'] = this;
+
+        if (!this.options.swipe || this.options.swipe == '0') {
+            this.el.classList.add('tabs-noswipe');
+        }
     };
 
-    Tabs.VERSION = '0.1.7';
+    Tabs.VERSION = '0.1.8';
 
     Tabs.DEFAULTS = {
         swipe: true
@@ -889,18 +893,20 @@ NodeList.prototype.not = function (sel_or_arr) {
     document
         .on('click', '[data-toggle="tab"]', function () {
             var target = this.closest('.tabs');
-            var init = target['cem.tabs'] || new Tabs(target, extend({}, Tabs.DEFAULTS, target.dataset, this.dataset));
+            var init = new Tabs(target, this.dataset);
             init.show(this);
         })
-        .on('swipestart', '.tabs:not(.tabs-noswipe) .tabs-list', function () {
+        .on('swipestart', '.tabs .tabs-list', function () {
             var tabs = this.closest('.tabs');
-            var init = tabs['cem.tabs'] || new Tabs(tabs, extend({}, Tabs.DEFAULTS, tabs.dataset));
+            var init = tabs['cem.dropdown'] || new Tabs(tabs);
 
-            init.bar.classList.add('no-transition');
-            this.querySelector('.tab-visible').classList.add('no-transition');
+            if (init.options.swipe && init.options.swipe != '0') {
+                init.bar.classList.add('no-transition');
+                this.querySelector('.tab-visible').classList.add('no-transition');
 
-            // GET TRANSLATE X VALUE
-            init.bar.dataset.translateX = init.bar.style.transform.replace(/\D/g, '');
+                // GET TRANSLATE X VALUE
+                init.bar.dataset.translateX = init.bar.style.transform.replace(/\D/g, '');
+            }
         })
         .on('swipemove', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);

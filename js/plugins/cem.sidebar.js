@@ -13,7 +13,9 @@
         this.el = el;
         this.options = extend({}, Sidebar.DEFAULTS, el.dataset, options || {});
 
-        if (!this.el['cem.sidebar']) {
+        if (this.el['cem.sidebar']) {
+            this.backdrop = this.el['cem.sidebar'].backdrop;
+        } else {
             this.backdrop = document.createElement('div');
             this.backdrop.classList.add('layout-sidebar-backdrop');
             this.el.parentNode.insertBefore(this.backdrop, this.el.nextSibling);

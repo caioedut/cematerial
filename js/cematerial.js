@@ -95,6 +95,25 @@ Element.prototype.parentsUntil = function (node_or_selector, include_until) {
     return parents;
 };
 
+Element.prototype.offset = function () {
+    if (!this.getClientRects().length) {
+        return {top: 0, left: 0};
+    }
+
+    var rect = this.getBoundingClientRect();
+
+    // Make sure element is not hidden (display: none)
+    if (rect.width || rect.height) {
+        var doc = this.ownerDocument.documentElement;
+        return {
+            top: rect.top + window.pageYOffset - doc.clientTop,
+            left: rect.left + window.pageXOffset - doc.clientLeft
+        };
+    }
+
+    return rect;
+};
+
 NodeList.prototype.toArray = function () {
     var nodes = [];
     this.forEach(function (node) {
@@ -986,19 +1005,20 @@ NodeList.prototype.not = function (sel_or_arr) {
     // CLASS
 
     var Tooltip = function (el, options) {
-        this.options = options || {};
         this.el = el;
+        this.options = extend({}, Tooltip.DEFAULTS, el.dataset, options || {});
+
+        if (this.el['cem.tooltip']) {
+            this.tooltip = this.el['cem.tooltip'].tooltip;
+        } else {
+            this.tooltip = document.createElement('span');
+            this.tooltip.classList.add('tooltip');
+        }
 
         this.el['cem.tooltip'] = this;
 
-        // Create element
-        this.tooltip = document.createElement('span');
-        this.tooltip.classList.add('tooltip');
-
         if (this.options.wrap) {
             this.tooltip.classList.add('tooltip-wrap');
-        } else {
-            this.tooltip.classList.remove('tooltip-wrap');
         }
     };
 
@@ -1071,7 +1091,7 @@ NodeList.prototype.not = function (sel_or_arr) {
     Tooltip.prototype.updatePosition = function () {
         document.body.appendChild(this.tooltip);
 
-        var offset = {top: this.el.offsetTop, left: this.el.offsetLeft};
+        var offset = this.el.offset();
         var width = this.tooltip.offsetWidth;
 
         // Offset left (MIN = 0px)
@@ -1083,17 +1103,18 @@ NodeList.prototype.not = function (sel_or_arr) {
         // Update css position
         this.tooltip.style.top = offset.top + this.el.offsetHeight;
         this.tooltip.style.left = left;
+
         this.tooltip.classList.add('tooltip-visible');
     };
 
     // Events
     document
         .on('focusin mouseover', '[data-tooltip]', function () {
-            var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
+            var init = this['cem.tooltip'] || new Tooltip(this);
             init.show(this);
         })
         .on('focusout mouseout', '[data-tooltip]', function () {
-            var init = this['cem.tooltip'] || new Tooltip(this, extend({}, Tooltip.DEFAULTS, this.dataset));
+            var init = this['cem.tooltip'] || new Tooltip(this);
             init.hide(this);
         })
         .on('wheel mousewheel DOMMouseScroll touchstart', function () {

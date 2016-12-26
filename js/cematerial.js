@@ -352,27 +352,22 @@ NodeList.prototype.not = function (sel_or_arr) {
     // CLASS
 
     var Panel = function (el, options) {
-        this.options = options || {};
         this.el = el;
-
+        this.options = extend({}, Panel.DEFAULTS, el.dataset, options || {});
         this.el['cem.panel'] = this;
 
         if (this.options.margin && this.options.margin != '0') {
             this.el.classList.add('panel-margin');
-        } else {
-            this.el.classList.remove('panel-margin');
         }
 
         if (this.options.popout && this.options.popout != '0') {
             this.el.classList.add('panel-popout');
-        } else {
-            this.el.classList.remove('panel-popout');
         }
 
         this.updateHeight();
     };
 
-    Panel.VERSION = '0.1.2';
+    Panel.VERSION = '0.1.3';
 
     Panel.DEFAULTS = {
         margin: false,
@@ -443,8 +438,8 @@ NodeList.prototype.not = function (sel_or_arr) {
 
     // Events
     document.on('click', '[data-toggle="panel"]', function () {
-        var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.panel');
-        var init = target['cem.panel'] || new Panel(target, extend({}, Panel.DEFAULTS, target.dataset, this.dataset));
+        var target = CEMaterial.getTarget(this, '.panel');
+        var init = new Panel(target, this.dataset);
         init.toggle(this);
     });
 

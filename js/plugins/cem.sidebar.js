@@ -10,23 +10,19 @@
     // CLASS
 
     var Sidebar = function (el, options) {
-        this.options = options || {};
         this.el = el;
+        this.options = extend({}, Sidebar.DEFAULTS, el.dataset, options || {});
+
+        if (!this.el['cem.sidebar']) {
+            this.backdrop = document.createElement('div');
+            this.backdrop.classList.add('layout-sidebar-backdrop');
+            this.el.parentNode.insertBefore(this.backdrop, this.el.nextSibling);
+        }
 
         this.el['cem.sidebar'] = this;
-
-        this.backdrop = document.createElement('div');
-        this.backdrop.classList.add('layout-sidebar-backdrop');
-        this.el.parentNode.insertBefore(this.backdrop, this.el.nextSibling);
-
-        if (this.options.autoclose && this.options.autoclose != '0') {
-            this.el.classList.add('sidebar-autoclose');
-        } else {
-            this.el.classList.remove('sidebar-autoclose');
-        }
     };
 
-    Sidebar.VERSION = '0.1.1';
+    Sidebar.VERSION = '0.1.3';
 
     Sidebar.DEFAULTS = {
         autoclose: true
@@ -76,21 +72,23 @@
     // Events
     document
         .on('click', '[data-toggle="sidebar"]', function () {
-            var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.layout-sidebar');
+            var target = CEMaterial.getTarget(this, '.layout-sidebar');
             target = target || this.closest('.layout').querySelector('.layout-sidebar');
-            var init = target['cem.sidebar'] || new Sidebar(target, extend({}, Sidebar.DEFAULTS, target.dataset, this.dataset));
+            var init = new Sidebar(target, this.dataset);
             init.toggle(this);
         })
         // Autoclose
-        .on('click', '.layout-sidebar-visible.sidebar-autoclose ~ .layout-sidebar-backdrop', function () {
+        .on('click', '.layout-sidebar-visible ~ .layout-sidebar-backdrop', function () {
             var target = this.previousElementSibling;
-            var init = target['cem.sidebar'] || new Sidebar(target, extend({}, Sidebar.DEFAULTS, target.dataset));
-            init.hide(this);
+            var init = target['cem.sidebar'] || new Sidebar(target);
+            if (init.options.autoclose && init.options.autoclose != '0') {
+                init.hide(this);
+            }
         })
         // Sidebar Navs
         .on('click', '[data-toggle="nav"]', function () {
             var sidebar = this.closest('.layout-sidebar');
-            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
             init.show(this);
 
             // Sidenav click
@@ -116,7 +114,7 @@
         .on('swipestart', '.layout', function (e) {
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
-            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             // GET TRANSLATE X VALUE
             var translate_x = parseInt(window.getComputedStyle(sidebar, null).getPropertyValue('transform').split(',')[4]);
@@ -134,7 +132,7 @@
         .on('swipemove', '.layout', function (e) {
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
-            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
             var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
@@ -161,7 +159,7 @@
         .on('swipeend', '.layout', function (e) {
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
-            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar, extend({}, Sidebar.DEFAULTS, sidebar.dataset));
+            var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             sidebar.classList.remove('layout-sidebar-swiping');
             sidebar.removeAttribute('style');

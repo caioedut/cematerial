@@ -72,9 +72,9 @@
         // Autoclose
         .on('click', function (e) {
             var parents = e.target.parents('.dropdown-visible');
-            var drops = document.querySelectorAll('.dropdown-visible').not(parents);
+            var nodes = document.querySelectorAll('.dropdown-visible').not(parents);
 
-            drops.forEach(function (node) {
+            nodes.forEach(function (node) {
                 var init = node['cem.dropdown'] || new Dropdown(node);
                 if (init.options.autoclose && init.options.autoclose != '0') {
                     init.hide();

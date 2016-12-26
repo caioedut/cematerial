@@ -10,25 +10,12 @@
     // CLASS
 
     var Dialog = function (el, options) {
-        this.options = options || {};
         this.el = el;
-
+        this.options = extend({}, Dialog.DEFAULTS, el.dataset, options || {});
         this.el['cem.dialog'] = this;
-
-        if (this.options.autoclose && this.options.autoclose != '0') {
-            this.el.classList.add('dialog-autoclose');
-        } else {
-            this.el.classList.remove('dialog-autoclose');
-        }
-
-        if (this.options.keyboard && this.options.keyboard != '0') {
-            this.el.classList.add('dialog-keyboard');
-        } else {
-            this.el.classList.remove('dialog-keyboard');
-        }
     };
 
-    Dialog.VERSION = '0.1.2';
+    Dialog.VERSION = '0.1.3';
 
     Dialog.DEFAULTS = {
         autoclose: true,
@@ -88,22 +75,30 @@
 
     document
         .on('click', '[data-toggle="dialog"]', function () {
-            var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('.dialog');
-            var init = target['cem.dialog'] || new Dialog(target, extend({}, Dialog.DEFAULTS, target.dataset, this.dataset));
+            var target = CEMaterial.getTarget(this, '.dialog');
+            var init = new Dialog(target, this.dataset);
             init.toggle(this);
         })
         // Autoclose
-        .on('click', '.dialog-visible.dialog-autoclose', function (e) {
+        .on('click', '.dialog-visible', function (e) {
             if (this === e.target) {
-                var init = this['cem.dialog'] || new Dialog(this, extend({}, Dialog.DEFAULTS, this.dataset));
-                init.hide();
+                var init = this['cem.dialog'] || new Dialog(this);
+                if (init.options.autoclose && init.options.autoclose != '0') {
+                    init.hide();
+                }
             }
         })
         // Escape Key
         .on('keydown', function (e) {
             if (e.which == 27) {
-                var target = document.querySelectorAll('.dialog-visible.dialog-keyboard');
-                target.length ? target[target.length - 1]['cem.dialog'].hide() : '';
+                var ar_hide = [];
+                document.querySelectorAll('.dialog-visible').forEach(function (node) {
+                    var init = node['cem.dialog'] || new Dialog(node);
+                    if (init.options.keyboard && init.options.keyboard != '0') {
+                        ar_hide.push(init);
+                    }
+                });
+                ar_hide.length ? ar_hide.pop().hide() : '';
             }
         })
     ;

@@ -700,14 +700,8 @@ body > .layout {
     visibility: visible;
 }
 
-.layout-header,
-.layout-footer {
-    z-index: 97;
-}
-
 .layout-content {
     height: 100%;
-    z-index: 96;
 }
 
 @media (min-width: 1024px) {

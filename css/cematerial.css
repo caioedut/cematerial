@@ -591,14 +591,11 @@ small {
     font-style: normal;
     font-weight: normal;
     letter-spacing: normal;
-    line-height: 1;
+    /*line-height: 1;*/
     text-transform: none;
     vertical-align: middle;
     word-wrap: normal;
     white-space: nowrap;
-
-    margin-top: -4px;
-    margin-bottom: -4px;
 
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
@@ -1497,6 +1494,7 @@ textarea.input:not([rows]) {
 .menu a > .md-icon {
     margin-left: .5em;
     margin-right: .5em;
+    opacity: .9;
 }
 
 .menu a > .md-icon:first-child {

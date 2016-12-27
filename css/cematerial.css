@@ -1422,6 +1422,31 @@ textarea.input:not([rows]) {
     width: 32px;
 }
 
+/*TOAST/TOSTER*/
+.toast {
+    position: relative;
+    background-color: #323232;
+    color: #fff;
+    height: 0;
+    overflow: hidden;
+
+    transition: ease all .4s;
+}
+
+.toast-body{
+    opacity: 0;
+    padding: 16px 24px;
+    transition: ease opacity .6s;
+}
+
+.toast-visible {
+    height: 48px;
+}
+
+.toast-visible .toast-body {
+    opacity: 1;
+}
+
 /*TOOLTIPS*/
 .tooltip {
     position: absolute;

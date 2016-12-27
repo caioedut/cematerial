@@ -586,7 +586,8 @@ small {
     direction: ltr;
     display: inline-block;
     font-family: 'Material Icons', sans-serif;
-    font-size: 24px;
+    /*font-size: 24px;*/
+    font-size: 1.4em;
     font-style: normal;
     font-weight: normal;
     letter-spacing: normal;
@@ -610,19 +611,19 @@ small {
 }
 
 .md-icon-xs {
-    font-size: 16px;
+    font-size: .6em;
 }
 
 .md-icon-sm {
-    font-size: 20px;
+    font-size: 1em;
 }
 
 .md-icon-lg {
-    font-size: 28px;
+    font-size: 1.8em;
 }
 
 .md-icon-xl {
-    font-size: 32px;
+    font-size: 2.2em;
 }
 
 /*BASE LAYOUT BEGIN*/
@@ -699,8 +700,14 @@ body > .layout {
     visibility: visible;
 }
 
+.layout-header,
+.layout-footer {
+    z-index: 99;
+}
+
 .layout-content {
     height: 100%;
+    z-index: 98;
 }
 
 @media (min-width: 1024px) {

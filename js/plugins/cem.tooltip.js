@@ -112,6 +112,9 @@
         this.tooltip.classList.add('tooltip-visible');
     };
 
+    // Export Class
+    window.Tooltip = Tooltip;
+
     // Events
     document
         .on('focusin mouseover', '[data-tooltip]', function () {

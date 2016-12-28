@@ -62,6 +62,9 @@
         this.el.dispatchEvent(e);
     };
 
+    // Export Class
+    window.Dropdown = Dropdown;
+
     // Events
     document
         .on('click', '[data-toggle="dropdown"]', function () {

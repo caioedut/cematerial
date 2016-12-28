@@ -31,12 +31,6 @@
             this.body.appendChild(this.el);
         }
 
-        // this.el.innerHTML = '<div class="toast-body">' + message + '</div>';
-
-        // if (!this.options.multiple) {
-        //     this.body.innerHTML = '';
-        // }
-
         this.body.appendChild(this.el);
         this.el['cem.toast'] = this;
     };
@@ -44,14 +38,10 @@
     Toast.VERSION = '0.0.2';
 
     Toast.DEFAULTS = {
-        duration: 3000,
+        duration: 4000,
         parent: 'body > .layout',
-        multiple: false
+        timeout: null
     };
-
-    // Toast.prototype.toggle = function (_relatedTarget) {
-    //     return this.el.classList.contains('toast-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
-    // };
 
     Toast.prototype.show = function (_relatedTarget) {
         var that = this;
@@ -61,6 +51,10 @@
         e = new Event('cem.toast.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
+
+        if (Toast.DEFAULTS.timeout) {
+            clearTimeout(Toast.DEFAULTS.timeout);
+        }
 
         var delay = 1;
 
@@ -74,37 +68,10 @@
             that.el.classList.add('toast-visible');
         }, delay);
 
-        // var old_toast = this.body.querySelector('.toast');
-        //
-        // if (old_toast) {
-        //     old_toast['cem.toast'].hide();
-        //
-        //     setTimeout(function () {
-        //         that.el.classList.add('toast-visible');
-        //     }, 1000);
-        // }
-
-        // Show
-        // if (!this.options.multiple) {
-        //     console.log("AAA");
-        //     var toast = this.body.querySelector('.toast');
-        //     console.log(toast)
-        //     if (toast) {
-        //         toast['cem.toast'].hide();
-        //         setTimeout(function () {
-        //             that.el.classList.add('toast-visible');
-        //         }, 400);
-        //     }
-        // } else {
-        //     setTimeout(function () {
-        //         that.el.classList.add('toast-visible');
-        //     }, 1);
-        // }
-
         // Check duration
-        // if (this.options.duration && this.options.duration != '0') {
-        //     setTimeout(this.hide.bind(this), this.options.duration)
-        // }
+        if (this.options.duration && this.options.duration != '0') {
+            Toast.DEFAULTS.timeout = setTimeout(this.hide.bind(this), this.options.duration)
+        }
 
         // Event Show
         e = new Event('cem.toast.show', {bubbles: true, cancelable: true, composed: true});
@@ -133,14 +100,11 @@
     window.Toast = Toast;
 
     // Events
-
-    document
-        .on('click', '[data-toggle="toast"][data-toast]', function () {
-            var init = new Toast(this.dataset.toast, extend({}, this.dataset, {
-                parent: this.closest('.layout')
-            }));
-            init.show(this);
-        })
-    ;
+    document.on('click', '[data-toggle="toast"][data-toast]', function () {
+        var init = new Toast(this.dataset.toast, extend({}, this.dataset, {
+            parent: this.closest('.layout')
+        }));
+        init.show(this);
+    });
 
 }();

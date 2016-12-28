@@ -71,6 +71,9 @@
         this.el.dispatchEvent(e);
     };
 
+    // Export Class
+    window.Sidebar = Sidebar;
+
     // Events
     document
         .on('click', '[data-toggle="sidebar"]', function () {

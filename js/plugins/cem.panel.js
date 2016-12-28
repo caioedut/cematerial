@@ -94,6 +94,9 @@
         });
     };
 
+    // Export Class
+    window.Panel = Panel;
+
     // Events
     document.on('click', '[data-toggle="panel"]', function () {
         var target = CEMaterial.getTarget(this, '.panel');

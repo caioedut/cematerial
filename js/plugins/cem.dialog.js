@@ -71,8 +71,10 @@
         this.el.dispatchEvent(e);
     };
 
-    // Events
+    // Export Class
+    window.Dialog = Dialog;
 
+    // Events
     document
         .on('click', '[data-toggle="dialog"]', function () {
             var target = CEMaterial.getTarget(this, '.dialog');

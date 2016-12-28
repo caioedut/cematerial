@@ -141,6 +141,9 @@
         this.bar.style.width = active.offsetWidth;
     };
 
+    // Export Class
+    window.Tabs = Tabs;
+
     // Events
     document
         .on('click', '[data-toggle="tab"]', function () {

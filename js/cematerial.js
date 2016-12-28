@@ -1022,7 +1022,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.options = extend({}, Toast.DEFAULTS, options || {});
         this.options.message = message;
 
-        this.parent = this.options.parent == 'string' ? document.querySelector(this.options.parent) : this.options.parent;
+        this.parent = typeof this.options.parent == 'string' ? document.querySelector(this.options.parent) : this.options.parent;
         this.body = this.parent.querySelector(':scope > .layout-toast');
 
         if (!this.body) {

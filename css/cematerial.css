@@ -463,7 +463,9 @@ template {
 /* normalize.css end */
 
 /*DEFAULTS*/
-* {
+*,
+*:before,
+*:after {
     box-sizing: border-box;
 }
 
@@ -1363,7 +1365,7 @@ textarea.input:not([rows]) {
     content: 'radio_button_unchecked';
 }
 
-.input[type="checkbox"]:checked:after {
+.input[type="checkbox"]:not(.input-switch):checked:after {
     content: 'check_box';
 }
 
@@ -1371,7 +1373,7 @@ textarea.input:not([rows]) {
     content: 'radio_button_checked';
 }
 
-.input[type="checkbox"]:before,
+.input[type="checkbox"]:not(.input-switch):before,
 .input[type="radio"]:before {
     position: absolute;
     top: -11px;
@@ -1379,7 +1381,6 @@ textarea.input:not([rows]) {
     border-radius: 50%;
     border: 22px solid #000;
     border-color: inherit;
-    box-sizing: border-box;
     content: '';
     height: 44px;
     opacity: 0;
@@ -1388,17 +1389,53 @@ textarea.input:not([rows]) {
     width: 44px;
 }
 
-.input[type="checkbox"]:not([class*="border-"]):before,
+.input[type="checkbox"]:not(.input-switch):not([class*="border-"]):before,
 .input[type="radio"]:not([class*="border-"]):before {
     border-color: rgba(0, 0, 0, .6);
 }
 
-.input[type="checkbox"]:active:before,
+.input[type="checkbox"]:not(.input-switch):active:before,
 .input[type="radio"]:active:before,
-.input[type="checkbox"]:focus:before,
+.input[type="checkbox"]:not(.input-switch):focus:before,
 .input[type="radio"]:focus:before {
     opacity: 0.2;
     visibility: visible;
+}
+
+/*INPUT SWITCH (CHECKBOX)*/
+.input-switch[type="checkbox"] {
+    height: 16px;
+    width: 36px;
+}
+
+.input-switch[type="checkbox"]:before {
+    border: 7px solid rgba(0, 0, 0, .38);
+    border-radius: 8px;
+    content: '';
+    display: block;
+    opacity: .6;
+    transition: ease all .3s;
+    width: 100%;
+}
+
+.input-switch[type="checkbox"]:after {
+    position: absolute;
+    top: -8px;
+    left: -5px;
+    color: #fafafa;
+    content: 'fiber_manual_record';
+    font-size: 30px;
+    text-shadow: -1px 0 5px rgba(0, 0, 0, .4);
+    transition: ease left .3s, ease color .3s;
+}
+
+.input-switch[type="checkbox"]:checked:before {
+    border-color: inherit;
+}
+
+.input-switch[type="checkbox"]:checked:after {
+    left: 11px;
+    color: inherit;
 }
 
 /*CHIPS*/

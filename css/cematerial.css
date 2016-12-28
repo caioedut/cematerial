@@ -1335,62 +1335,69 @@ textarea.input:not([rows]) {
 }
 
 /*CHECKBOX*/
+
 .input[type="radio"],
 .input[type="checkbox"] {
     position: relative;
     background: none;
     cursor: pointer;
     display: inline-block;
+    height: 22px;
     margin: 0;
     outline: none;
     padding: 0;
     vertical-align: middle;
-
-    height: 22px;
     width: 22px;
 }
 
-.input[type="radio"]:after,
-.input[type="checkbox"]:after {
+.input[type="checkbox"]:after,
+.input[type="radio"]:after {
     content: 'check_box_outline_blank';
     font-family: 'Material Icons', sans-serif;
     font-feature-settings: "liga" 1;
     font-size: 22px;
+    line-height: 1;
 }
 
 .input[type="radio"]:after {
     content: 'radio_button_unchecked';
 }
 
-.input[type="radio"]:checked:after {
-    content: 'radio_button_checked';
-}
-
 .input[type="checkbox"]:checked:after {
     content: 'check_box';
 }
 
-.input[type="radio"]:before,
-.input[type="checkbox"]:before {
-    position: absolute;
-    top: -20%;
-    left: -20%;
-
-    background-color: rgba(0, 0, 0, .2);
-    border-radius: 50%;
-
-    content: '';
-    height: 140%;
-    width: 140%;
-
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity ease .3s;
+.input[type="radio"]:checked:after {
+    content: 'radio_button_checked';
 }
 
+.input[type="checkbox"]:before,
+.input[type="radio"]:before {
+    position: absolute;
+    top: -11px;
+    left: -11px;
+    border-radius: 50%;
+    border: 22px solid #000;
+    border-color: inherit;
+    box-sizing: border-box;
+    content: '';
+    height: 44px;
+    opacity: 0;
+    transition: opacity ease .3s;
+    visibility: hidden;
+    width: 44px;
+}
+
+.input[type="checkbox"]:not([class*="border-"]):before,
+.input[type="radio"]:not([class*="border-"]):before {
+    border-color: rgba(0, 0, 0, .6);
+}
+
+.input[type="checkbox"]:active:before,
 .input[type="radio"]:active:before,
-.input[type="checkbox"]:active:before {
-    opacity: 1;
+.input[type="checkbox"]:focus:before,
+.input[type="radio"]:focus:before {
+    opacity: 0.2;
     visibility: visible;
 }
 
@@ -1409,6 +1416,7 @@ textarea.input:not([rows]) {
     background-color: #aaa;
     border-radius: 50%;
     font-size: 14px;
+    line-height: 1;
     padding: 1px;
 }
 
@@ -1433,7 +1441,7 @@ textarea.input:not([rows]) {
     transition: ease all .4s;
 }
 
-.toast-body{
+.toast-body {
     opacity: 0;
     padding: 16px 24px;
     transition: ease opacity .6s;

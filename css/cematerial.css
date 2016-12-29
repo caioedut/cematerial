@@ -5600,7 +5600,7 @@ textarea.input:not([rows]) {
     background-image: linear-gradient(#FFF, #FFF), linear-gradient(#FFF, #FFF)
 }
 
-.input.focus-white-:focus {
+.input.focus-white:focus {
     background-image: linear-gradient(#FFF, #FFF), linear-gradient(#D2D2D2, #D2D2D2)
 }
 

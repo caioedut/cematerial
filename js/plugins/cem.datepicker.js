@@ -234,7 +234,7 @@
 
     // Events
     document
-        .on('click', '[data-toggle="datepicker"]', function () {
+        .on('focusin', '[data-toggle="datepicker"]', function () {
             var init = this.datepicker || new Datepicker(this.dataset, this);
             this.datepicker = init;
             init.toggle(this);
@@ -274,6 +274,8 @@
             if (init.input) {
                 init.input.value = init.date.toLocaleString(Datepicker.LOCALE, {year: 'numeric', month: '2-digit', day: '2-digit'});
                 init.input.dataset.date = init.date.toISOString();
+                // Event change
+                init.input.dispatchEvent(new Event('change'));
             }
         })
     ;

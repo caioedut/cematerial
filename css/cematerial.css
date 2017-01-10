@@ -1328,7 +1328,6 @@ textarea.input:not([rows]) {
 
 .input:not([type="checkbox"]):not([type="radio"]):focus {
     border-bottom-width: 2px;
-    padding: 9px 0 7px;
 }
 
 /*CHECKBOX*/
@@ -1511,6 +1510,81 @@ textarea.input:not([rows]) {
 
 .tooltip-visible {
     opacity: 1;
+}
+
+/*DATEPICKER*/
+.datepicker-dialog thead,
+.datepicker-dialog th,
+.datepicker-dialog tbody,
+.datepicker-dialog td {
+    border: none !important;
+    padding: 0 !important;
+    text-align: center;
+}
+
+.datepicker-dialog span {
+    text-transform: capitalize;
+}
+
+.datepicker-date:not(.datepicker-active),
+.datepicker-yearselect:not(.datepicker-active) {
+    opacity: .6;
+}
+
+.datepicker-date {
+    font-size: 2.43rem;
+    margin-top: 5px;
+}
+
+.datepicker-month {
+    font-weight: 500;
+}
+
+.datepicker-week th,
+.datepicker-day a {
+    line-height: 36px;
+    height: 36px;
+    width: 36px;
+}
+
+.datepicker-day a {
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.datepicker-body {
+    position: relative;
+    background-color: inherit;
+}
+
+.datepicker-yearlist {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: inherit;
+    display: block;
+    height: 100%;
+    overflow: auto;
+    text-align: center;
+    width: 100%;
+}
+
+.datepicker-yearlist.visible {
+    display: block;
+}
+
+.datepicker-year {
+    display: block;
+    font-size: 1.2rem;
+    padding: 12px;
+}
+
+.datepicker-year.selected {
+    font-size: 2rem;
+}
+
+.datepicker-dialog .dialog-footer {
+    margin-top: -1px;
 }
 
 /*MENUS */
@@ -2656,6 +2730,10 @@ textarea.input:not([rows]) {
 
 .no-padding {
     padding: 0 !important;
+}
+
+.no-border {
+    border: none !important;
 }
 
 .no-shadow {

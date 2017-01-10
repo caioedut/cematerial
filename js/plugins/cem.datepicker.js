@@ -235,8 +235,7 @@
     // Events
     document
         .on('focusin', '[data-toggle="datepicker"]', function () {
-            var init = this.datepicker || new Datepicker(this.dataset, this);
-            this.datepicker = init;
+            var init = new Datepicker(this.dataset, this);
             init.toggle(this);
         })
         .on('click', '.datepicker-yearselect', function () {

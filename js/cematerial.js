@@ -57,7 +57,7 @@ Element.prototype.parents = function (selector) {
     var parents = [];
 
     var parent = this.parentNode;
-    while (parent !== document) {
+    while (parent && parent !== document) {
         if (selector) {
             if (parent.matches(selector)) {
                 parents.push(parent);

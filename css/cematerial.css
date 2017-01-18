@@ -1929,9 +1929,12 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 [class*="xs-col-"], [class*="sm-col-"], [class*="md-col-"], [class*="lg-col-"], [class*="xl-col-"] {
     display: block;
-    /*flex-grow: 0;*/
     flex-shrink: 0;
     width: 100%;
+}
+
+.grid-fit > * {
+    flex-shrink: 1;
 }
 
 /*****************

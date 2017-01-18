@@ -1308,8 +1308,16 @@ textarea.input:not([rows]) {
     height: 48px;
 }
 
+select.input {
+    padding-top: 6px !important;
+}
+
 .input:not([type="checkbox"]):not([type="radio"]):focus {
     border-bottom-width: 2px;
+}
+
+input.input:not([type="checkbox"]):not([type="radio"]):focus {
+    padding-top: 9px;
 }
 
 /*CHECKBOX*/

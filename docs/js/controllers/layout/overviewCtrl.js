@@ -19,17 +19,17 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '</div>'
         ),
         containers: (
-            '<div class="set-border">Div without .container-*</div>' + "\n" +
-            '<div class="set-border container-xs">Div with .container-xs</div>' + "\n" +
-            '<div class="set-border container-sm">Div with .container-sm</div>' + "\n" +
-            '<div class="set-border container-md">Div with .container-md</div>' + "\n" +
-            '<div class="set-border container-lg">Div with .container-lg</div>' + "\n" +
-            '<div class="set-border container-xl">Div with .container-xl</div>'
+            '<div class="set-border">Div without .pd-*</div>' + "\n" +
+            '<div class="set-border pd-xs">Div with .pd-xs</div>' + "\n" +
+            '<div class="set-border pd-sm">Div with .pd-sm</div>' + "\n" +
+            '<div class="set-border pd-md">Div with .pd-md</div>' + "\n" +
+            '<div class="set-border pd-lg">Div with .pd-lg</div>' + "\n" +
+            '<div class="set-border pd-xl">Div with .pd-xl</div>'
         ),
         style: (
             '<div class="layout" style="border: 1px solid #ddd; height: 300px;">' + "\n" +
             '    <div class="layout-sidebar">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Sidebar' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -40,7 +40,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '                    <i class="md-icon">menu</i>' + "\n" +
             '                </button>' + "\n" +
             '            </div>' + "\n" +
-            '            <div class="grid-col container-md">' + "\n" +
+            '            <div class="grid-col pd-md">' + "\n" +
             '                <h1 class="layout-title">' + "\n" +
             '                    Header' + "\n" +
             '                </h1>' + "\n" +
@@ -48,7 +48,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '        </div>' + "\n" +
             '    </div>' + "\n" +
             '    <div class="layout-content">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            <p>This is my <b>scrollable</b> container.</p>' + "\n" +
             '            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet assumenda aut doloremque, dolores ducimus eius, et eveniet, harum ipsa ipsam maxime minus officiis perspiciatis porro praesentium quod rem totam!</p>' + "\n" +
             '            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet assumenda aut doloremque, dolores ducimus eius, et eveniet, harum ipsa ipsam maxime minus officiis perspiciatis porro praesentium quod rem totam!</p>' + "\n" +
@@ -57,7 +57,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '        </div>' + "\n" +
             '    </div>' + "\n" +
             '    <div class="layout-footer bg-blue-6">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Footer' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -99,7 +99,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         '                <i class="md-icon">library_music</i>' + "\n" +
         '                Music library' + "\n" +
         '            </a>' + "\n" +
-        '            <div class="divider-horizontal container-sm"></div>' + "\n" +
+        '            <div class="divider-horizontal pd-sm"></div>' + "\n" +
         '            <a>' + "\n" +
         '                <i class="md-icon">settings</i>' + "\n" +
         '                Settings' + "\n" +
@@ -114,7 +114,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         '                <i class="md-icon">account_circle</i>' + "\n" +
         '                Profile' + "\n" +
         '            </a>' + "\n" +
-        '            <div class="divider-horizontal container-sm"></div>' + "\n" +
+        '            <div class="divider-horizontal pd-sm"></div>' + "\n" +
         '            <a>' + "\n" +
         '                <i class="md-icon">add</i>' + "\n" +
         '                Add account' + "\n" +
@@ -132,7 +132,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         '                    <i class="md-icon">menu</i>' + "\n" +
         '                </button>' + "\n" +
         '            </div>' + "\n" +
-        '            <div class="grid-col container-md">' + "\n" +
+        '            <div class="grid-col pd-md">' + "\n" +
         '                <h1 class="layout-title">' + "\n" +
         '                    Header' + "\n" +
         '                </h1>' + "\n" +
@@ -140,7 +140,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         '        </div>' + "\n" +
         '    </div>' + "\n" +
         '    <div class="layout-content">' + "\n" +
-        '        <div class="container-md">' + "\n" +
+        '        <div class="pd-md">' + "\n" +
         '            <p>This is my <b>scrollable</b> container.</p>' + "\n" +
         '            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet assumenda aut doloremque, dolores ducimus eius, et eveniet, harum ipsa ipsam maxime minus officiis perspiciatis porro praesentium quod rem totam!</p>' + "\n" +
         '            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet assumenda aut doloremque, dolores ducimus eius, et eveniet, harum ipsa ipsam maxime minus officiis perspiciatis porro praesentium quod rem totam!</p>' + "\n" +
@@ -149,7 +149,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         '        </div>' + "\n" +
         '    </div>' + "\n" +
         '    <div class="layout-footer bg-blue-6">' + "\n" +
-        '        <div class="container-md">' + "\n" +
+        '        <div class="pd-md">' + "\n" +
         '            Footer' + "\n" +
         '        </div>' + "\n" +
         '    </div>' + "\n" +

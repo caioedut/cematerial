@@ -8,7 +8,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop me' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -62,7 +62,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop .top' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-sm top">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -72,7 +72,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop .bottom' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-sm bottom">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -82,7 +82,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop .left' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-sm left">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -92,7 +92,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop .right' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-sm right">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -104,7 +104,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop .top-inverse' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-sm top-inverse">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -114,7 +114,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop .bottom-inverse' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-sm bottom-inverse">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -124,7 +124,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop .left-inverse' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-sm left-inverse">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -134,7 +134,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop .right-inverse' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-sm right-inverse">' + "\n" +
-            '        <div class="container-md">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +

@@ -3,7 +3,7 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
 
     $scope.codes = {
         basic: (
-            '<div class="container-md bg-grey-2">' + "\n" +
+            '<div class="pd-md bg-grey-2">' + "\n" +
             '   <ul class="menu">' + "\n" +
             '       <li>' + "\n" +
             '           <a>' + "\n" +
@@ -47,7 +47,7 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
             '</div>'
         ),
         block: (
-            '<div class="container-md bg-grey-2">' + "\n" +
+            '<div class="pd-md bg-grey-2">' + "\n" +
             '    <ul class="menu menu-block">' + "\n" +
             '        <li>' + "\n" +
             '            <a>' + "\n" +
@@ -71,7 +71,7 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
             '</div>'
         ),
         colors: (
-            '<div class="container-md bg-grey-2">' + "\n" +
+            '<div class="pd-md bg-grey-2">' + "\n" +
             '    <ul class="menu">' + "\n" +
             '        <li>' + "\n" +
             '            <a class="text-blue-6" data-class-hover="bg-blue-6 text-white">' + "\n" +

@@ -1014,6 +1014,7 @@ body > .layout {
 
 .dialog-footer,
 .card-footer {
+    direction: rtl;
     padding: 4px;
     text-align: right;
 }
@@ -1575,6 +1576,15 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .datepicker-dialog .dialog-footer {
     margin-top: -1px;
+}
+
+/*LIST GROUP*/
+.list .list-item {
+    padding: 16px;
+}
+
+.list.list-divider > .list-item + .list-item {
+    border-top: 1px solid #ddd;
 }
 
 /*MENUS */

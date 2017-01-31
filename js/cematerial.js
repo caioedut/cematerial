@@ -1379,14 +1379,14 @@ NodeList.prototype.not = function (sel_or_arr) {
             '</div>' +
             '<div class="datepicker-body">' +
             '<div class="grid grid-nowrap grid-middle xs-text-center">' +
-            '<button class="grid-col btn btn-circle btn-lg datepicker-dec" type="button">' +
-            '<i class="md-icon">chevron_left</i>' +
+            '<button class="grid-col btn btn-circle btn-xl datepicker-dec" type="button">' +
+            '<i class="md-icon md-icon-sm">chevron_left</i>' +
             '</button>' +
             '<div class="grid-col col-fill datepicker-month">' +
             this.dateBase.toLocaleDateString(Datepicker.LOCALE, {month: 'long', year: 'numeric'}) +
             '</div>' +
-            '<button class="grid-col btn btn-circle btn-lg datepicker-inc" type="button">' +
-            '<i class="md-icon">chevron_right</i>' +
+            '<button class="grid-col btn btn-circle btn-xl datepicker-inc" type="button">' +
+            '<i class="md-icon md-icon-sm">chevron_right</i>' +
             '</button>' +
             '</div>' +
             '<div class="dialog-body">' +

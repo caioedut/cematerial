@@ -1587,6 +1587,37 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     font-size: 2rem;
 }
 
+/*DATEPICKER HORIZONTAL*/
+@media (max-height: 460px) {
+    .datepicker-dialog {
+        flex-flow: row;
+        flex-wrap: nowrap;
+    }
+
+    .datepicker-dialog .dialog-header {
+        border-radius: 2px 0 0 2px;
+        width: 150px;
+    }
+
+    .datepicker-dialog .dialog-body {
+        border-radius: 0 2px 0 0;
+        margin-bottom: 36px;
+    }
+
+    .datepicker-dialog .dialog-footer {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 150px;
+        border-radius: 0 0 2px 0;
+    }
+
+    .datepicker-dialog .dialog-body .grid {
+        margin-top: -8px;
+        margin-bottom: -12px;
+    }
+}
+
 /*LIST GROUP*/
 .list .list-item {
     padding: 16px;

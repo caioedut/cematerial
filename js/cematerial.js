@@ -1370,14 +1370,14 @@ NodeList.prototype.not = function (sel_or_arr) {
         html += '' +
             '<div class="dialog-header bg-' + this.options.color + '">' +
             '<a class="datepicker-yearselect">' +
-            '' + this.date.getFullYear() +
+            this.date.getFullYear() +
             '</a>' +
             '<br/>' +
             '<a class="datepicker-date datepicker-active">' +
             this.date.toLocaleDateString(Datepicker.LOCALE, {weekday: 'short', day: 'numeric', month: 'short'}) +
             '</a>' +
             '</div>' +
-            '<div class="datepicker-body">' +
+            '<div class="dialog-body">' +
             '<div class="grid grid-nowrap grid-middle xs-text-center">' +
             '<button class="grid-col btn btn-circle btn-xl datepicker-dec" type="button">' +
             '<i class="md-icon md-icon-sm">chevron_left</i>' +
@@ -1389,7 +1389,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             '<i class="md-icon md-icon-sm">chevron_right</i>' +
             '</button>' +
             '</div>' +
-            '<div class="dialog-body">' +
+            '<div class="datepicker-body">' +
             '<table class="no-shadow">' +
             '<thead>' +
             '<tr class="datepicker-week">';
@@ -1466,7 +1466,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         if (!yearlist) {
             yearlist = document.createElement('div');
             yearlist.classList.add('datepicker-yearlist');
-            this.el.querySelector('.dialog-body').appendChild(yearlist);
+            this.el.querySelector('.datepicker-body').appendChild(yearlist);
         }
 
         var year = this.dateBase.getFullYear();

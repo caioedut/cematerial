@@ -1283,6 +1283,8 @@ NodeList.prototype.not = function (sel_or_arr) {
             }
         }
 
+        this.dateBase = new Date(this.date);
+
         this.createDatepicker();
 
         this.dialog = new Dialog(this.el, this.options);
@@ -1291,10 +1293,10 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.generateDays();
     };
 
-    Datepicker.VERSION = '0.0.1';
+    Datepicker.VERSION = '0.0.2';
 
     Datepicker.DEFAULTS = {
-        color: 'teal-6',
+        color: 'blue-6',
         btnConfirm: 'Ok',
         btnCancel: 'Cancel'
     };
@@ -1305,7 +1307,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         return (new Date(date.getTime() + timezone_offset));
     };
 
-    Datepicker.LOCALE = navigator.language || navigator.languages[0];
+    Datepicker.LOCALE = navigator.language || navigator.languages[0] || 'en-us';
 
     Datepicker.MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'].map(function (item) {
         return Datepicker.getDateNoTimezone('2017-' + item + '-01').toLocaleDateString(Datepicker.LOCALE, {month: 'long'});
@@ -1314,8 +1316,6 @@ NodeList.prototype.not = function (sel_or_arr) {
     Datepicker.WEEKS = ['01', '02', '03', '04', '05', '06', '07'].map(function (item) {
         return Datepicker.getDateNoTimezone('2017-01-' + item).toLocaleDateString(Datepicker.LOCALE, {weekday: 'long'});
     });
-
-    Datepicker.DAYS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 17, 18, 19, 30, 31];
 
     Datepicker.prototype.toggle = function (_relatedTarget) {
         return this.el.classList.contains('dialog-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
@@ -1359,7 +1359,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         if (!this.el) {
             this.el = document.createElement('div');
             this.el.classList.add('dialog');
-            this.el.classList.add('datepicker-dialog');
+            this.el.classList.add('datepicker-dialog', 'no-select');
             document.body.appendChild(this.el);
         }
     };
@@ -1368,24 +1368,24 @@ NodeList.prototype.not = function (sel_or_arr) {
         var html = '';
 
         html += '' +
-            '<div class="dialog-header bg-teal-6">' +
+            '<div class="dialog-header bg-' + this.options.color + '">' +
             '<a class="datepicker-yearselect">' +
             '' + this.date.getFullYear() +
             '</a>' +
             '<br/>' +
             '<a class="datepicker-date datepicker-active">' +
-            '<span>' + this.date.toLocaleDateString(Datepicker.LOCALE, {weekday: 'short'}) + '</span>, <span>' + this.date.toLocaleDateString(Datepicker.LOCALE, {month: 'short'}) + '</span> ' + this.date.getDate() +
+            this.date.toLocaleDateString(Datepicker.LOCALE, {weekday: 'short', day: 'numeric', month: 'short'}) +
             '</a>' +
             '</div>' +
             '<div class="datepicker-body">' +
-            '<div class="grid grid-nowrap grid-middle bg-white xs-text-center">' +
-            '<button class="grid-col btn btn-flat btn-lg datepicker-dec" type="button">' +
+            '<div class="grid grid-nowrap grid-middle xs-text-center">' +
+            '<button class="grid-col btn btn-circle btn-lg datepicker-dec" type="button">' +
             '<i class="md-icon">chevron_left</i>' +
             '</button>' +
             '<div class="grid-col col-fill datepicker-month">' +
-            '<span>' + this.date.toLocaleDateString(Datepicker.LOCALE, {month: 'long'}) + ' ' + this.date.getFullYear() + '</span>' +
+            this.dateBase.toLocaleDateString(Datepicker.LOCALE, {month: 'long', year: 'numeric'}) +
             '</div>' +
-            '<button class="grid-col btn btn-flat btn-lg datepicker-inc" type="button">' +
+            '<button class="grid-col btn btn-circle btn-lg datepicker-inc" type="button">' +
             '<i class="md-icon">chevron_right</i>' +
             '</button>' +
             '</div>' +
@@ -1405,8 +1405,8 @@ NodeList.prototype.not = function (sel_or_arr) {
             '<tr>';
 
         // Discover date offset and last month day
-        var offset_day = Datepicker.getDateNoTimezone(new Date(this.date.getFullYear(), this.date.getMonth(), 1)).getDay();
-        var last_day = (new Date((new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1)) - 1)).getDate();
+        var offset_day = Datepicker.getDateNoTimezone(new Date(this.dateBase.getFullYear(), this.dateBase.getMonth(), 1)).getDay();
+        var last_day = (new Date((new Date(this.dateBase.getFullYear(), this.dateBase.getMonth() + 1, 1)) - 1)).getDate();
 
         var i, days = [];
 
@@ -1428,7 +1428,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             if (day > 0) {
                 html += '' +
                     '<td class="datepicker-day">' +
-                    '<a class="' + (this.date.getDate() == day ? 'bg-' + this.options.color : '') + '" data-day="' + day + '">' + day + '</a>' +
+                    '<a class="' + (this.date.getDate() == day && this.date.getMonth() == this.dateBase.getMonth() && this.date.getFullYear() == this.dateBase.getFullYear() ? 'bg-' + this.options.color : '') + '" data-day="' + day + '">' + day + '</a>' +
                     '</td>';
             } else {
                 html += '<td></td>';
@@ -1446,8 +1446,8 @@ NodeList.prototype.not = function (sel_or_arr) {
             '</div>' +
             '</div>' +
             '<div class="dialog-footer">' +
-            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + this.options.btnCancel + '</button>' +
             '<button class="btn btn-flat text-' + this.options.color + ' datepicker-confirm" type="button" data-toggle="dialog">' + this.options.btnConfirm + '</button>' +
+            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + this.options.btnCancel + '</button>' +
             '</div>';
 
         this.el.innerHTML = html;
@@ -1469,7 +1469,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             this.el.querySelector('.dialog-body').appendChild(yearlist);
         }
 
-        var year = this.date.getFullYear();
+        var year = this.dateBase.getFullYear();
         var min = Math.min(year - 150, (new Date()).getFullYear() - 150);
         var max = Math.max(year + 150, (new Date()).getFullYear() + 150);
         var html = '';
@@ -1502,28 +1502,31 @@ NodeList.prototype.not = function (sel_or_arr) {
         })
         .on('click', '.datepicker-year', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
-            init.date.setYear(this.dataset.year);
+            init.dateBase.setYear(this.dataset.year);
             init.generateDays();
         })
         .on('click', '.datepicker-date', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
+            init.dateBase = new Date(init.date);
             init.generateDays();
         })
         .on('click', '.datepicker-dec', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
-            init.date.setDate(1);
-            init.date.setMonth(init.date.getMonth() - 1);
+            init.dateBase.setDate(1);
+            init.dateBase.setMonth(init.dateBase.getMonth() - 1);
             init.generateDays();
         })
         .on('click', '.datepicker-inc', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
-            init.date.setDate(1);
-            init.date.setMonth(init.date.getMonth() + 1);
+            init.dateBase.setDate(1);
+            init.dateBase.setMonth(init.dateBase.getMonth() + 1);
             init.generateDays();
         })
         .on('click', '.datepicker-day a', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
             init.date.setDate(this.dataset.day);
+            init.date.setMonth(init.dateBase.getMonth());
+            init.date.setFullYear(init.dateBase.getFullYear());
             init.generateDays();
         })
         .on('click', '.datepicker-confirm', function () {

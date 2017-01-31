@@ -1513,18 +1513,19 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     text-align: center;
 }
 
-.datepicker-dialog span {
-    text-transform: capitalize;
-}
-
 .datepicker-date:not(.datepicker-active),
 .datepicker-yearselect:not(.datepicker-active) {
     opacity: .6;
 }
 
 .datepicker-date {
+    display: block;
     font-size: 2.43rem;
     margin-top: 5px;
+}
+
+.datepicker-date::first-letter {
+    text-transform: capitalize;
 }
 
 .datepicker-month {

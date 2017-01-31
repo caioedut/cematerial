@@ -1532,6 +1532,23 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     font-weight: 500;
 }
 
+.datepicker-dialog .dialog-body {
+    position: relative;
+    background-color: inherit;
+    padding: 0;
+}
+
+.datepicker-dialog .dialog-footer {
+    margin-top: -1px;
+    padding: 0 12px 8px;
+}
+
+.datepicker-body {
+    background-color: inherit;
+    height: 260px;
+    padding: 0 12px;
+}
+
 .datepicker-week th,
 .datepicker-day a {
     line-height: 36px;
@@ -1541,12 +1558,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .datepicker-day a {
     border-radius: 50%;
-    display: inline-block;
-}
-
-.datepicker-body {
-    position: relative;
-    background-color: inherit;
+    display: block;
 }
 
 .datepicker-yearlist {
@@ -1573,14 +1585,6 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .datepicker-year.selected {
     font-size: 2rem;
-}
-
-.datepicker-dialog .dialog-body {
-    padding: 0 16px 16px;
-}
-
-.datepicker-dialog .dialog-footer {
-    margin-top: -1px;
 }
 
 /*LIST GROUP*/

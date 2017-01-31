@@ -1575,6 +1575,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     font-size: 2rem;
 }
 
+.datepicker-dialog .dialog-body {
+    padding: 0 16px 16px;
+}
+
 .datepicker-dialog .dialog-footer {
     margin-top: -1px;
 }

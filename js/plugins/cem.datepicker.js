@@ -25,7 +25,7 @@
             }
         }
 
-        this.dateBase = new Date(this.date);
+        this.dateBase = Datepicker.getDateNoTimezone(this.date);
 
         this.createDatepicker();
 
@@ -38,25 +38,53 @@
     Datepicker.VERSION = '0.0.2';
 
     Datepicker.DEFAULTS = {
-        color: 'blue-6',
-        btnConfirm: 'Ok',
-        btnCancel: 'Cancel'
+        color: 'blue-6'
     };
 
-    Datepicker.getDateNoTimezone = function (date) {
-        date = date ? (date instanceof Date ? date : new Date(date)) : new Date();
-        var timezone_offset = (new Date()).getTimezoneOffset() * 60000;
-        return (new Date(date.getTime() + timezone_offset));
+    Datepicker.getDateNoTimezone = function (y, m, d) {
+        // date = date ? (date instanceof Date ? date : new Date(date)) : new Date();
+        // var timezone_offset = (new Date()).getTimezoneOffset() * 60000;
+        // return (new Date(date.getTime() + timezone_offset));
+
+        var date;
+
+        if (typeof d !== 'undefined') {
+            date = new Date(y, m, d);
+        } else if (typeof m !== 'undefined') {
+            date = new Date(y, m);
+        } else if (typeof y !== 'undefined') {
+            date = new Date(y);
+        } else {
+            date = new Date();
+        }
+
+        return date;
+
     };
 
     Datepicker.LOCALE = navigator.language || navigator.languages[0] || 'en-us';
 
-    Datepicker.MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'].map(function (item) {
-        return Datepicker.getDateNoTimezone('2017-' + item + '-01').toLocaleDateString(Datepicker.LOCALE, {month: 'long'});
+    Datepicker.STRINGS = {
+        'en-us': {
+            confirm: 'Ok',
+            cancel: 'Cancel'
+        },
+        'pt-br': {
+            confirm: 'Ok',
+            cancel: 'Cancelar'
+        },
+        'es': {
+            confirm: 'Ok',
+            cancel: 'Cancelar'
+        }
+    };
+
+    Datepicker.MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (item) {
+        return Datepicker.getDateNoTimezone(2017, item, 1).toLocaleDateString(Datepicker.LOCALE, {month: 'long'});
     });
 
-    Datepicker.WEEKS = ['01', '02', '03', '04', '05', '06', '07'].map(function (item) {
-        return Datepicker.getDateNoTimezone('2017-01-' + item).toLocaleDateString(Datepicker.LOCALE, {weekday: 'long'});
+    Datepicker.WEEKDAYS = [1, 2, 3, 4, 5, 6, 7].map(function (item) {
+        return Datepicker.getDateNoTimezone(2017, 0, item).toLocaleDateString(Datepicker.LOCALE, {weekday: 'long'});
     });
 
     Datepicker.prototype.toggle = function (_relatedTarget) {
@@ -107,19 +135,20 @@
     };
 
     Datepicker.prototype.generateDays = function () {
+        var strings = Datepicker.STRINGS[Datepicker.LOCALE.toLowerCase()] || Datepicker.STRINGS['en-us'];
         var html = '';
 
         html += '' +
             '<div class="dialog-header bg-' + this.options.color + '">' +
             '<a class="datepicker-yearselect">' +
-            '' + this.date.getFullYear() +
+            this.date.getFullYear() +
             '</a>' +
             '<br/>' +
             '<a class="datepicker-date datepicker-active">' +
             this.date.toLocaleDateString(Datepicker.LOCALE, {weekday: 'short', day: 'numeric', month: 'short'}) +
             '</a>' +
             '</div>' +
-            '<div class="datepicker-body">' +
+            '<div class="dialog-body">' +
             '<div class="grid grid-nowrap grid-middle xs-text-center">' +
             '<button class="grid-col btn btn-circle btn-xl datepicker-dec" type="button">' +
             '<i class="md-icon md-icon-sm">chevron_left</i>' +
@@ -131,12 +160,12 @@
             '<i class="md-icon md-icon-sm">chevron_right</i>' +
             '</button>' +
             '</div>' +
-            '<div class="dialog-body">' +
+            '<div class="datepicker-body">' +
             '<table class="no-shadow">' +
             '<thead>' +
             '<tr class="datepicker-week">';
 
-        Datepicker.WEEKS.forEach(function (item) {
+        Datepicker.WEEKDAYS.forEach(function (item) {
             html += '<th>' + item.substr(0, 1).toUpperCase() + '</th>';
         });
 
@@ -188,8 +217,8 @@
             '</div>' +
             '</div>' +
             '<div class="dialog-footer">' +
-            '<button class="btn btn-flat text-' + this.options.color + ' datepicker-confirm" type="button" data-toggle="dialog">' + this.options.btnConfirm + '</button>' +
-            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + this.options.btnCancel + '</button>' +
+            '<button class="btn btn-flat text-' + this.options.color + ' datepicker-confirm" type="button" data-toggle="dialog">' + strings.confirm + '</button>' +
+            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + strings.cancel + '</button>' +
             '</div>';
 
         this.el.innerHTML = html;
@@ -208,7 +237,7 @@
         if (!yearlist) {
             yearlist = document.createElement('div');
             yearlist.classList.add('datepicker-yearlist');
-            this.el.querySelector('.dialog-body').appendChild(yearlist);
+            this.el.querySelector('.datepicker-body').appendChild(yearlist);
         }
 
         var year = this.dateBase.getFullYear();
@@ -249,7 +278,7 @@
         })
         .on('click', '.datepicker-date', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
-            init.dateBase = new Date(init.date);
+            init.dateBase = Datepicker.getDateNoTimezone(init.date);
             init.generateDays();
         })
         .on('click', '.datepicker-dec', function () {
@@ -274,7 +303,7 @@
         .on('click', '.datepicker-confirm', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
             if (init.input) {
-                init.input.value = init.date.toLocaleString(Datepicker.LOCALE, {year: 'numeric', month: '2-digit', day: '2-digit'});
+                init.input.value = init.date.toLocaleDateString();
                 init.input.dataset.date = init.date.toISOString();
                 // Event change
                 init.input.dispatchEvent(new Event('change'));

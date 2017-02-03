@@ -1283,7 +1283,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             }
         }
 
-        this.dateBase = new Date(this.date);
+        this.dateBase = Datepicker.getDateNoTimezone(this.date);
 
         this.createDatepicker();
 
@@ -1296,9 +1296,7 @@ NodeList.prototype.not = function (sel_or_arr) {
     Datepicker.VERSION = '0.0.2';
 
     Datepicker.DEFAULTS = {
-        color: 'blue-6',
-        btnConfirm: 'Ok',
-        btnCancel: 'Cancel'
+        color: 'blue-6'
     };
 
     Datepicker.getDateNoTimezone = function (date) {
@@ -1308,6 +1306,21 @@ NodeList.prototype.not = function (sel_or_arr) {
     };
 
     Datepicker.LOCALE = navigator.language || navigator.languages[0] || 'en-us';
+
+    Datepicker.STRINGS = {
+        'en-us': {
+            confirm: 'Ok',
+            cancel: 'Cancel'
+        },
+        'pt-br': {
+            confirm: 'Ok',
+            cancel: 'Cancelar'
+        },
+        'es': {
+            confirm: 'Ok',
+            cancel: 'Cancelar'
+        }
+    };
 
     Datepicker.MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'].map(function (item) {
         return Datepicker.getDateNoTimezone('2017-' + item + '-01').toLocaleDateString(Datepicker.LOCALE, {month: 'long'});
@@ -1365,6 +1378,7 @@ NodeList.prototype.not = function (sel_or_arr) {
     };
 
     Datepicker.prototype.generateDays = function () {
+        var strings = Datepicker.STRINGS[Datepicker.LOCALE.toLowerCase()] || Datepicker.STRINGS['en-us'];
         var html = '';
 
         html += '' +
@@ -1446,8 +1460,8 @@ NodeList.prototype.not = function (sel_or_arr) {
             '</div>' +
             '</div>' +
             '<div class="dialog-footer">' +
-            '<button class="btn btn-flat text-' + this.options.color + ' datepicker-confirm" type="button" data-toggle="dialog">' + this.options.btnConfirm + '</button>' +
-            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + this.options.btnCancel + '</button>' +
+            '<button class="btn btn-flat text-' + this.options.color + ' datepicker-confirm" type="button" data-toggle="dialog">' + strings.confirm + '</button>' +
+            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + strings.cancel + '</button>' +
             '</div>';
 
         this.el.innerHTML = html;
@@ -1507,7 +1521,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         })
         .on('click', '.datepicker-date', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
-            init.dateBase = new Date(init.date);
+            init.dateBase = Datepicker.getDateNoTimezone(init.date);
             init.generateDays();
         })
         .on('click', '.datepicker-dec', function () {

@@ -1299,10 +1299,25 @@ NodeList.prototype.not = function (sel_or_arr) {
         color: 'blue-6'
     };
 
-    Datepicker.getDateNoTimezone = function (date) {
-        date = date ? (date instanceof Date ? date : new Date(date)) : new Date();
-        var timezone_offset = (new Date()).getTimezoneOffset() * 60000;
-        return (new Date(date.getTime() + timezone_offset));
+    Datepicker.getDateNoTimezone = function (y, m, d) {
+        // date = date ? (date instanceof Date ? date : new Date(date)) : new Date();
+        // var timezone_offset = (new Date()).getTimezoneOffset() * 60000;
+        // return (new Date(date.getTime() + timezone_offset));
+
+        var date;
+
+        if (typeof d !== 'undefined') {
+            date = new Date(y, m, d);
+        } else if (typeof m !== 'undefined') {
+            date = new Date(y, m);
+        } else if (typeof y !== 'undefined') {
+            date = new Date(y);
+        } else {
+            date = new Date();
+        }
+
+        return date;
+
     };
 
     Datepicker.LOCALE = navigator.language || navigator.languages[0] || 'en-us';
@@ -1322,12 +1337,12 @@ NodeList.prototype.not = function (sel_or_arr) {
         }
     };
 
-    Datepicker.MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'].map(function (item) {
-        return Datepicker.getDateNoTimezone('2017-' + item + '-01').toLocaleDateString(Datepicker.LOCALE, {month: 'long'});
+    Datepicker.MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (item) {
+        return Datepicker.getDateNoTimezone(2017, item, 1).toLocaleDateString(Datepicker.LOCALE, {month: 'long'});
     });
 
-    Datepicker.WEEKS = ['01', '02', '03', '04', '05', '06', '07'].map(function (item) {
-        return Datepicker.getDateNoTimezone('2017-01-' + item).toLocaleDateString(Datepicker.LOCALE, {weekday: 'long'});
+    Datepicker.WEEKDAYS = [1, 2, 3, 4, 5, 6, 7].map(function (item) {
+        return Datepicker.getDateNoTimezone(2017, 0, item).toLocaleDateString(Datepicker.LOCALE, {weekday: 'long'});
     });
 
     Datepicker.prototype.toggle = function (_relatedTarget) {
@@ -1408,7 +1423,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             '<thead>' +
             '<tr class="datepicker-week">';
 
-        Datepicker.WEEKS.forEach(function (item) {
+        Datepicker.WEEKDAYS.forEach(function (item) {
             html += '<th>' + item.substr(0, 1).toUpperCase() + '</th>';
         });
 
@@ -1546,7 +1561,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         .on('click', '.datepicker-confirm', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
             if (init.input) {
-                init.input.value = init.date.toLocaleString(Datepicker.LOCALE, {year: 'numeric', month: '2-digit', day: '2-digit'});
+                init.input.value = init.date.toLocaleDateString();
                 init.input.dataset.date = init.date.toISOString();
                 // Event change
                 init.input.dispatchEvent(new Event('change'));

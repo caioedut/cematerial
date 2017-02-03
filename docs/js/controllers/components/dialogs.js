@@ -11,14 +11,14 @@ angular.module('docs').controller('components.dialogsCtrl', function ($scope) {
             '        <h3 class="dialog-title">My Dialog</h3>' + "\n" +
             '    </div>' + "\n" +
             '    <div class="dialog-body">' + "\n" +
-            '        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aspernatur, delectus deserunt earum error fugit iusto qui sit ut veniam. Alias at cupiditate enim est et iste necessitatibus neque ut.' + "\n" +
+            '        Lorem ipsum dolor sit amet, consectetur adipisicing elit.' + "\n" +
             '    </div>' + "\n" +
             '    <div class="dialog-footer">' + "\n" +
-            '        <button class="btn btn-flat text-blue-6" type="button" data-toggle="dialog">' + "\n" +
-            '            Cancel' + "\n" +
-            '        </button>' + "\n" +
             '        <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '            Confirm' + "\n" +
+            '        </button>' + "\n" +
+            '        <button class="btn btn-flat text-blue-6" type="button" data-toggle="dialog">' + "\n" +
+            '            Cancel' + "\n" +
             '        </button>' + "\n" +
             '    </div>' + "\n" +
             '</div>'
@@ -35,11 +35,11 @@ angular.module('docs').controller('components.dialogsCtrl', function ($scope) {
             '        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aspernatur, delectus deserunt earum error fugit iusto qui sit ut veniam. Alias at cupiditate enim est et iste necessitatibus neque ut.' + "\n" +
             '    </div>' + "\n" +
             '    <div class="dialog-footer">' + "\n" +
-            '        <button class="btn btn-flat text-blue-6" type="button" data-toggle="dialog">' + "\n" +
-            '            Cancel' + "\n" +
-            '        </button>' + "\n" +
             '        <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '            Confirm' + "\n" +
+            '        </button>' + "\n" +
+            '        <button class="btn btn-flat text-blue-6" type="button" data-toggle="dialog">' + "\n" +
+            '            Cancel' + "\n" +
             '        </button>' + "\n" +
             '    </div>' + "\n" +
             '</div>'
@@ -62,8 +62,16 @@ angular.module('docs').controller('components.dialogsCtrl', function ($scope) {
             '    </div>' + "\n" +
             '</div>' + "\n" +
             '<div id="dialog4" class="dialog">' + "\n" +
+            '    <div class="dialog-header">' + "\n" +
+            '        <h1 class="dialog-title">Alert</h1>' + "\n" +
+            '    </div>' + "\n" +
             '    <div class="dialog-body">' + "\n" +
-            '        Hello World!' + "\n" +
+            '        Lorem ipsum dolor sit amet, consectetur adipisicing elit.' + "\n" +
+            '    </div>' + "\n" +
+            '    <div class="dialog-footer">' + "\n" +
+            '        <button class="btn btn-flat text-blue-6" type="button" data-toggle="dialog">' + "\n" +
+            '            Close' + "\n" +
+            '        </button>' + "\n" +
             '    </div>' + "\n" +
             '</div>'
         )

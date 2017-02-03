@@ -49,6 +49,12 @@ angular.module('docs').config(function ($stateProvider) {
             templateUrl: 'view/components/chips.html'
         },
         {
+            name: 'datepicker',
+            url: '/components/datepicker',
+            controller: 'components.datepickerCtrl',
+            templateUrl: 'view/components/datepicker.html'
+        },
+        {
             name: 'dialogs',
             url: '/components/dialogs',
             controller: 'components.dialogsCtrl',

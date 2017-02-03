@@ -20,7 +20,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop me' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-xs">' + "\n" +
-            '        <div class="container">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -30,7 +30,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop me' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-sm">' + "\n" +
-            '        <div class="container">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -40,7 +40,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop me' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-lg">' + "\n" +
-            '        <div class="container">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
@@ -50,7 +50,7 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '        Drop me' + "\n" +
             '    </a>' + "\n" +
             '    <div class="dropdown-body dropdown-xl">' + "\n" +
-            '        <div class="container">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
             '            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum ex magnam magni nihil obcaecati quisquam quod ratione rerum sit veritatis. Alias consequatur dicta eaque eos et excepturi expedita itaque officiis.' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +

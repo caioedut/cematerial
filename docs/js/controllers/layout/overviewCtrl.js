@@ -68,7 +68,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         '    <div class="layout-sidebar">' + "\n" +
         '        <div class="layout-account">' + "\n" +
         '            <img class="media-background" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>' + "\n" +
-        '            <div class="set-overlay container">' + "\n" +
+        '            <div class="set-overlay pd-md">' + "\n" +
         '                <div class="grid grid-gutter">' + "\n" +
         '                    <div class="xs-col-5 sm-col-4">' + "\n" +
         '                        <div class="media-container-lg">' + "\n" +
@@ -99,7 +99,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         '                <i class="md-icon">library_music</i>' + "\n" +
         '                Music library' + "\n" +
         '            </a>' + "\n" +
-        '            <div class="divider-horizontal pd-sm"></div>' + "\n" +
+        '            <div class="divider-horizontal mg-top-sm mg-bottom-sm"></div>' + "\n" +
         '            <a>' + "\n" +
         '                <i class="md-icon">settings</i>' + "\n" +
         '                Settings' + "\n" +
@@ -114,7 +114,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         '                <i class="md-icon">account_circle</i>' + "\n" +
         '                Profile' + "\n" +
         '            </a>' + "\n" +
-        '            <div class="divider-horizontal pd-sm"></div>' + "\n" +
+        '            <div class="divider-horizontal mg-top-sm mg-bottom-sm"></div>' + "\n" +
         '            <a>' + "\n" +
         '                <i class="md-icon">add</i>' + "\n" +
         '                Add account' + "\n" +

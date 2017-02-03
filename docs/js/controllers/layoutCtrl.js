@@ -45,6 +45,10 @@ angular.module('docs').controller('layoutCtrl', function ($scope, $sce) {
                     url: 'chips'
                 },
                 {
+                    title: 'Datepicker',
+                    url: 'datepicker'
+                },
+                {
                     title: 'Dialogs',
                     url: 'dialogs'
                 },

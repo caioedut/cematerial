@@ -6,8 +6,8 @@ angular.module('docs').controller('components.buttonsCtrl', function ($scope) {
             '<button class="btn" type="button">' + "\n" +
             '   Button' + "\n" +
             '</button>' + "\n" +
-            '<button class="btn btn-lower" type="button">' + "\n" +
-            '   Button Lower' + "\n" +
+            '<button class="btn btn-flat" type="button">' + "\n" +
+            '   Button Flat' + "\n" +
             '</button>'
         ),
         colors: (

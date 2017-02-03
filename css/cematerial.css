@@ -1021,12 +1021,14 @@ body > .layout {
 
 .dialog > :first-child,
 .card > :first-child {
-    border-radius: 2px 2px 0 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 .dialog > :last-child,
 .card > :last-child {
-    border-radius: 0 0 2px 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
 /* DIVIDER / HORIZONTAL RULE */

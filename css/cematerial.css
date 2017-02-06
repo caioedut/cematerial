@@ -1464,8 +1464,8 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 }
 
 .toast-body {
-    opacity: 0;
-    padding: 16px 24px;
+    min-height: 48px;
+    padding-left: 16px;
     transition: ease opacity .6s;
 }
 
@@ -1473,8 +1473,8 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     height: 48px;
 }
 
-.toast-visible .toast-body {
-    opacity: 1;
+.toast-body .grid-col {
+    padding: 0 8px;
 }
 
 /*TOOLTIPS*/
@@ -1659,14 +1659,17 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 }
 
 .menu a,
-.menu li a,
-.menu li.divider-horizontal {
+.menu li a {
     display: block;
     padding: 8px 16px;
     white-space: nowrap;
 }
 
-.menu li:hover:not([data-class-hover]) {
+.menu li.divider-horizontal {
+    margin: 8px 0;
+}
+
+.menu li:hover {
     background-color: #eee;
 }
 

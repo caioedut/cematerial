@@ -64,7 +64,30 @@
         }
 
         setTimeout(function () {
-            that.el.innerHTML = '<div class="toast-body">' + that.options.message + '</div>';
+            that.el.innerHTML = '<div class="toast-body grid grid-middle grid-nowrap"><div class="grid-col col-fill">' + that.options.message + '</div></div>';
+
+            if (that.options.actions && that.options.actions.length) {
+                var body = that.el.querySelector('.toast-body');
+                var btn_body = document.createElement('div');
+
+                btn_body.classList.add('grid-col');
+
+                var dft = {color: 'blue-6', onClick: function() {}};
+                that.options.actions.forEach(function (opts) {
+                    opts = extend({}, dft, opts);
+
+                    var btn = document.createElement('button');
+                    btn.setAttribute('type', 'button');
+                    btn.classList.add('btn', 'btn-flat', 'text-' + opts.color);
+                    btn.innerHTML = opts.label;
+                    btn.on('click', opts.onClick.bind(btn, that));
+
+                    btn_body.appendChild(btn);
+                });
+
+                body.appendChild(btn_body);
+            }
+
             that.el.classList.add('toast-visible');
         }, delay);
 

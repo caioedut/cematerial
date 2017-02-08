@@ -1015,7 +1015,7 @@ body > .layout {
 .dialog-footer,
 .card-footer {
     direction: rtl;
-    padding: 4px;
+    padding: 8px;
     text-align: right;
 }
 

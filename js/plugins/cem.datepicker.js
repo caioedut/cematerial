@@ -15,7 +15,7 @@
         this.input = input;
 
         if (this.options.date) {
-            this.date = Datepicker.getDateNoTimezone(this.options.date);
+            this.date = Datepicker.getDateNoTimezone.apply(null, this.options.date.substr(0, 10).split('/').reverse().join('-').split('-'));
         } else {
             var date_check = Datepicker.getDateNoTimezone(input.value);
             if (date_check instanceof Date && isFinite(date_check)) {

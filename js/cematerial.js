@@ -794,8 +794,8 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.list = this.el.querySelector('.tabs-nav');
         this.content = this.el.querySelectorAll('.tabs-list > .tab-content');
 
-        if (this.el['cem.sidebar']) {
-            this.bar = this.el['cem.sidebar'].bar;
+        if (this.el['cem.tabs']) {
+            this.bar = this.el['cem.tabs'].bar;
             this.updateBar();
         } else {
             this.bar = document.createElement('div');

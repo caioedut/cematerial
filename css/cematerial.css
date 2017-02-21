@@ -1767,6 +1767,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     list-style: none;
 }
 
+.tabs-nav > *:not(.tab-active):not(.tabs-bar) {
+    opacity: .6;
+}
+
 .tabs-nav li {
     border-color: inherit;
 }

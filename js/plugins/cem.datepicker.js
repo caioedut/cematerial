@@ -14,18 +14,23 @@
         this.options = extend({}, Datepicker.DEFAULTS, options || {});
         this.input = input;
 
+        var date, y, m, d;
+
         if (this.options.date) {
-            this.date = Datepicker.getDateNoTimezone.apply(null, this.options.date.substr(0, 10).split('/').reverse().join('-').split('-'));
+            date = this.options.date;
+        } else if (input && input.value) {
+            date = input.value;
         } else {
-            var date_check = Datepicker.getDateNoTimezone(input.value);
-            if (date_check instanceof Date && isFinite(date_check)) {
-                this.date = date_check;
-            } else {
-                this.date = Datepicker.getDateNoTimezone();
-            }
+            date = (new Date()).toISOString();
         }
 
-        this.dateBase = Datepicker.getDateNoTimezone(this.date);
+        date = date.substr(0, 10).split('/').reverse().join('-').split('-');
+        y = parseInt(date[0]);
+        m = parseInt(date[1]) - 1;
+        d = parseInt(date[2]);
+
+        this.date = Datepicker.getDateNoTimezone(y, m, d);
+        this.dateBase = Datepicker.getDateNoTimezone(y, m, d);
 
         this.createDatepicker();
 

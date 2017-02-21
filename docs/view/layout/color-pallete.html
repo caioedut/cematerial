@@ -5,16 +5,33 @@
     </p>
     <ul>
         <li>
-            <code>.bg-*</code> to change background color.
+            <code>.bg-*-*</code> to change background color.
         </li>
         <li>
-            <code>.text-*</code> to change text color.
+            <code>.text-*-*</code> to change text color.
         </li>
         <li>
-            <code>.border-*</code> to change border color.
+            <code>.border-*-*</code> to change border color.
         </li>
         <li>
-            <code>.focus-*</code> to change the border color of text field WHEN focused.
+            <code>.input-*-*</code> to change the border color of text field
+        </li>
+    </ul>
+    <p>
+        You can set the following properties only on <code>:hover</code>, and the input on <code>:focus</code>
+    </p>
+    <ul>
+        <li>
+            <code>.bg-*-*-h</code> to change background color.
+        </li>
+        <li>
+            <code>.text-*-*-h</code> to change text color.
+        </li>
+        <li>
+            <code>.border-*-*-h</code> to change border color.
+        </li>
+        <li>
+            <code>.input-*-*-f</code> to change the border color of text field when FOCUSED
         </li>
     </ul>
 
@@ -41,22 +58,4 @@
             </div>
         </div>
     </div>
-</section>
-
-<section class="pd-lg">
-    <h2>Data api Events</h2>
-    <p>
-        You can use the data-api to add a class when an event is triggered.
-    </p>
-
-    <ul>
-        <li>
-            <code>[data-class-hover="bg-red-6"]</code> - Add class <code>.bg-red-6</code> when mouse is over element.
-        </li>
-        <li>
-            <code>[data-class-focus="bg-red-6"]</code> - Add class <code>.bg-red-6</code> when element has focus.
-        </li>
-    </ul>
-
-    <code-format code="{{codes.hover_me}}"></code-format>
 </section>

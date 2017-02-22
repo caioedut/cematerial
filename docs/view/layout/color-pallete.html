@@ -36,18 +36,20 @@
     </ul>
 
     <div class="grid grid-gutter">
-        <div class="grid-col xs-col-6 sm-col-4" ng-repeat="color in colors">
-            <div class="pd-md bg-{{color}}-6">
-                <b>{{color.toUpperCase()}}</b>
+        <div class="grid-col xs-col-6 sm-col-4" ng-repeat="item in colors">
+            <div class="grid grid-nowrap grid-middle bg-{{item}}-6">
+                <div class="grid-col col-fill pd-md">
+                    <b>{{item.toUpperCase()}}</b>
+                </div>
+                <div class="grid-col pd-right-sm">
+                    <button class="btn btn-flat bg-{{item}}-6" type="button" ng-click="changeColor(item)">
+                        Try
+                    </button>
+                </div>
             </div>
-            <?php foreach (range(0, 9) as $i) { ?>
-            <div class="pd-md bg-{{color}}-{{i}}" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9]">
-                <b>
-                    *-{{color}}-{{i}}
-                </b>
-                <b><?= '*-' . $color . '-' . $i ?></b>
+            <div class="pd-md bg-{{item}}-{{i}}" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9]">
+                <b>*-{{item}}-{{i}}</b>
             </div>
-            <?php } ?>
         </div>
         <div class="grid-col xs-col-6 sm-col-4">
             <div class="pd-md bg-black">

@@ -25,6 +25,10 @@ angular.module('docs').controller('mainCtrl', function ($scope, $rootScope, $sce
         init.hide();
     };
 
+    $scope.changeColor = function (color) {
+        $scope.color = color;
+    };
+
     $scope.html = function (str) {
         return $sce.trustAsHtml(str);
     };

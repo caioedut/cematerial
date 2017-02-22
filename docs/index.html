@@ -63,8 +63,7 @@
                 </div>
                 <div class="panel-body no-padding">
                     <div class="layout-nav">
-                        <a class="indent" href="#{{link.href}}"
-                           ng-class="{'bg-{{color}}-0 text-{{color}}-6': link.active}"
+                        <a class="indent {{ link.active ? 'bg-' + color + '-0 text-' + color + '-6' : '' }}" href="#{{link.href}}"
                            ng-click="closeSidebar()"
                            ng-init="link.href = '/' + nav.url + '/' + link.url"
                            ng-repeat="link in nav.links"

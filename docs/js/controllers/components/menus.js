@@ -116,7 +116,7 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
         ),
         dropdown: (
             '<div class="dropdown">' + "\n" +
-            '    <button class="btn btn-icon bg-blue-6" type="button" data-toggle="dropdown">' + "\n" +
+            '    <button class="btn btn-icon btn-circle bg-blue-6" type="button" data-toggle="dropdown">' + "\n" +
             '        <i class="md-icon">menu</i>' + "\n" +
             '    </button>' + "\n" +
             '    <ul class="dropdown-body bottom left menu">' + "\n" +

@@ -1,4 +1,6 @@
-angular.module('docs').config(function ($stateProvider, navs) {
+angular.module('docs').config(function ($urlRouterProvider, $stateProvider, navs) {
+
+    $urlRouterProvider.otherwise('/getting-started/introduction');
 
     // navs defined on app.js
 

@@ -1714,6 +1714,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .dropdown {
     position: relative;
     display: inline-block;
+    vertical-align: middle;
 }
 
 .dropdown:not(.dropdown-visible) {

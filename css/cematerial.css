@@ -1458,27 +1458,41 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 /*TOAST/TOSTER*/
 .toast {
-    position: relative;
-    background-color: #323232;
-    color: #fff;
-    height: 0;
-    overflow: hidden;
-
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    transform: translateY(100%);
     transition: ease all .4s;
-}
-
-.toast-body {
-    min-height: 48px;
-    padding-left: 16px;
-    transition: ease opacity .6s;
+    width: 100%;
+    z-index: 99;
 }
 
 .toast-visible {
-    height: 48px;
+    transform: translateY(0);
 }
 
-.toast-body .grid-col {
+.toast-body {
+    background-color: #323232;
+    color: #fff;
+    min-height: 48px;
     padding: 0 8px;
+}
+
+.toast-body .grid-col:first-child {
+    padding: 16px;
+}
+
+@media (min-width: 1024px) {
+    .toast {
+        padding: 16px;
+        max-width: 100%;
+        width: auto;
+    }
+
+    .toast-body {
+        border-radius: 2px;
+    }
 }
 
 /*TOOLTIPS*/

@@ -1828,7 +1828,6 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .tabs-list {
     display: flex !important;
     flex-flow: row nowrap;
-    overflow: hidden;
 }
 
 .tab-content {
@@ -1847,6 +1846,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .tab-content:not(.tab-visible) {
     height: 0;
     margin-left: -100%;
+    overflow: hidden;
 }
 
 .tab-content.tab-visible ~ .tab-content {

@@ -1013,7 +1013,8 @@ body > .layout {
 }
 
 .dialog-footer,
-.card-footer {
+.card-footer,
+.panel-footer {
     direction: rtl;
     padding: 8px;
     text-align: right;
@@ -1169,8 +1170,6 @@ table td:last-child {
 .panel-footer {
     border-top: 1px solid;
     border-color: inherit;
-    padding: 4px;
-    text-align: right;
 }
 
 .panel-body,

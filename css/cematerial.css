@@ -3245,12 +3245,16 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 /*BG COLORS*/
 .bg-black,
-.bg-black-h:hover {
+.bg-black-h:hover,
+[class*="bg-black-"],
+[class*="bg-black-"]:hover {
     background-color: #000
 }
 
 .bg-white,
-.bg-white-h:hover {
+.bg-white-h:hover,
+[class*="bg-white-"],
+[class*="bg-white-"]:hover {
     background-color: #FFF
 }
 
@@ -4204,7 +4208,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     background-color: #263238
 }
 
-.bg-black,
+.bg-black, [class*="bg-black-"], [class*="bg-black-"]:hover,
 .bg-red-4, .bg-red-4-h, .bg-red-5, .bg-red-5-h, .bg-red-6, .bg-red-6-h, .bg-red-7, .bg-red-7-h, .bg-red-8, .bg-red-8-h, .bg-red-9, .bg-red-9-h,
 .bg-pink-3, .bg-pink-3-h, .bg-pink-4, .bg-pink-4-h, .bg-pink-5, .bg-pink-5-h, .bg-pink-6, .bg-pink-6-h, .bg-pink-7, .bg-pink-7-h, .bg-pink-8, .bg-pink-8-h, .bg-pink-9, .bg-pink-9-h,
 .bg-purple-3, .bg-purple-3-h, .bg-purple-4, .bg-purple-4-h, .bg-purple-5, .bg-purple-5-h, .bg-purple-6, .bg-purple-6-h, .bg-purple-7, .bg-purple-7-h, .bg-purple-8, .bg-purple-8-h, .bg-purple-9, .bg-purple-9-h,

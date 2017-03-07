@@ -3246,15 +3246,13 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 /*BG COLORS*/
 .bg-black,
 .bg-black-h:hover,
-[class*="bg-black-"],
-[class*="bg-black-"]:hover {
+.bg-black-0, .bg-black-0-h:hover, .bg-black-1, .bg-black-1-h:hover, .bg-black-2, .bg-black-2-h:hover, .bg-black-3, .bg-black-3-h:hover, .bg-black-4, .bg-black-4-h:hover, .bg-black-5, .bg-black-5-h:hover, .bg-black-6, .bg-black-6-h:hover, .bg-black-7, .bg-black-7-h:hover, .bg-black-8, .bg-black-8-h:hover, .bg-black-9, .bg-black-9-h:hover {
     background-color: #000
 }
 
 .bg-white,
 .bg-white-h:hover,
-[class*="bg-white-"],
-[class*="bg-white-"]:hover {
+.bg-white-0, .bg-white-0-h:hover, .bg-white-1, .bg-white-1-h:hover, .bg-white-2, .bg-white-2-h:hover, .bg-white-3, .bg-white-3-h:hover, .bg-white-4, .bg-white-4-h:hover, .bg-white-5, .bg-white-5-h:hover, .bg-white-6, .bg-white-6-h:hover, .bg-white-7, .bg-white-7-h:hover, .bg-white-8, .bg-white-8-h:hover, .bg-white-9, .bg-white-9-h:hover {
     background-color: #FFF
 }
 
@@ -4208,7 +4206,8 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     background-color: #263238
 }
 
-.bg-black, [class*="bg-black-"], [class*="bg-black-"]:hover,
+.bg-black,
+.bg-black-0, .bg-black-0-h:hover, .bg-black-1, .bg-black-1-h:hover, .bg-black-2, .bg-black-2-h:hover, .bg-black-3, .bg-black-3-h:hover, .bg-black-4, .bg-black-4-h:hover, .bg-black-5, .bg-black-5-h:hover, .bg-black-6, .bg-black-6-h:hover, .bg-black-7, .bg-black-7-h:hover, .bg-black-8, .bg-black-8-h:hover, .bg-black-9, .bg-black-9-h:hover,
 .bg-red-4, .bg-red-4-h, .bg-red-5, .bg-red-5-h, .bg-red-6, .bg-red-6-h, .bg-red-7, .bg-red-7-h, .bg-red-8, .bg-red-8-h, .bg-red-9, .bg-red-9-h,
 .bg-pink-3, .bg-pink-3-h, .bg-pink-4, .bg-pink-4-h, .bg-pink-5, .bg-pink-5-h, .bg-pink-6, .bg-pink-6-h, .bg-pink-7, .bg-pink-7-h, .bg-pink-8, .bg-pink-8-h, .bg-pink-9, .bg-pink-9-h,
 .bg-purple-3, .bg-purple-3-h, .bg-purple-4, .bg-purple-4-h, .bg-purple-5, .bg-purple-5-h, .bg-purple-6, .bg-purple-6-h, .bg-purple-7, .bg-purple-7-h, .bg-purple-8, .bg-purple-8-h, .bg-purple-9, .bg-purple-9-h,
@@ -4232,12 +4231,16 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 /*BORDER COLORS*/
 
 .border-black, .border-black-h:hover,
-.input-black, .input-black-f:focus {
+.input-black, .input-black-f:focus,
+.border-black-0, .border-black-0-h:hover, .border-black-1, .border-black-1-h:hover, .border-black-2, .border-black-2-h:hover, .border-black-3, .border-black-3-h:hover, .border-black-4, .border-black-4-h:hover, .border-black-5, .border-black-5-h:hover, .border-black-6, .border-black-6-h:hover, .border-black-7, .border-black-7-h:hover, .border-black-8, .border-black-8-h:hover, .border-black-9, .border-black-9-h:hover,
+.input-black-0, .input-black-0-f:focus, .input-black-1, .input-black-1-f:focus, .input-black-2, .input-black-2-f:focus, .input-black-3, .input-black-3-f:focus, .input-black-4, .input-black-4-f:focus, .input-black-5, .input-black-5-f:focus, .input-black-6, .input-black-6-f:focus, .input-black-7, .input-black-7-f:focus, .input-black-8, .input-black-8-f:focus, .input-black-9, .input-black-9-f:focus {
     border-color: #000
 }
 
 .border-white, .border-white-h:hover,
-.input-white, .input-white-f:focus {
+.input-white, .input-white-f:focus,
+.border-white-0, .border-white-0-h:hover, .border-white-1, .border-white-1-h:hover, .border-white-2, .border-white-2-h:hover, .border-white-3, .border-white-3-h:hover, .border-white-4, .border-white-4-h:hover, .border-white-5, .border-white-5-h:hover, .border-white-6, .border-white-6-h:hover, .border-white-7, .border-white-7-h:hover, .border-white-8, .border-white-8-h:hover, .border-white-9, .border-white-9-h:hover,
+.input-white-0, .input-white-0-f:focus, .input-white-1, .input-white-1-f:focus, .input-white-2, .input-white-2-f:focus, .input-white-3, .input-white-3-f:focus, .input-white-4, .input-white-4-f:focus, .input-white-5, .input-white-5-f:focus, .input-white-6, .input-white-6-f:focus, .input-white-7, .input-white-7-f:focus, .input-white-8, .input-white-8-f:focus, .input-white-9, .input-white-9-f:focus {
     border-color: #FFF
 }
 
@@ -5194,12 +5197,16 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 /*LABELS COLORS*/
 
 .text-black, .text-black-h:hover,
-.label-focus.label-black {
+.label-focus.label-black,
+.text-black-0, .text-black-0-h:hover, .text-black-1, .text-black-1-h:hover, .text-black-2, .text-black-2-h:hover, .text-black-3, .text-black-3-h:hover, .text-black-4, .text-black-4-h:hover, .text-black-5, .text-black-5-h:hover, .text-black-6, .text-black-6-h:hover, .text-black-7, .text-black-7-h:hover, .text-black-8, .text-black-8-h:hover, .text-black-9, .text-black-9-h:hover,
+.label-focus.label-black-0, .label-focus.label-black-1, .label-focus.label-black-2, .label-focus.label-black-3, .label-focus.label-black-4, .label-focus.label-black-5, .label-focus.label-black-6, .label-focus.label-black-7, .label-focus.label-black-8, .label-focus.label-black-9 {
     color: #FFF !important
 }
 
 .text-white, .text-white-h:hover,
-.label-focus.label-white {
+.label-focus.label-white,
+.text-white-0, .text-white-0-h:hover, .text-white-1, .text-white-1-h:hover, .text-white-2, .text-white-2-h:hover, .text-white-3, .text-white-3-h:hover, .text-white-4, .text-white-4-h:hover, .text-white-5, .text-white-5-h:hover, .text-white-6, .text-white-6-h:hover, .text-white-7, .text-white-7-h:hover, .text-white-8, .text-white-8-h:hover, .text-white-9, .text-white-9-h:hover,
+.label-focus.label-white-0, .label-focus.label-white-1, .label-focus.label-white-2, .label-focus.label-white-3, .label-focus.label-white-4, .label-focus.label-white-5, .label-focus.label-white-6, .label-focus.label-white-7, .label-focus.label-white-8, .label-focus.label-white-9 {
     color: #FFF !important
 }
 

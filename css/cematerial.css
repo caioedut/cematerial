@@ -5200,7 +5200,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .label-focus.label-black,
 .text-black-0, .text-black-0-h:hover, .text-black-1, .text-black-1-h:hover, .text-black-2, .text-black-2-h:hover, .text-black-3, .text-black-3-h:hover, .text-black-4, .text-black-4-h:hover, .text-black-5, .text-black-5-h:hover, .text-black-6, .text-black-6-h:hover, .text-black-7, .text-black-7-h:hover, .text-black-8, .text-black-8-h:hover, .text-black-9, .text-black-9-h:hover,
 .label-focus.label-black-0, .label-focus.label-black-1, .label-focus.label-black-2, .label-focus.label-black-3, .label-focus.label-black-4, .label-focus.label-black-5, .label-focus.label-black-6, .label-focus.label-black-7, .label-focus.label-black-8, .label-focus.label-black-9 {
-    color: #FFF !important
+    color: #000 !important
 }
 
 .text-white, .text-white-h:hover,

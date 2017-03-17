@@ -32,6 +32,10 @@ angular.module('docs').constant('navs', [
             {
                 url: 'color-pallete',
                 title: 'Color Pallete'
+            },
+            {
+                url: 'elevation-shadows',
+                title: 'Elevation & Shadows'
             }
         ]
     },

@@ -493,6 +493,7 @@ body {
 .layout-title,
 .card-title,
 .dialog-title,
+.modal-title,
 .title {
     font-size: 1.43rem;
     font-weight: 500;
@@ -887,7 +888,7 @@ body > .layout {
 
 .btn[class*="bg-"]:hover:before,
 .btn[class*="bg-"]:focus:before {
-    background-color: rgba(255, 255, 255, .2);
+    background-color: rgba(255, 255, 255, .1);
 }
 
 .btn:disabled,
@@ -919,6 +920,7 @@ body > .layout {
 /*GLOBAL FLEXBOX */
 .layout,
 .dialog,
+.modal,
 .card,
 .flex {
     display: flex !important;
@@ -928,6 +930,7 @@ body > .layout {
 
 .layout-content,
 .dialog-body,
+.modal-body,
 .card-body,
 .flex-body {
     overflow: auto;
@@ -935,6 +938,7 @@ body > .layout {
 
 .layout-footer,
 .dialog-footer,
+.modal-footer,
 .card-footer,
 .flex-footer {
     margin-top: auto;
@@ -1056,6 +1060,32 @@ body > .layout {
 
 .card-group .card + .card {
     border-top: 1px solid #D2D2D2;
+}
+
+/*MODAL (PAGES)*/
+.modal {
+    position: fixed;
+    top: 20%;
+    left: 0;
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: ease all .3s;
+}
+
+.modal-visible {
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.layout-header,
+.modal-header {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
 }
 
 /*TABLES*/
@@ -1485,6 +1515,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 @media (min-width: 1024px) {
     .toast {
         padding: 16px;
+        min-width: 340px;
         max-width: 100%;
         width: auto;
     }

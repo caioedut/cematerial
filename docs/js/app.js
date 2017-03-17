@@ -44,6 +44,10 @@ angular.module('docs').constant('navs', [
         title: 'Components',
         links: [
             {
+                url: 'accordion',
+                title: 'Accordion'
+            },
+            {
                 url: 'buttons',
                 title: 'Buttons'
             },

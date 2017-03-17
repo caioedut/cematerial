@@ -773,7 +773,7 @@ body > .layout {
     display: inline-block;
     font-size: 1rem;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     height: 36px;
     line-height: 36px;
     outline: none;
@@ -816,7 +816,6 @@ body > .layout {
 }
 
 .btn-flat {
-    font-weight: 500;
     padding: 0 .8rem;
 }
 

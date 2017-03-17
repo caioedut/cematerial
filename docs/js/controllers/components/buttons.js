@@ -23,13 +23,13 @@ angular.module('docs').controller('components.buttonsCtrl', function ($scope) {
             '<button class="btn bg-blue-6" type="button">' + "\n" +
             '    Blue' + "\n" +
             '</button>' + "\n" +
-            '<button class="btn text-red-6" type="button">' + "\n" +
+            '<button class="btn bg-red-0-h text-red-6" type="button">' + "\n" +
             '    Red' + "\n" +
             '</button>' + "\n" +
-            '<button class="btn text-green-6" type="button">' + "\n" +
+            '<button class="btn bg-green-0-h text-green-6" type="button">' + "\n" +
             '    Green' + "\n" +
             '</button>' + "\n" +
-            '<button class="btn text-blue-6" type="button">' + "\n" +
+            '<button class="btn bg-blue-0-h text-blue-6" type="button">' + "\n" +
             '    Blue' + "\n" +
             '</button>'
         ),

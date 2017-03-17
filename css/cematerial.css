@@ -888,7 +888,7 @@ body > .layout {
 
 .btn[class*="bg-"]:hover:before,
 .btn[class*="bg-"]:focus:before {
-    background-color: rgba(255, 255, 255, .2);
+    background-color: rgba(255, 255, 255, .1);
 }
 
 .btn:disabled,
@@ -1012,7 +1012,6 @@ body > .layout {
 }
 
 .dialog-body,
-.modal-body,
 .card-body {
     padding: 8px 16px;
 }

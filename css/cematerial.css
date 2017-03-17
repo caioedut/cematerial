@@ -1515,6 +1515,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 @media (min-width: 1024px) {
     .toast {
         padding: 16px;
+        min-width: 340px;
         max-width: 100%;
         width: auto;
     }

@@ -48,6 +48,7 @@
             <a href="#layout">Layout</a>
             <!--<a href="#lists">Lists</a>-->
             <a href="#menus">Menus</a>
+            <a href="#modals">Modals</a>
             <a href="#raise">Raise</a>
             <a href="#selectioncontrols">Selection controls</a>
             <a href="#tabs">Tabs</a>
@@ -60,7 +61,7 @@
     </div>
     <header class="layout-header bg-blue-6">
         <div class="grid grid-middle grid-nowrap">
-            <div class="grid-col" data-toggle="sidebar">
+            <div class="grid-col" data-toggle="sidebar" data-target="#side-main">
                 <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">
                     <i class="md-icon md-icon-lg">menu</i>
                 </button>
@@ -562,7 +563,7 @@
 
         <div class="divider-horizontal"></div>
         <section id="dialogs" class="pd-lg">
-            <h1>Modal Dialog</h1>
+            <h1>Dialog</h1>
 
             <div class="grid grid-gutter-xs">
                 <div class="grid-col pd-xs">
@@ -1021,6 +1022,39 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="modals" class="pd-lg">
+
+            <a class="btn btn-flat bg-blue-6" data-toggle="modal" data-target="#modal">
+                Toggle Page Modal
+            </a>
+
+            <div id="modal" class="modal">
+                <div class="modal-header bg-blue-6">
+                    <div class="grid grid-middle grid-nowrap">
+                        <div class="grid-col" data-toggle="modal">
+                            <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">
+                                <i class="md-icon md-icon-lg">arrow_back</i>
+                            </button>
+                        </div>
+                        <div class="grid-col pd-md">
+                            <h1 class="modal-title">
+                                Components
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <section class="pd-md">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero maiores optio praesentium quasi sunt totam veniam. Esse harum iure repellendus rerum sapiente sequi vero voluptates voluptatum. Cumque omnis tenetur ut.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero maiores optio praesentium quasi sunt totam veniam. Esse harum iure repellendus rerum sapiente sequi vero voluptates voluptatum. Cumque omnis tenetur ut.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero maiores optio praesentium quasi sunt totam veniam. Esse harum iure repellendus rerum sapiente sequi vero voluptates voluptatum. Cumque omnis tenetur ut.</p>
+                    </section>
+                </div>
+            </div>
+
         </section>
 
         <div class="divider-horizontal"></div>

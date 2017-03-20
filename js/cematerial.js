@@ -1013,7 +1013,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             var init = new Tabs(target, this.dataset);
             init.show(this);
         })
-        .on('swipestart', '.tabs .tabs-list', function () {
+        .on('swipestart', '.tabs:not(.tabs-noswipe) .tabs-list', function () {
             var tabs = this.closest('.tabs');
             var init = tabs['cem.dropdown'] || new Tabs(tabs);
 

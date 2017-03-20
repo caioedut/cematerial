@@ -86,7 +86,27 @@ angular.module('docs').constant('navs', [
             {
                 url: 'tabs',
                 title: 'Tabs'
+            },
+            {
+                url: 'toasts',
+                title: 'Toasts'
             }
         ]
     }
 ]);
+
+function showToast() {
+    var toast = new Toast("This is my advanced toast", {
+        actions: [
+            {
+                label: "Undo",
+                color: "blue-6", // Button color
+                onClick: function (toast, event) {
+                    alert("Undo Clicked!");
+                    toast.hide();
+                }
+            }
+        ]
+    });
+    toast.show();
+}

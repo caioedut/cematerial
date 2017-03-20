@@ -30,8 +30,8 @@ angular.module('docs').constant('navs', [
                 title: 'Overview'
             },
             {
-                url: 'color-pallete',
-                title: 'Color Pallete'
+                url: 'color-palette',
+                title: 'Color Palette'
             },
             {
                 url: 'elevation-shadows',
@@ -74,6 +74,14 @@ angular.module('docs').constant('navs', [
             {
                 url: 'menus',
                 title: 'Menus'
+            },
+            {
+                url: 'selection',
+                title: 'Selection Controls'
+            },
+            {
+                url: 'tabs',
+                title: 'Tabs'
             }
         ]
     }

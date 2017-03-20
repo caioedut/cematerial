@@ -14,3 +14,9 @@ pre code {
     display: block;
     padding: 16px !important;
 }
+
+.inline-block {
+    display: inline-block !important;
+    max-width: 100%;
+    width: auto;
+}

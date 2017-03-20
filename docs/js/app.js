@@ -72,6 +72,10 @@ angular.module('docs').constant('navs', [
                 title: 'Dropdown'
             },
             {
+                url: 'inputs',
+                title: 'Inputs'
+            },
+            {
                 url: 'menus',
                 title: 'Menus'
             },

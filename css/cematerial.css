@@ -630,9 +630,6 @@ small {
 .layout {
     position: relative;
     overflow: hidden;
-
-    height: 100%;
-    width: 100%;
 }
 
 body.layout,
@@ -922,6 +919,12 @@ body > .layout {
 
 /*GLOBAL FLEXBOX */
 .layout,
+.modal,
+.flex {
+    height: 100%;
+}
+
+.layout,
 .dialog,
 .modal,
 .card,
@@ -1072,8 +1075,6 @@ body > .layout {
     top: 20%;
     left: 0;
     background-color: #fff;
-    height: 100%;
-    width: 100%;
     z-index: 99;
 
     opacity: 0;
@@ -1723,10 +1724,6 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .menu li.divider-horizontal {
     margin: 8px 0;
-}
-
-.menu li:hover {
-    background-color: #eee;
 }
 
 .menu a > .md-icon {

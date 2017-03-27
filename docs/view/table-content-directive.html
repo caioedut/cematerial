@@ -5,8 +5,12 @@
         </b>
     </div>
     <div class="pd-left-md pd-right-md pd-bottom-md">
-        <a class="btn-block link-hover text-{{color}}-6" ng-repeat="headline in headlines" style="padding-left: {{headline.indent}}px;">
-            {{headline.innerText}}
+        <a class="btn-block link-hover text-{{color}}-6" style="padding-left: {{headline.indent}}px;"
+           ng-click="scrollTo(headline.tcId)"
+           ng-repeat="headline in headlines"
+        >
+            {{headline.tcId}}
+            {{headline.label}}
         </a>
     </div>
 </div>

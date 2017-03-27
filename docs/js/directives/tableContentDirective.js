@@ -7,7 +7,7 @@ angular.module('docs').directive('tableContent', function () {
             color: '@',
             target: '@'
         },
-        link: function ($scope, $el) {
+        link: function ($scope) {
             if (!$scope.color) {
                 $scope.color = 'blue';
             }
@@ -16,6 +16,13 @@ angular.module('docs').directive('tableContent', function () {
                 $scope.target = '.layout-content';
             }
 
+            $scope.scrollTo = function (tcId) {
+                var $target = document.querySelector('[tcid="' + tcId + '"]');
+                document.querySelector('.layout-content').scrollTop = $target.offsetTop - 24;
+            };
+
+            $scope.headlines = [];
+
             var $target = document.querySelector($scope.target);
 
             if ($target) {
@@ -23,7 +30,9 @@ angular.module('docs').directive('tableContent', function () {
 
                 var prev = {tagName: null}, indent = 0;
 
-                headlines.forEach(function (item) {
+                headlines.forEach(function (item, i) {
+                    item.setAttribute('tcId', i);
+
                     if (item.tagName != prev.tagName) {
                         if (item.parentElement === prev.parentElement) {
                             indent += 16;
@@ -33,10 +42,15 @@ angular.module('docs').directive('tableContent', function () {
                     }
 
                     prev = item;
-                    item.indent = indent;
+
+                    $scope.headlines.push({
+                        tcId: i,
+                        indent: indent,
+                        label: item.innerText
+                    });
                 });
 
-                $scope.headlines = headlines;
+                // $scope.headlines = headlines;
             }
         }
     };

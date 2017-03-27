@@ -56,35 +56,41 @@
 <body ng-controller="mainCtrl">
 <div class="layout">
     <aside id="main-sidebar" class="layout-sidebar">
-        <div class="pd-md bg-{{color}}-6">
-            <div class="grid">
-                <div class="grid-col xs-col-3 pd-bottom">
-                    <img class="img-fluid" src="img/md-logo.png" alt="Material Design Logo"/>
-                </div>
-                <div class="grid-col xs-col-12">
-                    <h1 class="display-2 no-margin">CEMaterial</h1>
-                    <small>CSS Framework based on Google Material Design</small>
-                </div>
-            </div>
-        </div>
-        <nav class="panel-group">
-            <div class="panel" ng-class="{'panel-visible': nav.active}" ng-repeat="nav in navs">
-                <div class="panel-header link" data-toggle="panel">
-                    {{nav.title}}
-                </div>
-                <div class="panel-body no-padding">
-                    <div class="layout-nav">
-                        <a class="indent {{ link.active ? 'bg-' + color + '-0 text-' + color + '-6' : '' }}" href="#{{link.href}}"
-                           ng-click="closeSidebar()"
-                           ng-init="link.href = '/' + nav.url + '/' + link.url"
-                           ng-repeat="link in nav.links"
-                        >
-                            {{link.title}}
-                        </a>
+        <div class="flex">
+            <div class="flex-header">
+                <div class="pd-md bg-{{color}}-6">
+                    <div class="grid">
+                        <div class="grid-col xs-col-3 pd-bottom">
+                            <img class="img-fluid" src="img/md-logo.png" alt="Material Design Logo"/>
+                        </div>
+                        <div class="grid-col xs-col-12">
+                            <h1 class="display-2 no-margin">CEMaterial</h1>
+                            <small>CSS Framework based on Google Material Design</small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </nav>
+            <div class="flex-body">
+                <nav class="panel-group">
+                    <div class="panel" ng-class="{'panel-visible': nav.active}" ng-repeat="nav in navs">
+                        <div class="panel-header link" data-toggle="panel">
+                            {{nav.title}}
+                        </div>
+                        <div class="panel-body no-padding">
+                            <div class="layout-nav">
+                                <a class="indent {{ link.active ? 'bg-' + color + '-0 text-' + color + '-6' : '' }}" href="#{{link.href}}"
+                                   ng-click="closeSidebar()"
+                                   ng-init="link.href = '/' + nav.url + '/' + link.url"
+                                   ng-repeat="link in nav.links"
+                                >
+                                    {{link.title}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
     </aside>
     <header class="layout-header raised-xs bg-{{color}}-6">
         <div class="grid grid-middle grid-nowrap">

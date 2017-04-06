@@ -79,7 +79,7 @@
                         <div class="panel-body no-padding">
                             <div class="layout-nav">
                                 <a class="indent {{ link.active ? 'bg-' + color + '-0 text-' + color + '-6' : '' }}" href="#{{link.href}}"
-                                   ng-click="closeSidebar()"
+                                   data-toggle="sidebar"
                                    ng-init="link.href = '/' + nav.url + '/' + link.url"
                                    ng-repeat="link in nav.links"
                                 >
@@ -94,7 +94,7 @@
     </aside>
     <header class="layout-header raised-xs bg-{{color}}-6">
         <div class="grid grid-middle grid-nowrap">
-            <div class="grid-col" data-toggle="sidebar">
+            <div class="grid-col layout-toggler" data-toggle="sidebar">
                 <button class="btn btn-icon btn-circle mg-left-sm bg-{{color}}-6">
                     <i class="md-icon md-icon-lg">menu</i>
                 </button>

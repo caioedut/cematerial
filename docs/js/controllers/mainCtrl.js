@@ -19,12 +19,6 @@ angular.module('docs').controller('mainCtrl', function ($scope, $rootScope, $sce
         return nav.links && nav.links.length;
     });
 
-    $scope.closeSidebar = function () {
-        var target = document.querySelector('#main-sidebar');
-        var init = target['cem.sidebar'] || new Sidebar(target);
-        init.hide();
-    };
-
     $scope.changeColor = function (color) {
         $scope.color = color;
     };

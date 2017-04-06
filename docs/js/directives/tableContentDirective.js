@@ -13,12 +13,12 @@ angular.module('docs').directive('tableContent', function () {
             }
 
             if (!$scope.target) {
-                $scope.target = '.layout-content';
+                $scope.target = '.layout-body';
             }
 
             $scope.scrollTo = function (tcId) {
                 var $target = document.querySelector('[tcid="' + tcId + '"]');
-                document.querySelector('.layout-content').scrollTop = $target.offsetTop - 24;
+                document.querySelector('.layout-body').scrollTop = $target.offsetTop - 24;
             };
 
             $scope.headlines = [];

@@ -47,7 +47,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '            </div>' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="layout-content">' + "\n" +
+            '    <div class="layout-body">' + "\n" +
             '        <div class="pd-md">' + "\n" +
             '            <p>This is my <b>scrollable</b> container.</p>' + "\n" +
             '            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet assumenda aut doloremque, dolores ducimus eius, et eveniet, harum ipsa ipsam maxime minus officiis perspiciatis porro praesentium quod rem totam!</p>' + "\n" +
@@ -139,7 +139,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         '            </div>' + "\n" +
         '        </div>' + "\n" +
         '    </div>' + "\n" +
-        '    <div class="layout-content">' + "\n" +
+        '    <div class="layout-body">' + "\n" +
         '        <div class="pd-md">' + "\n" +
         '            <p>This is my <b>scrollable</b> container.</p>' + "\n" +
         '            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet assumenda aut doloremque, dolores ducimus eius, et eveniet, harum ipsa ipsam maxime minus officiis perspiciatis porro praesentium quod rem totam!</p>' + "\n" +

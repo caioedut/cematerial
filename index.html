@@ -23,45 +23,46 @@
 <body>
 
 <div class="layout">
-    <div id="side-main" class="layout-sidebar">
-
-        <div class="pd-md bg-blue-6">
-            <h1 class="display-1">
-                CEMaterial <br/>
-                <a class="subheader link-underline" href="http://caioedut.com/" target="_blank">
-                    caioedut.com
-                </a>
-            </h1>
+    <div id="side-main" class="layout-sidebar flex">
+        <div class="flex-header">
+            <div class="pd-md bg-blue-6">
+                <h1 class="display-1">
+                    CEMaterial <br/>
+                    <a class="subheader link-underline" href="http://caioedut.com/" target="_blank">
+                        caioedut.com
+                    </a>
+                </h1>
+            </div>
         </div>
-
-        <div class="layout-nav">
-            <a href="#buttons">Buttons</a>
-            <a href="#cards">Cards</a>
-            <a href="#chips">Chips</a>
-            <a href="#datatables">Data tables</a>
-            <a href="#datepicker">Datepicker</a>
-            <a href="#dialogs">Dialogs</a>
-            <a href="#dividers">Dividers</a>
-            <a href="#dropdowns">Dropdowns</a>
-            <a href="#expansionpanels">Expansion panels</a>
-            <a href="#gridlists">Grid lists</a>
-            <a href="#layout">Layout</a>
-            <!--<a href="#lists">Lists</a>-->
-            <a href="#menus">Menus</a>
-            <a href="#modals">Modals</a>
-            <a href="#raise">Raise</a>
-            <a href="#selectioncontrols">Selection controls</a>
-            <a href="#tabs">Tabs</a>
-            <a href="#textfields">Text fields</a>
-            <!--<a href="#toolbars">Toolbars</a>-->
-            <a href="#toasts">Toasts</a>
-            <a href="#tooltips">Tooltips</a>
+        <div class="flex-body">
+            <div class="layout-nav">
+                <a href="#buttons" data-toggle="sidebar">Buttons</a>
+                <a href="#cards" data-toggle="sidebar">Cards</a>
+                <a href="#chips" data-toggle="sidebar">Chips</a>
+                <a href="#datatables" data-toggle="sidebar">Data tables</a>
+                <a href="#datepicker" data-toggle="sidebar">Datepicker</a>
+                <a href="#dialogs" data-toggle="sidebar">Dialogs</a>
+                <a href="#dividers" data-toggle="sidebar">Dividers</a>
+                <a href="#dropdowns" data-toggle="sidebar">Dropdowns</a>
+                <a href="#expansionpanels" data-toggle="sidebar">Expansion panels</a>
+                <a href="#gridlists" data-toggle="sidebar">Grid lists</a>
+                <a href="#layout" data-toggle="sidebar">Layout</a>
+                <!-- <a href="#lists" data-toggle="sidebar">Lists</a> -->
+                <a href="#menus" data-toggle="sidebar">Menus</a>
+                <a href="#modals" data-toggle="sidebar">Modals</a>
+                <a href="#raise" data-toggle="sidebar">Raise</a>
+                <a href="#selectioncontrols" data-toggle="sidebar">Selection controls</a>
+                <a href="#tabs" data-toggle="sidebar">Tabs</a>
+                <a href="#textfields" data-toggle="sidebar">Text fields</a>
+                <!-- <a href="#toolbars" data-toggle="sidebar">Toolbars</a> -->
+                <a href="#toasts" data-toggle="sidebar">Toasts</a>
+                <a href="#tooltips" data-toggle="sidebar">Tooltips</a>
+            </div>
         </div>
-
     </div>
     <header class="layout-header bg-blue-6">
         <div class="grid grid-middle grid-nowrap">
-            <div class="grid-col" data-toggle="sidebar" data-target="#side-main">
+            <div class="grid-col layout-toggler" data-toggle="sidebar" data-target="#side-main">
                 <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">
                     <i class="md-icon md-icon-lg">menu</i>
                 </button>
@@ -73,102 +74,7 @@
             </div>
         </div>
     </header>
-    <main class="layout-content">
-
-        <!--
-        <script>
-            window.onload = function () {
-                document.on('click', '.btn-toast', function (e) {
-                    var init = new Toast('This is my biggest toast', {
-                        actions: [
-                            {
-                                color: 'red-6',
-                                label: 'Hide',
-                                onClick: function (toast) {
-                                    toast.hide();
-                                }
-                            },
-                            {
-                                color: 'red-6',
-                                label: 'Hide',
-                                onClick: function (toast) {
-                                    toast.hide();
-                                }
-                            },
-                            {
-                                color: 'red-6',
-                                label: 'Hide',
-                                onClick: function (toast) {
-                                    toast.hide();
-                                }
-                            }
-                        ]
-                    });
-                    init.show();
-                });
-                document.querySelector('.btn-toast').click();
-            };
-        </script>
-
-        <section class="pd-lg">
-            <button class="btn btn-toast">
-                Toast
-            </button>
-        </section>
-        -->
-
-        <!--<section class="pd-lg">-->
-        <!--<h1>Flex Box</h1>-->
-        <!--<div class="grid grid-gutter-md">-->
-        <!--<div class="grid-col xs-col-4">-->
-        <!--<div class="flex raised-md" style="height: 200px;">-->
-        <!--<div class="flex-header title">-->
-        <!--Flex Header-->
-        <!--</div>-->
-        <!--<div class="flex-body">-->
-        <!--<p>Flex Body</p>-->
-        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
-        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
-        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
-        <!--</div>-->
-        <!--<div class="flex-footer">-->
-        <!--Flex Footer-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="grid-col xs-col-4">-->
-        <!--<div class="flex raised-md" style="height: 200px;">-->
-        <!--<div class="flex-header title">-->
-        <!--Flex Header-->
-        <!--</div>-->
-        <!--<div class="flex-body">-->
-        <!--<p>Flex Body</p>-->
-        <!--</div>-->
-        <!--<div class="flex-footer">-->
-        <!--Flex Footer-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="grid-col xs-col-4">-->
-        <!--<div class="flex raised-md" style="height: 200px;">-->
-        <!--<div class="flex-header title">-->
-        <!--Flex Header<br/>-->
-        <!--Flex Header-->
-        <!--</div>-->
-        <!--<div class="flex-body">-->
-        <!--<p>Flex Body</p>-->
-        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
-        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
-        <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab atque cupiditate deserunt dolor dolore facilis fugiat harum hic molestiae nemo optio pariatur placeat qui, quibusdam, recusandae. Doloribus hic veritatis voluptatum.</p>-->
-        <!--</div>-->
-        <!--<div class="flex-footer">-->
-        <!--Flex Footer<br/>-->
-        <!--Flex Footer-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</section>-->
+    <main class="layout-body">
 
         <section class="pd-lg xs-hidden sm-hidden md-hidden lg-hidden xl-hidden">
             <h1>Draggable</h1>
@@ -763,7 +669,7 @@
                                 <div class="grid-col xs-col-4">
                                     Trip Name
                                 </div>
-                                <div class="grid-col xs-col-8 sm-visible">
+                                <div class="grid-col xs-col-8 md-hidden lg-hidden xl-hidden">
                                     Caribean cruise
                                 </div>
                             </div>
@@ -778,7 +684,7 @@
                                 <div class="grid-col xs-col-12 sm-col-4">
                                     Location
                                 </div>
-                                <div class="grid-col xs-col-8 sm-visible">
+                                <div class="grid-col xs-col-8 md-hidden lg-hidden xl-hidden">
                                     Barbados
                                 </div>
                             </div>
@@ -1026,7 +932,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="layout-content pd-md">
+                        <div class="layout-body pd-md">
                             <h3 class="title">Layout Content</h3>
                             <p>
                                 <button class="btn btn-flat text-purple-6" type="button" data-toggle="toast" data-toast="This is my toast example">

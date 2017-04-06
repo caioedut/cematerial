@@ -13,10 +13,10 @@ angular.module('docs').controller('components.cardsCtrl', function ($scope) {
             '            Located two hours south of Sydney in the Southern Highlands of New South Waves, ...' + "\n" +
             '        </div>' + "\n" +
             '        <div class="card-footer">' + "\n" +
-            '            <button class="btn btn-flat text-blue-5" type="button">' + "\n" +
+            '            <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '                Share' + "\n" +
             '            </button>' + "\n" +
-            '            <button class="btn btn-flat text-blue-5" type="button">' + "\n" +
+            '            <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '                Explore' + "\n" +
             '            </button>' + "\n" +
             '        </div>' + "\n" +
@@ -35,10 +35,10 @@ angular.module('docs').controller('components.cardsCtrl', function ($scope) {
             '                Located two hours south of Sydney in the Southern Highlands of New South Waves' + "\n" +
             '            </div>' + "\n" +
             '            <div class="card-footer">' + "\n" +
-            '                <button class="btn btn-flat text-blue-5" type="button">' + "\n" +
+            '                <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '                    Share' + "\n" +
             '                </button>' + "\n" +
-            '                <button class="btn btn-flat text-blue-5" type="button">' + "\n" +
+            '                <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '                    Explore' + "\n" +
             '                </button>' + "\n" +
             '            </div>' + "\n" +
@@ -54,10 +54,10 @@ angular.module('docs').controller('components.cardsCtrl', function ($scope) {
             '                Located at the southern tip of the state of New York, the city is the center of the New York metropolitan area, one of the most populous urban agglomerations in the world' + "\n" +
             '            </div>' + "\n" +
             '            <div class="card-footer">' + "\n" +
-            '                <button class="btn btn-flat text-blue-5" type="button">' + "\n" +
+            '                <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '                    Share' + "\n" +
             '                </button>' + "\n" +
-            '                <button class="btn btn-flat text-blue-5" type="button">' + "\n" +
+            '                <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '                    Explore' + "\n" +
             '                </button>' + "\n" +
             '            </div>' + "\n" +
@@ -73,10 +73,10 @@ angular.module('docs').controller('components.cardsCtrl', function ($scope) {
             '                There are some signs of a calm at noon, and these became more distinct as the sun' + "\n" +
             '            </div>' + "\n" +
             '            <div class="card-footer">' + "\n" +
-            '                <button class="btn btn-flat text-blue-5" type="button">' + "\n" +
+            '                <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '                    Share' + "\n" +
             '                </button>' + "\n" +
-            '                <button class="btn btn-flat text-blue-5" type="button">' + "\n" +
+            '                <button class="btn btn-flat text-blue-6" type="button">' + "\n" +
             '                    Explore' + "\n" +
             '                </button>' + "\n" +
             '            </div>' + "\n" +
@@ -116,10 +116,10 @@ angular.module('docs').controller('components.cardsCtrl', function ($scope) {
             '                Located at the southern tip of the state of New York, the city is the center of the New York metropolitan area, one of the most populous urban agglomerations in the world' + "\n" +
             '            </div>' + "\n" +
             '            <div class="card-footer bg-white text-green-6">' + "\n" +
-            '                <button class="btn btn-flat text-green-5" type="button">' + "\n" +
+            '                <button class="btn btn-flat text-green-6" type="button">' + "\n" +
             '                    Share' + "\n" +
             '                </button>' + "\n" +
-            '                <button class="btn btn-flat text-green-5" type="button">' + "\n" +
+            '                <button class="btn btn-flat text-green-6" type="button">' + "\n" +
             '                    Explore' + "\n" +
             '                </button>' + "\n" +
             '            </div>' + "\n" +

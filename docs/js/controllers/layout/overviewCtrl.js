@@ -35,7 +35,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '    </div>' + "\n" +
             '    <div class="layout-header bg-blue-6">' + "\n" +
             '        <div class="grid grid-middle grid-nowrap">' + "\n" +
-            '            <div class="grid-col" data-toggle="sidebar">' +
+            '            <div class="grid-col layout-toggler" data-toggle="sidebar">' +
             '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' +
             '                    <i class="md-icon md-icon-lg">menu</i>' +
             '                </button>' +
@@ -127,7 +127,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '    </div>' + "\n" +
             '    <div class="layout-header bg-blue-6">' + "\n" +
             '        <div class="grid grid-middle grid-nowrap">' + "\n" +
-            '            <div class="grid-col" data-toggle="sidebar">' +
+            '            <div class="grid-col layout-toggler" data-toggle="sidebar">' +
             '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' +
             '                    <i class="md-icon md-icon-lg">menu</i>' +
             '                </button>' +

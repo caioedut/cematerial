@@ -10,8 +10,8 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '    <div class="layout-header">' + "\n" +
             '        Header' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="layout-container">' + "\n" +
-            '        Container' + "\n" +
+            '    <div class="layout-body">' + "\n" +
+            '        Body' + "\n" +
             '    </div>' + "\n" +
             '    <div class="layout-footer">' + "\n" +
             '        Footer' + "\n" +

@@ -30,6 +30,10 @@ angular.module('docs').constant('navs', [
                 title: 'Overview'
             },
             {
+                url: 'grid',
+                title: 'Grid'
+            },
+            {
                 url: 'color-palette',
                 title: 'Color Palette'
             },

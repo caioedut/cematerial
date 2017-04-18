@@ -64,7 +64,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '</div>'
         ),
         sidebar: (
-            '<div class="layout" style="border: 1px solid #ddd; height: 400px;">' + "\n" +
+            '<div class="layout" style="border: 1px solid #ddd; height: 380px;">' + "\n" +
             '    <div class="layout-sidebar">' + "\n" +
             '        <div class="layout-account">' + "\n" +
             '            <img class="media-background" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>' + "\n" +

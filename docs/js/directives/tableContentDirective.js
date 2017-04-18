@@ -16,9 +16,24 @@ angular.module('docs').directive('tableContent', function () {
                 $scope.target = '.layout-body';
             }
 
+            function animateScroll(to, duration) {
+                var element = document.querySelector('.layout-body');
+
+                if (duration <= 0) return;
+                var difference = to - element.scrollTop;
+                var perTick = difference / duration * 10;
+
+                setTimeout(function () {
+                    element.scrollTop = element.scrollTop + perTick;
+                    if (element.scrollTop === to) return;
+                    animateScroll(to, duration - 10);
+                }, 10);
+            }
+
             $scope.scrollTo = function (tcId) {
                 var $target = document.querySelector('[tcid="' + tcId + '"]');
-                document.querySelector('.layout-body').scrollTop = $target.offsetTop - 24;
+                var duration = $target.offsetTop / 3;
+                animateScroll($target.offsetTop - 24, duration);
             };
 
             $scope.headlines = [];
@@ -27,21 +42,20 @@ angular.module('docs').directive('tableContent', function () {
 
             if ($target) {
                 var headlines = $target.querySelectorAll('h1, h2, h3, h4, h5, h6');
+                var first = Infinity;
 
-                var prev = {tagName: null}, indent = 0;
+                headlines.forEach(function (item) {
+                    var number = parseInt(item.tagName.replace(/\D/g, ''));
+                    if (number < first) {
+                        first = number;
+                    }
+                });
 
                 headlines.forEach(function (item, i) {
+                    var number = parseInt(item.tagName.replace(/\D/g, ''));
+                    var indent = (number - first) * 16;
+
                     item.setAttribute('tcId', i);
-
-                    if (item.tagName != prev.tagName) {
-                        if (item.parentElement === prev.parentElement) {
-                            indent += 16;
-                        } else if (indent) {
-                            indent -= 16;
-                        }
-                    }
-
-                    prev = item;
 
                     $scope.headlines.push({
                         tcId: i,
@@ -49,8 +63,6 @@ angular.module('docs').directive('tableContent', function () {
                         label: item.innerText
                     });
                 });
-
-                // $scope.headlines = headlines;
             }
         }
     };

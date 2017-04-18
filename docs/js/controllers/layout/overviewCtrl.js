@@ -35,11 +35,11 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '    </div>' + "\n" +
             '    <div class="layout-header bg-blue-6">' + "\n" +
             '        <div class="grid grid-middle grid-nowrap">' + "\n" +
-            '            <div class="grid-col layout-toggler" data-toggle="sidebar">' +
-            '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' +
-            '                    <i class="md-icon md-icon-lg">menu</i>' +
-            '                </button>' +
-            '            </div>' +
+            '            <div class="grid-col layout-toggler" data-toggle="sidebar">' + "\n" +
+            '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' + "\n" +
+            '                    <i class="md-icon md-icon-lg">menu</i>' + "\n" +
+            '                </button>' + "\n" +
+            '            </div>' + "\n" +
             '            <div class="grid-col pd-md">' + "\n" +
             '                <h1 class="layout-title">' + "\n" +
             '                    Header' + "\n" +
@@ -127,11 +127,11 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '    </div>' + "\n" +
             '    <div class="layout-header bg-blue-6">' + "\n" +
             '        <div class="grid grid-middle grid-nowrap">' + "\n" +
-            '            <div class="grid-col layout-toggler" data-toggle="sidebar">' +
-            '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' +
-            '                    <i class="md-icon md-icon-lg">menu</i>' +
-            '                </button>' +
-            '            </div>' +
+            '            <div class="grid-col layout-toggler" data-toggle="sidebar">' + "\n" +
+            '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' + "\n" +
+            '                    <i class="md-icon md-icon-lg">menu</i>' + "\n" +
+            '                </button>' + "\n" +
+            '            </div>' + "\n" +
             '            <div class="grid-col pd-md">' + "\n" +
             '                <h1 class="layout-title">' + "\n" +
             '                    Header' + "\n" +

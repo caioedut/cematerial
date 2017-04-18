@@ -1995,11 +1995,11 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     justify-content: center;
 }
 
-.grid-justify {
+.grid-justify, .grid-justify-between {
     justify-content: space-between;
 }
 
-.grid-center.grid-justify {
+.grid-justify-around {
     justify-content: space-around;
 }
 

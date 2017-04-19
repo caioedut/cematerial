@@ -1856,7 +1856,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     transition: ease border .3s;
 }
 
-.tabs .tabs-nav .tab-active {
+.tabs-nav .tab-active {
     border-color: inherit;
 }
 

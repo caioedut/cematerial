@@ -1846,9 +1846,8 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     border-bottom: 3px solid transparent;
     font-size: 1rem;
     max-width: 160px;
-    min-width: 96px;
     overflow: hidden;
-    padding: 14px 12px 12px;
+    padding: 14px 14px 12px;
     text-align: center;
     text-overflow: ellipsis;
     text-transform: uppercase;

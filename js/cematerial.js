@@ -927,11 +927,25 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el = el;
         this.options = extend({}, Tabs.DEFAULTS, el.dataset, options || {});
 
+        this.parent = this.el.closest('.tabs');
         this.nav = this.el.closest('.tabs-nav');
-        this.content = document.querySelector(this.options.target);
 
-        if (this.content) {
-            this.list = this.content.closest('.tabs-list');
+        if (this.parent) {
+            this.list = this.parent.querySelector('.tabs-list');
+            this.content = this.list.querySelector(this.options.target);
+        } else {
+            this.content = document.querySelector(this.options.target);
+            this.list = this.content ? this.content.closest('.tabs-list') : null;
+        }
+
+        var nav = this.el;
+
+        if (!this.content && this.nav && this.list) {
+            var index = 0;
+            this.nav.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
+                index = node === nav ? i + 1 : index;
+            });
+            this.content = this.list.querySelector('.tab-content:nth-child(' + index + ')');
         }
 
         // BAR

@@ -927,11 +927,25 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el = el;
         this.options = extend({}, Tabs.DEFAULTS, el.dataset, options || {});
 
+        this.parent = this.el.closest('.tabs');
         this.nav = this.el.closest('.tabs-nav');
-        this.content = document.querySelector(this.options.target);
 
-        if (this.content) {
-            this.list = this.content.closest('.tabs-list');
+        if (this.parent) {
+            this.list = this.parent.querySelector('.tabs-list');
+            this.content = this.list.querySelector(this.options.target);
+        } else {
+            this.content = document.querySelector(this.options.target);
+            this.list = this.content ? this.content.closest('.tabs-list') : null;
+        }
+
+        var nav = this.el;
+
+        if (!this.content && this.nav && this.list) {
+            var index = 0;
+            this.nav.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
+                index = node === nav ? i + 1 : index;
+            });
+            this.content = this.list.querySelector('.tab-content:nth-child(' + index + ')');
         }
 
         // BAR
@@ -954,6 +968,157 @@ NodeList.prototype.not = function (sel_or_arr) {
             if (!this.options.swipe || this.options.swipe == '0') {
                 this.list.classList.add('tabs-noswipe');
             }
+        }
+    };
+
+    Tabs.VERSION = '0.1.8';
+
+    Tabs.DEFAULTS = {
+        swipe: true
+    };
+
+    Tabs.prototype.show = function (_relatedTarget) {
+        var that = this;
+        var e; // Event handler
+
+        // Event Before Show
+        e = new Event('cem.tabs.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
+
+        // Show
+        if (this.content) {
+            // Hide others navs
+            if (this.nav) {
+                this.el.siblings().forEach(function (node) {
+                    if (node.classList.contains('tab-active')) {
+                        var init = node['cem.tabs'] || new Tabs(node);
+                        init.hide(that);
+                    }
+                });
+            }
+
+            // Hide Others Contents
+            if (this.list) {
+                this.content.siblings().forEach(function (node) {
+                    if (node.classList.contains('tab-visible')) {
+                        node.classList.remove('tab-visible');
+                    }
+                });
+            }
+
+            // Tab Nav
+            this.el.classList.add('tab-active');
+            this.updateBar();
+
+            // Tab Content
+            this.content.classList.add('tab-visible');
+        }
+
+        // Event Show
+        e = new Event('cem.tabs.show', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
+    };
+
+    Tabs.prototype.hide = function (_relatedTarget) {
+        var e; // Event handler
+
+        // Event Before Hide
+        e = new Event('cem.tabs.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
+
+        // Hide
+        this.el.classList.remove('tab-active');
+
+        // Event Hide
+        e = new Event('cem.tabs.hide', {bubbles: true, cancelable: true, composed: true});
+        e.relatedTarget = _relatedTarget;
+        this.el.dispatchEvent(e);
+    };
+
+    Tabs.prototype.updateBar = function () {
+        var active = this.nav.querySelector('.tab-active');
+
+        var pos = {left: active.offsetLeft - this.nav.scrollLeft};
+        var scroll = this.nav.scrollLeft;
+
+        var left = scroll + pos.left;
+
+        if (pos.left + active.offsetWidth > this.nav.offsetWidth) {
+            this.nav.scrollLeft = left - this.nav.offsetWidth + active.offsetWidth;
+        } else if (pos.left < 0) {
+            this.nav.scrollLeft = left;
+        }
+
+        // Update bar css
+        this.bar.style.transform = 'translateX(' + left + 'px)';
+        this.bar.style.width = active.offsetWidth;
+    };
+
+    // Export Class
+    window.Tabs = Tabs;
+
+    // Events
+    document
+        .on('click', '[data-toggle="tab"]', function () {
+            // var target = this.closest('.tabs');
+            var init = new Tabs(this, this.dataset);
+            init.show(this);
+        })
+    ;
+
+}();
+
++function () {
+    'use strict';
+
+    // CLASS
+
+    var Tabs = function (el, options) {
+        this.el = el;
+        this.options = extend({}, Tabs.DEFAULTS, el.dataset, options || {});
+
+        this.parent = this.el.closest('.tabs');
+        this.nav = this.el.closest('.tabs-nav');
+
+        if (this.parent) {
+            this.list = this.parent.querySelector('.tabs-list');
+            this.content = this.list.querySelector(this.options.target);
+        } else {
+            this.content = document.querySelector(this.options.target);
+            this.list = this.content ? this.content.closest('.tabs-list') : null;
+        }
+
+        var nav = this.el;
+
+        if (!this.content && this.nav && this.list) {
+            var index = 0;
+            this.nav.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
+                index = node === nav ? i + 1 : index;
+            });
+            this.content = this.list.querySelector('.tab-content:nth-child(' + index + ')');
+        }
+
+        // BAR
+        if (this.nav) {
+            this.bar = this.nav.querySelector('.tabs-bar');
+
+            if (this.bar) {
+                this.updateBar();
+            } else {
+                this.bar = document.createElement('div');
+                this.bar.classList.add('tabs-bar');
+                this.updateBar();
+                this.nav.insertBefore(this.bar, this.nav.firstChild);
+            }
+        }
+
+        this.el['cem.tabs'] = this;
+
+        if (!this.options.swipe || this.options.swipe == '0') {
+            this.el.classList.add('tabs-noswipe');
         }
     };
 

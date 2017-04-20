@@ -1882,9 +1882,17 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     width: 100%;
 }
 
-.tabs:not(.tabs-noswipe) .tab-content {
+.tabs-list:not(.tabs-noswipe) {
+    overflow: hidden;
+}
+
+.tabs-list:not(.tabs-noswipe) .tab-content {
     transition: margin-left ease .3s;
 }
+
+/*.tabs:not(.tabs-noswipe) .tab-content {*/
+/*transition: margin-left ease .3s;*/
+/*}*/
 
 .tab-content.tab-visible {
     margin-left: 0;

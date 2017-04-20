@@ -36,8 +36,10 @@
 
         this.el['cem.tabs'] = this;
 
-        if (!this.options.swipe || this.options.swipe == '0') {
-            this.el.classList.add('tabs-noswipe');
+        if (this.list) {
+            if (!this.options.swipe || this.options.swipe == '0') {
+                this.list.classList.add('tabs-noswipe');
+            }
         }
     };
 

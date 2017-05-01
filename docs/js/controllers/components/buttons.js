@@ -82,19 +82,19 @@ angular.module('docs').controller('components.buttonsCtrl', function ($scope) {
             '</button>' + "\n" +
             '<br/>' + "\n" +
             '<button class="btn btn-icon btn-circle bg-blue-6 btn-xs" type="button">' + "\n" +
-            '    <i class="md-icon">message</i>' + "\n" +
+            '    <i class="md-icon">people</i>' + "\n" +
             '</button>' + "\n" +
             '<button class="btn btn-icon btn-circle bg-blue-6 btn-sm" type="button">' + "\n" +
-            '    <i class="md-icon">message</i>' + "\n" +
+            '    <i class="md-icon">people</i>' + "\n" +
             '</button>' + "\n" +
             '<button class="btn btn-icon btn-circle bg-blue-6" type="button">' + "\n" +
-            '    <i class="md-icon">message</i>' + "\n" +
+            '    <i class="md-icon">people</i>' + "\n" +
             '</button>' + "\n" +
             '<button class="btn btn-icon btn-circle bg-blue-6 btn-lg" type="button">' + "\n" +
-            '    <i class="md-icon">message</i>' + "\n" +
+            '    <i class="md-icon">people</i>' + "\n" +
             '</button>' + "\n" +
             '<button class="btn btn-icon btn-circle bg-blue-6 btn-xl" type="button">' + "\n" +
-            '    <i class="md-icon">message</i>' + "\n" +
+            '    <i class="md-icon">people</i>' + "\n" +
             '</button>'
         ),
         block: (

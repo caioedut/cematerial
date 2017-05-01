@@ -588,17 +588,20 @@ small {
 .md-icon {
     direction: ltr;
     display: inline-block;
+
     font-family: 'Material Icons', sans-serif;
-    /*font-size: 24px;*/
-    font-size: 1.4em;
-    font-style: normal;
     font-weight: normal;
+    font-style: normal;
+    /*font-size: 24px;*/
+    font-size: 1.7em;
+
     letter-spacing: normal;
-    /*line-height: 1;*/
+    line-height: 1;
+
     text-transform: none;
     vertical-align: middle;
-    word-wrap: normal;
     white-space: nowrap;
+    word-wrap: normal;
 
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
@@ -611,19 +614,19 @@ small {
 }
 
 .md-icon-xs {
-    font-size: .6em;
+    font-size: .9em;
 }
 
 .md-icon-sm {
-    font-size: 1em;
+    font-size: 1.3em;
 }
 
 .md-icon-lg {
-    font-size: 1.8em;
+    font-size: 2.1em;
 }
 
 .md-icon-xl {
-    font-size: 2.2em;
+    font-size: 2.5em;
 }
 
 /*BASE LAYOUT BEGIN*/

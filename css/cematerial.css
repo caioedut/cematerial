@@ -656,7 +656,7 @@ body > .layout {
     transition: transform ease .3s;
     will-change: transform;
 
-    /*Fix browser slow swipe*/
+    /* Fix browser slow transition */
     backface-visibility: hidden;
 }
 
@@ -1087,18 +1087,24 @@ body > .layout {
 /*MODAL (PAGES)*/
 .modal {
     position: fixed;
-    top: 20%;
+    top: 0;
     left: 0;
     background-color: #fff;
     z-index: 99;
 
+    transform: translateY(20%);
+
     opacity: 0;
     visibility: hidden;
-    transition: ease all .3s;
+    transition: transform ease .3s, opacity ease .3s, visibility ease .3s;
+    will-change: top, opacity, visibility;
+
+    /*Fix browser slow transition*/
+    backface-visibility: hidden;
 }
 
 .modal-visible {
-    top: 0;
+    transform: translateY(0);
     opacity: 1;
     visibility: visible;
 }

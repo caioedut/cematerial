@@ -654,6 +654,7 @@ body > .layout {
 
     transform: translate3d(0, 0, 0);
     transition: transform ease .3s;
+    will-change: transform;
 
     /*Fix browser slow swipe*/
     backface-visibility: hidden;
@@ -685,6 +686,7 @@ body > .layout {
 
     height: 100%;
     width: 100%;
+    will-change: opacity;
 }
 
 .layout .layout-sidebar-visible {
@@ -1562,7 +1564,6 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
     opacity: 0;
     transition: ease opacity .15s;
-    will-change: top, left;
 }
 
 .tooltip:not(.tooltip-wrap) {

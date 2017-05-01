@@ -752,7 +752,7 @@ body > .layout {
     font-size: 1rem;
     font-weight: 500;
     line-height: 14px;
-    padding: 16px;
+    padding: 14px 16px;
 
     overflow: hidden;
     white-space: nowrap;

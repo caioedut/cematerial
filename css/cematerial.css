@@ -596,7 +596,8 @@ small {
     font-size: 1.7em;
 
     letter-spacing: normal;
-    line-height: 1;
+    /*line-height: 1;*/
+    line-height: inherit;
 
     text-transform: none;
     vertical-align: middle;
@@ -879,7 +880,9 @@ body > .layout {
 }
 
 /*BTN HOVER BEGIN*/
-.btn:before {
+.btn:before,
+.menu a:before,
+.menu li a:before {
     position: absolute;
     top: 0;
     left: 0;
@@ -892,7 +895,11 @@ body > .layout {
 }
 
 .btn:hover:before,
-.btn:focus:before {
+.btn:focus:before,
+.menu a:hover,
+.menu a:focus,
+.menu li a:hover,
+.menu li a:focus {
     background-color: rgba(0, 0, 0, .1);
 }
 
@@ -1750,6 +1757,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 }
 
 .menu a > .md-icon {
+    font-size: 1.4em;
     margin-left: .5em;
     margin-right: .5em;
     opacity: .9;

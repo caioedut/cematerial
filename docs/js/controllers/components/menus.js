@@ -148,6 +148,34 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
             '        </li>' + "\n" +
             '    </ul>' + "\n" +
             '</div>'
+        ),
+        context_menu: (
+            '<div class="set-border set-round bg-grey-2 pd-sm pd-left-md pd-right-md" data-toggle="contextmenu">' + "\n" +
+            '    <div class="grid grid-middle grid-nowrap">' + "\n" +
+            '        <div class="grid-col">' + "\n" +
+            '            This is a menu button with context menu (click on button or right click in this block)' + "\n" +
+            '        </div>' + "\n" +
+            '        <div class="grid-col col-right">' + "\n" +
+            '            <div class="dropdown">' + "\n" +
+            '                <button class="btn btn-icon btn-circle" type="button" data-toggle="dropdown">' + "\n" +
+            '                    <i class="md-icon">more_vert</i>' + "\n" +
+            '                </button>' + "\n" +
+            '                <ul class="dropdown-body right top menu">' + "\n" +
+            '                    <li>' + "\n" +
+            '                        <a class="bg-blue-1-h">Action One</a>' + "\n" +
+            '                    </li>' + "\n" +
+            '                    <li>' + "\n" +
+            '                        <a class="bg-blue-1-h">Action Two</a>' + "\n" +
+            '                    </li>' + "\n" +
+            '                    <li>' + "\n" +
+            '                        <a class="bg-blue-1-h">Action Three</a>' + "\n" +
+            '                    </li>' + "\n" +
+            '                </ul>' + "\n" +
+            '            </div>' + "\n" +
+            '        </div>' + "\n" +
+            '    </div>' + "\n" +
+            '</div>' + "\n" +
+            ''
         )
     }
 });

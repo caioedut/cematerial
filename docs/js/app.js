@@ -88,6 +88,10 @@ angular.module('docs').constant('navs', [
                 title: 'Selection Controls'
             },
             {
+                url: 'tables',
+                title: 'Tables'
+            },
+            {
                 url: 'tabs',
                 title: 'Tabs'
             },

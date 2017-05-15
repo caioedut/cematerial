@@ -67,12 +67,12 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '<div class="layout" style="border: 1px solid #ddd; height: 380px;">' + "\n" +
             '    <div class="layout-sidebar">' + "\n" +
             '        <div class="layout-account">' + "\n" +
-            '            <img class="media-background" src="http://www.slidesjs.com/img/example-slide-350-1.jpg" alt=""/>' + "\n" +
+            '            <img class="media-background" src="img/cards.jpg" alt=""/>' + "\n" +
             '            <div class="set-overlay pd-md">' + "\n" +
             '                <div class="grid grid-gutter">' + "\n" +
             '                    <div class="xs-col-5 sm-col-4">' + "\n" +
             '                        <div class="media-container-lg">' + "\n" +
-            '                            <img class="media-fluid media-cover set-circle" src="http://www.gbchealth.org/wp-content/uploads/2016/03/user-profile-placeholder.png" alt=""/>' + "\n" +
+                '                            <img class="media-fluid media-cover set-circle" src="img/user-profile.png" alt=""/>' + "\n" +
             '                        </div>' + "\n" +
             '                    </div>' + "\n" +
             '                    <a class="xs-col-12 text-white" data-toggle="nav" data-target="#nav-account">' + "\n" +

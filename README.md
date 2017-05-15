@@ -1,7 +1,9 @@
 Warning: this project is under development!
 
 # CEMaterial
-https://caioedut.github.io/cematerial/
+
+## Docs
+https://caioedut.github.io/cematerial/docs
 
 ## Dependences
 - Roboto Font (https://fonts.googleapis.com/css?family=Roboto:300,400,500,700)
@@ -23,6 +25,3 @@ https://caioedut.github.io/cematerial/
 
 ## Example
 https://caioedut.github.io/cematerial/
-
-## Docs
-https://caioedut.github.io/cematerial/docs (under construction)

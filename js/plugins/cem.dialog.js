@@ -12,6 +12,11 @@
     var Dialog = function (el, options) {
         this.el = el;
         this.options = extend({}, Dialog.DEFAULTS, el.dataset, options || {});
+
+        if (!this.el['cem.dialog']) {
+            CEMaterial.eventScrollAddShadow(this.el.querySelector('.dialog-header'), this.el.querySelector('.dialog-body'), 'raised-lg');
+        }
+
         this.el['cem.dialog'] = this;
     };
 

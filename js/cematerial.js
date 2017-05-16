@@ -183,7 +183,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.options = extend({}, Dialog.DEFAULTS, el.dataset, options || {});
 
         if (!this.el['cem.dialog']) {
-            CEMaterial.eventScrollAddShadow(this.el.querySelector('.dialog-header'), this.el.querySelector('.dialog-body'), 'raised-lg');
+            CEMaterial.eventScrollAddShadow(this.el.querySelector('.dialog-header'), this.el.querySelector('.dialog-body'));
         }
 
         this.el['cem.dialog'] = this;

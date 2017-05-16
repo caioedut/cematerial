@@ -181,11 +181,6 @@ NodeList.prototype.not = function (sel_or_arr) {
     var Dialog = function (el, options) {
         this.el = el;
         this.options = extend({}, Dialog.DEFAULTS, el.dataset, options || {});
-
-        if (!this.el['cem.dialog']) {
-            CEMaterial.eventScrollAddShadow(this.el.querySelector('.dialog-header'), this.el.querySelector('.dialog-body'));
-        }
-
         this.el['cem.dialog'] = this;
     };
 
@@ -296,11 +291,6 @@ NodeList.prototype.not = function (sel_or_arr) {
     var Modal = function (el, options) {
         this.el = el;
         this.options = extend({}, Modal.DEFAULTS, el.dataset, options || {});
-
-        if (!this.el['cem.modal']) {
-            CEMaterial.eventScrollAddShadow(this.el.querySelector('.modal-header'), this.el.querySelector('.modal-body'));
-        }
-
         this.el['cem.modal'] = this;
     };
 
@@ -1845,6 +1835,36 @@ document.on('DOMContentLoaded', function () {
     //     CEMaterial.init(e.target);
     // });
 
+    // Add shadow on scroll
+    document.addEventListener('scroll', function (e) {
+        var component,
+            parent;
+
+        if (e.target.is('.layout-body')) {
+            component = '.layout';
+        } else if (e.target.is('.dialog-body')) {
+            component = '.dialog';
+        } else if (e.target.is('.modal-body')) {
+            component = '.modal';
+        }
+
+        if (component) {
+            parent = e.target.closest(component);
+            if (parent) {
+                var header = parent.querySelector(component + '-header');
+                var body = parent.querySelector(component + '-body');
+
+                if (header && body) {
+                    if (body.scrollTop) {
+                        header.classList.add('raised-xs');
+                    } else {
+                        header.classList.remove('raised-xs');
+                    }
+                }
+            }
+        }
+    }, true);
+
     // Label toggle, text fields
     var texts = '.input:not([type="radio"]):not([type="checkbox"]):not([type="button"])';
     document
@@ -1890,23 +1910,6 @@ var CEMaterial = {
             target.querySelectorAll('.input-autogrow').forEach(function (node) {
                 CEMaterial.inputAutoGrow(node);
             });
-
-            target.querySelectorAll('.layout').forEach(function (node) {
-                CEMaterial.eventScrollAddShadow(node.querySelector('.layout-header'), node.querySelector('.layout-body'));
-            });
-        }
-    },
-    eventScrollAddShadow: function (header, body, cssClass) {
-        cssClass = cssClass || 'raised-xs';
-
-        if (header && body) {
-            body.onscroll = function () {
-                if (body.scrollTop) {
-                    header.classList.add(cssClass);
-                } else {
-                    header.classList.remove(cssClass);
-                }
-            }
         }
     },
     getTarget: function (node, parent) {

@@ -12,11 +12,6 @@
     var Modal = function (el, options) {
         this.el = el;
         this.options = extend({}, Modal.DEFAULTS, el.dataset, options || {});
-
-        if (!this.el['cem.modal']) {
-            CEMaterial.eventScrollAddShadow(this.el.querySelector('.modal-header'), this.el.querySelector('.modal-body'));
-        }
-
         this.el['cem.modal'] = this;
     };
 

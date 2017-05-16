@@ -481,45 +481,6 @@ body {
     overflow-x: hidden;
 }
 
-/** TYPOGRAPHY **/
-.caption {
-    font-size: .86rem;
-}
-
-.subheader {
-    font-size: 1.14rem;
-}
-
-.layout-title,
-.card-title,
-.dialog-title,
-.modal-title,
-.title {
-    font-size: 1.43rem;
-    font-weight: 500;
-    margin: 0;
-}
-
-.headline {
-    font-size: 1.71rem;
-}
-
-.display-1 {
-    font-size: 2.43rem;
-}
-
-.display-2 {
-    font-size: 3.21rem;
-}
-
-.display-3 {
-    font-size: 4rem;
-}
-
-.display-4 {
-    font-size: 8rem;
-}
-
 /*DEFAULT TAGS*/
 h1 {
     font-size: 3.4rem;
@@ -583,6 +544,55 @@ pre {
 small {
     font-size: .8em;
     opacity: .8;
+}
+
+/** TYPOGRAPHY **/
+.display-4 {
+    font-size: 8rem;
+    font-weight: 300;
+}
+
+.display-3 {
+    font-size: 4rem;
+}
+
+.display-2 {
+    font-size: 3.21rem;
+}
+
+.display-1 {
+    font-size: 2.43rem;
+}
+
+.headline {
+    font-size: 1.71rem;
+}
+
+.layout-title,
+.card-title,
+.dialog-title,
+.modal-title,
+.title {
+    font-size: 1.43rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.subheader {
+    font-size: 1.14rem;
+}
+
+.body-2 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.body-1 {
+    font-size: 1rem;
+}
+
+.caption {
+    font-size: .86rem;
 }
 
 .md-icon {
@@ -775,6 +785,13 @@ body > .layout {
 
 /*BASE LAYOUT END*/
 
+.button, .btn {
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
 /*BUTTONS*/
 .btn {
     position: relative;
@@ -783,16 +800,12 @@ body > .layout {
     border-radius: 2px;
     cursor: pointer;
     display: inline-block;
-    font-size: 1rem;
-    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
-    font-weight: 500;
     height: 36px;
     line-height: 36px;
     outline: none;
     overflow: hidden;
     padding: 0 1.8rem;
     text-decoration: none !important;
-    text-transform: uppercase;
     text-overflow: clip;
     transition: ease all .3s;
     vertical-align: middle;

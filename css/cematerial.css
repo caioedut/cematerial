@@ -998,12 +998,12 @@ body > .layout {
 
     margin-left: auto;
     margin-right: auto;
-    transform: translateY(-50%) translateZ(0);
+    transform: translateY(-50%) translateZ(0) scale(.5);
 
     display: flex;
 
-    max-height: calc(100vh - 48px);
-    max-width: calc(100vw - 48px);
+    max-height: calc(100vh - 64px);
+    max-width: calc(100vw - 64px);
 
     width: -moz-max-content;
     width: -webkit-max-content;
@@ -1011,13 +1011,16 @@ body > .layout {
 
     z-index: 99;
 
-    transition: opacity ease .3s, visibility ease .3s;
+    transition: opacity ease .3s, visibility ease .3s, transform ease .2s;
     opacity: 0;
     visibility: hidden;
+
+    /*Fix browser slow transition*/
+    backface-visibility: hidden;
 }
 
 .dialog-visible {
-    transform: translateY(-50%) translateZ(0);
+    transform: translateY(-50%) translateZ(0) scale(1);
     opacity: 1;
     visibility: visible;
 }
@@ -1027,7 +1030,7 @@ body > .layout {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(-50%) translateZ(0);
+    transform: translateX(-50%) translateY(-50%) translateZ(0) scale(2);
 
     background-color: rgba(0, 0, 0, .8);
     content: '';

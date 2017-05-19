@@ -653,9 +653,6 @@ body > .layout {
 }
 
 .layout-header {
-    display: flex !important;
-    align-items: center;
-    min-height: 56px;
     z-index: 97;
 }
 
@@ -735,7 +732,7 @@ body > .layout {
     }
 
     .layout-header {
-        min-height: 64px;
+        padding: 4px;
     }
 
     .layout-sidebar {

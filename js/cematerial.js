@@ -118,6 +118,8 @@ Element.prototype.offset = function () {
     return rect;
 };
 
+NodeList.prototype.forEach = Array.prototype.forEach;
+
 NodeList.prototype.toArray = function () {
     var nodes = [];
     this.forEach(function (node) {

@@ -1241,7 +1241,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.options.message = message;
 
         this.parent = typeof this.options.parent == 'string' ? document.querySelector(this.options.parent) : this.options.parent;
-        this.body = this.parent.querySelector(':scope > .layout-toast');
+        this.body = this.parent.querySelector('.layout-toast');
 
         if (!this.body) {
             this.body = document.createElement('div');

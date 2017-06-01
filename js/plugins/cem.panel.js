@@ -13,11 +13,11 @@
         this.el = el;
         this.options = extend({}, Panel.DEFAULTS, el.dataset, options || {});
 
-        if (this.options.margin && this.options.margin != '0') {
+        if (!empty(this.options.margin)) {
             this.el.classList.add('panel-margin');
         }
 
-        if (this.options.popout && this.options.popout != '0') {
+        if (!empty(this.options.popout)) {
             this.el.classList.add('panel-popout');
         }
 

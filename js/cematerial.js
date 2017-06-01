@@ -16,6 +16,48 @@ function extend() {
     return arguments[0];
 }
 
+function empty (mixedVar) {
+    //  discuss at: http://locutus.io/php/empty/
+    // original by: Philippe Baumann
+    //    input by: Onno Marsman (https://twitter.com/onnomarsman)
+    //    input by: LH
+    //    input by: Stoyan Kyosev (http://www.svest.org/)
+    // bugfixed by: Kevin van Zonneveld (http://kvz.io)
+    // improved by: Onno Marsman (https://twitter.com/onnomarsman)
+    // improved by: Francesco
+    // improved by: Marc Jansen
+    // improved by: Rafał Kukawski (http://blog.kukawski.pl)
+    //   example 1: empty(null)
+    //   returns 1: true
+    //   example 2: empty(undefined)
+    //   returns 2: true
+    //   example 3: empty([])
+    //   returns 3: true
+    //   example 4: empty({})
+    //   returns 4: true
+    //   example 5: empty({'aFunc' : function () { alert('humpty'); } })
+    //   returns 5: false
+    var undef;
+    var key;
+    var i;
+    var len;
+    var emptyValues = [undef, null, false, 0, '', '0'];
+    for (i = 0, len = emptyValues.length; i < len; i++) {
+        if (mixedVar === emptyValues[i]) {
+            return true;
+        }
+    }
+    if (typeof mixedVar === 'object') {
+        for (key in mixedVar) {
+            if (mixedVar.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return false;
+}
+
 Element.prototype.on = document.on = function (events, child, fn) {
     fn = fn || child;
     events = typeof events == 'string' ? events.split(' ') : events;
@@ -256,7 +298,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         .on('click', '.dialog-visible', function (e) {
             if (this === e.target) {
                 var init = this['cem.dialog'] || new Dialog(this);
-                if (init.options.autoclose && init.options.autoclose != '0') {
+                if (!empty(init.options.autoclose)) {
                     init.hide();
                 }
             }
@@ -267,7 +309,7 @@ NodeList.prototype.not = function (sel_or_arr) {
                 var ar_hide = [];
                 document.querySelectorAll('.dialog-visible').forEach(function (node) {
                     var init = node['cem.dialog'] || new Dialog(node);
-                    if (init.options.keyboard && init.options.keyboard != '0') {
+                    if (!empty(init.options.keyboard)) {
                         ar_hide.push(init);
                     }
                 });
@@ -443,17 +485,17 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.body.style.position = 'fixed';
         this.body.style.bottom = 'auto';
         this.body.style.right = 'auto';
-        this.body.style.top = e.pageY;
-        this.body.style.left = e.pageX;
+        this.body.style.top = e.pageY + 'px';
+        this.body.style.left = e.pageX + 'px';
 
         // Check horizontal EDGE
         if (document.documentElement.clientWidth - e.clientX < this.body.offsetWidth) {
-            this.body.style.left = e.clientX - this.body.offsetWidth;
+            this.body.style.left = (e.clientX - this.body.offsetWidth) + 'px';
         }
 
         // Check vertical EDGE
         if (document.documentElement.clientHeight - e.clientY < this.body.offsetHeight) {
-            this.body.style.left = e.clientX - this.body.offsetHeight;
+            this.body.style.left = (e.clientX - this.body.offsetHeight) + 'px';
         }
     };
 
@@ -474,7 +516,7 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             drops.forEach(function (node) {
                 var init = node['cem.dropdown'] || new Dropdown(node);
-                if (init.options.autoclose && init.options.autoclose != '0') {
+                if (!empty(init.options.autoclose)) {
                     init.hide();
                 }
             });
@@ -517,11 +559,11 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el = el;
         this.options = extend({}, Panel.DEFAULTS, el.dataset, options || {});
 
-        if (this.options.margin && this.options.margin != '0') {
+        if (!empty(this.options.margin)) {
             this.el.classList.add('panel-margin');
         }
 
-        if (this.options.popout && this.options.popout != '0') {
+        if (!empty(this.options.popout)) {
             this.el.classList.add('panel-popout');
         }
 
@@ -702,7 +744,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         .on('click', '.layout-sidebar-visible ~ .layout-sidebar-backdrop', function () {
             var target = this.previousElementSibling;
             var init = target['cem.sidebar'] || new Sidebar(target);
-            if (init.options.autoclose && init.options.autoclose != '0') {
+            if (!empty(init.options.autoclose)) {
                 init.hide(this);
             }
         })
@@ -970,7 +1012,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el['cem.tabs'] = this;
 
         if (this.list) {
-            if (!this.options.swipe || this.options.swipe == '0') {
+            if (empty(this.options.swipe)) {
                 this.list.classList.add('tabs-noswipe');
             }
         }
@@ -1059,7 +1101,7 @@ NodeList.prototype.not = function (sel_or_arr) {
 
         // Update bar css
         this.bar.style.transform = 'translateX(' + left + 'px)';
-        this.bar.style.width = active.offsetWidth;
+        this.bar.style.width = active.offsetWidth + 'px';
     };
 
     // Export Class
@@ -1072,157 +1114,79 @@ NodeList.prototype.not = function (sel_or_arr) {
             var init = new Tabs(this, this.dataset);
             init.show(this);
         })
-    ;
-
-}();
-
-+function () {
-    'use strict';
-
-    // CLASS
-
-    var Tabs = function (el, options) {
-        this.el = el;
-        this.options = extend({}, Tabs.DEFAULTS, el.dataset, options || {});
-
-        this.parent = this.el.closest('.tabs');
-        this.nav = this.el.closest('.tabs-nav');
-
-        if (this.parent) {
-            this.list = this.parent.querySelector('.tabs-list');
-            this.content = this.list.querySelector(this.options.target);
-        } else {
-            this.content = document.querySelector(this.options.target);
-            this.list = this.content ? this.content.closest('.tabs-list') : null;
-        }
-
-        var nav = this.el;
-
-        if (!this.content && this.nav && this.list) {
-            var index = 0;
-            this.nav.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
-                index = node === nav ? i + 1 : index;
-            });
-            this.content = this.list.querySelector('.tab-content:nth-child(' + index + ')');
-        }
-
-        // BAR
-        if (this.nav) {
-            this.bar = this.nav.querySelector('.tabs-bar');
-
-            if (this.bar) {
-                this.updateBar();
-            } else {
-                this.bar = document.createElement('div');
-                this.bar.classList.add('tabs-bar');
-                this.updateBar();
-                this.nav.insertBefore(this.bar, this.nav.firstChild);
-            }
-        }
-
-        this.el['cem.tabs'] = this;
-
-        if (!this.options.swipe || this.options.swipe == '0') {
-            this.el.classList.add('tabs-noswipe');
-        }
-    };
-
-    Tabs.VERSION = '0.1.8';
-
-    Tabs.DEFAULTS = {
-        swipe: true
-    };
-
-    Tabs.prototype.show = function (_relatedTarget) {
-        var that = this;
-        var e; // Event handler
-
-        // Event Before Show
-        e = new Event('cem.tabs.beforeShow', {bubbles: true, cancelable: true, composed: true});
-        e.relatedTarget = _relatedTarget;
-        this.el.dispatchEvent(e);
-
-        // Show
-        if (this.content) {
-            // Hide others navs
-            if (this.nav) {
-                this.el.siblings().forEach(function (node) {
-                    if (node.classList.contains('tab-active')) {
-                        var init = node['cem.tabs'] || new Tabs(node);
-                        init.hide(that);
-                    }
-                });
-            }
-
-            // Hide Others Contents
-            if (this.list) {
-                this.content.siblings().forEach(function (node) {
-                    if (node.classList.contains('tab-visible')) {
-                        node.classList.remove('tab-visible');
-                    }
-                });
-            }
-
-            // Tab Nav
-            this.el.classList.add('tab-active');
-            this.updateBar();
-
-            // Tab Content
-            this.content.classList.add('tab-visible');
-        }
-
-        // Event Show
-        e = new Event('cem.tabs.show', {bubbles: true, cancelable: true, composed: true});
-        e.relatedTarget = _relatedTarget;
-        this.el.dispatchEvent(e);
-    };
-
-    Tabs.prototype.hide = function (_relatedTarget) {
-        var e; // Event handler
-
-        // Event Before Hide
-        e = new Event('cem.tabs.beforeHide', {bubbles: true, cancelable: true, composed: true});
-        e.relatedTarget = _relatedTarget;
-        this.el.dispatchEvent(e);
-
-        // Hide
-        this.el.classList.remove('tab-active');
-
-        // Event Hide
-        e = new Event('cem.tabs.hide', {bubbles: true, cancelable: true, composed: true});
-        e.relatedTarget = _relatedTarget;
-        this.el.dispatchEvent(e);
-    };
-
-    Tabs.prototype.updateBar = function () {
-        var active = this.nav.querySelector('.tab-active');
-
-        var pos = {left: active.offsetLeft - this.nav.scrollLeft};
-        var scroll = this.nav.scrollLeft;
-
-        var left = scroll + pos.left;
-
-        if (pos.left + active.offsetWidth > this.nav.offsetWidth) {
-            this.nav.scrollLeft = left - this.nav.offsetWidth + active.offsetWidth;
-        } else if (pos.left < 0) {
-            this.nav.scrollLeft = left;
-        }
-
-        // Update bar css
-        this.bar.style.transform = 'translateX(' + left + 'px)';
-        this.bar.style.width = active.offsetWidth;
-    };
-
-    // Export Class
-    window.Tabs = Tabs;
-
-    // Events
-    document
-        .on('click', '[data-toggle="tab"]', function () {
-            // var target = this.closest('.tabs');
-            var init = new Tabs(this, this.dataset);
-            init.show(this);
-        })
+    // .on('swipestart', '.tabs:not(.tabs-noswipe) .tabs-list', function () {
+    //     var tabs = this.closest('.tabs');
+    //     var init = tabs['cem.dropdown'] || new Tabs(tabs);
+    //
+    //     if (!empty(init.options.swipe)) {
+    //         init.bar.classList.add('no-transition');
+    //         this.querySelector('.tab-visible').classList.add('no-transition');
+    //
+    //         // GET TRANSLATE X VALUE
+    //         init.bar.dataset.translateX = init.bar.style.transform.replace(/\D/g, '');
+    //     }
+    // })
+    // .on('swipemove', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
+    //     var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+    //     var is_parent_scrollable = false;
+    //
+    //     // Check parent scrollable
+    //     e.target.parentsUntil(this).forEach(function (node) {
+    //         if (node.scrollWidth > node.offsetWidth) {
+    //             is_parent_scrollable = true;
+    //         }
+    //     });
+    //
+    //     if (is_horizontal && !is_parent_scrollable) {
+    //         var active = this.querySelector('.tab-visible');
+    //         var bar = this.closest('.tabs').querySelector('.tabs-bar');
+    //
+    //         e.preventDefault();
+    //
+    //         // Move tab content
+    //         active.style.marginLeft = e.swipeOffsetX;
+    //
+    //         // Move tab bar
+    //         var translateX = bar.dataset.translateX - (e.swipeOffsetX / this.offsetWidth * 100);
+    //         bar.style.transform = 'translateX(' + translateX + 'px)';
+    //     }
+    // })
+    // .on('swipeend', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
+    //     var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+    //     var is_parent_scrollable = false;
+    //
+    //     // Check parent scrollable
+    //     e.target.parentsUntil(this).forEach(function (node) {
+    //         if (node.scrollWidth > node.offsetWidth) {
+    //             is_parent_scrollable = true;
+    //         }
+    //     });
+    //
+    //     var active = this.querySelector('.tab-visible');
+    //     var bar = this.closest('.tabs').querySelector('.tabs-bar');
+    //
+    //     var offset_start = active.offsetWidth * 0.3;
+    //     var new_active;
+    //
+    //     if (is_horizontal && !is_parent_scrollable) {
+    //         if (Math.abs(e.swipeOffsetX) > offset_start) {
+    //             if (e.swipeOffsetX > 0) {
+    //                 new_active = active.previousElementSibling;
+    //             } else {
+    //                 new_active = active.nextElementSibling;
+    //             }
+    //         }
+    //     }
+    //
+    //     bar.classList.remove('no-transition');
+    //     active.classList.remove('no-transition');
+    //
+    //     new_active = new_active || active;
+    //     this.closest('.tabs')['cem.tabs'].show(new_active);
+    //
+    //     // Reset tab content
+    //     active.style.marginLeft = '';
+    // })
     ;
 
 }();
@@ -1325,7 +1289,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         }, delay);
 
         // Check duration
-        if (this.options.duration && this.options.duration != '0') {
+        if (!empty(this.options.duration)) {
             Toast.DEFAULTS.timeout = setTimeout(this.hide.bind(this), this.options.duration)
         }
 
@@ -1474,8 +1438,8 @@ NodeList.prototype.not = function (sel_or_arr) {
         left = Math.min(left, document.body.offsetWidth - width);
 
         // Update css position
-        this.tooltip.style.top = offset.top + this.el.offsetHeight;
-        this.tooltip.style.left = left;
+        this.tooltip.style.top = (offset.top + this.el.offsetHeight) + 'px';
+        this.tooltip.style.left = left + 'px';
 
         this.tooltip.classList.add('tooltip-visible');
     };
@@ -1834,6 +1798,9 @@ document.on('DOMContentLoaded', function () {
 
     // Prepare and init CEMaterial
     CEMaterial.init(document);
+
+    // Auto initialize Datepicker Plugin (works first animation)
+    new Datepicker();
 
     // @deprecated
     // document.on('DOMNodeInserted', function (e) {

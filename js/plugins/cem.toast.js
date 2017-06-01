@@ -92,7 +92,7 @@
         }, delay);
 
         // Check duration
-        if (this.options.duration && this.options.duration != '0') {
+        if (!empty(this.options.duration)) {
             Toast.DEFAULTS.timeout = setTimeout(this.hide.bind(this), this.options.duration)
         }
 

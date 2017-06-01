@@ -86,7 +86,7 @@
         .on('click', '.layout-sidebar-visible ~ .layout-sidebar-backdrop', function () {
             var target = this.previousElementSibling;
             var init = target['cem.sidebar'] || new Sidebar(target);
-            if (init.options.autoclose && init.options.autoclose != '0') {
+            if (!empty(init.options.autoclose)) {
                 init.hide(this);
             }
         })

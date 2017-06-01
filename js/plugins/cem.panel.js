@@ -12,7 +12,6 @@
     var Panel = function (el, options) {
         this.el = el;
         this.options = extend({}, Panel.DEFAULTS, el.dataset, options || {});
-        this.el['cem.panel'] = this;
 
         if (this.options.margin && this.options.margin != '0') {
             this.el.classList.add('panel-margin');
@@ -22,7 +21,11 @@
             this.el.classList.add('panel-popout');
         }
 
-        this.updateHeight();
+        if (!this.el['cem.panel']) {
+            this.updateHeight();
+        }
+
+        this.el['cem.panel'] = this;
     };
 
     Panel.VERSION = '0.1.3';
@@ -90,7 +93,7 @@
             var height = ref.offsetHeight;
             ref.parentNode.removeChild(ref);
 
-            node.style.height = height;
+            node.style.height = height + 'px';
         });
     };
 

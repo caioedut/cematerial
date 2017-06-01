@@ -106,8 +106,8 @@
         left = Math.min(left, document.body.offsetWidth - width);
 
         // Update css position
-        this.tooltip.style.top = offset.top + this.el.offsetHeight;
-        this.tooltip.style.left = left;
+        this.tooltip.style.top = (offset.top + this.el.offsetHeight) + 'px';
+        this.tooltip.style.left = left + 'px';
 
         this.tooltip.classList.add('tooltip-visible');
     };

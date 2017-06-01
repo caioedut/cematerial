@@ -85,7 +85,7 @@
         .on('click', '.dialog-visible', function (e) {
             if (this === e.target) {
                 var init = this['cem.dialog'] || new Dialog(this);
-                if (init.options.autoclose && init.options.autoclose != '0') {
+                if (!empty(init.options.autoclose)) {
                     init.hide();
                 }
             }
@@ -96,7 +96,7 @@
                 var ar_hide = [];
                 document.querySelectorAll('.dialog-visible').forEach(function (node) {
                     var init = node['cem.dialog'] || new Dialog(node);
-                    if (init.options.keyboard && init.options.keyboard != '0') {
+                    if (!empty(init.options.keyboard)) {
                         ar_hide.push(init);
                     }
                 });

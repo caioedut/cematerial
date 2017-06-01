@@ -51,7 +51,7 @@
         this.el['cem.tabs'] = this;
 
         if (this.list) {
-            if (!this.options.swipe || this.options.swipe == '0') {
+            if (empty(this.options.swipe)) {
                 this.list.classList.add('tabs-noswipe');
             }
         }
@@ -140,7 +140,7 @@
 
         // Update bar css
         this.bar.style.transform = 'translateX(' + left + 'px)';
-        this.bar.style.width = active.offsetWidth;
+        this.bar.style.width = active.offsetWidth + 'px';
     };
 
     // Export Class
@@ -157,7 +157,7 @@
     //     var tabs = this.closest('.tabs');
     //     var init = tabs['cem.dropdown'] || new Tabs(tabs);
     //
-    //     if (init.options.swipe && init.options.swipe != '0') {
+    //     if (!empty(init.options.swipe)) {
     //         init.bar.classList.add('no-transition');
     //         this.querySelector('.tab-visible').classList.add('no-transition');
     //

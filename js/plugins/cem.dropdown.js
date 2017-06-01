@@ -78,17 +78,17 @@
         this.body.style.position = 'fixed';
         this.body.style.bottom = 'auto';
         this.body.style.right = 'auto';
-        this.body.style.top = e.pageY;
-        this.body.style.left = e.pageX;
+        this.body.style.top = e.pageY + 'px';
+        this.body.style.left = e.pageX + 'px';
 
         // Check horizontal EDGE
         if (document.documentElement.clientWidth - e.clientX < this.body.offsetWidth) {
-            this.body.style.left = e.clientX - this.body.offsetWidth;
+            this.body.style.left = (e.clientX - this.body.offsetWidth) + 'px';
         }
 
         // Check vertical EDGE
         if (document.documentElement.clientHeight - e.clientY < this.body.offsetHeight) {
-            this.body.style.left = e.clientX - this.body.offsetHeight;
+            this.body.style.left = (e.clientX - this.body.offsetHeight) + 'px';
         }
     };
 
@@ -109,7 +109,7 @@
 
             drops.forEach(function (node) {
                 var init = node['cem.dropdown'] || new Dropdown(node);
-                if (init.options.autoclose && init.options.autoclose != '0') {
+                if (!empty(init.options.autoclose)) {
                     init.hide();
                 }
             });

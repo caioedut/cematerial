@@ -37,7 +37,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '        <div class="grid grid-middle grid-nowrap">' + "\n" +
             '            <div class="grid-col layout-toggler" data-toggle="sidebar">' + "\n" +
             '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' + "\n" +
-            '                    <i class="md-icon">menu</i>' + "\n" +
+            '                    <i class="md-icon md-icon-lg">menu</i>' + "\n" +
             '                </button>' + "\n" +
             '            </div>' + "\n" +
             '            <div class="grid-col pd-md">' + "\n" +
@@ -129,7 +129,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '        <div class="grid grid-middle grid-nowrap">' + "\n" +
             '            <div class="grid-col layout-toggler" data-toggle="sidebar">' + "\n" +
             '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' + "\n" +
-            '                    <i class="md-icon">menu</i>' + "\n" +
+            '                    <i class="md-icon md-icon-lg">menu</i>' + "\n" +
             '                </button>' + "\n" +
             '            </div>' + "\n" +
             '            <div class="grid-col pd-md">' + "\n" +

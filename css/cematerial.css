@@ -603,7 +603,7 @@ small {
     font-weight: normal;
     font-style: normal;
     /*font-size: 24px;*/
-    font-size: 1.7em;
+    font-size: 1.4em;
 
     letter-spacing: normal;
     /*line-height: 1;*/
@@ -625,19 +625,19 @@ small {
 }
 
 .md-icon-xs {
-    font-size: .9em;
+    font-size: 1em;
 }
 
 .md-icon-sm {
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 .md-icon-lg {
-    font-size: 2.1em;
+    font-size: 1.6em;
 }
 
 .md-icon-xl {
-    font-size: 2.5em;
+    font-size: 1.8em;
 }
 
 /*BASE LAYOUT BEGIN*/
@@ -766,7 +766,7 @@ body > .layout {
     display: block;
     font-size: 1rem;
     font-weight: 500;
-    line-height: 14px;
+    line-height: 16px;
     padding: 16px;
 
     overflow: hidden;
@@ -774,8 +774,9 @@ body > .layout {
 }
 
 .layout-nav a .md-icon {
+    /*font-size: 1.4em;*/
     opacity: .8;
-    padding-right: 1em;
+    padding-right: 1.2em;
 }
 
 .layout-nav a:hover,

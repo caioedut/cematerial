@@ -117,6 +117,10 @@
 
     document
         .on('swipestart', '.layout', function (e) {
+            if (!window.matchMedia('(max-width: 1023px)').matches) {
+                return;
+            }
+
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
@@ -135,6 +139,10 @@
             }
         })
         .on('swipemove', '.layout', function (e) {
+            if (!window.matchMedia('(max-width: 1023px)').matches) {
+                return;
+            }
+
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
@@ -162,13 +170,13 @@
             }
         })
         .on('swipeend', '.layout', function (e) {
+            if (!window.matchMedia('(max-width: 1023px)').matches) {
+                return;
+            }
+
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
-
-            sidebar.classList.remove('layout-sidebar-swiping');
-            sidebar.removeAttribute('style');
-            init.backdrop.removeAttribute('style');
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
             var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
@@ -177,8 +185,12 @@
             var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
             if (bl_swipe) {
-                e.swipeDirectionX == 'left' ? init.hide() : init.show();
+                e.swipeOffsetX > 0 ? init.show() : init.hide();
             }
+
+            sidebar.classList.remove('layout-sidebar-swiping');
+            sidebar.removeAttribute('style');
+            init.backdrop.removeAttribute('style');
         })
     ;
 

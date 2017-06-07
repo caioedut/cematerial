@@ -2883,6 +2883,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     transition: none !important;
 }
 
+.no-bg {
+    background: none !important;
+}
+
 .no-style {
     background: transparent;
     border: 0;
@@ -3195,6 +3199,19 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .mg-right-xl {
     margin-right: 64px;
+}
+
+/*Inherit*/
+.text-inherit {
+    color: inherit;
+}
+
+.bg-inherit {
+    background-color: inherit;
+}
+
+.border-inherit {
+    border-collapse: inherit;
 }
 
 /*TEXT SIZES*/

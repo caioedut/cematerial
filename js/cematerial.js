@@ -842,13 +842,13 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
-            if (bl_swipe) {
-                e.swipeOffsetX > 0 ? init.show() : init.hide();
-            }
-
             sidebar.classList.remove('layout-sidebar-swiping');
             sidebar.removeAttribute('style');
             init.backdrop.removeAttribute('style');
+
+            if (bl_swipe) {
+                e.swipeOffsetX > 0 ? init.show() : init.hide();
+            }
         })
     ;
 

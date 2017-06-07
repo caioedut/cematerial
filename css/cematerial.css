@@ -1150,12 +1150,17 @@ body > .layout {
     position: relative;
 }
 
+.waves-overflow {
+    overflow: hidden;
+}
+
 .waves .ripple {
     position: absolute;
     background-color: rgba(255, 255, 255, .4);
     border-radius: 50%;
     height: 0;
     width: 0;
+    z-index: 999;
 
     transition: transform linear .5s, opacity linear .6s;
     opacity: 1;

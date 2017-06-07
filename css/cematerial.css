@@ -672,9 +672,9 @@ body > .layout {
 
     transform: translate3d(0, 0, 0);
     transition: transform ease .3s;
-    will-change: transform;
 
-    /* Fix browser slow transition */
+    /* Hardware acceleration / Fix slow */
+    will-change: transform;
     backface-visibility: hidden;
 }
 
@@ -961,7 +961,7 @@ body > .layout {
 }
 
 .layout,
-.dialog,
+.dialog-content,
 .modal,
 .card,
 .flex {
@@ -997,52 +997,56 @@ body > .layout {
 /*DIALOGS*/
 .dialog {
     position: fixed;
-    top: 50%;
+    top: 0;
     left: 0;
-    right: 0;
 
-    margin-left: auto;
-    margin-right: auto;
-    transform: translateY(-50%) translateZ(0) scale(.5);
+    display: flex !important;
 
-    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    max-height: calc(100vh - 64px);
-    max-width: calc(100vw - 64px);
+    background-color: rgba(0, 0, 0, .8);
+
+    padding: 32px;
+    height: 100vh;
+    width: 100vw;
+
+    z-index: 99;
+
+    transition: opacity ease .2s, visibility ease .2s;
+    opacity: 0;
+    visibility: hidden;
+
+    /* Fix slow / Hardware acceleration */
+    backface-visibility: hidden;
+    will-change: opacity, visiblity;
+}
+
+.dialog-content {
+    max-height: 100%;
+    max-width: 100%;
+
+    overflow: hidden;
+
+    transition: transform ease .4s;
+    transform: scale(.2);
 
     width: -moz-max-content;
     width: -webkit-max-content;
     width: max-content;
 
-    z-index: 99;
-
-    transition: opacity ease .3s, visibility ease .3s, transform ease .2s;
-    opacity: 0;
-    visibility: hidden;
-
-    /*Fix browser slow transition*/
+    /* Hardware acceleration / Fix slow */
+    will-change: transform;
     backface-visibility: hidden;
 }
 
 .dialog-visible {
-    transform: translateY(-50%) translateZ(0) scale(1);
     opacity: 1;
     visibility: visible;
 }
 
-/*DIALOG BACKDROP*/
-.dialog:after {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%) translateZ(0) scale(2);
-
-    background-color: rgba(0, 0, 0, .8);
-    content: '';
-
-    height: 100vh;
-    width: 100vw;
-    z-index: -1;
+.dialog-visible .dialog-content {
+    transform: scale(1);
 }
 
 .dialog-header,
@@ -1052,7 +1056,7 @@ body > .layout {
 }
 
 /*DIALOGS AND CARDS CSS*/
-.dialog,
+.dialog-content,
 .card {
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
@@ -1078,17 +1082,17 @@ body > .layout {
     text-align: right;
 }
 
-.dialog > :first-child,
-.card > :first-child {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-}
+/*.dialog > :first-child,*/
+/*.card > :first-child {*/
+/*border-top-left-radius: 2px;*/
+/*border-top-right-radius: 2px;*/
+/*}*/
 
-.dialog > :last-child,
-.card > :last-child {
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-}
+/*.dialog > :last-child,*/
+/*.card > :last-child {*/
+/*border-bottom-left-radius: 2px;*/
+/*border-bottom-right-radius: 2px;*/
+/*}*/
 
 /* DIVIDER / HORIZONTAL RULE */
 .divider-horizontal {
@@ -1129,9 +1133,9 @@ body > .layout {
     opacity: 0;
     visibility: hidden;
     transition: transform ease .3s, opacity ease .3s, visibility ease .3s;
-    will-change: top, opacity, visibility;
 
-    /*Fix browser slow transition*/
+    /* Hardware acceleration / Fix slow */
+    will-change: top, opacity, visibility;
     backface-visibility: hidden;
 }
 
@@ -1160,7 +1164,7 @@ body > .layout {
     border-radius: 50%;
     height: 0;
     width: 0;
-    z-index: 999;
+    z-index: 10;
 
     transition: transform linear .5s, opacity linear .6s;
     opacity: 1;

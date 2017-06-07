@@ -13,6 +13,19 @@
         this.el = el;
         this.options = extend({}, Dialog.DEFAULTS, el.dataset, options || {});
         this.el['cem.dialog'] = this;
+
+        if (!this.el.querySelector('.dialog-content')) {
+            var content = document.createElement('div');
+            content.classList.add('dialog-content');
+
+            var children = this.el.children;
+
+            for (var i = children.length - 1; i >= 0; i--) {
+                content.insertBefore(children[i], content.firstChild);
+            }
+
+            this.el.appendChild(content);
+        }
     };
 
     Dialog.VERSION = '0.1.3';
@@ -28,7 +41,8 @@
     };
 
     Dialog.prototype.show = function (_relatedTarget) {
-        var e; // Event handler
+        var e, // Event handler
+            el = this.el;
 
         // Event Before Show
         e = new Event('cem.dialog.beforeShow', {bubbles: true, cancelable: true, composed: true});
@@ -36,7 +50,9 @@
         this.el.dispatchEvent(e);
 
         // Show
-        this.el.classList.add('dialog-visible');
+        setTimeout(function () {
+            el.classList.add('dialog-visible');
+        }, 1);
 
         // Auto Focus
         if (this.options.focus) {

@@ -1145,6 +1145,32 @@ body > .layout {
     height: 100%;
 }
 
+/*RIPPLE / WAVES*/
+.waves {
+    position: relative;
+}
+
+.waves .ripple {
+    position: absolute;
+    background-color: rgba(255, 255, 255, .4);
+    border-radius: 50%;
+    height: 0;
+    width: 0;
+
+    transition: transform linear .5s, opacity linear .6s;
+    opacity: 1;
+    transform: scale(0);
+}
+
+.waves .ripple-animate {
+    opacity: 0;
+    transform: scale(2);
+}
+
+.waves.waves-dark .ripple {
+    background-color: rgba(0, 0, 0, .1);
+}
+
 /*TABLES*/
 table {
     border: 0;

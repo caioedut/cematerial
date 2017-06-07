@@ -940,7 +940,7 @@ body > .layout {
 }
 
 .btn-float {
-    position: absolute!important;
+    position: absolute !important;
     box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
     margin: 16px;
 }
@@ -984,6 +984,11 @@ body > .layout {
 .card-footer,
 .flex-footer {
     margin-top: auto;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
 }
 
 /*DIALOGS*/
@@ -2853,6 +2858,26 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .right-inverse {
     right: 100%;
+}
+
+.scale-xs {
+    transform: scale(.4);
+}
+
+.scale-sm {
+    transform: scale(.8);
+}
+
+.scale, .scale-md {
+    transform: scale(1.2);
+}
+
+.scale-lg {
+    transform: scale(1.6);
+}
+
+.scale-xl {
+    transform: scale(2);
 }
 
 .no-margin {

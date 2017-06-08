@@ -128,10 +128,11 @@
             // GET TRANSLATE X VALUE
             var translate_x = parseInt(window.getComputedStyle(sidebar, null).getPropertyValue('transform').split(',')[4]);
 
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
             var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
             var is_righttarget = e.target.closest(sidebar) || e.target === init.backdrop;
 
-            var bl_swipe = is_leftedge || is_righttarget;
+            var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
             if (bl_swipe) {
                 sidebar.classList.add('layout-sidebar-swiping');
@@ -185,8 +186,8 @@
             var bl_swipe = is_horizontal && (is_leftedge || is_righttarget);
 
             sidebar.classList.remove('layout-sidebar-swiping');
-            sidebar.removeAttribute('style');
-            init.backdrop.removeAttribute('style');
+            // sidebar.removeAttribute('style');
+            // init.backdrop.removeAttribute('style');
 
             if (bl_swipe) {
                 e.swipeOffsetX > 0 ? init.show() : init.hide();

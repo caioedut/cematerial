@@ -3233,7 +3233,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 }
 
 .border-inherit {
-    border-collapse: inherit;
+    border-color: inherit;
 }
 
 /*TEXT SIZES*/

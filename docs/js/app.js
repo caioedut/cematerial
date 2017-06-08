@@ -30,6 +30,10 @@ angular.module('docs').constant('navs', [
                 title: 'Overview'
             },
             {
+                url: 'css',
+                title: 'CSS Classes'
+            },
+            {
                 url: 'typography',
                 title: 'Typography'
             },

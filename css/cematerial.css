@@ -671,7 +671,7 @@ body > .layout {
     max-width: 340px;
 
     transform: translate3d(0, 0, 0);
-    transition: transform ease .3s;
+    transition: transform linear .1s;
 
     /* Hardware acceleration / Fix slow */
     will-change: transform;
@@ -699,16 +699,10 @@ body > .layout {
     z-index: 98;
 
     transition: opacity ease .3s, visibility ease .3s;
-    opacity: 0;
-    visibility: hidden;
 
     height: 100%;
     width: 100%;
     will-change: opacity;
-}
-
-.layout-sidebar-visible {
-    transform: translate3d(100%, 0, 0);
 }
 
 .layout-sidebar-visible,
@@ -716,9 +710,22 @@ body > .layout {
     box-shadow: 2px 0 15px rgba(0, 0, 0, .35);
 }
 
-.layout-sidebar-visible + .layout-sidebar-backdrop {
-    opacity: 1;
-    visibility: visible;
+.layout-sidebar:not(.layout-sidebar-swiping) {
+    transform: translate3d(0, 0, 0) !important;
+}
+
+.layout-sidebar-visible:not(.layout-sidebar-swiping) {
+    transform: translate3d(100%, 0, 0) !important;
+}
+
+.layout-sidebar:not(.layout-sidebar-swiping) + .layout-sidebar-backdrop {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.layout-sidebar-visible:not(.layout-sidebar-swiping) + .layout-sidebar-backdrop {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .layout-body {

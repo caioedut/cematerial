@@ -674,7 +674,7 @@ body > .layout {
     width: calc(100% - 56px);
     max-width: 340px;
 
-    transition: transform linear .1s;
+    transition: transform .1s linear;
 
     /* Hardware acceleration / Fix slow */
     will-change: transform;
@@ -690,7 +690,7 @@ body > .layout {
 .layout-sidebar ~ * {
     position: relative;
     margin-left: auto !important;
-    transition: width ease .3s;
+    transition: width .3s ease;
     width: 100%;
 }
 
@@ -701,7 +701,7 @@ body > .layout {
     background-color: rgba(0, 0, 0, .6);
     z-index: 98;
 
-    transition: opacity ease .3s, visibility ease .3s;
+    transition: opacity .3s ease, visibility .3s ease;
 
     height: 100%;
     width: 100%;
@@ -820,7 +820,7 @@ body > .layout {
     padding: 0 1.8rem;
     text-decoration: none !important;
     text-overflow: clip;
-    transition: ease all .3s;
+    transition: all .3s ease;
     vertical-align: middle;
     white-space: nowrap;
 }
@@ -916,7 +916,7 @@ body > .layout {
     border-radius: inherit;
     content: '';
     height: 100%;
-    transition: ease background .3s;
+    transition: background .3s ease;
     width: 100%;
 }
 
@@ -1018,7 +1018,7 @@ body > .layout {
 
     z-index: 99;
 
-    transition: opacity ease .2s, visibility ease .2s;
+    transition: opacity .2s ease, visibility .2s ease;
     opacity: 0;
     visibility: hidden;
 
@@ -1033,7 +1033,7 @@ body > .layout {
 
     overflow: hidden;
 
-    transition: transform ease .4s;
+    transition: transform .4s ease;
     transform: scale(.2);
 
     width: -moz-max-content;
@@ -1137,7 +1137,7 @@ body > .layout {
 
     opacity: 0;
     visibility: hidden;
-    transition: transform ease .3s, opacity ease .3s, visibility ease .3s;
+    transition: transform .3s ease, opacity .3s ease, visibility .3s ease;
 
     /* Hardware acceleration / Fix slow */
     will-change: top, opacity, visibility;
@@ -1171,7 +1171,7 @@ body > .layout {
     width: 0;
     z-index: 10;
 
-    transition: transform linear .5s, opacity linear .6s;
+    transition: transform .5s linear, opacity .6s linear;
     opacity: 1;
     transform: scale(0);
 }
@@ -1258,7 +1258,7 @@ table td:last-child {
     border-color: transparent;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     display: block;
-    transition: margin ease .3s;
+    transition: margin .3s ease;
 }
 
 .panel + .panel {
@@ -1273,21 +1273,22 @@ table td:last-child {
 }
 
 /*Panel arrows*/
-.panel-header:after {
+.panel-header.panel-arrow:after {
     position: absolute;
     top: 50%;
-    right: 0;
+    right: 1em;
     content: 'keyboard_arrow_down';
     font-family: 'Material Icons', sans-serif;
     font-feature-settings: "liga" 1;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     opacity: .8;
-    padding-right: inherit;
-    transform: translateY(-50%);
+
+    transition: transform .3s ease;
+    transform: translate3d(0, -50%, 0) rotate(0);
 }
 
-.panel-visible .panel-header:after {
-    content: 'keyboard_arrow_up';
+.panel-visible .panel-header.panel-arrow:after {
+    transform: translate3d(0, -50%, 0) rotate(180deg);
 }
 
 .panel-body {
@@ -1303,7 +1304,7 @@ table td:last-child {
 .panel-footer {
     display: block;
     overflow: hidden;
-    transition: height ease .3s, padding ease .3s;
+    transition: height .3s ease, padding .3s ease;
 }
 
 .panel:not(.panel-visible) .panel-body:not(.panel-clone),
@@ -1348,7 +1349,7 @@ table td:last-child {
 
     transform: scale(.9);
     transform-origin: top left;
-    transition: transform ease .3s, color ease .3s;
+    transition: transform .3s ease, color .3s ease;
 }
 
 .label-float:not(.label-active) .label-text {
@@ -1407,7 +1408,7 @@ table td:last-child {
     border-bottom: 1px solid #d2d2d2;
     color: rgba(0, 0, 0, .6);
     outline: none;
-    transition: border-color ease .3s;
+    transition: border-color .3s ease;
 }
 
 .input:not([type="checkbox"]):not([type="radio"]) {
@@ -1499,7 +1500,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     content: '';
     height: 44px;
     opacity: 0;
-    transition: opacity ease .3s;
+    transition: opacity .3s ease;
     visibility: hidden;
     width: 44px;
 }
@@ -1529,7 +1530,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     content: '';
     display: block;
     opacity: .6;
-    transition: ease all .3s;
+    transition: all .3s ease;
     width: 100%;
 }
 
@@ -1541,7 +1542,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     content: 'fiber_manual_record';
     font-size: 30px;
     text-shadow: -1px 0 5px rgba(0, 0, 0, .4);
-    transition: ease left .3s, ease color .3s;
+    transition: left .3s ease, color .3s ease;
 }
 
 .input-switch[type="checkbox"]:checked:before {
@@ -1588,7 +1589,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     bottom: 0;
     left: 0;
     transform: translateY(100%);
-    transition: ease all .4s;
+    transition: all .4s ease;
     width: 100%;
     z-index: 99;
 }
@@ -1636,7 +1637,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     z-index: 99;
 
     opacity: 0;
-    transition: ease opacity .15s;
+    transition: opacity .15s ease;
 }
 
 .tooltip:not(.tooltip-wrap) {
@@ -1856,7 +1857,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     margin: -10px auto;
     opacity: 0;
     visibility: hidden;
-    transition: margin ease .3s, opacity ease .3s, visibility ease .3s;
+    transition: margin .3s ease, opacity .3s ease, visibility .3s ease;
 }
 
 .dropdown-fit > .dropdown-body {
@@ -1923,7 +1924,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     text-transform: uppercase;
     vertical-align: middle;
 
-    transition: ease border .3s;
+    transition: border .3s ease;
 }
 
 .tabs-nav .tab-active {
@@ -1935,7 +1936,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     bottom: 0;
     border-bottom: 3px solid;
     border-color: inherit;
-    transition: transform ease .4s, width ease .4s;
+    transition: transform .4s ease, width .4s ease;
     will-change: transform, width;
 }
 
@@ -1958,11 +1959,11 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 }
 
 .tabs-list:not(.tabs-noswipe) .tab-content {
-    transition: margin-left ease .3s;
+    transition: margin-left .3s ease;
 }
 
 /*.tabs:not(.tabs-noswipe) .tab-content {*/
-/*transition: margin-left ease .3s;*/
+/*transition: margin-left .3s ease;*/
 /*}*/
 
 .tab-content.tab-visible {

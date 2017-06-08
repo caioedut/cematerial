@@ -1735,18 +1735,15 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 /*DATEPICKER HORIZONTAL*/
 @media (max-height: 460px) {
-    .datepicker-dialog {
-        flex-flow: row;
-        flex-wrap: nowrap;
+    .datepicker-dialog .dialog-content {
+        flex-flow: row nowrap;
     }
 
     .datepicker-dialog .dialog-header {
-        border-radius: 2px 0 0 2px;
         width: 150px;
     }
 
     .datepicker-dialog .dialog-body {
-        border-radius: 0 2px 0 0;
         margin-bottom: 36px;
     }
 
@@ -1755,7 +1752,6 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
         bottom: 0;
         right: 0;
         left: 150px;
-        border-radius: 0 0 2px 0;
     }
 
     .datepicker-dialog .dialog-body .grid {

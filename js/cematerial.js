@@ -60,7 +60,7 @@ function empty(mixedVar) {
 
 Element.prototype.on = document.on = function (events, child, fn) {
     fn = fn || child;
-    events = typeof events == 'string' ? events.split(' ') : events;
+    events = typeof events === 'string' ? events.split(' ') : events;
 
     var el = this;
 
@@ -1281,7 +1281,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.options = extend({}, Toast.DEFAULTS, options || {});
         this.options.message = message;
 
-        this.parent = typeof this.options.parent == 'string' ? document.querySelector(this.options.parent) : this.options.parent;
+        this.parent = typeof this.options.parent === 'string' ? document.querySelector(this.options.parent) : this.options.parent;
         this.body = this.parent.querySelector('.layout-toast');
 
         if (!this.body) {
@@ -1678,11 +1678,17 @@ NodeList.prototype.not = function (sel_or_arr) {
             this.el = document.createElement('div');
             this.el.classList.add('dialog');
             this.el.classList.add('datepicker-dialog', 'no-select');
+
+            var content = document.createElement('div');
+            content.classList.add('dialog-content');
+
+            this.el.appendChild(content);
             document.body.appendChild(this.el);
         }
     };
 
     Datepicker.prototype.generateDays = function () {
+        var today = new Date();
         var strings = Datepicker.STRINGS[Datepicker.LOCALE.toLowerCase()] || Datepicker.STRINGS['en-us'];
         var html = '';
 
@@ -1740,20 +1746,31 @@ NodeList.prototype.not = function (sel_or_arr) {
         for (i in days) {
             var day = days[i];
 
-            if (i % 7 == 0) {
+            if (i % 7 === 0) {
                 html += '<tr>';
             }
 
             if (day > 0) {
+                var classes = [];
+
+                var is_today = today.getDate() === day && today.getMonth() === this.dateBase.getMonth() && today.getFullYear() === this.dateBase.getFullYear();
+                var is_selectedday = this.date.getDate() === day && this.date.getMonth() === this.dateBase.getMonth() && this.date.getFullYear() === this.dateBase.getFullYear();
+
+                if (is_selectedday) {
+                    classes.push('bg-' + this.options.color);
+                } else if (is_today) {
+                    classes.push('body-2 text-' + this.options.color);
+                }
+
                 html += '' +
                     '<td class="datepicker-day">' +
-                    '<a class="' + (this.date.getDate() == day && this.date.getMonth() == this.dateBase.getMonth() && this.date.getFullYear() == this.dateBase.getFullYear() ? 'bg-' + this.options.color : '') + '" data-day="' + day + '">' + day + '</a>' +
+                    '<a class="' + classes.join(' ') + '" data-day="' + day + '">' + day + '</a>' +
                     '</td>';
             } else {
                 html += '<td></td>';
             }
 
-            if (i % 7 == 6) {
+            if (i % 7 === 6) {
                 html += '</tr>';
             }
         }
@@ -1769,7 +1786,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + strings.cancel + '</button>' +
             '</div>';
 
-        this.el.innerHTML = html;
+        this.el.querySelector('.dialog-content').innerHTML = html;
 
         var yearlist = this.el.querySelector('.datepicker-yearlist');
         if (yearlist) {

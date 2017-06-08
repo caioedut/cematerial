@@ -59,7 +59,7 @@
         var delay = 1;
 
         if (this.el.classList.contains('toast-visible')) {
-            this.hide();
+            setTimeout(this.hide.bind(this), 1);
             delay = 400;
         }
 
@@ -93,7 +93,7 @@
 
         // Check duration
         if (!empty(this.options.duration)) {
-            Toast.DEFAULTS.timeout = setTimeout(this.hide.bind(this), this.options.duration)
+            Toast.DEFAULTS.timeout = setTimeout(this.hide.bind(this), this.options.duration);
         }
 
         // Event Show

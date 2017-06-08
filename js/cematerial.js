@@ -1327,7 +1327,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var delay = 1;
 
         if (this.el.classList.contains('toast-visible')) {
-            this.hide();
+            setTimeout(this.hide.bind(this), 1);
             delay = 400;
         }
 
@@ -1364,7 +1364,7 @@ NodeList.prototype.not = function (sel_or_arr) {
 
         // Check duration
         if (!empty(this.options.duration)) {
-            Toast.DEFAULTS.timeout = setTimeout(this.hide.bind(this), this.options.duration)
+            Toast.DEFAULTS.timeout = setTimeout(this.hide.bind(this), this.options.duration);
         }
 
         // Event Show

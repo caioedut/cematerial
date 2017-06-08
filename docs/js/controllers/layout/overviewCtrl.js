@@ -18,14 +18,6 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '    </div>' + "\n" +
             '</div>'
         ),
-        containers: (
-            '<div class="set-border">Div without .pd-*</div>' + "\n" +
-            '<div class="set-border pd-xs">Div with .pd-xs</div>' + "\n" +
-            '<div class="set-border pd-sm">Div with .pd-sm</div>' + "\n" +
-            '<div class="set-border pd-md">Div with .pd-md</div>' + "\n" +
-            '<div class="set-border pd-lg">Div with .pd-lg</div>' + "\n" +
-            '<div class="set-border pd-xl">Div with .pd-xl</div>'
-        ),
         style: (
             '<div class="layout" style="border: 1px solid #ddd; height: 300px;">' + "\n" +
             '    <div class="layout-sidebar">' + "\n" +

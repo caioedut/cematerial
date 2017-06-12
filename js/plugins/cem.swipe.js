@@ -66,7 +66,7 @@
 
             if (data.status == 1) {
                 // Event swipestart
-                var evt = new Event('swipestart', {bubbles: true, cancelable: true, composed: true});
+                var evt = new CustomEvent('swipestart', {bubbles: true, cancelable: true, composed: true});
                 evt = extend(evt, data.event_params);
                 data.target.dispatchEvent(evt);
 
@@ -81,13 +81,13 @@
             // Evets swipeleft, swiperight, swipetop, swipebottom
             for (var i in data.event_params.direction) {
                 if (data.event_params.direction[i]) {
-                    evt = new Event('swipe' + i, {bubbles: true, cancelable: true, composed: true});
+                    evt = new CustomEvent('swipe' + i, {bubbles: true, cancelable: true, composed: true});
                     evt = extend(evt, data.event_params);
                     data.target.dispatchEvent(evt);
                 }
             }
 
-            evt = new Event('swipemove', {bubbles: true, cancelable: true, composed: true});
+            evt = new CustomEvent('swipemove', {bubbles: true, cancelable: true, composed: true});
             evt = extend(evt, data.event_params);
             data.target.dispatchEvent(evt);
         })
@@ -100,7 +100,7 @@
 
             if (data.status) {
                 if (data.status == 2) {
-                    var evt = new Event('swipeend', {bubbles: true, cancelable: true, composed: true});
+                    var evt = new CustomEvent('swipeend', {bubbles: true, cancelable: true, composed: true});
                     evt = extend(evt, data.event_params);
                     data.target.dispatchEvent(evt);
                 }

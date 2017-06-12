@@ -39,7 +39,7 @@
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.sidebar.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.sidebar.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -49,7 +49,7 @@
         }, 1);
 
         // Event Show
-        e = new Event('cem.sidebar.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.sidebar.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -58,7 +58,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.sidebar.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.sidebar.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -66,7 +66,7 @@
         this.el.classList.remove('layout-sidebar-visible');
 
         // Event Hide
-        e = new Event('cem.sidebar.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.sidebar.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };

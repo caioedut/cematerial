@@ -17,9 +17,7 @@
 
     Modal.VERSION = '0.1.0';
 
-    Modal.DEFAULTS = {
-        focus: false
-    };
+    Modal.DEFAULTS = {};
 
     Modal.prototype.toggle = function (_relatedTarget) {
         return this.el.classList.contains('modal-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
@@ -29,25 +27,15 @@
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.modal.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.modal.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
         // Show
         this.el.classList.add('modal-visible');
 
-        // Auto Focus
-        if (this.options.focus) {
-            var el_focus = this.el.querySelector(this.options.focus);
-            if (el_focus && el_focus.focus) {
-                setTimeout(function () {
-                    el_focus.focus();
-                }, 400);
-            }
-        }
-
         // Event Show
-        e = new Event('cem.modal.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.modal.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -56,7 +44,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.modal.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.modal.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -64,7 +52,7 @@
         this.el.classList.remove('modal-visible');
 
         // Event Hide
-        e = new Event('cem.modal.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.modal.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };

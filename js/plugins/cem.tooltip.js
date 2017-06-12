@@ -43,7 +43,7 @@
         });
 
         // Event Before Show
-        e = new Event('cem.tooltip.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tooltip.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -52,7 +52,7 @@
         this.updatePosition();
 
         // Event Show
-        e = new Event('cem.tooltip.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tooltip.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -61,7 +61,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.tooltip.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tooltip.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -71,7 +71,7 @@
         }
 
         // Event Hide
-        e = new Event('cem.tooltip.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tooltip.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };

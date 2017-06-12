@@ -48,7 +48,7 @@
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.toast.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.toast.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -97,7 +97,7 @@
         }
 
         // Event Show
-        e = new Event('cem.toast.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.toast.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -106,7 +106,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.toast.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.toast.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -114,7 +114,7 @@
         this.el.classList.remove('toast-visible');
 
         // Event Hide
-        e = new Event('cem.toast.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.toast.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };

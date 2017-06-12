@@ -31,7 +31,7 @@
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.dropdown.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dropdown.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -43,7 +43,7 @@
         this.updatePosition(originalEvent);
 
         // Event Show
-        e = new Event('cem.dropdown.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dropdown.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -52,7 +52,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.dropdown.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dropdown.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -60,7 +60,7 @@
         this.el.classList.remove('dropdown-visible');
 
         // Event Hide
-        e = new Event('cem.dropdown.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dropdown.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };

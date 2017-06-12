@@ -275,7 +275,6 @@ NodeList.prototype.not = function (sel_or_arr) {
 
     Dialog.DEFAULTS = {
         autoclose: true,
-        focus: false,
         keyboard: true
     };
 
@@ -296,16 +295,6 @@ NodeList.prototype.not = function (sel_or_arr) {
         setTimeout(function () {
             el.classList.add('dialog-visible');
         }, 1);
-
-        // Auto Focus
-        if (this.options.focus) {
-            var el_focus = this.el.querySelector(this.options.focus);
-            if (el_focus && el_focus.focus) {
-                setTimeout(function () {
-                    el_focus.focus();
-                }, 400);
-            }
-        }
 
         // Event Show
         e = new CustomEvent('cem.dialog.show', {bubbles: true, cancelable: true, composed: true});
@@ -386,9 +375,7 @@ NodeList.prototype.not = function (sel_or_arr) {
 
     Modal.VERSION = '0.1.0';
 
-    Modal.DEFAULTS = {
-        focus: false
-    };
+    Modal.DEFAULTS = {};
 
     Modal.prototype.toggle = function (_relatedTarget) {
         return this.el.classList.contains('modal-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
@@ -404,16 +391,6 @@ NodeList.prototype.not = function (sel_or_arr) {
 
         // Show
         this.el.classList.add('modal-visible');
-
-        // Auto Focus
-        if (this.options.focus) {
-            var el_focus = this.el.querySelector(this.options.focus);
-            if (el_focus && el_focus.focus) {
-                setTimeout(function () {
-                    el_focus.focus();
-                }, 400);
-            }
-        }
 
         // Event Show
         e = new CustomEvent('cem.modal.show', {bubbles: true, cancelable: true, composed: true});
@@ -1559,17 +1536,17 @@ NodeList.prototype.not = function (sel_or_arr) {
     // Events
     document
         .on('focusin mouseover', '[data-tooltip]', function () {
-            // var init = this['cem.tooltip'] || new Tooltip(this);
-            // init.show(this);
+            var init = this['cem.tooltip'] || new Tooltip(this);
+            init.show(this);
         })
         .on('focusout mouseout', '[data-tooltip]', function () {
-            // var init = this['cem.tooltip'] || new Tooltip(this);
-            // init.hide(this);
+            var init = this['cem.tooltip'] || new Tooltip(this);
+            init.hide(this);
         })
         .on('wheel mousewheel DOMMouseScroll touchstart', function () {
-            // document.querySelectorAll('.tooltip-visible').forEach(function (node) {
-            //     node.parentNode.removeChild(node);
-            // });
+            document.querySelectorAll('.tooltip-visible').forEach(function (node) {
+                node.parentNode.removeChild(node);
+            });
         })
     ;
 
@@ -1989,6 +1966,21 @@ document.on('DOMContentLoaded', function () {
         target.querySelectorAll('input[type="checkbox"]').forEach(function (node) {
             node.checked = checked;
         });
+    });
+
+    // Auto Focus
+    document.on('click', '[data-focus]', function () {
+        var options = this.dataset,
+            target = options.focus,
+            delay = options.delay || 100;
+
+        if (target) {
+            target = document.querySelector((options.target || '') + ' ' + target);
+            if (target) {
+                setTimeout(target.focus.bind(target), delay);
+            }
+        }
+
     });
 
 });

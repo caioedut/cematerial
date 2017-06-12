@@ -32,7 +32,6 @@
 
     Dialog.DEFAULTS = {
         autoclose: true,
-        focus: false,
         keyboard: true
     };
 
@@ -45,7 +44,7 @@
             el = this.el;
 
         // Event Before Show
-        e = new Event('cem.dialog.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dialog.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -54,18 +53,8 @@
             el.classList.add('dialog-visible');
         }, 1);
 
-        // Auto Focus
-        if (this.options.focus) {
-            var el_focus = this.el.querySelector(this.options.focus);
-            if (el_focus && el_focus.focus) {
-                setTimeout(function () {
-                    el_focus.focus();
-                }, 400);
-            }
-        }
-
         // Event Show
-        e = new Event('cem.dialog.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dialog.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -74,7 +63,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.dialog.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dialog.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -82,7 +71,7 @@
         this.el.classList.remove('dialog-visible');
 
         // Event Hide
-        e = new Event('cem.dialog.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dialog.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };

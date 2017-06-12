@@ -68,7 +68,7 @@
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.tabs.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tabs.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -102,7 +102,7 @@
         }
 
         // Event Show
-        e = new Event('cem.tabs.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tabs.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -111,7 +111,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.tabs.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tabs.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -119,7 +119,7 @@
         this.el.classList.remove('tab-active');
 
         // Event Hide
-        e = new Event('cem.tabs.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tabs.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };

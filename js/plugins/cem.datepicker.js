@@ -100,7 +100,7 @@
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.datepicker.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.datepicker.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -108,7 +108,7 @@
         this.dialog.show(_relatedTarget);
 
         // Event Show
-        e = new Event('cem.datepicker.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.datepicker.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -117,7 +117,7 @@
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.datepicker.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.datepicker.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -125,7 +125,7 @@
         this.dialog.hide(_relatedTarget);
 
         // Event Hide
-        e = new Event('cem.datepicker.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.datepicker.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -328,7 +328,7 @@
                 init.input.value = init.date.toLocaleDateString();
                 init.input.dataset.date = init.date.toISOString();
                 // Event change
-                init.input.dispatchEvent(new Event('change'));
+                init.input.dispatchEvent(new CustomEvent('change'));
             }
         })
     ;

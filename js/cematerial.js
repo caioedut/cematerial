@@ -864,7 +864,12 @@ NodeList.prototype.not = function (sel_or_arr) {
             // init.backdrop.removeAttribute('style');
 
             if (bl_swipe) {
-                e.swipeOffsetX > 0 ? init.show() : init.hide();
+                if (e.swipeOffsetX > 0) {
+                    sidebar.classList.add('layout-sidebar-visible');
+                    setTimeout(init.show.bind(init), 100);
+                } else {
+                    init.hide();
+                }
             }
         })
     ;

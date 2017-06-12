@@ -58,6 +58,36 @@ function empty(mixedVar) {
     return false;
 }
 
+(function () {
+    if (typeof window.CustomEvent === "function") return false; //If not IE
+
+    function CustomEvent(event, params) {
+        params = params || {bubbles: false, cancelable: false, detail: undefined};
+        var evt = document.createEvent('CustomEvent');
+        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+        return evt;
+    }
+
+    CustomEvent.prototype = window.Event.prototype;
+
+    window.CustomEvent = CustomEvent;
+})();
+
+Element.prototype.matches =
+    Element.prototype.matches ||
+    Element.prototype.matchesSelector ||
+    Element.prototype.mozMatchesSelector ||
+    Element.prototype.msMatchesSelector ||
+    Element.prototype.oMatchesSelector ||
+    Element.prototype.webkitMatchesSelector ||
+    function (s) {
+        var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+            i = matches.length;
+        while (--i >= 0 && matches.item(i) !== this) {
+        }
+        return i > -1;
+    };
+
 Element.prototype.on = document.on = function (events, child, fn) {
     fn = fn || child;
     events = typeof events === 'string' ? events.split(' ') : events;
@@ -258,7 +288,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             el = this.el;
 
         // Event Before Show
-        e = new Event('cem.dialog.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dialog.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -278,7 +308,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         }
 
         // Event Show
-        e = new Event('cem.dialog.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dialog.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -287,7 +317,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.dialog.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dialog.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -295,7 +325,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el.classList.remove('dialog-visible');
 
         // Event Hide
-        e = new Event('cem.dialog.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dialog.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -368,7 +398,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.modal.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.modal.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -386,7 +416,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         }
 
         // Event Show
-        e = new Event('cem.modal.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.modal.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -395,7 +425,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.modal.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.modal.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -403,7 +433,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el.classList.remove('modal-visible');
 
         // Event Hide
-        e = new Event('cem.modal.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.modal.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -454,7 +484,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.dropdown.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dropdown.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -466,7 +496,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.updatePosition(originalEvent);
 
         // Event Show
-        e = new Event('cem.dropdown.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dropdown.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -475,7 +505,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.dropdown.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dropdown.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -483,7 +513,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el.classList.remove('dropdown-visible');
 
         // Event Hide
-        e = new Event('cem.dropdown.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.dropdown.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -612,7 +642,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         }
 
         // Event Before Show
-        e = new Event('cem.panel.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.panel.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -621,7 +651,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el.classList.add('panel-visible');
 
         // Event Show
-        e = new Event('cem.panel.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.panel.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -630,7 +660,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.panel.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.panel.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -639,7 +669,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el.classList.remove('panel-visible');
 
         // Event Hide
-        e = new Event('cem.panel.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.panel.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -713,7 +743,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.sidebar.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.sidebar.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -723,7 +753,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         }, 1);
 
         // Event Show
-        e = new Event('cem.sidebar.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.sidebar.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -732,7 +762,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.sidebar.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.sidebar.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -740,7 +770,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el.classList.remove('layout-sidebar-visible');
 
         // Event Hide
-        e = new Event('cem.sidebar.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.sidebar.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -945,7 +975,7 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             if (data.status == 1) {
                 // Event swipestart
-                var evt = new Event('swipestart', {bubbles: true, cancelable: true, composed: true});
+                var evt = new CustomEvent('swipestart', {bubbles: true, cancelable: true, composed: true});
                 evt = extend(evt, data.event_params);
                 data.target.dispatchEvent(evt);
 
@@ -960,13 +990,13 @@ NodeList.prototype.not = function (sel_or_arr) {
             // Evets swipeleft, swiperight, swipetop, swipebottom
             for (var i in data.event_params.direction) {
                 if (data.event_params.direction[i]) {
-                    evt = new Event('swipe' + i, {bubbles: true, cancelable: true, composed: true});
+                    evt = new CustomEvent('swipe' + i, {bubbles: true, cancelable: true, composed: true});
                     evt = extend(evt, data.event_params);
                     data.target.dispatchEvent(evt);
                 }
             }
 
-            evt = new Event('swipemove', {bubbles: true, cancelable: true, composed: true});
+            evt = new CustomEvent('swipemove', {bubbles: true, cancelable: true, composed: true});
             evt = extend(evt, data.event_params);
             data.target.dispatchEvent(evt);
         })
@@ -979,7 +1009,7 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             if (data.status) {
                 if (data.status == 2) {
-                    var evt = new Event('swipeend', {bubbles: true, cancelable: true, composed: true});
+                    var evt = new CustomEvent('swipeend', {bubbles: true, cancelable: true, composed: true});
                     evt = extend(evt, data.event_params);
                     data.target.dispatchEvent(evt);
                 }
@@ -1063,7 +1093,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.tabs.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tabs.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -1097,7 +1127,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         }
 
         // Event Show
-        e = new Event('cem.tabs.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tabs.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -1106,7 +1136,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.tabs.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tabs.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -1114,7 +1144,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el.classList.remove('tab-active');
 
         // Event Hide
-        e = new Event('cem.tabs.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tabs.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -1321,7 +1351,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.toast.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.toast.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -1373,7 +1403,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         }
 
         // Event Show
-        e = new Event('cem.toast.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.toast.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -1382,7 +1412,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.toast.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.toast.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -1390,7 +1420,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el.classList.remove('toast-visible');
 
         // Event Hide
-        e = new Event('cem.toast.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.toast.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -1454,7 +1484,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         });
 
         // Event Before Show
-        e = new Event('cem.tooltip.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tooltip.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -1463,7 +1493,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.updatePosition();
 
         // Event Show
-        e = new Event('cem.tooltip.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tooltip.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -1472,7 +1502,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.tooltip.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tooltip.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -1482,7 +1512,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         }
 
         // Event Hide
-        e = new Event('cem.tooltip.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.tooltip.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -1529,17 +1559,17 @@ NodeList.prototype.not = function (sel_or_arr) {
     // Events
     document
         .on('focusin mouseover', '[data-tooltip]', function () {
-            var init = this['cem.tooltip'] || new Tooltip(this);
-            init.show(this);
+            // var init = this['cem.tooltip'] || new Tooltip(this);
+            // init.show(this);
         })
         .on('focusout mouseout', '[data-tooltip]', function () {
-            var init = this['cem.tooltip'] || new Tooltip(this);
-            init.hide(this);
+            // var init = this['cem.tooltip'] || new Tooltip(this);
+            // init.hide(this);
         })
         .on('wheel mousewheel DOMMouseScroll touchstart', function () {
-            document.querySelectorAll('.tooltip-visible').forEach(function (node) {
-                node.parentNode.removeChild(node);
-            });
+            // document.querySelectorAll('.tooltip-visible').forEach(function (node) {
+            //     node.parentNode.removeChild(node);
+            // });
         })
     ;
 
@@ -1648,7 +1678,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Show
-        e = new Event('cem.datepicker.beforeShow', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.datepicker.beforeShow', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -1656,7 +1686,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.dialog.show(_relatedTarget);
 
         // Event Show
-        e = new Event('cem.datepicker.show', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.datepicker.show', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -1665,7 +1695,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // Event Before Hide
-        e = new Event('cem.datepicker.beforeHide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.datepicker.beforeHide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
 
@@ -1673,7 +1703,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.dialog.hide(_relatedTarget);
 
         // Event Hide
-        e = new Event('cem.datepicker.hide', {bubbles: true, cancelable: true, composed: true});
+        e = new CustomEvent('cem.datepicker.hide', {bubbles: true, cancelable: true, composed: true});
         e.relatedTarget = _relatedTarget;
         this.el.dispatchEvent(e);
     };
@@ -1876,7 +1906,7 @@ NodeList.prototype.not = function (sel_or_arr) {
                 init.input.value = init.date.toLocaleDateString();
                 init.input.dataset.date = init.date.toISOString();
                 // Event change
-                init.input.dispatchEvent(new Event('change'));
+                init.input.dispatchEvent(new CustomEvent('change'));
             }
         })
     ;

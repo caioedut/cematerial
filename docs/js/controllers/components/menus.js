@@ -48,7 +48,7 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
         ),
         block: (
             '<div class="pd-md bg-grey-2">' + "\n" +
-            '    <ul class="menu menu-block">' + "\n" +
+            '    <ul class="menu set-block">' + "\n" +
             '        <li>' + "\n" +
             '            <a>' + "\n" +
             '                <i class="md-icon">visibility</i>' + "\n" +
@@ -119,7 +119,7 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
             '    <button class="btn btn-icon btn-circle bg-blue-6" type="button" data-toggle="dropdown">' + "\n" +
             '        <i class="md-icon">menu</i>' + "\n" +
             '    </button>' + "\n" +
-            '    <ul class="dropdown-body bottom left menu">' + "\n" +
+            '    <ul class="dropdown-body top left menu">' + "\n" +
             '        <li>' + "\n" +
             '            <a>' + "\n" +
             '                <i class="md-icon">visibility</i>' + "\n" +
@@ -131,7 +131,7 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
             '                <i class="md-icon">person_add</i>' + "\n" +
             '                Share' + "\n" +
             '            </a>' + "\n" +
-            '            <ul class="dropdown-body bottom left-inverse menu">' + "\n" +
+            '            <ul class="dropdown-body top left-inverse menu">' + "\n" +
             '                <li>' + "\n" +
             '                    <a>Text message</a>' + "\n" +
             '                </li>' + "\n" +

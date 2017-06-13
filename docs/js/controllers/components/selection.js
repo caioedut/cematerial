@@ -5,19 +5,19 @@ angular.module('docs').controller('components.selectionCtrl', function ($scope) 
         radio: (
             '<div class="grid grid-gutter">' + "\n" +
             '    <label class="grid-col">' + "\n" +
-            '        <input class="input" type="radio"/>' + "\n" +
+            '        <input class="input" type="radio" name="radio"/>' + "\n" +
             '        My Radio' + "\n" +
             '    </label>' + "\n" +
             '    <label class="grid-col">' + "\n" +
-            '        <input class="input input-red-6 text-red-6" type="radio"/>' + "\n" +
+            '        <input class="input input-red-6 text-red-6" type="radio" name="radio"/>' + "\n" +
             '        My Radio' + "\n" +
             '    </label>' + "\n" +
             '    <label class="grid-col">' + "\n" +
-            '        <input class="input input-green-6 text-green-6" type="radio"/>' + "\n" +
+            '        <input class="input input-green-6 text-green-6" type="radio" name="radio"/>' + "\n" +
             '        My Radio' + "\n" +
             '    </label>' + "\n" +
             '    <label class="grid-col">' + "\n" +
-            '        <input class="input input-blue-6 text-blue-6" type="radio"/>' + "\n" +
+            '        <input class="input input-blue-6 text-blue-6" type="radio" name="radio"/>' + "\n" +
             '        My Radio' + "\n" +
             '    </label>' + "\n" +
             '</div>'

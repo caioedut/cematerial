@@ -125,48 +125,48 @@ angular.module('docs').controller('components.tablesCtrl', function ($scope) {
             '    <tr>' + "\n" +
             '        <td>' + "\n" +
             '            <div class="dropdown">' + "\n" +
-            '                <div data-toggle="dropdown">' + "\n" +
+            '                <div data-toggle="dropdown" data-focus="#i1">' + "\n" +
             '                    Frozen yogurt' + "\n" +
             '                </div>' + "\n" +
             '                <div class="dropdown-body dropdown-sm top left">' + "\n" +
             '                    <div class="pd-md">' + "\n" +
-            '                        <input class="input input-blue-6 text-md" type="text" value="Frozen yogurt"/>' + "\n" +
+            '                        <input id="i1" class="input input-blue-6 text-md" type="text" value="Frozen yogurt"/>' + "\n" +
             '                    </div>' + "\n" +
             '                </div>' + "\n" +
             '            </div>' + "\n" +
             '        </td>' + "\n" +
             '        <td>' + "\n" +
             '            <div class="dropdown">' + "\n" +
-            '                <div data-toggle="dropdown">' + "\n" +
+            '                <div data-toggle="dropdown" data-focus="#i2">' + "\n" +
             '                    159' + "\n" +
             '                </div>' + "\n" +
             '                <div class="dropdown-body dropdown-xs top right">' + "\n" +
             '                    <div class="pd-md">' + "\n" +
-            '                        <input class="input input-blue-6 text-md" type="text" value="159"/>' + "\n" +
+            '                        <input id="i2" class="input input-blue-6 text-md" type="text" value="159"/>' + "\n" +
             '                    </div>' + "\n" +
             '                </div>' + "\n" +
             '            </div>' + "\n" +
             '        </td>' + "\n" +
             '        <td>' + "\n" +
             '            <div class="dropdown">' + "\n" +
-            '                <div data-toggle="dropdown">' + "\n" +
+            '                <div data-toggle="dropdown" data-focus="#i3">' + "\n" +
             '                    6.0' + "\n" +
             '                </div>' + "\n" +
             '                <div class="dropdown-body dropdown-xs top right">' + "\n" +
             '                    <div class="pd-md">' + "\n" +
-            '                        <input class="input input-blue-6 text-md" type="text" value="6.0"/>' + "\n" +
+            '                        <input id="i3" class="input input-blue-6 text-md" type="text" value="6.0"/>' + "\n" +
             '                    </div>' + "\n" +
             '                </div>' + "\n" +
             '            </div>' + "\n" +
             '        </td>' + "\n" +
             '        <td>' + "\n" +
             '            <div class="dropdown">' + "\n" +
-            '                <div data-toggle="dropdown">' + "\n" +
+            '                <div data-toggle="dropdown" data-focus="#i4">' + "\n" +
             '                    24' + "\n" +
             '                </div>' + "\n" +
             '                <div class="dropdown-body dropdown-xs top right">' + "\n" +
             '                    <div class="pd-md">' + "\n" +
-            '                        <input class="input input-blue-6 text-md" type="text" value="24"/>' + "\n" +
+            '                        <input id="i4" class="input input-blue-6 text-md" type="text" value="24"/>' + "\n" +
             '                    </div>' + "\n" +
             '                </div>' + "\n" +
             '            </div>' + "\n" +

@@ -29,7 +29,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '        <div class="grid grid-middle grid-nowrap">' + "\n" +
             '            <div class="grid-col layout-toggler" data-toggle="sidebar">' + "\n" +
             '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' + "\n" +
-            '                    <i class="md-icon md-icon-lg">menu</i>' + "\n" +
+            '                    <i class="md-icon">menu</i>' + "\n" +
             '                </button>' + "\n" +
             '            </div>' + "\n" +
             '            <div class="grid-col pd-md">' + "\n" +
@@ -58,13 +58,13 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
         sidebar: (
             '<div class="layout" style="border: 1px solid #ddd; height: 380px;">' + "\n" +
             '    <div class="layout-sidebar">' + "\n" +
-            '        <div class="layout-account">' + "\n" +
+            '        <div class="relative">' + "\n" +
             '            <img class="media-background" src="img/cards.jpg" alt=""/>' + "\n" +
             '            <div class="set-overlay pd-md">' + "\n" +
             '                <div class="grid grid-gutter">' + "\n" +
             '                    <div class="xs-col-5 sm-col-4">' + "\n" +
             '                        <div class="media-container-lg">' + "\n" +
-                '                            <img class="media-fluid media-cover set-circle" src="img/user-profile.png" alt=""/>' + "\n" +
+            '                            <img class="media-fluid media-cover set-circle" src="img/user-profile.png" alt=""/>' + "\n" +
             '                        </div>' + "\n" +
             '                    </div>' + "\n" +
             '                    <a class="xs-col-12 text-white" data-toggle="nav" data-target="#nav-account">' + "\n" +
@@ -121,7 +121,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '        <div class="grid grid-middle grid-nowrap">' + "\n" +
             '            <div class="grid-col layout-toggler" data-toggle="sidebar">' + "\n" +
             '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' + "\n" +
-            '                    <i class="md-icon md-icon-lg">menu</i>' + "\n" +
+            '                    <i class="md-icon">menu</i>' + "\n" +
             '                </button>' + "\n" +
             '            </div>' + "\n" +
             '            <div class="grid-col pd-md">' + "\n" +

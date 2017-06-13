@@ -22,11 +22,6 @@ angular.module('docs').controller('layout.elevationShadowsCtrl', function ($scop
             '</div>' + "\n" +
             ''
         ),
-        buttons: (
-            '<button class="btn btn-flat bg-blue-6 raised-md" type="button">' + "\n" +
-            '    Raised Button' + "\n" +
-            '</button>'
-        ),
         hover: (
             '<div class="grid grid-gutter">' + "\n" +
             '    <div class="grid-col">' + "\n" +

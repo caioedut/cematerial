@@ -483,7 +483,7 @@ body {
 
 /*DEFAULT TAGS*/
 h1 {
-    font-size: 3.4rem;
+    font-size: 3.8rem;
 }
 
 h2 {
@@ -491,11 +491,11 @@ h2 {
 }
 
 h3 {
-    font-size: 2.2rem;
+    font-size: 2rem;
 }
 
 h4 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
 
 h5 {
@@ -503,7 +503,7 @@ h5 {
 }
 
 h6 {
-    font-size: .4rem;
+    font-size: .8rem;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -595,6 +595,7 @@ small {
     font-size: .86rem;
 }
 
+.menu li.dropdown > a:after,
 .md-icon {
     direction: ltr;
     display: inline-block;
@@ -602,13 +603,16 @@ small {
     font-family: 'Material Icons', sans-serif;
     font-weight: normal;
     font-style: normal;
-    /*font-size: 24px;*/
-    font-size: 1.4em;
+
+    /*font-size: 1.4em;*/
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+    line-height: 1;
 
     letter-spacing: normal;
-    /*line-height: 1;*/
-    line-height: inherit;
 
+    overflow: hidden;
     text-transform: none;
     vertical-align: middle;
     white-space: nowrap;
@@ -625,19 +629,27 @@ small {
 }
 
 .md-icon-xs {
-    font-size: 1em;
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
 }
 
 .md-icon-sm {
-    font-size: 1.2em;
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
 }
 
 .md-icon-lg {
-    font-size: 1.6em;
+    font-size: 28px;
+    height: 28px;
+    width: 28px;
 }
 
 .md-icon-xl {
-    font-size: 1.8em;
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
 }
 
 /*BASE LAYOUT BEGIN*/
@@ -759,9 +771,11 @@ body > .layout {
     }
 }
 
-/*LAYOUT NAV*/
+/*LAYOUT NAV AND MENU*/
+.menu,
 .layout-nav {
-    display: block;
+    background-color: #fff;
+    color: #333;
     margin: 0;
     padding: 8px 0;
 }
@@ -770,30 +784,60 @@ body > .layout {
     display: none;
 }
 
+.menu a,
 .layout-nav a {
-    display: block;
+    position: relative;
+    align-items: center;
+    display: flex !important;
     font-size: 1rem;
     font-weight: 500;
-    line-height: 16px;
-    padding: 16px;
-
+    height: 48px;
+    padding: 0 16px;
     overflow: hidden;
     white-space: nowrap;
 }
 
+.menu a .md-icon,
 .layout-nav a .md-icon {
-    /*font-size: 1.4em;*/
     opacity: .8;
-    padding-right: 1.2em;
+    margin-right: 2rem;
 }
 
-.layout-nav a:hover,
-.layout-nav a:focus {
-    background-color: #eee;
+.menu .divider-horizontal,
+.layout-nav .divider-horizontal {
+    margin: 8px 0;
 }
 
-.layout-account {
-    position: relative;
+/*MENUS*/
+.menu {
+    border-radius: 2px;
+    display: inline-block;
+    width: -moz-max-content;
+    width: -webkit-max-content;
+    width: max-content;
+}
+
+.menu li {
+    margin: 0;
+    list-style: none;
+}
+
+.menu a {
+    height: 40px;
+}
+
+.menu-border li + li {
+    border-top: 1px solid #f0f0f0;
+}
+
+/*SUBMENU CHEVRON/ARROW*/
+.menu li.dropdown > a:after {
+    content: 'chevron_right';
+    margin: 0 -8px 0 8px;
+
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
 }
 
 /*BASE LAYOUT END*/
@@ -906,10 +950,11 @@ body > .layout {
     margin-top: 4px;
 }
 
-/*BTN HOVER BEGIN*/
+/*HOVER AND FOCUS*/
 .btn:before,
 .menu a:before,
-.menu li a:before {
+.menu li a:before,
+.layout-nav a:before {
     position: absolute;
     top: 0;
     left: 0;
@@ -926,7 +971,9 @@ body > .layout {
 .menu a:hover:before,
 .menu a:focus:before,
 .menu li a:hover:before,
-.menu li a:focus:before {
+.menu li a:focus:before,
+.layout-nav a:hover:before,
+.layout-nav a:focus:before {
     background-color: rgba(0, 0, 0, .1);
 }
 
@@ -935,7 +982,9 @@ body > .layout {
 .menu a[class*="bg-"]:hover:before,
 .menu a[class*="bg-"]:focus:before,
 .menu li a[class*="bg-"]:hover:before,
-.menu li a[class*="bg-"]:focus:before {
+.menu li a[class*="bg-"]:focus:before,
+.layout-nav a[class*="bg-"]:hover:before,
+.layout-nav a[class*="bg-"]:focus:before {
     background-color: rgba(255, 255, 255, .2);
 }
 
@@ -1282,12 +1331,13 @@ table td:last-child {
     position: absolute;
     top: 50%;
     right: 1em;
+
     content: 'keyboard_arrow_down';
     font-family: 'Material Icons', sans-serif;
     font-feature-settings: "liga" 1;
     font-size: 1.4rem;
-    opacity: .8;
 
+    opacity: .8;
     transition: transform .3s ease;
     transform: translate3d(0, -50%, 0) rotate(0);
 }
@@ -1573,9 +1623,11 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .chips .md-icon {
     background-color: #aaa;
     border-radius: 50%;
-    font-size: 14px;
-    line-height: 1;
     padding: 1px;
+
+    font-size: 14px;
+    height: 16px;
+    width: 16px;
 }
 
 .chips img {
@@ -1638,8 +1690,11 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     margin-top: 2px;
     max-width: 100%;
     padding: 6px 8px;
-    width: max-content;
     z-index: 99;
+
+    width: -moz-max-content;
+    width: -webkit-max-content;
+    width: max-content;
 
     opacity: 0;
     transition: opacity .15s ease;
@@ -1773,66 +1828,6 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .list.list-divider > .list-item + .list-item {
     border-top: 1px solid #ddd;
-}
-
-/*MENUS */
-.menu {
-    background-color: #fff;
-    border-radius: 2px;
-    color: #333;
-    display: inline-block;
-    font-size: 1rem;
-    margin: 0;
-    padding: 8px 0;
-    text-align: left;
-    width: max-content;
-}
-
-.menu-block {
-    display: block;
-    width: 100%;
-}
-
-.menu li {
-    position: relative;
-    margin: 0;
-    list-style: none;
-    padding: 0;
-}
-
-.menu-border li + li {
-    border-top: 1px solid #f0f0f0;
-}
-
-.menu a,
-.menu li a {
-    display: block;
-    padding: 8px 16px;
-    white-space: nowrap;
-}
-
-.menu li.divider-horizontal {
-    margin: 8px 0;
-}
-
-.menu a > .md-icon {
-    font-size: 1.4em;
-    margin-left: .5em;
-    margin-right: .5em;
-    opacity: .9;
-}
-
-.menu a > .md-icon:first-child {
-    margin-left: 0;
-}
-
-/*SUBMENU CHEVRON/ARROW*/
-.menu li.dropdown > a:after {
-    content: 'chevron_right';
-    font-family: 'Material Icons', sans-serif;
-    font-feature-settings: "liga" 1;
-    margin: 0 -9px 0 4px;
-    vertical-align: top;
 }
 
 /*DROPDOWN / DROPUP*/
@@ -3023,7 +3018,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 /*RAISED*/
 .btn-raised,
 .raised-xs {
-    /*box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);*/
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
 }
 
 .btn-raised:hover, .btn-raised:focus,

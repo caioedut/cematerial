@@ -1698,7 +1698,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .datepicker-week th,
 .datepicker-day a {
-    line-height: 36px;
+    line-height: 34px;
     height: 36px;
     width: 36px;
 }

@@ -496,6 +496,12 @@ NodeList.prototype.not = function (sel_or_arr) {
     };
 
     Dropdown.prototype.updatePosition = function (e) {
+        if (this.body.dataset.nativeClasses) {
+            this.body.setAttribute('class', this.body.dataset.nativeClasses);
+        } else {
+            this.body.dataset.nativeClasses = this.body.classList.toString();
+        }
+
         if (!e) {
             this.body.style.position = '';
             this.body.style.bottom = '';
@@ -514,11 +520,21 @@ NodeList.prototype.not = function (sel_or_arr) {
         // Check horizontal EDGE
         if (document.documentElement.clientWidth - e.clientX < this.body.offsetWidth) {
             this.body.style.left = (e.clientX - this.body.offsetWidth) + 'px';
+            this.body.classList.remove('left', 'left-inverse');
+            this.body.classList.add('right');
+        } else {
+            this.body.classList.remove('right', 'right-inverse');
+            this.body.classList.add('left');
         }
 
         // Check vertical EDGE
         if (document.documentElement.clientHeight - e.clientY < this.body.offsetHeight) {
-            this.body.style.left = (e.clientX - this.body.offsetHeight) + 'px';
+            this.body.style.top = (e.clientY - this.body.offsetHeight) + 'px';
+            this.body.classList.remove('top', 'top-inverse');
+            this.body.classList.add('bottom');
+        } else {
+            this.body.classList.remove('bottom', 'bottom-inverse');
+            this.body.classList.add('top');
         }
     };
 

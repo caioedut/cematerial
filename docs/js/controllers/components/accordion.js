@@ -4,15 +4,23 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
     $scope.codes = {
         basic: (
             '<div class="panel-group">' + "\n" +
-            '    <div class="panel">' + "\n" +
+            '    <div class="panel panel-arrow">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            Trip to Caribean cruise' + "\n" +
             '        </a>' + "\n" +
             '        <div class="panel-body">' + "\n" +
             '            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Si quae forte-possumus. Explanetur igitur. At ego quem huic anteponam non audeo dicere; Quia dolori non voluptas contraria est, sed doloris privatio. Urgent tamen et nihil remittunt. Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. </p>' + "\n" +
             '        </div>' + "\n" +
+            '        <div class="panel-footer">' + "\n" +
+            '            <button class="btn btn-flat text-blue-6 bg-blue-0-h">' + "\n" +
+            '                Done' + "\n" +
+            '            </button>' + "\n" +
+            '            <button class="btn btn-flat text-blue-6 bg-blue-0-h">' + "\n" +
+            '                Cancel' + "\n" +
+            '            </button>' + "\n" +
+            '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="panel">' + "\n" +
+            '    <div class="panel panel-arrow">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            Barbados' + "\n" +
             '        </a>' + "\n" +
@@ -23,7 +31,7 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
             '            <p>Iam enim adesse poterit. Dicimus aliquem hilare vivere; At certe gravius. Quod iam a me expectare noli. Cur igitur easdem res, inquam, Peripateticis dicentibus verbum nullum est, quod non intellegatur? Erat enim Polemonis. Nondum autem explanatum satis, erat, quid maxime natura vellet. Apud ceteros autem philosophos, qui quaesivit aliquid, tacet; </p>' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="panel">' + "\n" +
+            '    <div class="panel panel-arrow">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            The best cruise line' + "\n" +
             '        </a>' + "\n" +
@@ -38,15 +46,23 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
         ),
         margin: (
             '<div class="panel-group">' + "\n" +
-            '    <div class="panel panel-margin">' + "\n" +
+            '    <div class="panel panel-arrow panel-margin">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            Trip to Caribean cruise' + "\n" +
             '        </a>' + "\n" +
             '        <div class="panel-body">' + "\n" +
             '            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Si quae forte-possumus. Explanetur igitur. At ego quem huic anteponam non audeo dicere; Quia dolori non voluptas contraria est, sed doloris privatio. Urgent tamen et nihil remittunt. Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. </p>' + "\n" +
             '        </div>' + "\n" +
+            '        <div class="panel-footer">' + "\n" +
+            '            <button class="btn btn-flat text-blue-6 bg-blue-0-h">' + "\n" +
+            '                Done' + "\n" +
+            '            </button>' + "\n" +
+            '            <button class="btn btn-flat text-blue-6 bg-blue-0-h">' + "\n" +
+            '                Cancel' + "\n" +
+            '            </button>' + "\n" +
+            '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="panel panel-margin">' + "\n" +
+            '    <div class="panel panel-arrow panel-margin">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            Barbados' + "\n" +
             '        </a>' + "\n" +
@@ -57,7 +73,7 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
             '            <p>Iam enim adesse poterit. Dicimus aliquem hilare vivere; At certe gravius. Quod iam a me expectare noli. Cur igitur easdem res, inquam, Peripateticis dicentibus verbum nullum est, quod non intellegatur? Erat enim Polemonis. Nondum autem explanatum satis, erat, quid maxime natura vellet. Apud ceteros autem philosophos, qui quaesivit aliquid, tacet; </p>' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="panel panel-margin">' + "\n" +
+            '    <div class="panel panel-arrow panel-margin">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            The best cruise line' + "\n" +
             '        </a>' + "\n" +
@@ -72,15 +88,23 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
         ),
         popout: (
             '<div class="panel-group">' + "\n" +
-            '    <div class="panel panel-popout">' + "\n" +
+            '    <div class="panel panel-arrow panel-popout">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            Trip to Caribean cruise' + "\n" +
             '        </a>' + "\n" +
             '        <div class="panel-body">' + "\n" +
             '            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Si quae forte-possumus. Explanetur igitur. At ego quem huic anteponam non audeo dicere; Quia dolori non voluptas contraria est, sed doloris privatio. Urgent tamen et nihil remittunt. Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. </p>' + "\n" +
             '        </div>' + "\n" +
+            '        <div class="panel-footer">' + "\n" +
+            '            <button class="btn btn-flat text-blue-6 bg-blue-0-h">' + "\n" +
+            '                Done' + "\n" +
+            '            </button>' + "\n" +
+            '            <button class="btn btn-flat text-blue-6 bg-blue-0-h">' + "\n" +
+            '                Cancel' + "\n" +
+            '            </button>' + "\n" +
+            '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="panel panel-popout">' + "\n" +
+            '    <div class="panel panel-arrow panel-popout">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            Barbados' + "\n" +
             '        </a>' + "\n" +
@@ -91,7 +115,7 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
             '            <p>Iam enim adesse poterit. Dicimus aliquem hilare vivere; At certe gravius. Quod iam a me expectare noli. Cur igitur easdem res, inquam, Peripateticis dicentibus verbum nullum est, quod non intellegatur? Erat enim Polemonis. Nondum autem explanatum satis, erat, quid maxime natura vellet. Apud ceteros autem philosophos, qui quaesivit aliquid, tacet; </p>' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="panel panel-popout">' + "\n" +
+            '    <div class="panel panel-arrow panel-popout">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            The best cruise line' + "\n" +
             '        </a>' + "\n" +

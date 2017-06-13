@@ -43,7 +43,6 @@
                 <a href="#buttons" data-toggle="sidebar">Buttons</a>
                 <a href="#cards" data-toggle="sidebar">Cards</a>
                 <a href="#chips" data-toggle="sidebar">Chips</a>
-                <a href="#datatables" data-toggle="sidebar">Data tables</a>
                 <a href="#datepicker" data-toggle="sidebar">Datepicker</a>
                 <a href="#dialogs" data-toggle="sidebar">Dialogs</a>
                 <a href="#dividers" data-toggle="sidebar">Dividers</a>
@@ -56,6 +55,7 @@
                 <a href="#modals" data-toggle="sidebar">Modals</a>
                 <a href="#raise" data-toggle="sidebar">Raise</a>
                 <a href="#selectioncontrols" data-toggle="sidebar">Selection controls</a>
+                <a href="#tables" data-toggle="sidebar">Tables</a>
                 <a href="#tabs" data-toggle="sidebar">Tabs</a>
                 <a href="#textfields" data-toggle="sidebar">Text fields</a>
                 <!-- <a href="#toolbars" data-toggle="sidebar">Toolbars</a> -->
@@ -232,9 +232,6 @@
                             <h3 class="card-title">
                                 Header
                             </h3>
-                            <button class="btn btn-float btn-lg waves right top bg-grey-8" type="button">
-                                <i class="md-icon">add</i>
-                            </button>
                         </div>
                         <div class="card-body bg-grey-7">
                             Lorem ipsum dolor sit amet
@@ -264,9 +261,6 @@
                             <h3 class="card-title">
                                 Header
                             </h3>
-                            <button class="btn btn-float btn-lg waves right top bg-red-8" type="button">
-                                <i class="md-icon">add</i>
-                            </button>
                         </div>
                         <div class="card-body bg-red-7">
                             Lorem ipsum dolor sit amet
@@ -385,70 +379,6 @@
                 <span class="label-text">Select a date</span>
                 <input class="input input-teal-6" type="text" data-toggle="datepicker" readonly value="31/12/2016" size="10"/>
             </label>
-        </section>
-
-        <div class="divider-horizontal"></div>
-        <section id="datatables" class="pd-lg">
-            <h1>Data tables</h1>
-
-            <div class="table-responsive">
-                <table class="table-hover">
-                    <thead>
-                    <tr>
-                        <th>
-                            <input class="input" type="checkbox" data-toggle="table"/>
-                        </th>
-                        <th class="table-content">Dessert (100g serving)</th>
-                        <th>Calories</th>
-                        <th>Fat (g)</th>
-                        <th>Carbs (g)</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <input class="input" type="checkbox"/>
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <div data-toggle="dropdown">
-                                    Frozen yogurt (click)
-                                </div>
-                                <div class="dropdown-body dropdown-sm top left">
-                                    <div class="pd-md">
-                                        <input class="input input-blue-6 text-md" type="text" value="Frozen yogurt"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="xs-text-right">159</td>
-                        <td class="xs-text-right">6.0</td>
-                        <td class="xs-text-right">24</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input class="input" type="checkbox"/>
-                        </td>
-                        <td>
-                            <input class="no-style set-block" type="text" value="Ice cream sandwich (click)"/>
-                        </td>
-                        <td class="xs-text-right">237</td>
-                        <td class="xs-text-right">9.0</td>
-                        <td class="xs-text-right">37</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input class="input" type="checkbox"/>
-                        </td>
-                        <td>Eclair</td>
-                        <td class="xs-text-right">262</td>
-                        <td class="xs-text-right">16.0</td>
-                        <td class="xs-text-right">24</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
         </section>
 
         <div class="divider-horizontal"></div>
@@ -1195,6 +1125,70 @@
                     Switch (Checkbox)
                 </label>
             </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="tables" class="pd-lg">
+            <h1>Tables</h1>
+
+            <div class="table-responsive">
+                <table class="table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input class="input" type="checkbox" data-toggle="table"/>
+                        </th>
+                        <th class="table-content">Dessert (100g serving)</th>
+                        <th>Calories</th>
+                        <th>Fat (g)</th>
+                        <th>Carbs (g)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input class="input" type="checkbox"/>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <div data-toggle="dropdown">
+                                    Frozen yogurt (click)
+                                </div>
+                                <div class="dropdown-body dropdown-sm top left">
+                                    <div class="pd-md">
+                                        <input class="input input-blue-6 text-md" type="text" value="Frozen yogurt"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="xs-text-right">159</td>
+                        <td class="xs-text-right">6.0</td>
+                        <td class="xs-text-right">24</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="input" type="checkbox"/>
+                        </td>
+                        <td>
+                            <input class="no-style set-block" type="text" value="Ice cream sandwich (click)"/>
+                        </td>
+                        <td class="xs-text-right">237</td>
+                        <td class="xs-text-right">9.0</td>
+                        <td class="xs-text-right">37</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="input" type="checkbox"/>
+                        </td>
+                        <td>Eclair</td>
+                        <td class="xs-text-right">262</td>
+                        <td class="xs-text-right">16.0</td>
+                        <td class="xs-text-right">24</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </section>
 
         <div class="divider-horizontal"></div>

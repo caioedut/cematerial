@@ -598,6 +598,10 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.el = el;
         this.options = extend({}, Panel.DEFAULTS, el.dataset, options || {});
 
+        if (!empty(this.options.arrow)) {
+            this.el.classList.add('panel-arrow');
+        }
+
         if (!empty(this.options.margin)) {
             this.el.classList.add('panel-margin');
         }
@@ -616,6 +620,7 @@ NodeList.prototype.not = function (sel_or_arr) {
     Panel.VERSION = '0.1.3';
 
     Panel.DEFAULTS = {
+        arrow: false,
         margin: false,
         popout: false
     };

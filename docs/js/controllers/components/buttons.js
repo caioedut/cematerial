@@ -3,12 +3,16 @@ angular.module('docs').controller('components.buttonsCtrl', function ($scope) {
 
     $scope.codes = {
         basic: (
-            '<button class="btn" type="button">' + "\n" +
+            '<button class="btn bg-blue-6" type="button">' + "\n" +
             '   Button' + "\n" +
-            '</button>' + "\n" +
-            '<button class="btn btn-flat" type="button">' + "\n" +
-            '   Button Flat' + "\n" +
-            '</button>'
+            '</button> ' + "\n" +
+            '<button class="btn btn-raised bg-blue-6" type="button">' + "\n" +
+            '   Raised Button' + "\n" +
+            '</button> ' + "\n" +
+            '<button class="btn btn-flat text-blue-6 bg-blue-0-h" type="button">' + "\n" +
+            '   Flat Button' + "\n" +
+            '</button>' +
+            ''
         ),
         colors: (
             '<button class="btn bg-grey-2" type="button">' + "\n" +

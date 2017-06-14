@@ -162,13 +162,13 @@
             '<div class="dialog-body">' +
             '<div class="grid grid-nowrap grid-middle xs-text-center">' +
             '<button class="grid-col btn btn-circle btn-xl datepicker-dec" type="button">' +
-            '<i class="md-icon md-icon-xs">chevron_left</i>' +
+            '<i class="md-icon md-icon-sm">chevron_left</i>' +
             '</button>' +
             '<div class="grid-col col-fill datepicker-month">' +
             this.dateBase.toLocaleDateString(Datepicker.LOCALE, {month: 'long', year: 'numeric'}) +
             '</div>' +
             '<button class="grid-col btn btn-circle btn-xl datepicker-inc" type="button">' +
-            '<i class="md-icon md-icon-xs">chevron_right</i>' +
+            '<i class="md-icon md-icon-sm">chevron_right</i>' +
             '</button>' +
             '</div>' +
             '<div class="datepicker-body">' +

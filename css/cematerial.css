@@ -629,27 +629,27 @@ small {
 }
 
 .md-icon-xs {
+    font-size: 8px;
+    height: 8px;
+    width: 8px;
+}
+
+.md-icon-sm {
     font-size: 16px;
     height: 16px;
     width: 16px;
 }
 
-.md-icon-sm {
-    font-size: 20px;
-    height: 20px;
-    width: 20px;
-}
-
 .md-icon-lg {
-    font-size: 28px;
-    height: 28px;
-    width: 28px;
+    font-size: 40px;
+    height: 40px;
+    width: 40px;
 }
 
 .md-icon-xl {
-    font-size: 32px;
-    height: 32px;
-    width: 32px;
+    font-size: 56px;
+    height: 56px;
+    width: 56px;
 }
 
 /*BASE LAYOUT BEGIN*/
@@ -862,6 +862,7 @@ body > .layout {
     outline: none;
     overflow: hidden;
     padding: 0 1.1428rem;
+    text-align: center;
     text-decoration: none !important;
     text-overflow: clip;
     transition: all .3s ease;
@@ -870,35 +871,35 @@ body > .layout {
 }
 
 .btn-xs {
-    font-size: .8rem;
+    font-size: 0.7rem;
     height: 24px;
     line-height: 24px;
-    padding: 0 .91424rem;
+    padding: 0 .7618rem;
 }
 
 .btn-sm {
-    font-size: .9rem;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 1.02852rem;
+    font-size: 0.9rem;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 1.0158rem;
 }
 
 .btn-lg {
-    font-size: 1.3rem;
-    height: 48px;
-    line-height: 48px;
-    padding: 0 1.48564rem;
+    font-size: 1.1rem;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 1.2697rem;
 }
 
 .btn-xl {
     font-size: 1.6rem;
-    height: 64px;
-    line-height: 64px;
-    padding: 0 1.82848rem;
+    height: 56px;
+    line-height: 56px;
+    padding: 0 1.7776rem;
 }
 
 .btn-flat {
-    padding: 0 .5714285714285714rem;
+    padding: 0 .5714rem;
     box-shadow: none !important;
 }
 
@@ -920,19 +921,19 @@ body > .layout {
 .btn-icon.btn-sm,
 .btn-float.btn-sm,
 .btn-circle.btn-sm {
-    width: 30px;
+    width: 32px;
 }
 
 .btn-icon.btn-lg,
 .btn-float.btn-lg,
 .btn-circle.btn-lg {
-    width: 48px;
+    width: 40px;
 }
 
 .btn-icon.btn-xl,
 .btn-float.btn-xl,
 .btn-circle.btn-xl {
-    width: 64px;
+    width: 56px;
 }
 
 .btn-lower {

@@ -1924,6 +1924,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 }
 
 /*TABS*/
+.tabs {
+    display: block;
+}
+
 .tabs-nav {
     position: relative;
     display: block;

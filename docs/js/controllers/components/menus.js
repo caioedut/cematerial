@@ -74,19 +74,19 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
             '<div class="pd-md bg-grey-2">' + "\n" +
             '    <ul class="menu">' + "\n" +
             '        <li>' + "\n" +
-            '            <a class="text-blue-6 text-white-h bg-blue-6-h">' + "\n" +
+            '            <a class="text-blue-6 bg-blue-6-h">' + "\n" +
             '                <i class="md-icon">visibility</i>' + "\n" +
             '                Preview' + "\n" +
             '            </a>' + "\n" +
             '        </li>' + "\n" +
             '        <li>' + "\n" +
-            '            <a class="bg-blue-6-h">' + "\n" +
+            '            <a class="text-red-6 bg-red-6-h">' + "\n" +
             '                <i class="md-icon">person_add</i>' + "\n" +
             '                Share' + "\n" +
             '            </a>' + "\n" +
             '        </li>' + "\n" +
             '        <li>' + "\n" +
-            '            <a class="bg-blue-6-h">' + "\n" +
+            '            <a class="text-green-6 bg-green-6-h">' + "\n" +
             '                <i class="md-icon">link</i>' + "\n" +
             '                Get Link' + "\n" +
             '            </a>' + "\n" +
@@ -94,19 +94,19 @@ angular.module('docs').controller('components.menusCtrl', function ($scope) {
             '    </ul>' + "\n" +
             '    <ul class="menu bg-blue-6">' + "\n" +
             '        <li>' + "\n" +
-            '            <a class="bg-blue-7-h">' + "\n" +
+            '            <a>' + "\n" +
             '                <i class="md-icon">visibility</i>' + "\n" +
             '                Preview' + "\n" +
             '            </a>' + "\n" +
             '        </li>' + "\n" +
             '        <li>' + "\n" +
-            '            <a class="bg-blue-7-h">' + "\n" +
+            '            <a>' + "\n" +
             '                <i class="md-icon">person_add</i>' + "\n" +
             '                Share' + "\n" +
             '            </a>' + "\n" +
             '        </li>' + "\n" +
             '        <li>' + "\n" +
-            '            <a class="bg-blue-7-h">' + "\n" +
+            '            <a>' + "\n" +
             '                <i class="md-icon">link</i>' + "\n" +
             '                Get Link' + "\n" +
             '            </a>' + "\n" +

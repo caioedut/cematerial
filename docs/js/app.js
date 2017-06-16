@@ -60,6 +60,10 @@ angular.module('docs').constant('navs', [
                 title: 'Accordion'
             },
             {
+                url: 'appbar',
+                title: 'App Bar'
+            },
+            {
                 url: 'buttons',
                 title: 'Buttons'
             },
@@ -90,6 +94,10 @@ angular.module('docs').constant('navs', [
             {
                 url: 'menus',
                 title: 'Menus'
+            },
+            {
+                url: 'modals',
+                title: 'Page Modal'
             },
             {
                 url: 'selection',

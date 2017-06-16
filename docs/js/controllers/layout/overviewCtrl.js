@@ -25,19 +25,19 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '            Sidebar' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="layout-header bg-blue-6">' + "\n" +
-            '        <div class="grid grid-middle grid-nowrap">' + "\n" +
-            '            <div class="grid-col layout-toggler" data-toggle="sidebar">' + "\n" +
-            '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' + "\n" +
-            '                    <i class="md-icon">menu</i>' + "\n" +
-            '                </button>' + "\n" +
-            '            </div>' + "\n" +
-            '            <div class="grid-col pd-md">' + "\n" +
-            '                <h1 class="layout-title">' + "\n" +
-            '                    Header' + "\n" +
-            '                </h1>' + "\n" +
-            '            </div>' + "\n" +
-            '        </div>' + "\n" +
+            '    <div class="layout-header bg-blue-6 app-bar">' + "\n" +
+            '        <button class="btn btn-icon btn-circle bg-blue-6 layout-toggler" data-toggle="sidebar">' + "\n" +
+            '            <i class="md-icon">menu</i>' + "\n" +
+            '        </button>' + "\n" +
+            '        <h1 class="layout-title mg-left-md">' + "\n" +
+            '            Header' + "\n" +
+            '        </h1>' + "\n" +
+            '        <button class="btn btn-icon btn-circle bg-blue-6 waves col-right">' + "\n" +
+            '            <i class="md-icon">search</i>' + "\n" +
+            '        </button>' + "\n" +
+            '        <button class="btn btn-icon btn-circle bg-blue-6 waves">' + "\n" +
+            '            <i class="md-icon">more_vert</i>' + "\n" +
+            '        </button>' + "\n" +
             '    </div>' + "\n" +
             '    <div class="layout-body">' + "\n" +
             '        <div class="pd-md">' + "\n" +
@@ -117,19 +117,13 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '            </a>' + "\n" +
             '        </ul>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="layout-header bg-blue-6">' + "\n" +
-            '        <div class="grid grid-middle grid-nowrap">' + "\n" +
-            '            <div class="grid-col layout-toggler" data-toggle="sidebar">' + "\n" +
-            '                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">' + "\n" +
-            '                    <i class="md-icon">menu</i>' + "\n" +
-            '                </button>' + "\n" +
-            '            </div>' + "\n" +
-            '            <div class="grid-col pd-md">' + "\n" +
-            '                <h1 class="layout-title">' + "\n" +
-            '                    Header' + "\n" +
-            '                </h1>' + "\n" +
-            '            </div>' + "\n" +
-            '        </div>' + "\n" +
+            '    <div class="layout-header bg-blue-6 app-bar">' + "\n" +
+            '        <button class="btn btn-icon btn-circle bg-blue-6 layout-toggler" data-toggle="sidebar">' + "\n" +
+            '            <i class="md-icon">menu</i>' + "\n" +
+            '        </button>' + "\n" +
+            '        <h1 class="layout-title mg-left-md">' + "\n" +
+            '            Header' + "\n" +
+            '        </h1>' + "\n" +
             '    </div>' + "\n" +
             '    <div class="layout-body">' + "\n" +
             '        <div class="pd-md">' + "\n" +

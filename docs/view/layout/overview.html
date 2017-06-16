@@ -9,7 +9,7 @@
         <div class="indent">
             <code>.layout-sidebar</code>
             <br/>
-            <code>.layout-header</code>
+            <code>.layout-header</code> [optional: <code>.app-bar</code>]
             <div class="indent">
                 <code>.layout-toggler[data-toggle="sidebar"]</code>
                 <br/>
@@ -54,7 +54,10 @@
             You can resize the window to show/hide sidebar.
         </li>
         <li>
-            Elements with <code>[data-toggle="sidebar"]</code> will be hidden when sidebar were visible.
+            Elements with <code>.layout-toggler</code> will be hidden when sidebar were visible.
+        </li>
+        <li>
+            Use <code>.app-bar</code> to styles header.
         </li>
         <li>
             The container is auto-scrollable.

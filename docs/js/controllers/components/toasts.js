@@ -3,7 +3,7 @@ angular.module('docs').controller('components.toastsCtrl', function ($scope) {
 
     $scope.codes = {
         basic: (
-            '<button class="btn btn-flat bg-blue-6" data-toggle="toast" data-toast="This is my toast example">' + "\n" +
+            '<button class="btn bg-blue-6" data-toggle="toast" data-toast="This is my toast example">' + "\n" +
             '    Show Toast' + "\n" +
             '</button>' + "\n" +
             ''
@@ -26,7 +26,7 @@ angular.module('docs').controller('components.toastsCtrl', function ($scope) {
             '        toast.show();' + "\n" +
             '    }' + "\n" +
             '</script>' + "\n" +
-            '<button class="btn btn-flat bg-blue-6" onclick="showToast()">' + "\n" +
+            '<button class="btn bg-blue-6" onclick="showToast()">' + "\n" +
             '    Show Toast' + "\n" +
             '</button>' + "\n" +
             ''

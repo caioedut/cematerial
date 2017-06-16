@@ -672,6 +672,11 @@ body > .layout {
     height: 100%;
 }
 
+.app-bar {
+    min-height: 56px;
+    padding: 0 8px;
+}
+
 .layout-sidebar {
     position: absolute;
     top: 0;
@@ -751,8 +756,8 @@ body > .layout {
         display: none !important;
     }
 
-    .layout-header {
-        padding: 4px;
+    .app-bar {
+        min-height: 64px;
     }
 
     .layout-sidebar {
@@ -823,11 +828,21 @@ body > .layout {
 }
 
 .menu a {
+    font-weight: 400;
     height: 40px;
+}
+
+.menu a .md-icon {
+    margin-right: 1rem;
+    transform: scale(.9);
 }
 
 .menu-border li + li {
     border-top: 1px solid #f0f0f0;
+}
+
+.menu-condensed a {
+    height: 32px;
 }
 
 /*SUBMENU CHEVRON/ARROW*/
@@ -2018,6 +2033,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 }
 
 /*FLEX GRID SYSTEM*/
+.app-bar,
 .grid {
     align-items: stretch;
     display: flex !important;
@@ -2127,6 +2143,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     align-items: flex-end;
 }
 
+.app-bar,
 .grid-middle {
     align-items: center;
 }

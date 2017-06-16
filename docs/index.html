@@ -45,6 +45,7 @@
     <script type="text/javascript" src="js/controllers/layout/overviewCtrl.js"></script>
     <script type="text/javascript" src="js/controllers/layout/typographyCtrl.js"></script>
 
+    <script type="text/javascript" src="js/controllers/components/appbar.js"></script>
     <script type="text/javascript" src="js/controllers/components/accordion.js"></script>
     <script type="text/javascript" src="js/controllers/components/buttons.js"></script>
     <script type="text/javascript" src="js/controllers/components/cards.js"></script>
@@ -54,6 +55,7 @@
     <script type="text/javascript" src="js/controllers/components/dropdown.js"></script>
     <script type="text/javascript" src="js/controllers/components/inputs.js"></script>
     <script type="text/javascript" src="js/controllers/components/menus.js"></script>
+    <script type="text/javascript" src="js/controllers/components/modals.js"></script>
     <script type="text/javascript" src="js/controllers/components/selection.js"></script>
     <script type="text/javascript" src="js/controllers/components/tables.js"></script>
     <script type="text/javascript" src="js/controllers/components/tabs.js"></script>
@@ -78,7 +80,7 @@
             </div>
             <div class="flex-body">
                 <nav class="panel-group">
-                    <div class="panel" ng-class="{'panel-visible': nav.active}" ng-repeat="nav in navs">
+                    <div class="panel panel-arrow" ng-class="{'panel-visible': nav.active}" ng-repeat="nav in navs">
                         <div class="panel-header panel-arrow link" data-toggle="panel">
                             {{nav.title}}
                         </div>
@@ -98,19 +100,13 @@
             </div>
         </div>
     </aside>
-    <header class="layout-header bg-{{color}}-6">
-        <div class="grid grid-middle grid-nowrap">
-            <div class="grid-col layout-toggler" data-toggle="sidebar">
-                <button class="btn btn-icon btn-circle mg-left-sm bg-{{color}}-6">
-                    <i class="md-icon">menu</i>
-                </button>
-            </div>
-            <div class="grid-col pd-md">
-                <h1 class="layout-title">
-                    {{title}}
-                </h1>
-            </div>
-        </div>
+    <header class="layout-header bg-{{color}}-6 app-bar">
+        <button class="btn btn-icon btn-circle bg-{{color}}-6 layout-toggler" data-toggle="sidebar">
+            <i class="md-icon">menu</i>
+        </button>
+        <h1 class="layout-title mg-left-md">
+            {{title}}
+        </h1>
     </header>
     <main class="layout-body" ui-view>
     </main>

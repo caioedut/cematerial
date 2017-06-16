@@ -41,6 +41,7 @@
         </div>
         <div class="flex-body">
             <div class="layout-nav">
+                <a href="#appbar" data-toggle="sidebar">App Bar</a>
                 <a href="#buttons" data-toggle="sidebar">Buttons</a>
                 <a href="#cards" data-toggle="sidebar">Cards</a>
                 <a href="#chips" data-toggle="sidebar">Chips</a>
@@ -64,19 +65,13 @@
             </div>
         </div>
     </div>
-    <header class="layout-header bg-blue-6">
-        <div class="grid grid-middle grid-nowrap">
-            <div class="grid-col layout-toggler" data-toggle="sidebar" data-target="#side-main">
-                <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">
-                    <i class="md-icon">menu</i>
-                </button>
-            </div>
-            <div class="grid-col pd-md">
-                <h1 class="layout-title">
-                    Components
-                </h1>
-            </div>
-        </div>
+    <header class="layout-header bg-blue-6 app-bar">
+        <button class="btn btn-icon btn-circle bg-blue-6 layout-toggler" data-toggle="sidebar" data-target="#side-main">
+            <i class="md-icon">menu</i>
+        </button>
+        <h1 class="layout-title mg-left-md">
+            Components
+        </h1>
     </header>
     <main class="layout-body">
 
@@ -122,6 +117,27 @@
             </div>
         </section>
 
+        <section id="appbar" class="pd-lg">
+            <h1>App Bar</h1>
+            <div>
+                <div class="app-bar bg-purple-6">
+                    <button class="btn btn-icon btn-circle bg-purple-6">
+                        <i class="md-icon">menu</i>
+                    </button>
+                    <h1 class="layout-title mg-left-md">
+                        Layout Header
+                    </h1>
+                    <button class="btn btn-icon btn-circle bg-purple-6 col-right">
+                        <i class="md-icon">search</i>
+                    </button>
+                    <button class="btn btn-icon btn-circle bg-purple-6">
+                        <i class="md-icon">more_vert</i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
         <section id="buttons" class="pd-lg">
             <h1>Buttons</h1>
             <div class="grid grid-gutter">
@@ -788,24 +804,16 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="layout-header bg-purple-6">
-                            <div class="grid grid-middle grid-nowrap">
-                                <div class="grid-col layout-toggler" data-toggle="sidebar" data-target="#side-example">
-                                    <button class="btn btn-icon btn-circle mg-left-sm bg-purple-6" type="button">
-                                        <i class="md-icon">menu</i>
-                                    </button>
-                                </div>
-                                <div class="grid-col pd-md">
-                                    <h1 class="layout-title">
-                                        Layout Header
-                                    </h1>
-                                </div>
-                                <div class="grid-col col-right">
-                                    <button class="btn btn-icon btn-circle mg-right-sm bg-purple-6" type="button">
-                                        <i class="md-icon">search</i>
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="layout-header bg-purple-6 app-bar">
+                            <button class="btn btn-icon btn-circle bg-purple-6 layout-toggler" data-toggle="sidebar" data-target="#side-example">
+                                <i class="md-icon">menu</i>
+                            </button>
+                            <h1 class="layout-title mg-left-md">
+                                Layout Header
+                            </h1>
+                            <button class="btn btn-icon btn-circle bg-purple-6 col-right">
+                                <i class="md-icon">search</i>
+                            </button>
                         </div>
                         <div class="layout-body pd-md">
                             <h3 class="title">Layout Content</h3>
@@ -843,19 +851,13 @@
             </a>
 
             <div id="modal" class="modal">
-                <div class="modal-header bg-blue-6">
-                    <div class="grid grid-middle grid-nowrap">
-                        <div class="grid-col" data-toggle="modal">
-                            <button class="btn btn-icon btn-circle mg-left-sm bg-blue-6">
-                                <i class="md-icon">arrow_back</i>
-                            </button>
-                        </div>
-                        <div class="grid-col pd-md">
-                            <h1 class="modal-title">
-                                Page Modal
-                            </h1>
-                        </div>
-                    </div>
+                <div class="modal-header bg-blue-6 app-bar">
+                    <button class="btn btn-icon btn-circle bg-blue-6" data-toggle="modal">
+                        <i class="md-icon">arrow_back</i>
+                    </button>
+                    <h1 class="modal-title mg-left-md">
+                        Page Modal
+                    </h1>
                 </div>
                 <div class="modal-body">
                     <section class="pd-md">

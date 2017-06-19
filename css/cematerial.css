@@ -1515,6 +1515,7 @@ textarea.input:not([rows]) {
 
 select.input {
     padding-top: 6px !important;
+    padding-bottom: 4px !important;
 }
 
 .input:not([type="checkbox"]):not([type="radio"]):focus {

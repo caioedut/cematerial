@@ -56,9 +56,9 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '</div>'
         ),
         sidebar: (
-            '<div class="layout" style="border: 1px solid #ddd; height: 380px;">' + "\n" +
-            '    <div class="layout-sidebar">' + "\n" +
-            '        <div class="relative">' + "\n" +
+            '<div class="layout" style="border: 1px solid #ddd; height: 400px;">' + "\n" +
+            '    <div class="layout-sidebar flex">' + "\n" +
+            '        <div class="flex-header relative">' + "\n" +
             '            <img class="media-background" src="img/cards.jpg" alt=""/>' + "\n" +
             '            <div class="set-overlay pd-md">' + "\n" +
             '                <div class="grid grid-gutter">' + "\n" +
@@ -70,8 +70,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '                    <a class="xs-col-12 text-white" data-toggle="nav" data-target="#nav-account">' + "\n" +
             '                        <div class="grid grid-middle">' + "\n" +
             '                            <div class="grid-col">' + "\n" +
-            '                                <b>William Ward</b>' + "\n" +
-            '                                <br/>' + "\n" +
+            '                                <div class="body-2">William Ward</div>' + "\n" +
             '                                william@ward.com' + "\n" +
             '                            </div>' + "\n" +
             '                            <div class="grid-col col-right">' + "\n" +
@@ -82,40 +81,42 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '                </div>' + "\n" +
             '            </div>' + "\n" +
             '        </div>' + "\n" +
-            '        <ul class="layout-nav">' + "\n" +
-            '            <a>' + "\n" +
-            '                <i class="md-icon">home</i>' + "\n" +
-            '                Home' + "\n" +
-            '            </a>' + "\n" +
-            '            <a>' + "\n" +
-            '                <i class="md-icon">library_music</i>' + "\n" +
-            '                Music library' + "\n" +
-            '            </a>' + "\n" +
-            '            <div class="divider-horizontal mg-top-sm mg-bottom-sm"></div>' + "\n" +
-            '            <a>' + "\n" +
-            '                <i class="md-icon">settings</i>' + "\n" +
-            '                Settings' + "\n" +
-            '            </a>' + "\n" +
-            '            <a>' + "\n" +
-            '                <i class="md-icon">help</i>' + "\n" +
-            '                Help & feedback' + "\n" +
-            '            </a>' + "\n" +
-            '        </ul>' + "\n" +
-            '        <ul id="nav-account" class="layout-nav nav-hidden">' + "\n" +
-            '            <a>' + "\n" +
-            '                <i class="md-icon">account_circle</i>' + "\n" +
-            '                Profile' + "\n" +
-            '            </a>' + "\n" +
-            '            <div class="divider-horizontal mg-top-sm mg-bottom-sm"></div>' + "\n" +
-            '            <a>' + "\n" +
-            '                <i class="md-icon">add</i>' + "\n" +
-            '                Add account' + "\n" +
-            '            </a>' + "\n" +
-            '            <a>' + "\n" +
-            '                <i class="md-icon">settings</i>' + "\n" +
-            '                Manage accounts' + "\n" +
-            '            </a>' + "\n" +
-            '        </ul>' + "\n" +
+            '        <div class="flex-body">' + "\n" +
+            '            <ul class="layout-nav">' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">home</i>' + "\n" +
+            '                    Home' + "\n" +
+            '                </a>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">library_music</i>' + "\n" +
+            '                    Music library' + "\n" +
+            '                </a>' + "\n" +
+            '                <div class="divider-horizontal"></div>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">settings</i>' + "\n" +
+            '                    Settings' + "\n" +
+            '                </a>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">help</i>' + "\n" +
+            '                    Help & feedback' + "\n" +
+            '                </a>' + "\n" +
+            '            </ul>' + "\n" +
+            '            <ul id="nav-account" class="layout-nav nav-hidden">' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">account_circle</i>' + "\n" +
+            '                    Profile' + "\n" +
+            '                </a>' + "\n" +
+            '                <div class="divider-horizontal"></div>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">add</i>' + "\n" +
+            '                    Add account' + "\n" +
+            '                </a>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">settings</i>' + "\n" +
+            '                    Manage accounts' + "\n" +
+            '                </a>' + "\n" +
+            '            </ul>' + "\n" +
+            '        </div>' + "\n" +
             '    </div>' + "\n" +
             '    <div class="layout-header bg-blue-6 app-bar">' + "\n" +
             '        <button class="btn btn-icon btn-circle bg-blue-6 layout-toggler" data-toggle="sidebar">' + "\n" +
@@ -139,7 +140,115 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '            Footer' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '</div>'
+            '</div>' + "\n" +
+            ''
+        ),
+        tabs: (
+            '<div class="layout" style="border: 1px solid #ddd; height: 400px;">' + "\n" +
+            '    <div class="layout-sidebar flex">' + "\n" +
+            '        <div class="flex-header relative">' + "\n" +
+            '            <img class="media-background" src="img/cards.jpg" alt=""/>' + "\n" +
+            '            <div class="set-overlay pd-md">' + "\n" +
+            '                <div class="grid grid-gutter">' + "\n" +
+            '                    <div class="xs-col-5 sm-col-4">' + "\n" +
+            '                        <div class="media-container-lg">' + "\n" +
+            '                            <img class="media-fluid media-cover set-circle" src="img/user-profile.png" alt=""/>' + "\n" +
+            '                        </div>' + "\n" +
+            '                    </div>' + "\n" +
+            '                    <a class="xs-col-12 text-white" data-toggle="nav" data-target="#nav-account">' + "\n" +
+            '                        <div class="grid grid-middle">' + "\n" +
+            '                            <div class="grid-col">' + "\n" +
+            '                                <div class="body-2">William Ward</div>' + "\n" +
+            '                                william@ward.com' + "\n" +
+            '                            </div>' + "\n" +
+            '                            <div class="grid-col col-right">' + "\n" +
+            '                                <i class="md-icon">arrow_drop_down</i>' + "\n" +
+            '                            </div>' + "\n" +
+            '                        </div>' + "\n" +
+            '                    </a>' + "\n" +
+            '                </div>' + "\n" +
+            '            </div>' + "\n" +
+            '        </div>' + "\n" +
+            '        <div class="flex-body">' + "\n" +
+            '            <ul class="layout-nav">' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">home</i>' + "\n" +
+            '                    Home' + "\n" +
+            '                </a>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">library_music</i>' + "\n" +
+            '                    Music library' + "\n" +
+            '                </a>' + "\n" +
+            '                <div class="divider-horizontal"></div>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">settings</i>' + "\n" +
+            '                    Settings' + "\n" +
+            '                </a>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">help</i>' + "\n" +
+            '                    Help & feedback' + "\n" +
+            '                </a>' + "\n" +
+            '            </ul>' + "\n" +
+            '            <ul id="nav-account" class="layout-nav nav-hidden">' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">account_circle</i>' + "\n" +
+            '                    Profile' + "\n" +
+            '                </a>' + "\n" +
+            '                <div class="divider-horizontal"></div>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">add</i>' + "\n" +
+            '                    Add account' + "\n" +
+            '                </a>' + "\n" +
+            '                <a>' + "\n" +
+            '                    <i class="md-icon">settings</i>' + "\n" +
+            '                    Manage accounts' + "\n" +
+            '                </a>' + "\n" +
+            '            </ul>' + "\n" +
+            '        </div>' + "\n" +
+            '    </div>' + "\n" +
+            '    <div class="layout-header bg-blue-6">' + "\n" +
+            '        <div class="app-bar">' + "\n" +
+            '            <button class="btn btn-icon btn-circle bg-blue-6 layout-toggler" data-toggle="sidebar">' + "\n" +
+            '                <i class="md-icon">menu</i>' + "\n" +
+            '            </button>' + "\n" +
+            '            <h1 class="layout-title mg-left-md">' + "\n" +
+            '                Header' + "\n" +
+            '            </h1>' + "\n" +
+            '        </div>' + "\n" +
+            '        <div class="tabs-nav mg-left mg-right">' + "\n" +
+            '            <a class="tab-active" data-toggle="tab" data-target="#tab1">My Tab</a>' + "\n" +
+            '            <a data-toggle="tab" data-target="#tab2">Tab 2</a>' + "\n" +
+            '            <a data-toggle="tab" data-target="#tab3">Tab 3</a>' + "\n" +
+            '            <a data-toggle="tab" data-target="#tab4">Tab 4</a>' + "\n" +
+            '            <a data-toggle="tab" data-target="#tab5">Tab 5</a>' + "\n" +
+            '        </div>' + "\n" +
+            '    </div>' + "\n" +
+            '    <div class="layout-body">' + "\n" +
+            '        <div class="tabs-list pd-md">' + "\n" +
+            '            <div id="tab1" class="tab-content tab-visible">' + "\n" +
+            '                This is the Tab 1' + "\n" +
+            '            </div>' + "\n" +
+            '            <div id="tab2" class="tab-content">' + "\n" +
+            '                This is the Tab 2' + "\n" +
+            '            </div>' + "\n" +
+            '            <div id="tab3" class="tab-content">' + "\n" +
+            '                This is the Tab 3' + "\n" +
+            '            </div>' + "\n" +
+            '            <div id="tab4" class="tab-content">' + "\n" +
+            '                This is the Tab 4' + "\n" +
+            '            </div>' + "\n" +
+            '            <div id="tab5" class="tab-content">' + "\n" +
+            '                This is the Tab 5' + "\n" +
+            '            </div>' + "\n" +
+            '        </div>' + "\n" +
+            '    </div>' + "\n" +
+            '    <div class="layout-footer bg-blue-6">' + "\n" +
+            '        <div class="pd-md">' + "\n" +
+            '            Footer' + "\n" +
+            '        </div>' + "\n" +
+            '    </div>' + "\n" +
+            '</div>' + "\n" +
+            ''
         )
     }
 });

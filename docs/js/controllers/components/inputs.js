@@ -22,13 +22,13 @@ angular.module('docs').controller('components.inputsCtrl', function ($scope) {
             '    <div class="grid-col xs-col-6 sm-col-4 md-col-3 lg-col-2">' + "\n" +
             '        <label class="grid grid-nowrap grid-bottom">' + "\n" +
             '            <i class="md-icon">phone</i>' + "\n" +
-            '            <input class="input"/>' + "\n" +
+            '            <input class="input col-fill"/>' + "\n" +
             '        </label>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="grid-col xs-col-6 sm-col-4 md-col-3 lg-col-1">' + "\n" +
+            '    <div class="grid-col xs-col-6 sm-col-4 md-col-3 lg-col-2">' + "\n" +
             '        <label class="grid grid-nowrap grid-middle">' + "\n" +
             '            <i class="md-icon">remove_circle_outline</i>' + "\n" +
-            '            <input class="input"/>' + "\n" +
+            '            <input class="input col-fill"/>' + "\n" +
             '            <i class="md-icon">add_circle_outline</i>' + "\n" +
             '        </label>' + "\n" +
             '    </div>' + "\n" +

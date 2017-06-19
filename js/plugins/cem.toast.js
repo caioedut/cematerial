@@ -13,8 +13,8 @@
         this.options = extend({}, Toast.DEFAULTS, options || {});
         this.options.message = message;
 
-        this.parent = typeof this.options.parent == 'string' ? document.querySelector(this.options.parent) : this.options.parent;
-        this.body = this.parent.querySelector(':scope > .layout-toast');
+        this.parent = typeof this.options.parent === 'string' ? document.querySelector(this.options.parent) : this.options.parent;
+        this.body = this.parent.querySelector('.layout-toast');
 
         if (!this.body) {
             this.body = document.createElement('div');
@@ -66,13 +66,20 @@
         setTimeout(function () {
             that.el.innerHTML = '<div class="toast-body grid grid-middle grid-nowrap"><div class="grid-col col-fill">' + that.options.message + '</div></div>';
 
-            if (that.options.actions && that.options.actions.length) {
+            setTimeout(function () {
+                that.el.style.marginBottom = (-that.el.offsetHeight) + 'px';
+            }, 1);
+
+            if (!empty(that.options.actions)) {
                 var body = that.el.querySelector('.toast-body');
                 var btn_body = document.createElement('div');
 
                 btn_body.classList.add('grid-col');
 
-                var dft = {color: 'blue-6', onClick: function() {}};
+                var dft = {
+                    color: 'blue-6', onClick: function () {
+                    }
+                };
                 that.options.actions.forEach(function (opts) {
                     opts = extend({}, dft, opts);
 
@@ -128,6 +135,12 @@
             parent: this.closest('.layout')
         }));
         init.show(this);
+    });
+
+    window.addEventListener('resize', function () {
+        document.querySelectorAll('.toast').forEach(function (node) {
+            node.parentNode.removeChild(node);
+        });
     });
 
 }();

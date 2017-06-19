@@ -1367,7 +1367,11 @@ NodeList.prototype.not = function (sel_or_arr) {
         setTimeout(function () {
             that.el.innerHTML = '<div class="toast-body grid grid-middle grid-nowrap"><div class="grid-col col-fill">' + that.options.message + '</div></div>';
 
-            if (that.options.actions && that.options.actions.length) {
+            setTimeout(function () {
+                that.el.style.marginBottom = (-that.el.offsetHeight) + 'px';
+            }, 1);
+
+            if (!empty(that.options.actions)) {
                 var body = that.el.querySelector('.toast-body');
                 var btn_body = document.createElement('div');
 
@@ -1432,6 +1436,12 @@ NodeList.prototype.not = function (sel_or_arr) {
             parent: this.closest('.layout')
         }));
         init.show(this);
+    });
+
+    window.addEventListener('resize', function () {
+        document.querySelectorAll('.toast').forEach(function (node) {
+            node.parentNode.removeChild(node);
+        });
     });
 
 }();
@@ -1823,7 +1833,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         }
 
         var year = this.dateBase.getFullYear();
-        var min = Math.min(year - 150, (new Date()).getFullYear() -  150);
+        var min = Math.min(year - 150, (new Date()).getFullYear() - 150);
         var max = Math.max(year + 150, (new Date()).getFullYear() + 150);
         var html = '';
 

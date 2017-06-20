@@ -51,6 +51,18 @@
         find: function (query) {
             return $el(query, this.get(0));
         },
+        data: function (property, value) {
+            if (typeof value === 'undefined') {
+                var el = this.get(0);
+                return el.data[property] || el.dataset[property];
+            }
+
+            this.each(function (node) {
+                node.data[property] = value;
+            });
+
+            return this;
+        },
         is: function (query) {
             var el = this.get(0);
             if (typeof query === 'string') {
@@ -67,6 +79,24 @@
             var el = this.get(0);
             query = typeof query === 'function' ? query.call(this, this) : query;
             return this.is(query) ? this : (!el.parentNode || el.parentNode === document ? $el() : $el(el.parentNode).closest(query));
+        },
+        css: function (property, value) {
+            if (typeof value === 'undefined') {
+                var el = this.get(0);
+                return window.getComputedStyle(el, null).getPropertyValue(property);
+            }
+
+            this.each(function (node) {
+                property = property.replace(/\-/g, ' ')
+                    .replace(/(?:^\w|[A-Z]|\b\w)/g, function (letter, index) {
+                        return index === 0 ? letter.toLowerCase() : letter.toUpperCase();
+                    })
+                    .replace(/\s+/g, '');
+
+                node.style[property] = value;
+            });
+
+            return this;
         },
         offset: function () {
             var el = this.get(0);
@@ -153,8 +183,9 @@
 
 }();
 
+
 /**
-document.on('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
     var el = $el('#buttons');
     var t = el;
@@ -167,6 +198,7 @@ document.on('DOMContentLoaded', function () {
     t = el.not('section');
     t = el.siblings();
     t = el.parents();
+    // el.css('border', '1px solid red');
 
     console.log(t);
 

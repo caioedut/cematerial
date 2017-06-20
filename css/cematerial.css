@@ -2012,26 +2012,17 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     overflow: hidden;
 }
 
+.tabs-list:not(.tabs-processed) .tab-content:not(.tab-visible) {
+    display: none;
+}
+
 .tabs-list:not(.tabs-noswipe) .tab-content {
     transition: margin-left .3s ease;
 }
 
-/*.tabs:not(.tabs-noswipe) .tab-content {*/
-/*transition: margin-left .3s ease;*/
-/*}*/
-
-.tab-content.tab-visible {
-    margin-left: 0;
-}
-
-.tab-content:not(.tab-visible) {
-    height: 0;
-    margin-left: -100%;
+.tabs-list.tabs-noswipe .tab-content:not(.tab-visible) {
     overflow: hidden;
-}
-
-.tab-content.tab-visible ~ .tab-content {
-    margin-left: 0;
+    height: 0;
 }
 
 /*FLEX GRID SYSTEM*/

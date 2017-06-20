@@ -133,6 +133,21 @@ Element.prototype.on = document.on = function (events, child, fn, capture) {
     return this;
 };
 
+Element.prototype.css = function (property, value) {
+    if (typeof value === 'undefined') {
+        return window.getComputedStyle(this, null).getPropertyValue(property);
+    }
+
+    property = property.replace(/\-/g, ' ')
+        .replace(/(?:^\w|[A-Z]|\b\w)/g, function (letter, index) {
+            return index === 0 ? letter.toLowerCase() : letter.toUpperCase();
+        })
+        .replace(/\s+/g, '');
+
+    this.style[property] = value;
+    return this;
+};
+
 Element.prototype.is = function (node_or_selector) {
     if (typeof node_or_selector === 'string') {
         return this.matches(node_or_selector);
@@ -850,7 +865,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             // GET TRANSLATE X VALUE
-            var translate_x = parseInt(window.getComputedStyle(sidebar, null).getPropertyValue('transform').split(',')[4]);
+            var translate_x = parseInt(sidebar.css('transform').split(',')[4]);
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
             var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
@@ -1099,13 +1114,21 @@ NodeList.prototype.not = function (sel_or_arr) {
             if (empty(this.options.swipe)) {
                 this.list.classList.add('tabs-noswipe');
             }
+
+            if (empty(this.options.fit)) {
+                this.list.classList.add('tabs-nofit');
+            }
+
+            this.list.classList.add('tabs-processed');
+            this.updatePosition();
         }
     };
 
     Tabs.VERSION = '0.1.8';
 
     Tabs.DEFAULTS = {
-        swipe: true
+        swipe: true,
+        fit: true
     };
 
     Tabs.prototype.show = function (_relatedTarget) {
@@ -1144,6 +1167,7 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             // Tab Content
             this.content.classList.add('tab-visible');
+            this.updatePosition();
         }
 
         // Event Show
@@ -1188,6 +1212,17 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.bar.style.width = active.offsetWidth + 'px';
     };
 
+    Tabs.prototype.updatePosition = function () {
+        var active = this.nav.querySelector('.tab-active');
+        var index = 0;
+
+        this.nav.querySelectorAll('[data-toggle="tab"]').forEach(function (node, i) {
+            index = node === active ? i : index;
+        });
+
+        this.list.querySelector('.tab-content').css('marginLeft', (-100 * index) + '%');
+    };
+
     // Export Class
     window.Tabs = Tabs;
 
@@ -1198,81 +1233,83 @@ NodeList.prototype.not = function (sel_or_arr) {
             var init = new Tabs(this, this.dataset);
             init.show(this);
         })
-    // .on('swipestart', '.tabs:not(.tabs-noswipe) .tabs-list', function () {
-    //     var tabs = this.closest('.tabs');
-    //     var init = tabs['cem.dropdown'] || new Tabs(tabs);
-    //
-    //     if (!empty(init.options.swipe)) {
-    //         init.bar.classList.add('no-transition');
-    //         this.querySelector('.tab-visible').classList.add('no-transition');
-    //
-    //         // GET TRANSLATE X VALUE
-    //         init.bar.dataset.translateX = init.bar.style.transform.replace(/\D/g, '');
-    //     }
-    // })
-    // .on('swipemove', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
-    //     var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-    //     var is_parent_scrollable = false;
-    //
-    //     // Check parent scrollable
-    //     e.target.parentsUntil(this).forEach(function (node) {
-    //         if (node.scrollWidth > node.offsetWidth) {
-    //             is_parent_scrollable = true;
-    //         }
-    //     });
-    //
-    //     if (is_horizontal && !is_parent_scrollable) {
-    //         var active = this.querySelector('.tab-visible');
-    //         var bar = this.closest('.tabs').querySelector('.tabs-bar');
-    //
-    //         e.preventDefault();
-    //
-    //         // Move tab content
-    //         active.style.marginLeft = e.swipeOffsetX;
-    //
-    //         // Move tab bar
-    //         var translateX = bar.dataset.translateX - (e.swipeOffsetX / this.offsetWidth * 100);
-    //         bar.style.transform = 'translateX(' + translateX + 'px)';
-    //     }
-    // })
-    // .on('swipeend', '.tabs:not(.tabs-noswipe) .tabs-list', function (e) {
-    //     var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
-    //     var is_parent_scrollable = false;
-    //
-    //     // Check parent scrollable
-    //     e.target.parentsUntil(this).forEach(function (node) {
-    //         if (node.scrollWidth > node.offsetWidth) {
-    //             is_parent_scrollable = true;
-    //         }
-    //     });
-    //
-    //     var active = this.querySelector('.tab-visible');
-    //     var bar = this.closest('.tabs').querySelector('.tabs-bar');
-    //
-    //     var offset_start = active.offsetWidth * 0.3;
-    //     var new_active;
-    //
-    //     if (is_horizontal && !is_parent_scrollable) {
-    //         if (Math.abs(e.swipeOffsetX) > offset_start) {
-    //             if (e.swipeOffsetX > 0) {
-    //                 new_active = active.previousElementSibling;
-    //             } else {
-    //                 new_active = active.nextElementSibling;
-    //             }
-    //         }
-    //     }
-    //
-    //     bar.classList.remove('no-transition');
-    //     active.classList.remove('no-transition');
-    //
-    //     new_active = new_active || active;
-    //     this.closest('.tabs')['cem.tabs'].show(new_active);
-    //
-    //     // Reset tab content
-    //     active.style.marginLeft = '';
-    // })
-    ;
+        .on('swipestart', '.tabs-list:not(.tabs-noswipe)', function (e) {
+            var tabs = this.closest('.tabs');
 
+            if (!tabs) {
+                return;
+            }
+
+            var anchor = tabs.querySelector('.tabs-nav [data-toggle="tab"]:first-of-type');
+            var init = new Tabs(anchor, anchor.dataset);
+
+            var contents = this.querySelectorAll('.tab-content');
+            var bar = tabs.querySelector('.tabs-bar');
+            var first = contents[0];
+
+            first.dataset.offset = parseInt(first.css('margin-left'));
+            first.classList.add('no-transition');
+
+            if (bar) {
+                bar.dataset.translateX = parseInt(bar.css('transform').split(',')[4]);
+                bar.classList.add('no-transition');
+            }
+        })
+        .on('swipemove', '.tabs-list:not(.tabs-noswipe)', function (e) {
+            var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
+            var tabs = this.closest('.tabs');
+
+            if (!is_horizontal || !tabs) {
+                return;
+            }
+
+            var contents = this.querySelectorAll('.tab-content');
+            var bar = tabs.querySelector('.tabs-bar');
+            var first = contents[0];
+            var offset = parseInt(first.dataset.offset);
+
+            // Move the tab content
+            first.style.marginLeft = (offset + e.swipeOffsetX) + 'px';
+
+            // Move tab bar
+            if (bar) {
+                var translateX = bar.dataset.translateX - (e.swipeOffsetX / this.offsetWidth * 100 / 2);
+                bar.style.transform = 'translateX(' + translateX + 'px)';
+            }
+        })
+        .on('swipeend', '.tabs-list:not(.tabs-noswipe)', function (e) {
+            var tabs = this.closest('.tabs');
+
+            if (!tabs) {
+                return;
+            }
+
+            var contents = this.querySelectorAll('.tab-content');
+            var bar = tabs.querySelector('.tabs-bar');
+            var first = contents[0];
+
+            var width = this.offsetWidth;
+            var margin = parseInt(first.css('margin-left'));
+
+            var index = Math.abs(Math.round(margin / width));
+
+            if (margin > 0) {
+                index = contents.length - 1;
+            } else if (index >= contents.length) {
+                index = 0;
+            }
+
+            first.classList.remove('no-transition');
+
+            if (bar) {
+                bar.classList.remove('no-transition');
+            }
+
+            var anchor = tabs.querySelector('.tabs-nav [data-toggle="tab"]:nth-of-type(' + (index + 1) + ')');
+            var init = new Tabs(anchor, anchor.dataset);
+            init.show(anchor);
+        })
+    ;
 }();
 
 

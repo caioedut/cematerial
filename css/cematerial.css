@@ -2809,6 +2809,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     .xs-no-padding {
         padding: 0 !important;
     }
+
+    .text-flow {
+        font-size: .2em;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 1023px) {
@@ -2822,6 +2826,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
     .sm-no-padding {
         padding: 0 !important;
+    }
+
+    .text-flow {
+        font-size: .4em;
     }
 }
 
@@ -2837,6 +2845,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     .md-no-padding {
         padding: 0 !important;
     }
+
+    .text-flow {
+        font-size: .6em;
+    }
 }
 
 @media (min-width: 1440px) and (max-width: 1919px) {
@@ -2851,6 +2863,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     .lg-no-padding {
         padding: 0 !important;
     }
+
+    .text-flow {
+        font-size: .8em;
+    }
 }
 
 @media (min-width: 1920px) {
@@ -2864,6 +2880,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
     .xl-no-padding {
         padding: 0 !important;
+    }
+
+    .text-flow {
+        font-size: 1em;
     }
 }
 

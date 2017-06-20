@@ -1115,10 +1115,6 @@ NodeList.prototype.not = function (sel_or_arr) {
                 this.list.classList.add('tabs-noswipe');
             }
 
-            if (empty(this.options.fit)) {
-                this.list.classList.add('tabs-nofit');
-            }
-
             this.list.classList.add('tabs-processed');
             this.updatePosition();
         }
@@ -1127,8 +1123,7 @@ NodeList.prototype.not = function (sel_or_arr) {
     Tabs.VERSION = '0.1.8';
 
     Tabs.DEFAULTS = {
-        swipe: true,
-        fit: true
+        swipe: true
     };
 
     Tabs.prototype.show = function (_relatedTarget) {
@@ -1240,11 +1235,12 @@ NodeList.prototype.not = function (sel_or_arr) {
                 return;
             }
 
-            var anchor = tabs.querySelector('.tabs-nav [data-toggle="tab"]:first-of-type');
+            var nav = tabs.querySelector(':scope > .tabs-nav');
+            var anchor = nav.querySelector('[data-toggle="tab"]:first-of-type');
             var init = new Tabs(anchor, anchor.dataset);
 
-            var contents = this.querySelectorAll('.tab-content');
-            var bar = tabs.querySelector('.tabs-bar');
+            var contents = this.querySelectorAll(':scope > .tab-content');
+            var bar = nav.querySelector('.tabs-bar');
             var first = contents[0];
 
             first.dataset.offset = parseInt(first.css('margin-left'));
@@ -1263,9 +1259,12 @@ NodeList.prototype.not = function (sel_or_arr) {
                 return;
             }
 
-            var contents = this.querySelectorAll('.tab-content');
-            var bar = tabs.querySelector('.tabs-bar');
+            var nav = tabs.querySelector(':scope > .tabs-nav');
+
+            var contents = this.querySelectorAll(':scope > .tab-content');
+            var bar = nav.querySelector('.tabs-bar');
             var first = contents[0];
+
             var offset = parseInt(first.dataset.offset);
 
             // Move the tab content
@@ -1284,8 +1283,10 @@ NodeList.prototype.not = function (sel_or_arr) {
                 return;
             }
 
-            var contents = this.querySelectorAll('.tab-content');
-            var bar = tabs.querySelector('.tabs-bar');
+            var nav = tabs.querySelector(':scope > .tabs-nav');
+
+            var contents = this.querySelectorAll(':scope > .tab-content');
+            var bar = nav.querySelector('.tabs-bar');
             var first = contents[0];
 
             var width = this.offsetWidth;
@@ -1305,7 +1306,7 @@ NodeList.prototype.not = function (sel_or_arr) {
                 bar.classList.remove('no-transition');
             }
 
-            var anchor = tabs.querySelector('.tabs-nav [data-toggle="tab"]:nth-of-type(' + (index + 1) + ')');
+            var anchor = nav.querySelector('[data-toggle="tab"]:nth-of-type(' + (index + 1) + ')');
             var init = new Tabs(anchor, anchor.dataset);
             init.show(anchor);
         })

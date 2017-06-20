@@ -2012,16 +2012,20 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     overflow: hidden;
 }
 
-.tabs-list:not(.tabs-processed) .tab-content:not(.tab-visible) {
+.tabs-list:not(.tabs-processed) > .tab-content:not(.tab-visible) {
     display: none;
 }
 
-.tabs-list:not(.tabs-noswipe) .tab-content {
+.tabs-list:not(.tabs-noswipe) > .tab-content {
     transition: margin-left .3s ease;
 }
 
-.tabs-list.tabs-noswipe .tab-content:not(.tab-visible) {
+.tabs-list.tabs-noswipe > .tab-content:not(.tab-visible) {
     overflow: hidden;
+    height: 0;
+}
+
+.tabs-list > .tab-content:not(.tab-visible) {
     height: 0;
 }
 

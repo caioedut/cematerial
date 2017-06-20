@@ -1961,7 +1961,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 }
 
 .tabs-nav > *:not(.tab-active):not(.tabs-bar) {
-    opacity: .6;
+    opacity: .8;
 }
 
 .tabs-nav li {

@@ -1236,6 +1236,11 @@ NodeList.prototype.not = function (sel_or_arr) {
             }
 
             var nav = tabs.querySelector(':scope > .tabs-nav');
+
+            if (!nav) {
+                return;
+            }
+
             var anchor = nav.querySelector('[data-toggle="tab"]:first-of-type');
             var init = new Tabs(anchor, anchor.dataset);
 
@@ -1261,6 +1266,10 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             var nav = tabs.querySelector(':scope > .tabs-nav');
 
+            if (!nav) {
+                return;
+            }
+
             var contents = this.querySelectorAll(':scope > .tab-content');
             var bar = nav.querySelector('.tabs-bar');
             var first = contents[0];
@@ -1284,6 +1293,10 @@ NodeList.prototype.not = function (sel_or_arr) {
             }
 
             var nav = tabs.querySelector(':scope > .tabs-nav');
+
+            if (!nav) {
+                return;
+            }
 
             var contents = this.querySelectorAll(':scope > .tab-content');
             var bar = nav.querySelector('.tabs-bar');

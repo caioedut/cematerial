@@ -144,7 +144,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             ''
         ),
         tabs: (
-            '<div class="layout" style="border: 1px solid #ddd; height: 400px;">' + "\n" +
+            '<div class="layout tabs" style="border: 1px solid #ddd; height: 400px;">' + "\n" +
             '    <div class="layout-sidebar flex">' + "\n" +
             '        <div class="flex-header relative">' + "\n" +
             '            <img class="media-background" src="img/cards.jpg" alt=""/>' + "\n" +
@@ -224,20 +224,44 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '        </div>' + "\n" +
             '    </div>' + "\n" +
             '    <div class="layout-body">' + "\n" +
-            '        <div class="tabs-list pd-md">' + "\n" +
-            '            <div id="tab1" class="tab-content tab-visible">' + "\n" +
-            '                This is the Tab 1' + "\n" +
+            '        <div class="tabs-list">' + "\n" +
+            '            <div id="tab1" class="tab-content tab-visible pd-sm">' + "\n" +
+            '                <div class="pd-md bg-white raised-xs">' + "\n" +
+            '                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium architecto dolore facere facilis ipsam natus neque, nesciunt non, praesentium quam quis sed sint sunt, suscipit tenetur voluptate! Quis, reiciendis.' + "\n" +
+            '                </div>' + "\n" +
             '            </div>' + "\n" +
-            '            <div id="tab2" class="tab-content">' + "\n" +
-            '                This is the Tab 2' + "\n" +
+            '            <div id="tab2" class="tab-content pd-sm">' + "\n" +
+            '                <div class="grid grid-gutter-xs grid-middle">' + "\n" +
+            '                    <div class="grid-col">' + "\n" +
+            '                        <div class="card">' + "\n" +
+            '                            <div class="card-header">' + "\n" +
+            '                                <h2 class="title">Hello</h2>' + "\n" +
+            '                            </div>' + "\n" +
+            '                            <div class="card-body">' + "\n" +
+            '                                This is the Tab 2' + "\n" +
+            '                            </div>' + "\n" +
+            '                        </div>' + "\n" +
+            '                    </div>' + "\n" +
+            '                    <div class="grid-col">' + "\n" +
+            '                        <div class="card">' + "\n" +
+            '                            <div class="card-header">' + "\n" +
+            '                                <h2 class="title">Hello</h2>' + "\n" +
+            '                            </div>' + "\n" +
+            '                            <div class="card-body">' + "\n" +
+            '                                This is the Tab 2' + "\n" +
+            '                            </div>' + "\n" +
+            '                        </div>' + "\n" +
+            '                    </div>' + "\n" +
+            '                </div>' + "\n" +
             '            </div>' + "\n" +
-            '            <div id="tab3" class="tab-content">' + "\n" +
-            '                This is the Tab 3' + "\n" +
+            '            <div id="tab3" class="tab-content pd-md">' + "\n" +
+            '                <p>Lorem ipsum dolor sit amet, pro iriure maiorum ea. Ex cum solum legimus pericula, te sea harum postea inciderint. Graece intellegat scriptorem mei at. Eam modus dolor putent et, diam alterum legendos et vim. Sit reque virtute ea, possim accumsan mei ei, et congue impetus denique eos.</p>' + "\n" +
+            '                <p>Ullum invidunt te usu, discere lobortis no mei. Idque ponderum mel eu, cu putant timeam audire eos. Vim nusquam invidunt eu, pri ei quaestio definiebas vituperatoribus. Id accusam definitionem mea, sapientem urbanitas mnesarchum est et. Eum homero nusquam et, cum putant oblique et.</p>' + "\n" +
             '            </div>' + "\n" +
-            '            <div id="tab4" class="tab-content">' + "\n" +
+            '            <div id="tab4" class="tab-content pd-md">' + "\n" +
             '                This is the Tab 4' + "\n" +
             '            </div>' + "\n" +
-            '            <div id="tab5" class="tab-content">' + "\n" +
+            '            <div id="tab5" class="tab-content pd-md">' + "\n" +
             '                This is the Tab 5' + "\n" +
             '            </div>' + "\n" +
             '        </div>' + "\n" +

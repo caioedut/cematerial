@@ -8,6 +8,8 @@ angular.module('docs').directive('codeFormat', function ($sce) {
             class: '@'
         },
         link: function ($scope, $element) {
+            $scope.expanded = false;
+
             $scope.html = $sce.trustAsHtml($scope.code);
 
             setTimeout(function () {

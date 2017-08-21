@@ -20,3 +20,16 @@ pre code {
     max-width: 100%;
     width: auto;
 }
+
+.expanded-block {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+}
+
+.expanded-block-item {
+    height: calc(100vh - 85px) !important;
+}

@@ -1,16 +1,21 @@
-<div class="card">
+<div class="card animate" ng-class="{'expanded-block' : expanded}">
     <div class="tabs">
-        <div class="tabs-nav bg-grey-1">
-            <a class="waves waves-dark" data-toggle="tab">
-                <i class="md-icon">code</i>
-                Code
-                <div class="waves-body bg-blue-2"></div>
-            </a>
-            <a class="waves waves-dark tab-active" data-toggle="tab">
-                <i class="md-icon">play_arrow</i>
-                Result
-                <div class="waves-body bg-blue-2"></div>
-            </a>
+        <div class="bg-grey-1 grid grid-middle grid-nowrap">
+            <div class="tabs-nav">
+                <a class="waves waves-dark" data-toggle="tab">
+                    <i class="md-icon">code</i>
+                    Code
+                    <div class="waves-body bg-blue-2"></div>
+                </a>
+                <a class="waves waves-dark tab-active" data-toggle="tab">
+                    <i class="md-icon">play_arrow</i>
+                    Result
+                    <div class="waves-body bg-blue-2"></div>
+                </a>
+            </div>
+            <button class="btn btn-circle bg-blue-1-h text-blue-6 col-right mg-right-sm" data-tooltip="Expand block" ng-click="expanded = !expanded">
+                <i class="md-icon">fullscreen{{ expanded ? '_exit' : '' }}</i>
+            </button>
         </div>
         <div class="tabs-list tabs-noswipe {{class}}">
             <div class="tab-content tab-visible">

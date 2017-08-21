@@ -248,9 +248,11 @@
             var index = Math.abs(Math.round(margin / width));
 
             if (margin > 0) {
-                index = contents.length - 1;
-            } else if (index >= contents.length) {
+                // index = contents.length - 1;
                 index = 0;
+            } else if (index >= contents.length) {
+                // index = 0;
+                index = contents.length - 1;
             }
 
             first.classList.remove('no-transition');

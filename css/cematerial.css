@@ -676,7 +676,7 @@ body > .layout {
     z-index: 99;
 
     height: 100%;
-    width: calc(100% - 64px);
+    width: calc(100% - 96px)!important;
     max-width: 340px;
 
     transition: transform .1s linear;

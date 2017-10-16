@@ -175,7 +175,7 @@
                 return;
             }
 
-            var nav = tabs.querySelector(':scope > .tabs-nav');
+            var nav = tabs.querySelector(':scope .tabs-nav');
 
             if (!nav) {
                 return;
@@ -184,7 +184,7 @@
             var anchor = nav.querySelector('[data-toggle="tab"]:first-of-type');
             var init = new Tabs(anchor, anchor.dataset);
 
-            var contents = this.querySelectorAll(':scope > .tab-content');
+            var contents = this.querySelectorAll(':scope .tab-content');
             var bar = nav.querySelector('.tabs-bar');
             var first = contents[0];
 
@@ -204,13 +204,13 @@
                 return;
             }
 
-            var nav = tabs.querySelector(':scope > .tabs-nav');
+            var nav = tabs.querySelector(':scope .tabs-nav');
 
             if (!nav) {
                 return;
             }
 
-            var contents = this.querySelectorAll(':scope > .tab-content');
+            var contents = this.querySelectorAll(':scope .tab-content');
             var bar = nav.querySelector('.tabs-bar');
             var first = contents[0];
 
@@ -232,13 +232,13 @@
                 return;
             }
 
-            var nav = tabs.querySelector(':scope > .tabs-nav');
+            var nav = tabs.querySelector(':scope .tabs-nav');
 
             if (!nav) {
                 return;
             }
 
-            var contents = this.querySelectorAll(':scope > .tab-content');
+            var contents = this.querySelectorAll(':scope .tab-content');
             var bar = nav.querySelector('.tabs-bar');
             var first = contents[0];
 

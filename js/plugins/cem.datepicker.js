@@ -14,8 +14,9 @@
         this.options = extend({}, Datepicker.DEFAULTS, options || {});
         this.input = input;
 
-        var date, y, m, d;
+        var date, min, max;
 
+        // Date value
         if (this.options.date) {
             date = this.options.date;
         } else if (input && input.value) {
@@ -24,13 +25,11 @@
             date = (new Date()).toISOString();
         }
 
-        date = date.substr(0, 10).split('/').reverse().join('-').split('-');
-        y = parseInt(date[0]);
-        m = parseInt(date[1]) - 1;
-        d = parseInt(date[2]);
+        this.date = Datepicker.prepareDate(date);
+        this.dateBase = Datepicker.prepareDate(this.date);
 
-        this.date = Datepicker.getDateNoTimezone(y, m, d);
-        this.dateBase = Datepicker.getDateNoTimezone(y, m, d);
+        this.min = this.options.min ? Datepicker.prepareDate(this.options.min) : null;
+        this.max = this.options.max ? Datepicker.prepareDate(this.options.max) : null;
 
         this.createDatepicker();
 
@@ -43,7 +42,34 @@
     Datepicker.VERSION = '0.0.2';
 
     Datepicker.DEFAULTS = {
-        color: 'blue-6'
+        color: 'blue-6',
+        locale: navigator.language || navigator.languages[0] || 'en-us',
+        btnConfirm: 'Ok',
+        btnCancel: 'Cancel',
+        min: null,
+        max: null
+    };
+
+    Datepicker.prepareDate = function (date) {
+        // Check if is numeric value
+        if (!isNaN(parseFloat(date)) && isFinite(date)) {
+            var sum = parseInt(date);
+            date = new Date();
+            date.setDate(date.getDate() + sum);
+        }
+
+        if (date instanceof Date) {
+            date = date.toISOString();
+        }
+
+        var y, m, d;
+
+        date = date.substr(0, 10).split('/').reverse().join('-').split('-');
+        y = parseInt(date[0]);
+        m = parseInt(date[1]) - 1;
+        d = parseInt(date[2]);
+
+        return Datepicker.getDateNoTimezone(y, m, d);
     };
 
     Datepicker.getDateNoTimezone = function (y, m, d) {
@@ -67,30 +93,12 @@
 
     };
 
-    Datepicker.LOCALE = navigator.language || navigator.languages[0] || 'en-us';
-
-    Datepicker.STRINGS = {
-        'en-us': {
-            confirm: 'Ok',
-            cancel: 'Cancel'
-        },
-        'pt-br': {
-            confirm: 'Ok',
-            cancel: 'Cancelar'
-        },
-        'es': {
-            confirm: 'Ok',
-            cancel: 'Cancelar'
-        }
+    Datepicker.prototype.getWeekdays = function () {
+        var locale = this.options.locale;
+        return [1, 2, 3, 4, 5, 6, 7].map(function (item) {
+            return Datepicker.getDateNoTimezone(2017, 0, item).toLocaleDateString(locale, {weekday: 'long'});
+        })
     };
-
-    Datepicker.MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (item) {
-        return Datepicker.getDateNoTimezone(2017, item, 1).toLocaleDateString(Datepicker.LOCALE, {month: 'long'});
-    });
-
-    Datepicker.WEEKDAYS = [1, 2, 3, 4, 5, 6, 7].map(function (item) {
-        return Datepicker.getDateNoTimezone(2017, 0, item).toLocaleDateString(Datepicker.LOCALE, {weekday: 'long'});
-    });
 
     Datepicker.prototype.toggle = function (_relatedTarget) {
         return this.el.classList.contains('dialog-visible') ? this.hide(_relatedTarget) : this.show(_relatedTarget);
@@ -146,7 +154,6 @@
 
     Datepicker.prototype.generateDays = function () {
         var today = new Date();
-        var strings = Datepicker.STRINGS[Datepicker.LOCALE.toLowerCase()] || Datepicker.STRINGS['en-us'];
         var html = '';
 
         html += '' +
@@ -156,7 +163,7 @@
             '</a>' +
             '<br/>' +
             '<a class="datepicker-date datepicker-active">' +
-            this.date.toLocaleDateString(Datepicker.LOCALE, {weekday: 'short', day: 'numeric', month: 'short'}) +
+            this.date.toLocaleDateString(this.options.locale, {weekday: 'short', day: 'numeric', month: 'short'}) +
             '</a>' +
             '</div>' +
             '<div class="dialog-body">' +
@@ -165,7 +172,7 @@
             '<i class="md-icon md-icon-sm">chevron_left</i>' +
             '</button>' +
             '<div class="grid-col col-fill datepicker-month">' +
-            this.dateBase.toLocaleDateString(Datepicker.LOCALE, {month: 'long', year: 'numeric'}) +
+            this.dateBase.toLocaleDateString(this.options.locale, {month: 'long', year: 'numeric'}) +
             '</div>' +
             '<button class="grid-col btn btn-circle btn-xl datepicker-inc" type="button">' +
             '<i class="md-icon md-icon-sm">chevron_right</i>' +
@@ -176,7 +183,7 @@
             '<thead>' +
             '<tr class="datepicker-week">';
 
-        Datepicker.WEEKDAYS.forEach(function (item) {
+        this.getWeekdays().forEach(function (item) {
             html += '<th>' + item.substr(0, 1).toUpperCase() + '</th>';
         });
 
@@ -213,6 +220,18 @@
                 var is_today = today.getDate() === day && today.getMonth() === this.dateBase.getMonth() && today.getFullYear() === this.dateBase.getFullYear();
                 var is_selectedday = this.date.getDate() === day && this.date.getMonth() === this.dateBase.getMonth() && this.date.getFullYear() === this.dateBase.getFullYear();
 
+                var dt_check = parseInt(this.dateBase.toISOString().substr(0, 8).replace(/\D/g, '') + (day < 10 ? '0' + day : day));
+
+                // Check min date
+                if (this.min && dt_check < parseInt(this.min.toISOString().substr(0, 10).replace(/\D/g, ''))) {
+                    classes.push('datepicker-disabled');
+                }
+
+                // Check max date
+                if (this.max && dt_check > parseInt(this.max.toISOString().substr(0, 10).replace(/\D/g, ''))) {
+                    classes.push('datepicker-disabled');
+                }
+
                 if (is_selectedday) {
                     classes.push('bg-' + this.options.color);
                 } else if (is_today) {
@@ -239,8 +258,8 @@
             '</div>' +
             '</div>' +
             '<div class="dialog-footer">' +
-            '<button class="btn btn-flat text-' + this.options.color + ' datepicker-confirm" type="button" data-toggle="dialog">' + strings.confirm + '</button>' +
-            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + strings.cancel + '</button>' +
+            '<button class="btn btn-flat text-' + this.options.color + ' datepicker-confirm" type="button" data-toggle="dialog">' + this.options.btnConfirm + '</button>' +
+            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + this.options.btnCancel + '</button>' +
             '</div>';
 
         this.el.querySelector('.dialog-content').innerHTML = html;
@@ -268,7 +287,7 @@
         var html = '';
 
         for (min; min <= max; min++) {
-            html += '<a class="datepicker-year ' + (min == year ? 'selected text-' + this.options.color : '') + '" data-year="' + min + '">' + min + '</a>';
+            html += '<a class="datepicker-year ' + (min === year ? 'selected text-' + this.options.color : '') + '" data-year="' + min + '">' + min + '</a>';
         }
 
         yearlist.innerHTML = html;
@@ -315,7 +334,7 @@
             init.dateBase.setMonth(init.dateBase.getMonth() + 1);
             init.generateDays();
         })
-        .on('click', '.datepicker-day a', function () {
+        .on('click', '.datepicker-day a:not(.datepicker-disabled)', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
             init.date.setDate(this.dataset.day);
             init.date.setMonth(init.dateBase.getMonth());
@@ -325,7 +344,7 @@
         .on('click', '.datepicker-confirm', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
             if (init.input) {
-                init.input.value = init.date.toLocaleDateString();
+                init.input.value = init.date.toLocaleDateString(init.options.locale);
                 init.input.dataset.date = init.date.toISOString();
                 // Event change
                 init.input.dispatchEvent(new CustomEvent('change'));

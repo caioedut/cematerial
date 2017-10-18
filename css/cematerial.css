@@ -1743,6 +1743,11 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     display: block;
 }
 
+.datepicker-disabled {
+    opacity: .6;
+    pointer-events: none;
+}
+
 .datepicker-yearlist {
     position: absolute;
     top: 0;

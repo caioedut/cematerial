@@ -1675,8 +1675,9 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.options = extend({}, Datepicker.DEFAULTS, options || {});
         this.input = input;
 
-        var date, y, m, d;
+        var date, min, max;
 
+        // Date value
         if (this.options.date) {
             date = this.options.date;
         } else if (input && input.value) {
@@ -1685,13 +1686,11 @@ NodeList.prototype.not = function (sel_or_arr) {
             date = (new Date()).toISOString();
         }
 
-        date = date.substr(0, 10).split('/').reverse().join('-').split('-');
-        y = parseInt(date[0]);
-        m = parseInt(date[1]) - 1;
-        d = parseInt(date[2]);
+        this.date = Datepicker.prepareDate(date);
+        this.dateBase = Datepicker.prepareDate(this.date);
 
-        this.date = Datepicker.getDateNoTimezone(y, m, d);
-        this.dateBase = Datepicker.getDateNoTimezone(y, m, d);
+        this.min = this.options.min ? Datepicker.prepareDate(this.options.min) : null;
+        this.max = this.options.max ? Datepicker.prepareDate(this.options.max) : null;
 
         this.createDatepicker();
 
@@ -1707,7 +1706,31 @@ NodeList.prototype.not = function (sel_or_arr) {
         color: 'blue-6',
         locale: navigator.language || navigator.languages[0] || 'en-us',
         btnConfirm: 'Ok',
-        btnCancel: 'Cancel'
+        btnCancel: 'Cancel',
+        min: null,
+        max: null
+    };
+
+    Datepicker.prepareDate = function (date) {
+        // Check if is numeric value
+        if (!isNaN(parseFloat(date)) && isFinite(date)) {
+            var sum = parseInt(date);
+            date = new Date();
+            date.setDate(date.getDate() + sum);
+        }
+
+        if (date instanceof Date) {
+            date = date.toISOString();
+        }
+
+        var y, m, d;
+
+        date = date.substr(0, 10).split('/').reverse().join('-').split('-');
+        y = parseInt(date[0]);
+        m = parseInt(date[1]) - 1;
+        d = parseInt(date[2]);
+
+        return Datepicker.getDateNoTimezone(y, m, d);
     };
 
     Datepicker.getDateNoTimezone = function (y, m, d) {
@@ -1858,6 +1881,18 @@ NodeList.prototype.not = function (sel_or_arr) {
                 var is_today = today.getDate() === day && today.getMonth() === this.dateBase.getMonth() && today.getFullYear() === this.dateBase.getFullYear();
                 var is_selectedday = this.date.getDate() === day && this.date.getMonth() === this.dateBase.getMonth() && this.date.getFullYear() === this.dateBase.getFullYear();
 
+                var dt_check = parseInt(this.dateBase.toISOString().substr(0, 8).replace(/\D/g, '') + (day < 10 ? '0' + day : day));
+
+                // Check min date
+                if (this.min && dt_check < parseInt(this.min.toISOString().substr(0, 10).replace(/\D/g, ''))) {
+                    classes.push('datepicker-disabled');
+                }
+
+                // Check max date
+                if (this.max && dt_check > parseInt(this.max.toISOString().substr(0, 10).replace(/\D/g, ''))) {
+                    classes.push('datepicker-disabled');
+                }
+
                 if (is_selectedday) {
                     classes.push('bg-' + this.options.color);
                 } else if (is_today) {
@@ -1960,7 +1995,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             init.dateBase.setMonth(init.dateBase.getMonth() + 1);
             init.generateDays();
         })
-        .on('click', '.datepicker-day a', function () {
+        .on('click', '.datepicker-day a:not(.datepicker-disabled)', function () {
             var init = this.closest('.datepicker-dialog')['cem.datepicker'];
             init.date.setDate(this.dataset.day);
             init.date.setMonth(init.dateBase.getMonth());

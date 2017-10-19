@@ -696,7 +696,7 @@ body > .layout {
     position: relative;
     margin-left: auto !important;
     transition: width .3s ease;
-    width: 100%;
+    width: 100% !important;
 }
 
 .layout-sidebar-backdrop {
@@ -756,7 +756,7 @@ body > .layout {
     }
 
     .layout-sidebar ~ * {
-        width: calc(100% - 280px);
+        width: calc(100% - 280px) !important;
     }
 
     .layout-sidebar-backdrop {

@@ -1,6 +1,6 @@
 {
   "name": "cematerial",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CSS and JS framework based on Google Material Design",
   "main": "js/cematerial.js",
   "repository": "https://github.com/caioedut/cematerial.git",

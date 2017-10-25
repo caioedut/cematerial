@@ -7,7 +7,7 @@ angular.module('docs').controller('components.modalsCtrl', function ($scope) {
             '    Open Modal' + "\n" +
             '</button>' + "\n" +
             '<div id="modal1" class="modal">' + "\n" +
-            '    <div class="modal-header bg-blue-6 app-bar">' + "\n" +
+            '    <div class="modal-header bg-blue-6 toolbar">' + "\n" +
             '        <button class="btn btn-icon btn-circle bg-blue-6" data-toggle="modal">' + "\n" +
             '            <i class="md-icon">arrow_back</i>' + "\n" +
             '        </button>' + "\n" +

@@ -41,7 +41,6 @@
         </div>
         <div class="flex-body">
             <div class="layout-nav">
-                <a href="#appbar" data-toggle="sidebar">App Bar</a>
                 <a href="#buttons" data-toggle="sidebar">Buttons</a>
                 <a href="#cards" data-toggle="sidebar">Cards</a>
                 <a href="#chips" data-toggle="sidebar">Chips</a>
@@ -62,11 +61,12 @@
                 <a href="#textflow" data-toggle="sidebar">Text flow</a>
                 <!-- <a href="#toolbars" data-toggle="sidebar">Toolbars</a> -->
                 <a href="#toasts" data-toggle="sidebar">Toasts</a>
+                <a href="#toolbar" data-toggle="sidebar">Toolbar</a>
                 <a href="#tooltips" data-toggle="sidebar">Tooltips</a>
             </div>
         </div>
     </div>
-    <header class="layout-header bg-blue-6 app-bar">
+    <header class="layout-header bg-blue-6 toolbar">
         <button class="btn btn-icon btn-circle bg-blue-6 layout-toggler" data-toggle="sidebar" data-target="#side-main">
             <i class="md-icon">menu</i>
         </button>
@@ -76,27 +76,6 @@
     </header>
     <main class="layout-body">
 
-        <section id="appbar" class="pd-lg">
-            <h1>App Bar</h1>
-            <div>
-                <div class="app-bar bg-purple-6">
-                    <button class="btn btn-icon btn-circle bg-purple-6 waves">
-                        <i class="md-icon">menu</i>
-                    </button>
-                    <h1 class="layout-title mg-left-md">
-                        Layout Header
-                    </h1>
-                    <button class="btn btn-icon btn-circle bg-purple-6 waves col-right">
-                        <i class="md-icon">search</i>
-                    </button>
-                    <button class="btn btn-icon btn-circle bg-purple-6 waves">
-                        <i class="md-icon">more_vert</i>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <div class="divider-horizontal"></div>
         <section id="buttons" class="pd-lg">
             <h1>Buttons</h1>
             <div class="grid grid-gutter">
@@ -737,7 +716,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="layout-header bg-purple-6 app-bar">
+                        <div class="layout-header bg-purple-6 toolbar">
                             <button class="btn btn-icon btn-circle bg-purple-6 layout-toggler" data-toggle="sidebar" data-target="#side-example">
                                 <i class="md-icon">menu</i>
                             </button>
@@ -784,7 +763,7 @@
             </a>
 
             <div id="modal" class="modal">
-                <div class="modal-header bg-blue-6 app-bar">
+                <div class="modal-header bg-blue-6 toolbar">
                     <button class="btn btn-icon btn-circle bg-blue-6" data-toggle="modal">
                         <i class="md-icon">arrow_back</i>
                     </button>
@@ -1239,6 +1218,27 @@
                 <button class="btn btn-flat text-blue-6 bg-grey-2" data-toggle="toast" data-toast="Toast TWO">
                     Show Toast 2
                 </button>
+            </div>
+        </section>
+
+        <div class="divider-horizontal"></div>
+        <section id="toolbar" class="pd-lg">
+            <h1>Toolbar</h1>
+            <div>
+                <div class="toolbar bg-purple-6">
+                    <button class="btn btn-icon btn-circle bg-purple-6 waves">
+                        <i class="md-icon">menu</i>
+                    </button>
+                    <h1 class="layout-title mg-left-md">
+                        Layout Header
+                    </h1>
+                    <button class="btn btn-icon btn-circle bg-purple-6 waves col-right">
+                        <i class="md-icon">search</i>
+                    </button>
+                    <button class="btn btn-icon btn-circle bg-purple-6 waves">
+                        <i class="md-icon">more_vert</i>
+                    </button>
+                </div>
             </div>
         </section>
 

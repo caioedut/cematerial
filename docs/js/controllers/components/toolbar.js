@@ -1,9 +1,9 @@
-angular.module('docs').controller('components.appbarCtrl', function ($scope) {
-    $scope.$parent.title = 'App Bar';
+angular.module('docs').controller('components.toolbarCtrl', function ($scope) {
+    $scope.$parent.title = 'Toolbar';
 
     $scope.codes = {
         basic: (
-            '<div class="layout-header bg-blue-6 app-bar">' + "\n" +
+            '<div class="layout-header bg-blue-6 toolbar">' + "\n" +
             '    <button class="btn btn-icon btn-circle bg-blue-6 waves">' + "\n" +
             '        <i class="md-icon">menu</i>' + "\n" +
             '    </button>' + "\n" +
@@ -20,7 +20,7 @@ angular.module('docs').controller('components.appbarCtrl', function ($scope) {
             ''
         ),
         search: (
-            '<div class="layout-header bg-blue-6 app-bar">' + "\n" +
+            '<div class="layout-header bg-blue-6 toolbar">' + "\n" +
             '    <button class="btn btn-icon btn-circle bg-blue-6 waves">' + "\n" +
             '        <i class="md-icon">menu</i>' + "\n" +
             '    </button>' + "\n" +

@@ -25,7 +25,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '            Sidebar' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="layout-header bg-blue-6 app-bar">' + "\n" +
+            '    <div class="layout-header bg-blue-6 toolbar">' + "\n" +
             '        <button class="btn btn-icon btn-circle bg-blue-6 layout-toggler" data-toggle="sidebar">' + "\n" +
             '            <i class="md-icon">menu</i>' + "\n" +
             '        </button>' + "\n" +
@@ -118,7 +118,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '            </ul>' + "\n" +
             '        </div>' + "\n" +
             '    </div>' + "\n" +
-            '    <div class="layout-header bg-blue-6 app-bar">' + "\n" +
+            '    <div class="layout-header bg-blue-6 toolbar">' + "\n" +
             '        <button class="btn btn-icon btn-circle bg-blue-6 layout-toggler" data-toggle="sidebar">' + "\n" +
             '            <i class="md-icon">menu</i>' + "\n" +
             '        </button>' + "\n" +
@@ -207,7 +207,7 @@ angular.module('docs').controller('layout.overviewCtrl', function ($scope) {
             '        </div>' + "\n" +
             '    </div>' + "\n" +
             '    <div class="layout-header bg-blue-6">' + "\n" +
-            '        <div class="app-bar">' + "\n" +
+            '        <div class="toolbar">' + "\n" +
             '            <button class="btn btn-icon btn-circle bg-blue-6 layout-toggler" data-toggle="sidebar">' + "\n" +
             '                <i class="md-icon">menu</i>' + "\n" +
             '            </button>' + "\n" +

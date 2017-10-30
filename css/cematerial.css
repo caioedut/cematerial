@@ -1010,6 +1010,7 @@ body > .layout {
 .card-body,
 .flex-body {
     overflow: auto;
+    will-change: scroll-position;
 }
 
 .layout-footer,

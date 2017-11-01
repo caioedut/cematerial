@@ -2868,6 +2868,12 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     position: fixed !important;
 }
 
+.sticky {
+    position: sticky !important;
+    top: 0;
+    z-index: 1;
+}
+
 .top {
     top: 0;
 }

@@ -1441,6 +1441,7 @@ table td:last-child {
 }
 
 .input:not([type="checkbox"]):not([type="radio"]) {
+    border-radius: 0;
     display: block;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
     font-size: 15px;
@@ -2979,6 +2980,15 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .btn,
 [data-toggle] {
     -webkit-tap-highlight-color: transparent;
+}
+
+.btn,
+.input,
+.waves,
+.menu a,
+.layout-nav a,
+[data-toggle] {
+    touch-action: manipulation;
 }
 
 .draggable-on,

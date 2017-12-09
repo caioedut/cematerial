@@ -125,7 +125,7 @@
             var init = this['cem.tooltip'] || new Tooltip(this);
             init.hide(this);
         })
-        .on('wheel mousewheel DOMMouseScroll touchstart', function () {
+        .on('wheel mousewheel DOMMouseScroll touchstart click', function () {
             document.querySelectorAll('.tooltip-visible').forEach(function (node) {
                 node.parentNode.removeChild(node);
             });

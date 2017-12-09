@@ -832,6 +832,11 @@ NodeList.prototype.not = function (sel_or_arr) {
         // Sidebar Navs
         .on('click', '[data-toggle="nav"]', function () {
             var sidebar = this.closest('.layout-sidebar');
+
+            if (!sidebar) {
+                return;
+            }
+
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
             init.show(this);
 
@@ -862,6 +867,11 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
+
+            if (!sidebar) {
+                return;
+            }
+
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             // GET TRANSLATE X VALUE
@@ -885,6 +895,11 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
+
+            if (!sidebar) {
+                return;
+            }
+
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
@@ -916,6 +931,11 @@ NodeList.prototype.not = function (sel_or_arr) {
 
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
+
+            if (!sidebar) {
+                return;
+            }
+
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
@@ -1649,7 +1669,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             var init = this['cem.tooltip'] || new Tooltip(this);
             init.hide(this);
         })
-        .on('wheel mousewheel DOMMouseScroll touchstart', function () {
+        .on('wheel mousewheel DOMMouseScroll touchstart click', function () {
             document.querySelectorAll('.tooltip-visible').forEach(function (node) {
                 node.parentNode.removeChild(node);
             });

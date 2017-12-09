@@ -93,6 +93,11 @@
         // Sidebar Navs
         .on('click', '[data-toggle="nav"]', function () {
             var sidebar = this.closest('.layout-sidebar');
+
+            if (!sidebar) {
+                return;
+            }
+
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
             init.show(this);
 
@@ -123,10 +128,15 @@
 
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
+
+            if (!sidebar) {
+                return;
+            }
+
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             // GET TRANSLATE X VALUE
-            var translate_x = parseInt(window.getComputedStyle(sidebar, null).getPropertyValue('transform').split(',')[4]);
+            var translate_x = parseInt(sidebar.css('transform').split(',')[4]);
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
             var is_leftedge = e.swipeFromX - el.offsetLeft < 16;
@@ -146,6 +156,11 @@
 
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
+
+            if (!sidebar) {
+                return;
+            }
+
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
@@ -177,6 +192,11 @@
 
             var el = this;
             var sidebar = el.querySelector('.layout-sidebar');
+
+            if (!sidebar) {
+                return;
+            }
+
             var init = sidebar['cem.sidebar'] || new Sidebar(sidebar);
 
             var is_horizontal = Math.abs(e.swipeOffsetX) > Math.abs(e.swipeOffsetY);
@@ -190,7 +210,12 @@
             // init.backdrop.removeAttribute('style');
 
             if (bl_swipe) {
-                e.swipeOffsetX > 0 ? init.show() : init.hide();
+                if (e.swipeOffsetX > 0) {
+                    sidebar.classList.add('layout-sidebar-visible');
+                    setTimeout(init.show.bind(init), 100);
+                } else {
+                    init.hide();
+                }
             }
         })
     ;

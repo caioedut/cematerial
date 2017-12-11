@@ -10,7 +10,6 @@ https://caioedut.github.io/cematerial/docs (under construction)
 - [Material Icons Font](https://fonts.googleapis.com/icon?family=Material+Icons)
 
 ## How to use
-
 Include the responsive metatag at the beginning of your .html file.
 
 ```html
@@ -23,7 +22,14 @@ Include the required fonts.
 <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
 <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
 ```
-Finally, include CEMaterial's JS and CSS files.
+
+### NPM
+```
+npm install cematerial
+```
+
+### Manual Import
+Include CEMaterial's JS and CSS files.
 
 ```html
 <script type="text/javascript" src="js/cematerial.min.js"></script>

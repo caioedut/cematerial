@@ -2943,6 +2943,14 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     border: none !important;
 }
 
+.no-round {
+    border-radius: 0 !important;
+}
+
+.no-wrap {
+    white-space: nowrap !important;
+}
+
 .no-shadow {
     box-shadow: none !important;
 }
@@ -3032,6 +3040,19 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .set-block {
     display: block;
     width: 100%;
+}
+
+/*VERTICAL ALIGN*/
+.vertical-top {
+    vertical-align: top !important;
+}
+
+.vertical-middle {
+    vertical-align: middle !important;
+}
+
+.vertical-bottom {
+    vertical-align: bottom !important;
 }
 
 /*RAISED*/

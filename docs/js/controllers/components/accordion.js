@@ -12,17 +12,20 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
         {
             name: 'arrow',
             default: 'false',
-            values: 'true/false'
+            values: 'true/false',
+            description: 'Show arrow up/down no panel header'
         },
         {
             name: 'margin',
             default: 'false',
-            values: 'true/false'
+            values: 'true/false',
+            description: 'Add spaces between panels when are open'
         },
         {
             name: 'popout',
             default: 'false',
-            values: 'true/false'
+            values: 'true/false',
+            description: 'Panel popouts when opened'
         }
     ];
 

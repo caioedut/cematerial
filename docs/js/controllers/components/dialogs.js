@@ -8,6 +8,21 @@ angular.module('docs').controller('components.dialogsCtrl', function ($scope) {
         'cem.dialog.hide': 'Dialog is closed'
     };
 
+    $scope.options = [
+        {
+            name: 'autoclose',
+            default: 'true',
+            values: 'true/false',
+            description: 'Close the dialog if an user clicks on backdrop'
+        },
+        {
+            name: 'keyboard',
+            default: 'true',
+            values: 'true/false',
+            description: 'Close the dialog if an user press ESC key'
+        }
+    ];
+
     $scope.codes = {
         basic: (
             '<button class="btn bg-blue-6" type="button" data-toggle="dialog" data-target="#dialog1">' + "\n" +

@@ -1,5 +1,46 @@
 <section class="pd-lg">
-    <table-content color="{{color}}"></table-content>
+    <div class="grid grid-gutter">
+        <div>
+            <table-content color="{{color}}"></table-content>
+        </div>
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <b class="title">Events</b>
+                </div>
+                <div class="card-body no-padding">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Event name</th>
+                                <th>Occurs when</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><code>cem.datepicker.beforeShow</code></td>
+                                <td>Datepicker dialog is called, but not opened yet</td>
+                            </tr>
+                            <tr>
+                                <td><code>cem.datepicker.show</code></td>
+                                <td>Datepicker dialog is opened</td>
+                            </tr>
+                            <tr>
+                                <td><code>cem.datepicker.beforeHide</code></td>
+                                <td>Datepicker dialog close action is triggered, but not closed yet</td>
+                            </tr>
+                            <tr>
+                                <td><code>cem.datepicker.hide</code></td>
+                                <td>Datepicker dialog is closed</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section class="pd-lg">
@@ -32,4 +73,13 @@
     </ul>
 
     <code-format code="{{codes.min_max}}"></code-format>
+</section>
+
+<section class="pd-lg">
+    <h2>Custom Handler</h2>
+    <p>
+        You can use custom elements (not a input) to handle the datepicker, like a button or an icon, using the <code>[data-toggle="datepicker"]</code> and <code>[data-target="#inputDate"]</code>
+    </p>
+
+    <code-format code="{{codes.handler}}"></code-format>
 </section>

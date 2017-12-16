@@ -168,7 +168,7 @@
             var init = new Tabs(this, this.dataset);
             init.show(this);
         })
-        .on('swipestart', '.tabs-list:not(.tabs-noswipe)', function (e) {
+        .on('swipestart', '.tabs-list:not(.tabs-noswipe)', function () {
             var tabs = this.closest('.tabs');
 
             if (!tabs) {
@@ -182,7 +182,7 @@
             }
 
             var anchor = nav.querySelector('[data-toggle="tab"]:first-of-type');
-            var init = new Tabs(anchor, anchor.dataset);
+            new Tabs(anchor, anchor.dataset);
 
             var contents = this.querySelectorAll(':scope .tab-content');
             var bar = nav.querySelector('.tabs-bar');
@@ -225,7 +225,7 @@
                 bar.style.transform = 'translateX(' + translateX + 'px)';
             }
         })
-        .on('swipeend', '.tabs-list:not(.tabs-noswipe)', function (e) {
+        .on('swipeend', '.tabs-list:not(.tabs-noswipe)', function () {
             var tabs = this.closest('.tabs');
 
             if (!tabs) {

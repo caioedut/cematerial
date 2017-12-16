@@ -41,7 +41,7 @@ function empty(mixedVar) {
     var key;
     var i;
     var len;
-    var emptyValues = [undef, null, false, 0, '', '0'];
+    var emptyValues = [undef, null, false, 0, '', '0', 'null', 'false'];
     for (i = 0, len = emptyValues.length; i < len; i++) {
         if (mixedVar === emptyValues[i]) {
             return true;
@@ -1248,7 +1248,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             var init = new Tabs(this, this.dataset);
             init.show(this);
         })
-        .on('swipestart', '.tabs-list:not(.tabs-noswipe)', function (e) {
+        .on('swipestart', '.tabs-list:not(.tabs-noswipe)', function () {
             var tabs = this.closest('.tabs');
 
             if (!tabs) {
@@ -1262,7 +1262,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             }
 
             var anchor = nav.querySelector('[data-toggle="tab"]:first-of-type');
-            var init = new Tabs(anchor, anchor.dataset);
+            new Tabs(anchor, anchor.dataset);
 
             var contents = this.querySelectorAll(':scope .tab-content');
             var bar = nav.querySelector('.tabs-bar');
@@ -1305,7 +1305,7 @@ NodeList.prototype.not = function (sel_or_arr) {
                 bar.style.transform = 'translateX(' + translateX + 'px)';
             }
         })
-        .on('swipeend', '.tabs-list:not(.tabs-noswipe)', function (e) {
+        .on('swipeend', '.tabs-list:not(.tabs-noswipe)', function () {
             var tabs = this.closest('.tabs');
 
             if (!tabs) {
@@ -1695,7 +1695,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.options = extend({}, Datepicker.DEFAULTS, options || {});
         this.input = input;
 
-        var date, min, max;
+        var date;
 
         // Date value
         if (this.options.date) {
@@ -1727,6 +1727,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         locale: navigator.language || navigator.languages[0] || 'en-us',
         btnConfirm: 'Ok',
         btnCancel: 'Cancel',
+        btnClear: 'Clear',
         min: null,
         max: null
     };
@@ -1940,8 +1941,13 @@ NodeList.prototype.not = function (sel_or_arr) {
             '</div>' +
             '<div class="dialog-footer">' +
             '<button class="btn btn-flat text-' + this.options.color + ' datepicker-confirm" type="button" data-toggle="dialog">' + this.options.btnConfirm + '</button>' +
-            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + this.options.btnCancel + '</button>' +
-            '</div>';
+            '<button class="btn btn-flat text-' + this.options.color + '" type="button" data-toggle="dialog">' + this.options.btnCancel + '</button>';
+
+        if (this.options.btnClear) {
+            html += '<button class="btn btn-flat pull-left text-' + this.options.color + ' datepicker-clear" type="button" data-toggle="dialog">' + this.options.btnClear + '</button>';
+        }
+
+        html += '</div>';
 
         this.el.querySelector('.dialog-content').innerHTML = html;
 
@@ -1985,8 +1991,9 @@ NodeList.prototype.not = function (sel_or_arr) {
 
     // Events
     document
-        .on('focusin', '[data-toggle="datepicker"]', function () {
-            var init = new Datepicker(this.dataset, this);
+        .on('click', '[data-toggle="datepicker"]', function () {
+            var $input = this.is('input') ? this : CEMaterial.getTarget(this);
+            var init = new Datepicker(this.dataset, $input);
             init.toggle(this);
         })
         .on('click', '.datepicker-yearselect', function () {
@@ -2027,6 +2034,15 @@ NodeList.prototype.not = function (sel_or_arr) {
             if (init.input) {
                 init.input.value = init.date.toLocaleDateString(init.options.locale);
                 init.input.dataset.date = init.date.toISOString();
+                // Event change
+                init.input.dispatchEvent(new CustomEvent('change'));
+            }
+        })
+        .on('click', '.datepicker-clear', function () {
+            var init = this.closest('.datepicker-dialog')['cem.datepicker'];
+            if (init.input) {
+                init.input.value = '';
+                delete init.input.dataset.date;
                 // Event change
                 init.input.dispatchEvent(new CustomEvent('change'));
             }

@@ -1,6 +1,13 @@
 angular.module('docs').controller('components.tabsCtrl', function ($scope) {
     $scope.$parent.title = 'Tabs';
 
+    $scope.events = {
+        'cem.tabs.beforeShow': 'Tab content is called to show, but not shown yet',
+        'cem.tabs.show': 'Tab content is shown',
+        'cem.tabs.beforeHide': 'Tab content hide action is triggered, but not hidden yet',
+        'cem.tabs.hide': 'Tab content is hidden'
+    };
+
     $scope.codes = {
         basic: (
             '<div class="tabs">' + "\n" +
@@ -74,5 +81,5 @@ angular.module('docs').controller('components.tabsCtrl', function ($scope) {
             '</div>' + "\n" +
             ''
         )
-    }
+    };
 });

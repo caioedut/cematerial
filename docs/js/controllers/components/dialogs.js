@@ -1,6 +1,13 @@
 angular.module('docs').controller('components.dialogsCtrl', function ($scope) {
     $scope.$parent.title = 'Dialogs';
 
+    $scope.events = {
+        'cem.dialog.beforeShow': 'Dialog is called, but not opened yet',
+        'cem.dialog.show': 'Dialog is opened',
+        'cem.dialog.beforeHide': 'Dialog close action is triggered, but not closed yet',
+        'cem.dialog.hide': 'Dialog is closed'
+    };
+
     $scope.codes = {
         basic: (
             '<button class="btn bg-blue-6" type="button" data-toggle="dialog" data-target="#dialog1">' + "\n" +
@@ -77,5 +84,5 @@ angular.module('docs').controller('components.dialogsCtrl', function ($scope) {
             '    </div>' + "\n" +
             '</div>'
         )
-    }
+    };
 });

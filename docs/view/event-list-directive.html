@@ -1,0 +1,23 @@
+<div class="card" ng-if="events">
+    <div class="card-header">
+        <b class="title">Events</b>
+    </div>
+    <div class="card-body no-padding">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                <tr>
+                    <th>Event name</th>
+                    <th>Occurs when</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(i, event) in events">
+                    <td><code>{{ i }}</code></td>
+                    <td>{{ event }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

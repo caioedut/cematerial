@@ -1,6 +1,31 @@
 angular.module('docs').controller('components.accordionCtrl', function ($scope) {
     $scope.$parent.title = 'Accordion';
 
+    $scope.events = {
+        'cem.panel.beforeShow': 'Panel content is called to open, but not opened yet',
+        'cem.panel.show': 'Panel content is opened',
+        'cem.panel.beforeHide': 'Panel content close action is triggered, but not closed yet',
+        'cem.panel.hide': 'Panel content is closed'
+    };
+
+    $scope.options = [
+        {
+            name: 'arrow',
+            default: 'false',
+            values: 'true/false'
+        },
+        {
+            name: 'margin',
+            default: 'false',
+            values: 'true/false'
+        },
+        {
+            name: 'popout',
+            default: 'false',
+            values: 'true/false'
+        }
+    ];
+
     $scope.codes = {
         basic: (
             '<div class="panel-group">' + "\n" +
@@ -128,5 +153,5 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
             '</div>' + "\n" +
             ''
         )
-    }
+    };
 });

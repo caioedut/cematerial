@@ -1,6 +1,13 @@
 angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
     $scope.$parent.title = 'Dropdown';
 
+    $scope.events = {
+        'cem.dialog.beforeShow': 'Dropdown content is called to open, but not opened yet',
+        'cem.dialog.show': 'Dropdown content is opened',
+        'cem.dialog.beforeHide': 'Dropdown content close action is triggered, but not closed yet',
+        'cem.dialog.hide': 'Dropdown content is closed'
+    };
+
     $scope.codes = {
         basic: (
             '<div class="dropdown"> <!-- Init dropdown -->' + "\n" +
@@ -140,5 +147,5 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
             '    </div>' + "\n" +
             '</div>'
         )
-    }
+    };
 });

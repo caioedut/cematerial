@@ -1,6 +1,13 @@
 angular.module('docs').controller('components.datepickerCtrl', function ($scope) {
     $scope.$parent.title = 'Datepicker';
 
+    $scope.events = {
+        'cem.datepicker.beforeShow': 'Datepicker dialog is called, but not opened yet',
+        'cem.datepicker.show': 'Datepicker dialog is opened',
+        'cem.datepicker.beforeHide': 'Datepicker dialog close action is triggered, but not closed yet',
+        'cem.datepicker.hide': 'Datepicker dialog is closed'
+    };
+
     $scope.codes = {
         basic: (
             '<input class="input" value="2017-01-01" size="10" readonly data-toggle="datepicker"/>'
@@ -20,5 +27,5 @@ angular.module('docs').controller('components.datepickerCtrl', function ($scope)
             '</div>' + "\n" +
             ''
         )
-    }
+    };
 });

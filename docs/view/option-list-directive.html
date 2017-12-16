@@ -1,0 +1,25 @@
+<div class="card" ng-if="options">
+    <div class="card-header">
+        <b class="title">Data Options</b>
+    </div>
+    <div class="card-body no-padding">
+        <div class="table-responsive">
+            <table>
+                <thead>
+                <tr>
+                    <th>Option name</th>
+                    <th>Default</th>
+                    <th>Usage values</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="option in options">
+                    <td><code>data-{{ option.name }}</code></td>
+                    <td>{{ option.default }}</td>
+                    <td>{{ option.values }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

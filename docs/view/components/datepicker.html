@@ -1,44 +1,10 @@
 <section class="pd-lg">
     <div class="grid grid-gutter">
-        <div>
-            <table-content color="{{color}}"></table-content>
+        <div class="grid-col">
+            <table-content color="{{ color }}"></table-content>
         </div>
-        <div>
-            <div class="card">
-                <div class="card-header">
-                    <b class="title">Events</b>
-                </div>
-                <div class="card-body no-padding">
-                    <div class="table-responsive">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Event name</th>
-                                <th>Occurs when</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><code>cem.datepicker.beforeShow</code></td>
-                                <td>Datepicker dialog is called, but not opened yet</td>
-                            </tr>
-                            <tr>
-                                <td><code>cem.datepicker.show</code></td>
-                                <td>Datepicker dialog is opened</td>
-                            </tr>
-                            <tr>
-                                <td><code>cem.datepicker.beforeHide</code></td>
-                                <td>Datepicker dialog close action is triggered, but not closed yet</td>
-                            </tr>
-                            <tr>
-                                <td><code>cem.datepicker.hide</code></td>
-                                <td>Datepicker dialog is closed</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <div class="grid-col">
+            <event-list events="{{ events }}"></event-list>
         </div>
     </div>
 </section>

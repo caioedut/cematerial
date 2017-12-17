@@ -8,6 +8,15 @@ angular.module('docs').controller('components.dropdownCtrl', function ($scope) {
         'cem.dialog.hide': 'Dropdown content is closed'
     };
 
+    $scope.options = [
+        {
+            name: 'autoclose',
+            default: 'true',
+            values: 'true/false',
+            description: 'Close the dialog if an user clicks outside'
+        }
+    ];
+
     $scope.codes = {
         basic: (
             '<div class="dropdown"> <!-- Init dropdown -->' + "\n" +

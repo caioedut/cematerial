@@ -1473,9 +1473,11 @@ NodeList.prototype.not = function (sel_or_arr) {
                 btn_body.classList.add('grid-col');
 
                 var dft = {
-                    color: 'blue-6', onClick: function () {
+                    color: 'blue-5',
+                    onClick: function () {
                     }
                 };
+
                 that.options.actions.forEach(function (opts) {
                     opts = extend({}, dft, opts);
 
@@ -1723,7 +1725,7 @@ NodeList.prototype.not = function (sel_or_arr) {
     Datepicker.VERSION = '0.0.2';
 
     Datepicker.DEFAULTS = {
-        color: 'blue-6',
+        color: 'blue-5',
         locale: navigator.language || navigator.languages[0] || 'en-us',
         btnConfirm: 'Ok',
         btnCancel: 'Cancel',

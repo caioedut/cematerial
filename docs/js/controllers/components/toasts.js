@@ -8,6 +8,21 @@ angular.module('docs').controller('components.toastsCtrl', function ($scope) {
         'cem.toast.hide': 'Toast is hidden'
     };
 
+    $scope.options = [
+        {
+            name: 'duration',
+            default: '4000',
+            values: 'integer',
+            description: 'Sets the duration in miliseconds to display the toast'
+        },
+        {
+            name: 'parent',
+            default: 'body > .layout',
+            values: 'string',
+            description: 'Define the element to append the toast'
+        }
+    ];
+
     $scope.codes = {
         basic: (
             '<button class="btn bg-blue-6" data-toggle="toast" data-toast="This is my toast example">' + "\n" +

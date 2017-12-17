@@ -8,6 +8,15 @@ angular.module('docs').controller('components.tabsCtrl', function ($scope) {
         'cem.tabs.hide': 'Tab content is hidden'
     };
 
+    $scope.options = [
+        {
+            name: 'swipe',
+            default: 'true',
+            values: 'true/false',
+            description: 'Users can swipe the tab content to switch between tabs'
+        }
+    ];
+
     $scope.codes = {
         basic: (
             '<div class="tabs">' + "\n" +

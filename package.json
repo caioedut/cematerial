@@ -1,7 +1,7 @@
 {
   "name": "cematerial",
   "description": "CSS and JS framework based on Google Material Design",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "author": {
     "name": "Caio Eduardo",
     "email": "caioedut@gmail.com",
@@ -25,7 +25,10 @@
     "type": "git",
     "url": "git+https://github.com/caioedut/cematerial"
   },
-  "dependencies": {},
+  "dependencies": {
+    "material-design-icons": "^3.0.1",
+    "roboto-fontface": "^0.8.0"
+  },
   "license": "MIT",
   "main": "js/cematerial.js"
 }

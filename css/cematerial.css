@@ -1187,6 +1187,7 @@ body > .layout {
 /*RIPPLE / WAVES*/
 .waves {
     position: relative;
+    will-change: height, width, top, left, opacity, transform;
 }
 
 .waves-overflow {

@@ -671,6 +671,7 @@ body > .layout {
     right: 100%;
 
     background-color: #fff;
+    color: #333;
 
     overflow-y: auto;
     z-index: 99;
@@ -1093,6 +1094,7 @@ body > .layout {
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     border-radius: 2px;
+    color: #333;
 }
 
 .dialog-header,
@@ -1158,6 +1160,7 @@ body > .layout {
     top: 0;
     left: 0;
     background-color: #fff;
+    color: #333;
     z-index: 99;
 
     transform: translateY(20%);
@@ -1220,6 +1223,7 @@ table {
     border-spacing: 0;
     border-radius: 2px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    color: #333;
     width: 100%;
 }
 
@@ -1285,8 +1289,10 @@ table td:last-child {
     background-color: #fff;
     border-color: rgba(0, 0, 0, .12);
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    color: #333;
     display: block;
     transition: margin .3s ease;
+    will-change: margin-top, margin-bottom, margin-left, margin-right;
 }
 
 .panel + .panel {
@@ -1334,6 +1340,7 @@ table td:last-child {
     display: block;
     overflow: hidden;
     transition: height .3s ease, padding .3s ease;
+    will-change: border, height, padding-top, padding-bottom;
 }
 
 .panel:not(.panel-visible) .panel-body:not(.panel-clone),
@@ -1833,6 +1840,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    color: #333;
     max-width: calc(100vw - 24px);
     z-index: 99;
 

@@ -644,10 +644,6 @@ pre {
     position: relative;
     background-color: #eee;
     overflow: hidden;
-}
-
-body.layout,
-body > .layout {
     height: 100vh;
     width: 100vw;
 }
@@ -981,7 +977,6 @@ body > .layout {
 }
 
 /*GLOBAL FLEXBOX */
-.layout,
 .modal,
 .flex {
     height: 100%;
@@ -1098,13 +1093,10 @@ body > .layout {
 }
 
 .dialog-header,
-.card-header {
-    padding: 16px;
-}
-
 .dialog-body,
-.card-body {
-    padding: 8px 16px;
+.card-header,
+.card-body{
+    padding: 16px;
 }
 
 .dialog-footer,
@@ -1115,18 +1107,6 @@ body > .layout {
     padding: 8px;
     text-align: right;
 }
-
-/*.dialog > :first-child,*/
-/*.card > :first-child {*/
-/*border-top-left-radius: 2px;*/
-/*border-top-right-radius: 2px;*/
-/*}*/
-
-/*.dialog > :last-child,*/
-/*.card > :last-child {*/
-/*border-bottom-left-radius: 2px;*/
-/*border-bottom-right-radius: 2px;*/
-/*}*/
 
 /* DIVIDER / HORIZONTAL RULE */
 .divider-horizontal {

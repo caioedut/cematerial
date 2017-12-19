@@ -670,10 +670,13 @@ NodeList.prototype.not = function (sel_or_arr) {
         var e; // Event handler
 
         // If has panel group, close PREVIOUS OPENNED PANEL
-        var to_hide = this.el.closest('.panel-group').querySelector('.panel-visible');
-        if (to_hide) {
-            var init = to_hide['cem.panel'] || new Panel(to_hide, extend({}, Panel.DEFAULTS, to_hide.dataset));
-            init.hide();
+        var group = this.el.closest('.panel-group');
+        if (group) {
+            var to_hide = group.querySelector('.panel-visible');
+            if (to_hide) {
+                var init = to_hide['cem.panel'] || new Panel(to_hide, extend({}, Panel.DEFAULTS, to_hide.dataset));
+                init.hide();
+            }
         }
 
         // Event Before Show
@@ -711,16 +714,7 @@ NodeList.prototype.not = function (sel_or_arr) {
 
     Panel.prototype.updateHeight = function () {
         this.el.querySelectorAll('.panel-body, .panel-footer').forEach(function (node) {
-            var ref = node.cloneNode(true);
-            ref.classList.add('panel-clone');
-            ref.style.height = 'auto';
-
-            node.parentNode.insertBefore(ref, node.nextSibling);
-
-            var height = ref.offsetHeight;
-            ref.parentNode.removeChild(ref);
-
-            node.style.height = height + 'px';
+            node.style.height = node.scrollHeight + 'px';
         });
     };
 

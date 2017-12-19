@@ -1337,6 +1337,7 @@ table td:last-child {
 
 .panel-body,
 .panel-footer {
+    box-sizing: content-box;
     display: block;
     overflow: hidden;
     transition: height .3s ease, padding .3s ease;

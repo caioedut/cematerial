@@ -1007,6 +1007,7 @@ pre {
 .flex-body {
     overflow: auto;
     will-change: scroll-position;
+    -webkit-overflow-scrolling: touch;
 }
 
 .layout-footer,
@@ -1749,6 +1750,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     overflow: auto;
     text-align: center;
     width: 100%;
+    -webkit-overflow-scrolling: touch;
 }
 
 .datepicker-yearlist.visible {
@@ -2010,6 +2012,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .grid-scroll {
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .grid-vertical {

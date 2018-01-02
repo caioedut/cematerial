@@ -641,11 +641,11 @@ pre {
 
 /*BASE LAYOUT BEGIN*/
 .layout {
-    position: relative;
+    position: fixed;
     background-color: #eee;
     overflow: hidden;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 
 .layout-header {
@@ -1037,8 +1037,8 @@ pre {
     background-color: rgba(0, 0, 0, .8);
 
     padding: 32px;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 
     z-index: 99;
 
@@ -1096,7 +1096,7 @@ pre {
 .dialog-header,
 .dialog-body,
 .card-header,
-.card-body{
+.card-body {
     padding: 16px;
 }
 

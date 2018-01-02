@@ -114,7 +114,7 @@ Element.prototype.on = document.on = function (events, child, fn, capture) {
     fn = fn || child;
     events = typeof events === 'string' ? events.split(' ') : events;
 
-    var el = this;
+    var el = this === document ? document.documentElement : this;
 
     for (var i in events) {
         this.addEventListener(events[i], function (e) {
@@ -586,7 +586,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             init.toggle(this);
         })
         // Autoclose
-        .on('click', function (e) {
+        .on('click contextmenu', function (e) {
             var parents = e.target.parents('.dropdown-visible');
             var drops = document.querySelectorAll('.dropdown-visible').not(parents);
 

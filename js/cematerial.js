@@ -1987,7 +1987,11 @@ NodeList.prototype.not = function (sel_or_arr) {
 
     // Events
     document
-        .on('click', '[data-toggle="datepicker"]', function () {
+        .on('focusin', 'input[data-toggle="datepicker"]', function () {
+            var init = new Datepicker(this.dataset, this);
+            init.toggle(this);
+        })
+        .on('click', '[data-toggle="datepicker"]:not(input)', function () {
             var $input = this.is('input') ? this : CEMaterial.getTarget(this);
             var init = new Datepicker(this.dataset, $input);
             init.toggle(this);

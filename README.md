@@ -1,9 +1,7 @@
-> **Warning:** this project is under development!
-
 # CEMaterial
 
 ## Docs
-https://caioedut.github.io/cematerial/docs (under construction)
+https://caioedut.github.io/cematerial/docs
 
 ## Dependencies
 - [Roboto Font](https://github.com/google/roboto)

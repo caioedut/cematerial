@@ -2117,18 +2117,6 @@ document.on('DOMContentLoaded', function () {
         CEMaterial.inputAutoGrow(this);
     });
 
-    // Table checkbox toggle
-    document.on('click', '[data-toggle="table"]', function (e) {
-        e.stopPropagation();
-
-        var target = this.dataset.target ? document.querySelector(this.dataset.target) : this.closest('table');
-        var checked = this.checked;
-
-        target.querySelectorAll('input[type="checkbox"]').forEach(function (node) {
-            node.checked = checked;
-        });
-    });
-
     // Auto Focus
     document.on('click', '[data-focus]', function () {
         var options = this.dataset,

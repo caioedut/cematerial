@@ -800,7 +800,7 @@ pre {
 
 /*MENUS*/
 .menu {
-    border-radius: 2px;
+    border-radius: 4px;
     display: inline-block;
     width: -moz-max-content;
     width: -webkit-max-content;
@@ -854,7 +854,7 @@ pre {
     position: relative;
     background: none;
     border: none;
-    border-radius: 2px;
+    border-radius: 4px;
     cursor: pointer;
     display: inline-block;
     outline: none;
@@ -1089,7 +1089,7 @@ pre {
 .card {
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
-    border-radius: 2px;
+    border-radius: 4px;
     color: #333;
 }
 
@@ -1124,11 +1124,11 @@ pre {
 }
 
 .card-group > .card:first-child {
-    border-radius: 2px 2px 0 0;
+    border-radius: 4px 4px 0 0;
 }
 
 .card-group > .card:last-child {
-    border-radius: 0 0 2px 2px;
+    border-radius: 0 0 4px 4px;
 }
 
 .card-group .card + .card {
@@ -1203,7 +1203,7 @@ table {
     border: 0;
     border-collapse: collapse;
     border-spacing: 0;
-    border-radius: 2px;
+    border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     color: #333;
     width: 100%;
@@ -1332,6 +1332,10 @@ table td:last-child {
     height: 0 !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+}
+
+.panel:not(.panel-visible) .panel-on-visible {
+    display: none;
 }
 
 .panel-popout.panel-visible {
@@ -1643,7 +1647,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     }
 
     .toast-body {
-        border-radius: 2px;
+        border-radius: 4px;
     }
 }
 
@@ -1651,7 +1655,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .tooltip {
     position: absolute;
     background-color: #616161;
-    border-radius: 2px;
+    border-radius: 4px;
     color: #fff;
     font-size: .74rem;
     margin-top: 2px;
@@ -1822,7 +1826,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .dropdown-body {
     position: absolute;
     background-color: #fff;
-    border-radius: 2px;
+    border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     color: #333;
     max-width: calc(100vw - 24px);
@@ -3019,7 +3023,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 }
 
 .set-round {
-    border-radius: 3px;
+    border-radius: 4px;
 }
 
 .set-circle {
@@ -3033,6 +3037,22 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .set-block {
     display: block;
     width: 100%;
+}
+
+.set-overflow-hidden {
+    overflow: hidden;
+}
+
+.set-overflow-visible {
+    overflow: visible;
+}
+
+.set-overflow-scroll {
+    overflow: scroll;
+}
+
+.set-overflow-auto {
+    overflow: auto;
 }
 
 /*VERTICAL ALIGN*/

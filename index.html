@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="flex-body">
-            <div class="layout-nav">
+            <div id="mainNav" class="layout-nav">
                 <a href="#buttons" data-toggle="sidebar">Buttons</a>
                 <a href="#cards" data-toggle="sidebar">Cards</a>
                 <a href="#chips" data-toggle="sidebar">Chips</a>
@@ -143,9 +143,9 @@
 
             <div class="grid grid-gutter-md">
                 <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 pd-md">
-                    <div class="card">
+                    <div class="card set-overflow-hidden">
                         <div class="card-body no-padding">
-                            <div class="media-container-sm">
+                            <div class="media-container-md">
                                 <img class="media-cover" src="docs/img/cards.jpg" alt=""/>
                             </div>
                         </div>
@@ -162,19 +162,19 @@
                         </div>
                         <div class="divider-horizontal"></div>
                         <div class="card-footer">
-                            <button class="btn btn-flat waves waves-dark" type="button">
+                            <button class="btn btn-flat waves bg-grey-8" type="button">
                                 Button
                             </button>
-                            <button class="btn btn-flat waves bg-grey-8" type="button">
+                            <button class="btn btn-flat waves waves-dark" type="button">
                                 Button
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 pd-md">
-                    <div class="card">
+                    <div class="card set-overflow-hidden">
                         <div class="card-body no-padding">
-                            <div class="media-container-sm">
+                            <div class="media-container-md">
                                 <img class="media-cover" src="docs/img/cards2.jpg" alt=""/>
                             </div>
                         </div>
@@ -191,19 +191,19 @@
                         </div>
                         <div class="divider-horizontal"></div>
                         <div class="card-footer">
-                            <button class="btn btn-flat waves waves-dark" type="button">
+                            <button class="btn btn-flat waves bg-red-8" type="button">
                                 Button
                             </button>
-                            <button class="btn btn-flat waves bg-red-8" type="button">
+                            <button class="btn btn-flat waves waves-dark" type="button">
                                 Button
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 pd-md">
-                    <div class="card">
+                    <div class="card set-overflow-hidden">
                         <div class="card-body no-padding">
-                            <div class="media-container-sm">
+                            <div class="media-container-md">
                                 <img class="media-cover" src="docs/img/cards3.jpg" alt=""/>
                             </div>
                         </div>
@@ -220,19 +220,19 @@
                         </div>
                         <div class="divider-horizontal"></div>
                         <div class="card-footer">
-                            <button class="btn btn-flat waves waves-dark" type="button">
+                            <button class="btn btn-flat waves bg-green-8" type="button">
                                 Button
                             </button>
-                            <button class="btn btn-flat waves bg-green-8" type="button">
+                            <button class="btn btn-flat waves waves-dark" type="button">
                                 Button
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="xs-col-12 sm-col-6 md-col-4 lg-col-3 xl-col-3 pd-md">
-                    <div class="card">
+                    <div class="card set-overflow-hidden">
                         <div class="card-body no-padding">
-                            <div class="media-container-sm">
+                            <div class="media-container-md">
                                 <img class="media-cover" src="docs/img/cards.jpg" alt=""/>
                             </div>
                         </div>
@@ -249,10 +249,10 @@
                         </div>
                         <div class="divider-horizontal"></div>
                         <div class="card-footer">
-                            <button class="btn btn-flat waves waves-dark" type="button">
+                            <button class="btn btn-flat waves bg-blue-8" type="button">
                                 Button
                             </button>
-                            <button class="btn btn-flat waves bg-blue-8" type="button">
+                            <button class="btn btn-flat waves waves-dark" type="button">
                                 Button
                             </button>
                         </div>
@@ -613,11 +613,15 @@
                             <div class="grid grid-middle">
                                 <div class="grid-col xs-col-12 sm-col-4">
                                     Meal preferences
-                                    <br/>
-                                    <small>Optional</small>
+                                    <div class="panel-on-visible">
+                                        <small>Optional</small>
+                                    </div>
                                 </div>
                                 <div class="grid-col xs-col-8 xs-hidden">
                                     Vegetarian
+                                    <div class="panel-on-visible">
+                                        <small>Optional</small>
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -989,9 +993,7 @@
                 <table class="table-hover">
                     <thead>
                     <tr>
-                        <th>
-                            <input class="input" type="checkbox" data-toggle="table"/>
-                        </th>
+                        <th></th>
                         <th class="table-content">Dessert (100g serving)</th>
                         <th>Calories</th>
                         <th>Fat (g)</th>
@@ -1005,12 +1007,12 @@
                         </td>
                         <td>
                             <div class="dropdown">
-                                <div data-toggle="dropdown">
+                                <div data-toggle="dropdown" data-focus="#frozenInput">
                                     Frozen yogurt (click)
                                 </div>
                                 <div class="dropdown-body dropdown-sm top left">
                                     <div class="pd-md">
-                                        <input class="input input-blue-6 text-md" type="text" value="Frozen yogurt"/>
+                                        <input id="frozenInput" class="input input-blue-6 text-md" type="text" value="Frozen yogurt"/>
                                     </div>
                                 </div>
                             </div>

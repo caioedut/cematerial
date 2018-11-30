@@ -66,15 +66,15 @@ angular.module('docs').controller('components.inputsCtrl', function ($scope) {
         labels_float: (
             '<div class="grid grid-gutter">' + "\n" +
             '    <div class="grid-col xs-col-12 md-col-6">' + "\n" +
-            '        <label class="label text-blue-6 label-float label-active">' + "\n" +
+            '        <label class="label text-blue-6 label-float">' + "\n" +
             '            <span class="label-text">Input Label</span>' + "\n" +
-            '            <input class="input input-blue-6" value="My colored input"/>' + "\n" +
+            '            <input class="input input-blue-6" value=""/>' + "\n" +
             '        </label>' + "\n" +
             '    </div>' + "\n" +
             '    <div class="grid-col xs-col-12 md-col-6">' + "\n" +
-            '        <label class="label label-blue-6 label-float label-active">' + "\n" +
+            '        <label class="label label-blue-6 label-float">' + "\n" +
             '            <span class="label-text">Input Label (Color on Focus)</span>' + "\n" +
-            '            <input class="input input-blue-6-f" value="My colored input when focused"/>' + "\n" +
+            '            <input class="input input-blue-6-f" value=""/>' + "\n" +
             '        </label>' + "\n" +
             '    </div>' + "\n" +
             '</div>' + "\n" +

@@ -469,11 +469,6 @@ template {
     box-sizing: border-box;
 }
 
-/*REM DEFINITIONS */
-html, body {
-    font-size: 14px;
-}
-
 body {
     color: #333;
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
@@ -482,34 +477,6 @@ body {
 }
 
 /*DEFAULT TAGS*/
-h1 {
-    font-size: 3.8rem;
-}
-
-h2 {
-    font-size: 2.8rem;
-}
-
-h3 {
-    font-size: 2rem;
-}
-
-h4 {
-    font-size: 1.4rem;
-}
-
-h5 {
-    font-size: 1rem;
-}
-
-h6 {
-    font-size: .8rem;
-}
-
-h1, h2, h3, h4, h5, h6, p {
-    font-weight: 400;
-}
-
 h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child, p:first-child {
     margin-top: 0;
 }
@@ -542,25 +509,90 @@ pre {
 }
 
 /** TYPOGRAPHY **/
-.display-4 {
-    font-size: 8rem;
-    font-weight: 300;
+h1 {
+    font-size: 6rem;
+    letter-spacing: -1.5px;
 }
 
-.display-3 {
-    font-size: 4rem;
+h2 {
+    font-size: 3.75rem;
+    letter-spacing: -0.5px;
 }
 
-.display-2 {
-    font-size: 3.21rem;
+h3 {
+    font-size: 3rem;
+    letter-spacing: 0;
 }
 
-.display-1 {
-    font-size: 2.43rem;
+h4 {
+    font-size: 2.125rem;
+    letter-spacing: .25px;
 }
 
-.headline {
-    font-size: 1.71rem;
+h5 {
+    font-size: 1.5rem;
+    letter-spacing: 0;
+}
+
+h6,
+.layout-title,
+.card-title,
+.dialog-title,
+.modal-title,
+.title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: .15px;
+}
+
+h1, h2 {
+    font-weight: lighter;
+}
+
+h3, h4, h5 {
+    font-weight: 400;
+}
+
+.subtitle,
+.subtitle-1 {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: .15px;
+}
+
+.subtitle-2 {
+    font-size: .875rem;
+    font-weight: 500;
+    letter-spacing: .1px;
+}
+
+/*REM DEFINITIONS IN HTML */
+html,
+.body,
+.body-1 {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: .5px;
+}
+
+body,
+.body-2 {
+    font-size: .875rem; /* 14px */
+    font-weight: 400;
+    letter-spacing: .25px;
+}
+
+.caption {
+    font-size: .75rem;
+    font-weight: 400;
+    letter-spacing: .4px;
+}
+
+.overline {
+    font-size: .625rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 .layout-title,
@@ -568,26 +600,7 @@ pre {
 .dialog-title,
 .modal-title,
 .title {
-    font-size: 1.43rem;
-    font-weight: 500;
     margin: 0;
-}
-
-.subheader {
-    font-size: 1.14rem;
-}
-
-.body-2 {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.body-1 {
-    font-size: 1rem;
-}
-
-.caption {
-    font-size: .86rem;
 }
 
 .menu li.dropdown > a:after,
@@ -648,12 +661,18 @@ pre {
     width: 100%;
 }
 
+/* App bar: 4dp */
 .layout-header {
-    z-index: 97;
+    z-index: 4;
 }
 
 .layout-body {
     height: 100%;
+}
+
+/* Bottom app bar: 8dp */
+.layout-footer {
+    z-index: 8;
 }
 
 .toolbar {
@@ -661,6 +680,7 @@ pre {
     padding: 0 8px;
 }
 
+/* Nav drawer: 16dp */
 .layout-sidebar {
     position: absolute;
     top: 0;
@@ -670,7 +690,7 @@ pre {
     color: #333;
 
     overflow-y: auto;
-    z-index: 99;
+    z-index: 16;
 
     height: 100%;
     width: calc(100% - 96px) !important;
@@ -696,12 +716,13 @@ pre {
     width: 100% !important;
 }
 
+/* Nav drawer: 16dp, then backdrop 15dp */
 .layout-sidebar-backdrop {
     position: absolute;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, .6);
-    z-index: 98;
+    z-index: 15;
 
     transition: opacity .3s ease, visibility .3s ease;
 
@@ -779,18 +800,23 @@ pre {
     position: relative;
     align-items: center;
     display: flex !important;
-    font-size: 1rem;
+    font-size: .875rem;
     font-weight: 500;
-    height: 48px;
+    height: 40px;
     padding: 0 16px;
     overflow: hidden;
     white-space: nowrap;
 }
 
+.layout-nav a {
+    border-radius: 4px;
+    margin: 4px 8px;
+}
+
 .menu a .md-icon,
 .layout-nav a .md-icon {
     opacity: .8;
-    margin-right: 2rem;
+    margin-right: 1.5rem;
 }
 
 .menu .divider-horizontal,
@@ -814,7 +840,6 @@ pre {
 
 .menu a {
     font-weight: 400;
-    height: 40px;
 }
 
 .menu a .md-icon {
@@ -841,15 +866,18 @@ pre {
 }
 
 /*BASE LAYOUT END*/
-
+/* Button: 2dp to 8dp */
 .button, .btn {
     font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
-    font-size: 1rem;
+    font-size: .875rem;
     font-weight: 500;
+    letter-spacing: 1.25px;
     text-transform: uppercase;
+    z-index: 2;
 }
 
 /*BUTTONS*/
+/* Height 36px */
 .btn {
     position: relative;
     background: none;
@@ -859,7 +887,7 @@ pre {
     display: inline-block;
     outline: none;
     overflow: hidden;
-    padding: 0 1.142857142857143em;
+    padding: 0 1em;
     text-align: center;
     text-decoration: none !important;
     text-overflow: clip;
@@ -871,28 +899,28 @@ pre {
     line-height: 2.571428571428571em;
 }
 
-/* 24px */
+/* Height 24px */
 .btn-xs {
-    font-size: .6666666666666667rem;
+    font-size: .5834rem;
 }
 
-/* 32px */
+/* Height 32px */
 .btn-sm {
-    font-size: .8888888888888889rem;
+    font-size: .778rem;
 }
 
-/* 40px */
+/* Height 40px */
 .btn-lg {
-    font-size: 1.111111111111111rem;
+    font-size: .9723rem;
 }
 
-/* 56px */
+/* Height 56px */
 .btn-xl {
-    font-size: 1.555555555555556rem;
+    font-size: 1.3612rem;
 }
 
 .btn-flat {
-    padding: 0 .5714285714285714em;
+    padding: 0 .5em;
     box-shadow: none !important;
 }
 
@@ -946,12 +974,12 @@ pre {
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0);
     border-radius: inherit;
     content: '';
-    height: 100%;
     transition: background .3s ease;
-    width: 100%;
 }
 
 .btn:hover:before,
@@ -1024,6 +1052,7 @@ pre {
 }
 
 /*DIALOGS*/
+/* Dialog: 24dp */
 .dialog {
     position: fixed;
     top: 0;
@@ -1040,7 +1069,7 @@ pre {
     height: 100%;
     width: 100%;
 
-    z-index: 99;
+    z-index: 24;
 
     transition: opacity .2s ease, visibility .2s ease;
     opacity: 0;
@@ -1136,13 +1165,14 @@ pre {
 }
 
 /*MODAL (PAGES)*/
+/* Dialog: 24dp */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     background-color: #fff;
     color: #333;
-    z-index: 99;
+    z-index: 24;
 
     transform: translateY(20%);
 
@@ -1215,7 +1245,7 @@ table th {
     border-top: 1px solid #e9e9e9;
     border-bottom: 1px solid #e9e9e9;
     color: rgba(0, 0, 0, .54);
-    font-size: .86rem;
+    font-size: .75rem;
     font-weight: 600;
     padding: 14px 8px;
     text-align: left;
@@ -1232,7 +1262,7 @@ table td {
     border-top: 1px solid #e9e9e9;
     border-bottom: 1px solid #e9e9e9;
     color: rgba(0, 0, 0, .87);
-    font-size: .93rem;
+    font-size: .8125rem;
     padding: 12px 8px;
 }
 
@@ -1284,7 +1314,7 @@ table td:last-child {
 .panel-header {
     position: relative;
     display: block;
-    font-size: 1.07rem;
+    font-size: 0.9375rem;
     padding: 16px;
 }
 
@@ -1297,7 +1327,7 @@ table td:last-child {
     content: 'keyboard_arrow_down';
     font-family: 'Material Icons', sans-serif;
     font-feature-settings: "liga" 1;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
 
     opacity: .8;
     transition: transform .3s ease;
@@ -1321,8 +1351,9 @@ table td:last-child {
 .panel-footer {
     box-sizing: content-box;
     display: block;
+    opacity: 1;
     overflow: hidden;
-    transition: height .3s ease, padding .3s ease;
+    transition: height .3s ease, opacity .4s ease-in, padding .3s ease;
     will-change: border, height, padding-top, padding-bottom;
 }
 
@@ -1330,10 +1361,12 @@ table td:last-child {
 .panel:not(.panel-visible) .panel-footer:not(.panel-clone) {
     border: 0 !important;
     height: 0 !important;
+    opacity: 0;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
 
+.panel.panel-visible .panel-on-hidden,
 .panel:not(.panel-visible) .panel-on-visible {
     display: none;
 }
@@ -1584,7 +1617,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     background-color: #dfdfdf;
     border-radius: 16px;
     display: inline-block;
-    font-size: .92rem;
+    font-size: .8125rem;
     line-height: 32px;
     overflow: hidden;
     padding: 0 12px;
@@ -1657,7 +1690,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     background-color: #616161;
     border-radius: 4px;
     color: #fff;
-    font-size: .74rem;
+    font-size: .63rem;
     margin-top: 2px;
     max-width: 100%;
     padding: 6px 8px;
@@ -1698,7 +1731,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .datepicker-date {
     display: block;
-    font-size: 2.43rem;
+    font-size: 2.125rem;
     margin-top: 5px;
 }
 
@@ -1763,12 +1796,12 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .datepicker-year {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 12px;
 }
 
 .datepicker-year.selected {
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
 /*DATEPICKER HORIZONTAL*/
@@ -1823,6 +1856,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     display: block;
 }
 
+/* Menus and sub menus: 8dp */
 .dropdown-body {
     position: absolute;
     background-color: #fff;
@@ -1830,7 +1864,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     color: #333;
     max-width: calc(100vw - 24px);
-    z-index: 99;
+    z-index: 8;
 
     margin: -10px auto;
     opacity: 0;
@@ -1877,7 +1911,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     }
 
     .dropdown-body {
-        transform: scale(0);
+        transform: scale(.8);
     }
 
     .dropdown-body.top,
@@ -1930,7 +1964,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 .tabs-nav a {
     border-bottom: 3px solid transparent;
-    font-size: 1rem;
+    font-size: .875rem;
     overflow: hidden;
     padding: 14px 14px 12px;
     text-align: center;

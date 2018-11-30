@@ -18,10 +18,23 @@
             <code>.panel</code> [optional: <code>.panel-arrow, .panel-margin, .panel-popout</code>]
             <div class="indent">
                 <code>.panel-header</code>
-                <br/>
+                <div class="indent">
+                    <code>.panel-on-hidden</code>
+                    <br/>
+                    <code>.panel-on-visible</code>
+                </div>
                 <code>.panel-body</code>
-                <br/>
+                <div class="indent">
+                    <code>.panel-on-hidden</code>
+                    <br/>
+                    <code>.panel-on-visible</code>
+                </div>
                 <code>.panel-footer</code>
+                <div class="indent">
+                    <code>.panel-on-hidden</code>
+                    <br/>
+                    <code>.panel-on-visible</code>
+                </div>
             </div>
         </div>
     </div>
@@ -31,6 +44,11 @@
     <h2>Basic</h2>
     <p>
         You can create a accordion group using a <code>.panel-group</code>, then using <code>.panel</code> as children.
+    </p>
+    <p>
+        The class <code>.panel-on-hidden</code> keep elements visible ONLY when panel content is hidden.
+        <br/>
+        The class <code>.panel-on-visible</code> keep elements visible ONLY when panel content is visible.
     </p>
     <p>
         Use the class <code>.panel-arrow</code> with <code>.panel</code> to display an collapse-arrow in <code>.panel-header</code>.

@@ -35,8 +35,8 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
             '    <div class="panel panel-arrow">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            Trip to Caribean cruise' + "\n" +
-            '            <span class="panel-on-hidden">(Panel is hidden)</span>' + "\n" +
-            '            <span class="panel-on-visible">(Panel is visible)</span>' + "\n" +
+            '            <span class="panel-on-hidden text-red-5">(Panel is hidden)</span>' + "\n" +
+            '            <span class="panel-on-visible text-green-5">(Panel is visible)</span>' + "\n" +
             '        </a>' + "\n" +
             '        <div class="panel-body">' + "\n" +
             '            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Si quae forte-possumus. Explanetur igitur. At ego quem huic anteponam non audeo dicere; Quia dolori non voluptas contraria est, sed doloris privatio. Urgent tamen et nihil remittunt. Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. </p>' + "\n" +
@@ -79,8 +79,8 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
             '    <div class="panel panel-arrow panel-margin">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            Trip to Caribean cruise' + "\n" +
-            '            <span class="panel-on-hidden">(Panel is hidden)</span>' + "\n" +
-            '            <span class="panel-on-visible">(Panel is visible)</span>' + "\n" +
+            '            <span class="panel-on-hidden text-red-5">(Panel is hidden)</span>' + "\n" +
+            '            <span class="panel-on-visible text-green-5">(Panel is visible)</span>' + "\n" +
             '        </a>' + "\n" +
             '        <div class="panel-body">' + "\n" +
             '            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Si quae forte-possumus. Explanetur igitur. At ego quem huic anteponam non audeo dicere; Quia dolori non voluptas contraria est, sed doloris privatio. Urgent tamen et nihil remittunt. Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. </p>' + "\n" +
@@ -119,12 +119,12 @@ angular.module('docs').controller('components.accordionCtrl', function ($scope) 
             ''
         ),
         popout: (
-            '<div class="panel-group">' + "\n" +
+            '<div class="panel-group pd-md">' + "\n" +
             '    <div class="panel panel-arrow panel-popout">' + "\n" +
             '        <a class="panel-header" data-toggle="panel">' + "\n" +
             '            Trip to Caribean cruise' + "\n" +
-            '            <span class="panel-on-hidden">(Panel is hidden)</span>' + "\n" +
-            '            <span class="panel-on-visible">(Panel is visible)</span>' + "\n" +
+            '            <span class="panel-on-hidden text-red-5">(Panel is hidden)</span>' + "\n" +
+            '            <span class="panel-on-visible text-green-5">(Panel is visible)</span>' + "\n" +
             '        </a>' + "\n" +
             '        <div class="panel-body">' + "\n" +
             '            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Si quae forte-possumus. Explanetur igitur. At ego quem huic anteponam non audeo dicere; Quia dolori non voluptas contraria est, sed doloris privatio. Urgent tamen et nihil remittunt. Huius, Lyco, oratione locuples, rebus ipsis ielunior. Duo Reges: constructio interrete. </p>' + "\n" +

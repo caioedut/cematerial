@@ -693,8 +693,8 @@ body,
     z-index: 16;
 
     height: 100%;
-    width: calc(100% - 96px) !important;
-    max-width: 340px;
+    width: calc(100% - 32px)!important;
+    max-width: 320px;
 
     transition: transform .1s linear;
 
@@ -769,12 +769,12 @@ body,
     .layout-sidebar {
         border-right: 1px solid #D2D2D2;
         box-shadow: none;
-        max-width: 280px;
+        max-width: 260px;
         transform: translate3d(100%, 0, 0) !important;
     }
 
     .layout-sidebar ~ * {
-        width: calc(100% - 280px) !important;
+        width: calc(100% - 260px) !important;
     }
 
     .layout-sidebar-backdrop {

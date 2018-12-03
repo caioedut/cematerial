@@ -367,7 +367,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             init.toggle(this);
         })
         // Autoclose
-        .on('click', '.dialog-visible', function (e) {
+        .on('click touchstart', '.dialog-visible', function (e) {
             if (this === e.target) {
                 var init = this['cem.dialog'] || new Dialog(this);
                 if (!empty(init.options.autoclose)) {
@@ -586,7 +586,7 @@ NodeList.prototype.not = function (sel_or_arr) {
             init.toggle(this);
         })
         // Autoclose
-        .on('click contextmenu', function (e) {
+        .on('click touchstart contextmenu', function (e) {
             var parents = e.target.parents('.dropdown-visible');
             var drops = document.querySelectorAll('.dropdown-visible').not(parents);
 

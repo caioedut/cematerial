@@ -119,7 +119,7 @@
             init.toggle(this);
         })
         // Autoclose
-        .on('click contextmenu', function (e) {
+        .on('click touchstart contextmenu', function (e) {
             var parents = e.target.parents('.dropdown-visible');
             var drops = document.querySelectorAll('.dropdown-visible').not(parents);
 

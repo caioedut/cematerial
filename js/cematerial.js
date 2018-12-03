@@ -2076,6 +2076,10 @@ document.on('DOMContentLoaded', function () {
         var component,
             parent;
 
+        if (e.target === document) {
+            return;
+        }
+
         if (e.target.is('.layout-body')) {
             component = '.layout';
         } else if (e.target.is('.dialog-body')) {

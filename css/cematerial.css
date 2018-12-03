@@ -808,6 +808,10 @@ body,
     white-space: nowrap;
 }
 
+.menu a {
+    padding: 0 20px;
+}
+
 .layout-nav a {
     border-radius: 4px;
     margin: 4px 8px;
@@ -1303,8 +1307,8 @@ table td:last-child {
     box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
     color: #333;
     display: block;
-    transition: margin .3s ease;
-    will-change: margin-top, margin-bottom, margin-left, margin-right;
+    transition: margin .3s ease, box-shadow .3s ease;
+    will-change: margin-top, margin-bottom, margin-left, margin-right, box-shadow;
 }
 
 .panel + .panel {
@@ -1372,6 +1376,7 @@ table td:last-child {
 }
 
 .panel-popout.panel-visible {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
     margin-left: -16px;
     margin-right: -16px;
 }
@@ -1861,7 +1866,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     position: absolute;
     background-color: #fff;
     border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
     color: #333;
     max-width: calc(100vw - 24px);
     z-index: 8;

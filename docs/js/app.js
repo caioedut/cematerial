@@ -48,6 +48,10 @@ angular.module('docs').constant('navs', [
             {
                 url: 'elevation-shadows',
                 title: 'Elevation & Shadows'
+            },
+            {
+                url: 'waves',
+                title: 'Waves'
             }
         ]
     },

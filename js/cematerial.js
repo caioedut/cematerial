@@ -1349,7 +1349,7 @@ NodeList.prototype.not = function (sel_or_arr) {
  *
  * ======================================================================== */
 +function () {
-    document.on('click', '.waves', function (e) {
+    document.on('mousedown touchstart', '.waves', function (e) {
         var el = this;
 
         var posx = el.offset().left,
@@ -1369,6 +1369,11 @@ NodeList.prototype.not = function (sel_or_arr) {
         // Add ripple element
         el.insertBefore(ripple, el.firstChild);
 
+        // Remove ripple on ending animation
+        ripple.on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
+            el.removeChild(ripple);
+        });
+
         // Get bigger
         var size = Math.max(width, height);
 
@@ -1383,7 +1388,7 @@ NodeList.prototype.not = function (sel_or_arr) {
 
         setTimeout(function () {
             ripple.classList.add('ripple-animate');
-        }, 1);
+        }, 50);
     });
 }();
 

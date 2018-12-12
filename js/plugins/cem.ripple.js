@@ -4,7 +4,7 @@
  *
  * ======================================================================== */
 +function () {
-    document.on('click', '.waves', function (e) {
+    document.on('mousedown touchstart', '.waves', function (e) {
         var el = this;
 
         var posx = el.offset().left,
@@ -24,6 +24,11 @@
         // Add ripple element
         el.insertBefore(ripple, el.firstChild);
 
+        // Remove ripple on ending animation
+        ripple.on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
+            el.removeChild(ripple);
+        });
+
         // Get bigger
         var size = Math.max(width, height);
 
@@ -38,6 +43,6 @@
 
         setTimeout(function () {
             ripple.classList.add('ripple-animate');
-        }, 1);
+        }, 50);
     });
 }();

@@ -1259,7 +1259,7 @@ body,
     width: 0;
     z-index: 10;
 
-    transition: transform .5s linear, opacity .6s linear;
+    transition: transform .3s linear, opacity .4s linear;
     opacity: 1;
     transform: scale(0);
 }

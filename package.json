@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "material-design-icons": "^3.0.1",
-    "roboto-fontface": "^0.8.0"
+    "roboto-fontface": "^0.10.0"
   },
   "license": "MIT",
   "main": "js/cematerial.js"

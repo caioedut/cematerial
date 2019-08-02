@@ -1182,6 +1182,13 @@ body,
     text-align: right;
 }
 
+.dialog-footer > *,
+.modal-footer > *,
+.card-footer > *,
+.panel-footer > * {
+    direction: ltr;
+}
+
 /* DIVIDER / HORIZONTAL RULE */
 .divider-horizontal {
     border-top: 1px solid #D2D2D2;

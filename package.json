@@ -25,10 +25,7 @@
     "type": "git",
     "url": "git+https://github.com/caioedut/cematerial"
   },
-  "dependencies": {
-    "material-design-icons": "^3.0.1",
-    "roboto-fontface": "^0.10.0"
-  },
+  "dependencies": {},
   "license": "MIT",
   "main": "js/cematerial.js"
 }

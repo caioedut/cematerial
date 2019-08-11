@@ -14,6 +14,11 @@
         this.options.message = message;
 
         this.parent = typeof this.options.parent === 'string' ? document.querySelector(this.options.parent) : this.options.parent;
+
+        if (!this.parent) {
+            return;
+        }
+
         this.body = this.parent.querySelector('.layout-toast');
 
         if (!this.body) {

@@ -1370,7 +1370,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         el.insertBefore(ripple, el.firstChild);
 
         // Remove ripple on ending animation
-        ripple.on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
+        ripple.on('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
             el.removeChild(ripple);
         });
 
@@ -1409,7 +1409,7 @@ NodeList.prototype.not = function (sel_or_arr) {
         this.options.message = message;
 
         this.parent = typeof this.options.parent === 'string' ? document.querySelector(this.options.parent) : this.options.parent;
-        this.body = this.parent.querySelector(':scope > .layout-toast');
+        this.body = this.parent.querySelector('.layout-toast');
 
         if (!this.body) {
             this.body = document.createElement('div');
@@ -1461,10 +1461,6 @@ NodeList.prototype.not = function (sel_or_arr) {
         setTimeout(function () {
             that.el.innerHTML = '<div class="toast-body grid grid-middle grid-nowrap"><div class="grid-col col-fill">' + that.options.message + '</div></div>';
 
-            setTimeout(function () {
-                that.el.style.marginBottom = (-that.el.offsetHeight) + 'px';
-            }, 1);
-
             if (!empty(that.options.actions)) {
                 var body = that.el.querySelector('.toast-body');
                 var btn_body = document.createElement('div');
@@ -1492,7 +1488,10 @@ NodeList.prototype.not = function (sel_or_arr) {
                 body.appendChild(btn_body);
             }
 
-            that.el.classList.add('toast-visible');
+            setTimeout(function () {
+                that.el.style.marginBottom = (-that.el.offsetHeight) + 'px';
+                that.el.classList.add('toast-visible');
+            }, 1);
         }, delay);
 
         // Check duration
@@ -2068,8 +2067,9 @@ document.on('DOMContentLoaded', function () {
     // Prepare and init CEMaterial
     CEMaterial.init(document);
 
-    // Auto initialize Datepicker Plugin (works first animation)
-    new Datepicker();
+    // Auto initialize plugins (to work first animations)
+    new window.Datepicker();
+    new window.Toast();
 
     // @deprecated
     // document.on('DOMNodeInserted', function (e) {

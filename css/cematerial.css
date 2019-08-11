@@ -508,6 +508,10 @@ pre {
     white-space: pre;
 }
 
+label {
+    display: inline-block;
+}
+
 /** TYPOGRAPHY **/
 h1 {
     font-size: 6rem;
@@ -1179,7 +1183,6 @@ body,
 .panel-footer {
     direction: rtl;
     padding: 8px;
-    text-align: right;
 }
 
 .dialog-footer > *,
@@ -1199,8 +1202,13 @@ body,
 }
 
 /*CARDS*/
+.card + .card {
+    margin-top: 16px;
+}
+
 .card-group > .card {
     border-radius: 0;
+    margin-top: 0;
 }
 
 .card-group > .card:first-child {
@@ -1545,6 +1553,7 @@ textarea.input.input-autogrow {
 }
 
 .input:not([type="checkbox"]):not([type="radio"]):not(textarea),
+select.input:not(multiple),
 textarea.input[rows="1"] {
     height: 32px;
 }
@@ -1632,6 +1641,8 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 
 /*INPUT SWITCH (CHECKBOX)*/
 .input-switch[type="checkbox"] {
+    min-height: 16px;
+    min-width: 36px;
     height: 16px;
     width: 36px;
 }

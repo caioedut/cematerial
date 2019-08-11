@@ -118,6 +118,10 @@ angular.module('docs').constant('navs', [
             {
                 url: 'toolbar',
                 title: 'Toolbar'
+            },
+            {
+                url: 'tooltips',
+                title: 'Tooltips'
             }
         ]
     }

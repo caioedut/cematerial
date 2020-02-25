@@ -2048,9 +2048,10 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .tabs-bar {
     position: absolute;
     bottom: 0;
+    border-width: 0;
     border-color: inherit;
     border-style: solid;
-    border-width: 3px;
+    border-bottom-width: 3px;
     transition: transform .4s ease, width .4s ease;
     will-change: transform, width;
 }

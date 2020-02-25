@@ -1622,8 +1622,9 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
     top: -11px;
     left: -11px;
     border-radius: 50%;
-    border: 22px solid #000;
     border-color: inherit;
+    border-style: solid;
+    border-width: 22px;
     content: '';
     height: 44px;
     opacity: 0;
@@ -2047,8 +2048,9 @@ input.input:not([type="checkbox"]):not([type="radio"]):focus {
 .tabs-bar {
     position: absolute;
     bottom: 0;
-    border-bottom: 3px solid;
     border-color: inherit;
+    border-style: solid;
+    border-width: 3px;
     transition: transform .4s ease, width .4s ease;
     will-change: transform, width;
 }

@@ -957,11 +957,17 @@ body,
     margin-top: 4px;
 }
 
+[disabled],
+*:disabled,
+.btn-disabled {
+    opacity: .6;
+    pointer-events: none;
+}
+
+.btn[disabled],
 .btn:disabled,
 .btn-disabled {
     box-shadow: none !important;
-    opacity: .6;
-    pointer-events: none;
 }
 
 /*BUTTON FLOAT*/
